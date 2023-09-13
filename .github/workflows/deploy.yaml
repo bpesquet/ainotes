@@ -30,11 +30,10 @@ jobs:
       run: poetry install
 
     - name: Check the code
-      run: pylint src/
+      run: poetry run pylint src/
 
     - name: Build the website
-      run: |
-        jupyter-book build ./docs/
+      run: poetry run jupyter-book build ./docs/
 
     - name: Push the website to github-pages
       uses: peaceiris/actions-gh-pages@v3
