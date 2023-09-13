@@ -429,7 +429,7 @@ document.write(`
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -437,10 +437,65 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="nn">File ~/.cache/pypoetry/virtualenvs/ai_notes-RYmbPOi6-py3.11/lib/python3.11/site-packages/torch/__init__.py:168,</span> in <span class="ni">_load_global_deps</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">168</span>     <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">lib_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">RTLD_GLOBAL</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span>     <span class="c1"># Can only happen for wheel with cuda libs as PYPI deps</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span>     <span class="c1"># As PyTorch is not purelib, but nvidia-*-cu11 is</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/ctypes/__init__.py:376,</span> in <span class="ni">CDLL.__init__</span><span class="nt">(self, name, mode, handle, use_errno, use_last_error, winmode)</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span> <span class="k">if</span> <span class="n">handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">376</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">_dlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="ne">OSError</span>: libcurand.so.10: cannot open shared object file: No such file or directory
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">platform</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">cache</span><span class="o">/</span><span class="n">pypoetry</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">ai_notes</span><span class="o">-</span><span class="n">RYmbPOi6</span><span class="o">-</span><span class="n">py3</span><span class="mf">.11</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">228</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># Easy way.  You want this most of the time, because it will prevent</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="c1"># C++ symbols from libtorch clobbering C++ symbols from other</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span>     <span class="c1">#</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="c1"># See Note [Global dependencies]</span>
+<span class="g g-Whitespace">    </span><span class="mi">227</span>     <span class="k">if</span> <span class="n">USE_GLOBAL_DEPS</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">228</span>         <span class="n">_load_global_deps</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span>     <span class="kn">from</span> <span class="nn">torch._C</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span> <span class="c1"># Appease the type checker; ordinarily this binding is inserted by the</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span> <span class="c1"># torch._C module initialization code in C</span>
+
+<span class="nn">File ~/.cache/pypoetry/virtualenvs/ai_notes-RYmbPOi6-py3.11/lib/python3.11/site-packages/torch/__init__.py:189,</span> in <span class="ni">_load_global_deps</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>     <span class="k">raise</span> <span class="n">err</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> <span class="k">for</span> <span class="n">lib_folder</span><span class="p">,</span> <span class="n">lib_name</span> <span class="ow">in</span> <span class="n">cuda_libs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">189</span>     <span class="n">_preload_cuda_deps</span><span class="p">(</span><span class="n">lib_folder</span><span class="p">,</span> <span class="n">lib_name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">lib_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">RTLD_GLOBAL</span><span class="p">)</span>
+
+<span class="nn">File ~/.cache/pypoetry/virtualenvs/ai_notes-RYmbPOi6-py3.11/lib/python3.11/site-packages/torch/__init__.py:154,</span> in <span class="ni">_preload_cuda_deps</span><span class="nt">(lib_folder, lib_name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span>         <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">lib_path</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">154</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lib_name</span><span class="si">}</span><span class="s2"> not found in the system path </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">lib_path</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: libcublas.so.*[0-9] not found in the system path [&#39;/home/runner/work/ainotes/ainotes/docs/foundations&#39;, &#39;/opt/hostedtoolcache/Python/3.11.5/x64/lib/python311.zip&#39;, &#39;/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11&#39;, &#39;/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/lib-dynload&#39;, &#39;&#39;, &#39;/home/runner/.cache/pypoetry/virtualenvs/ai_notes-RYmbPOi6-py3.11/lib/python3.11/site-packages&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device configuration</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device configuration</span>
 <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA GPU </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> found :)&quot;</span><span class="p">)</span>
@@ -450,6 +505,11 @@ document.write(`
 <span class="k">else</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No available GPU :/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metal GPU found :)
 </pre></div>
 </div>
 </div>
