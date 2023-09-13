@@ -24,16 +24,15 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-        cache: "poetry"
 
     - name: Install dependencies
       run: poetry install
 
     - name: Check the code
-      run: poetry run pylint src/
+      run: pylint src/
 
     - name: Build the website
-      run: poetry run jupyter-book build ./docs/
+      run: jupyter-book build ./docs/
 
     - name: Push the website to github-pages
       uses: peaceiris/actions-gh-pages@v3
