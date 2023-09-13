@@ -1,9 +1,6 @@
 # macOS folder files
 .DS_Store
 
-# Jupyter notebooks (recreated by jupytext from the .py files in src/)
-docs/**/*.ipynb
-
 # JupyterBook output
 docs/_build/
 

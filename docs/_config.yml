@@ -11,7 +11,7 @@ exclude_patterns : [_build, "**.DS_Store", "**.ipynb_checkpoints", ".venv"]
 # Configure re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: off
+  execute_notebooks: force  # Use "force" to relaunch all notebook cells during build
 
 # Define the name of the latex output file for PDF builds
 latex:

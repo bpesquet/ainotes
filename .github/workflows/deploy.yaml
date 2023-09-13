@@ -32,8 +32,8 @@ jobs:
     - name: Check the code
       run: poetry run pylint src/
 
-    - name: Generate notebooks from Python files
-      run: poetry run jupytext --sync src/*/*.py
+    # - name: Synchronise notebooks with Python files
+    #  run: poetry run jupytext --sync src/*/*.py
 
     - name: Build the website
       run: poetry run jupyter-book build ./docs/
