@@ -1,0 +1,42 @@
+name: deploy-website
+
+on:
+  # Trigger the deploy on push to main branch
+  push:
+    branches:
+    - main
+
+# This job installs dependencies, build the website, and pushes it to `gh-pages`
+jobs:
+  deploy-website:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.11]
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Check the code
+      run: |
+        pylint src/
+
+    - name: Build the website
+      run: |
+        jupyter-book build ./docs/
+
+    - name: Push the website to github-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_build/html

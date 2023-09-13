@@ -1,0 +1,13 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+
+parts:
+  - caption: Foundations
+    chapters:
+    - file: foundations/calculus
+      title: Calculus
+    - file: foundations/proba_stats
+      title: Probability & Statistics
