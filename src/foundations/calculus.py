@@ -20,7 +20,7 @@
 
 # %%
 import platform
-import torche
+import torch
 
 print(f"Python version: {platform.python_version()}")
 print(f"PyTorch version: {torch.__version__}")
