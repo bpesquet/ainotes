@@ -489,7 +489,45 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-and-packages">Modules and packages</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-good-practices">Python good practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-good-practices">Python good practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-pythonic-code">Writing pythonic code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-pythonic-mean">What does “Pythonic” mean?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-swapping-two-variables">Example: swapping two variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-iterating-on-a-list">Example: iterating on a list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-indexed-traversal">Example: indexed traversal</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-searching-in-a-list">Example: searching in a list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-generating-a-list">Example: generating a list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-style">Code style</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-pep8">Beyond PEP8</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-linting">Code linting</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#type-annotations">Type annotations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests">Unit tests</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packaging-and-dependency-management">Packaging and dependency management</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-dependencies-in-python">Managing dependencies in Python</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-versioning">Semantic versioning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pip-and-requirements-txt">pip and requirements.txt</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-environments">Virtual environments</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-and-environment-yml">conda and environment.yml</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poetry">Poetry</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poetry-and-virtual-environments">Poetry and virtual environments</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pyproject-toml-file">The pyproject.toml file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#caret-requirements">Caret requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poetry-lock-file">The poetry.lock file</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-notebooks">Working with notebooks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-jupyter-notebooks">Advantages of Jupyter notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-jupyter-notebooks">Drawbacks of Jupyter notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborating-with-notebooks">Collaborating with notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization">Code organization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-workflow">Notebook workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -505,14 +543,62 @@ document.write(`
 <h1>Programming<a class="headerlink" href="#programming" title="Permalink to this heading">#</a></h1>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>papermill
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: papermill in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (2.4.0)
+Requirement already satisfied: ansiwrap in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (0.8.4)
+Requirement already satisfied: click in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (8.1.7)
+Requirement already satisfied: pyyaml in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (6.0.1)
+Requirement already satisfied: nbformat&gt;=5.1.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (5.9.2)
+Requirement already satisfied: nbclient&gt;=0.2.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (0.7.4)
+Requirement already satisfied: tqdm&gt;=4.32.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (4.66.1)
+Requirement already satisfied: requests in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (2.31.0)
+Requirement already satisfied: entrypoints in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (0.4)
+Requirement already satisfied: tenacity in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from papermill) (8.2.3)
+Requirement already satisfied: jupyter-client&gt;=6.1.12 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from nbclient&gt;=0.2.0-&gt;papermill) (7.4.9)
+Requirement already satisfied: jupyter-core!=5.0.*,&gt;=4.12 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from nbclient&gt;=0.2.0-&gt;papermill) (5.3.1)
+Requirement already satisfied: traitlets&gt;=5.3 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from nbclient&gt;=0.2.0-&gt;papermill) (5.9.0)
+Requirement already satisfied: fastjsonschema in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.1.2-&gt;papermill) (2.18.0)
+Requirement already satisfied: jsonschema&gt;=2.6 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from nbformat&gt;=5.1.2-&gt;papermill) (4.19.0)
+Requirement already satisfied: textwrap3&gt;=0.9.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from ansiwrap-&gt;papermill) (0.9.2)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from requests-&gt;papermill) (3.2.0)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from requests-&gt;papermill) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from requests-&gt;papermill) (2.0.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from requests-&gt;papermill) (2023.7.22)
+Requirement already satisfied: attrs&gt;=22.2.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.1.2-&gt;papermill) (23.1.0)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.1.2-&gt;papermill) (2023.7.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.1.2-&gt;papermill) (0.30.2)
+Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.1.2-&gt;papermill) (0.10.2)
+Requirement already satisfied: nest-asyncio&gt;=1.5.4 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (1.5.7)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (2.8.2)
+Requirement already satisfied: pyzmq&gt;=23.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (24.0.1)
+Requirement already satisfied: tornado&gt;=6.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (6.3.3)
+Requirement already satisfied: platformdirs&gt;=2.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-core!=5.0.*,&gt;=4.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (3.10.0)
+Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (1.16.0)
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Relax some linting rules for code examples</span>
-<span class="c1"># pylint: disable=invalid-name,redefined-outer-name,consider-using-f-string,duplicate-value,unnecessary-lambda-assignment,protected-access,too-few-public-methods,wrong-import-position,unused-import</span>
+<span class="c1"># pylint: disable=invalid-name,redefined-outer-name,consider-using-f-string,duplicate-value,unnecessary-lambda-assignment,protected-access,too-few-public-methods,wrong-import-position,unused-import,consider-swap-variables,consider-using-enumerate,too-many-lines</span>
 </pre></div>
 </div>
 </div>
@@ -1161,7 +1247,9 @@ Index 3 in supplies is: binders
 <h4>List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using explicit code</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions</span>
+
+<span class="c1"># Using explicit code</span>
 <span class="n">squared_numbers</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">stop</span> <span class="o">=</span> <span class="mi">10</span>
 
@@ -1201,7 +1289,7 @@ Index 3 in supplies is: binders
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;ABC&#39;, &#39;DEF&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;DEF&#39;, &#39;ABC&#39;}
 {0, 1, 2, 3}
 {&#39;Prosper&#39;: &#39;name&#39;, 12: &#39;age&#39;}
 </pre></div>
@@ -1499,6 +1587,8 @@ Mammal
 </section>
 <section id="python-good-practices">
 <h2>Python good practices<a class="headerlink" href="#python-good-practices" title="Permalink to this heading">#</a></h2>
+<section id="writing-pythonic-code">
+<h3>Writing pythonic code<a class="headerlink" href="#writing-pythonic-code" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
@@ -1531,6 +1621,511 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div>
 </div>
 </div>
+<section id="what-does-pythonic-mean">
+<h4>What does “Pythonic” mean?<a class="headerlink" href="#what-does-pythonic-mean" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Python code is considered <em>pythonic</em> if it:</p>
+<ul>
+<li><p>conforms to the Python philosophy;</p></li>
+<li><p>takes advantage of the language’s specific features.</p></li>
+</ul>
+</li>
+<li><p>Pythonic code is nothing more than <strong>idiomatic Python code</strong> that strives to be clean, concise and readable.</p></li>
+</ul>
+<blockquote>
+<div><p>Most linting tools (see below) enforce pythonicity.</p>
+</div></blockquote>
+</section>
+<section id="example-swapping-two-variables">
+<h4>Example: swapping two variables<a class="headerlink" href="#example-swapping-two-variables" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Non-pythonic</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tmp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Pythonic</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 3
+3 2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-iterating-on-a-list">
+<h4>Example: iterating on a list<a class="headerlink" href="#example-iterating-on-a-list" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+
+<span class="c1"># Non-pythonic</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Still non-pythonic</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Pythonic</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a
+b
+c
+a
+b
+c
+a
+b
+c
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-indexed-traversal">
+<h4>Example: indexed traversal<a class="headerlink" href="#example-indexed-traversal" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+<span class="c1"># Non-pythonic</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">my_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Pythonic</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 -&gt; a
+1 -&gt; b
+2 -&gt; c
+0 -&gt; a
+1 -&gt; b
+2 -&gt; c
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-searching-in-a-list">
+<h4>Example: searching in a list<a class="headerlink" href="#example-searching-in-a-list" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apples&quot;</span><span class="p">,</span> <span class="s2">&quot;oranges&quot;</span><span class="p">,</span> <span class="s2">&quot;bananas&quot;</span><span class="p">,</span> <span class="s2">&quot;grapes&quot;</span><span class="p">]</span>
+<span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;cherries&quot;</span>
+
+<span class="c1"># Non-pythonic</span>
+<span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">fruits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">fruit</span><span class="p">:</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+
+<span class="c1"># Pythonic</span>
+<span class="n">found</span> <span class="o">=</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-generating-a-list">
+<h4>Example: generating a list<a class="headerlink" href="#example-generating-a-list" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="c1"># Non-pythonic</span>
+<span class="n">doubles</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">doubles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">doubles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doubles</span><span class="p">)</span>
+
+<span class="c1"># Pythonic</span>
+<span class="n">doubles</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doubles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 3, 8, 5, 12]
+[1, 4, 3, 8, 5, 12]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code-style">
+<h4>Code style<a class="headerlink" href="#code-style" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> is the official style guide for Python:</p>
+<ul>
+<li><p>use 4 spaces for indentation;</p></li>
+<li><p>define a maximum value for line length (around 80 characters);</p></li>
+<li><p>organize imports at beginning of file;</p></li>
+<li><p>surround binary operators with a single space on each side;</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+<li><p>Code style should be enforced upon creation by a tool like <a class="reference external" href="https://github.com/psf/black">Black</a>.</p></li>
+</ul>
+</section>
+<section id="beyond-pep8">
+<h4>Beyond PEP8<a class="headerlink" href="#beyond-pep8" title="Permalink to this heading">#</a></h4>
+<p>Focusing on style and PEP8-compliance might make you miss more fundamental code flaws.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
+
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;wf-BqAjZb8M&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/wf-BqAjZb8M"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="docstrings">
+<h4>Docstrings<a class="headerlink" href="#docstrings" title="Permalink to this heading">#</a></h4>
+<p>A <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">docstring</a> is a string literal that occurs as the first statement in a module, function, class, or method definition to document it.</p>
+<p>All modules, classes, public methods and exported functions should include a docstring.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Form a complex number.</span>
+
+<span class="sd">    Keyword arguments:</span>
+<span class="sd">    real -- the real part (default 0.0)</span>
+<span class="sd">    imag -- the imaginary part (default 0.0)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ... (do something useful with parameters)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">real</span><span class="p">,</span> <span class="n">imag</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code-linting">
+<h4>Code linting<a class="headerlink" href="#code-linting" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><em>Linting</em> is the process of checking code for syntactical and stylistic problems before execution.</p></li>
+<li><p>It is useful to catch errors and improve code quality in dynamically typed, interpreted languages, where there is no compiler.</p></li>
+<li><p>Several linters exist in the Python ecosystem. A popular choice is <a class="reference external" href="https://pylint.readthedocs.io">Pylint</a>.</p></li>
+</ul>
+</section>
+<section id="type-annotations">
+<h4>Type annotations<a class="headerlink" href="#type-annotations" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Added in Python 3.5, <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">type annotations</a> allow to add type hints to code entities like variables or functions, bringing a statically typed flavour to the language.</p></li>
+<li><p><a class="reference external" href="http://mypy-lang.org/">mypy</a> can automatically check the code for annotation correctness.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Greet someone&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Hello &quot;</span> <span class="o">+</span> <span class="n">name</span>
+
+
+<span class="n">greeting</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>  <span class="c1"># OK</span>
+
+<span class="c1"># greeting(3)  # mypy error: incompatible type &quot;int&quot;; expected &quot;str&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Hello Alice&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="unit-tests">
+<h4>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this heading">#</a></h4>
+<p>Unit tests automate the testing of individual code elements like functions or methods, thus decreasing the risk of bugs and regressions.</p>
+<p>They can be implemented in Python using tools like <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest</a> or <a class="reference external" href="https://docs.pytest.org">pytest</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Increment a value&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">assert</span> <span class="n">inc</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+
+<span class="c1"># assert inc(3) == 5  # AssertionError</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="packaging-and-dependency-management">
+<h3>Packaging and dependency management<a class="headerlink" href="#packaging-and-dependency-management" title="Permalink to this heading">#</a></h3>
+<section id="managing-dependencies-in-python">
+<h4>Managing dependencies in Python<a class="headerlink" href="#managing-dependencies-in-python" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Most Python apps depend on third-party libraries and frameworks (NumPy, Flask, Requests…).</p></li>
+<li><p>These tools may also have external dependencies, and so on.</p></li>
+<li><p><strong>Dependency management</strong> is necessary to prevent version conflicts and incompatibilities. it involves two things:</p>
+<ul>
+<li><p>a way for the app to declare its dependencies;</p></li>
+<li><p>a tool to resolve these dependencies and install compatible versions.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="semantic-versioning">
+<h4>Semantic versioning<a class="headerlink" href="#semantic-versioning" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Software versioning convention used in many ecosystems.</p></li>
+<li><p>A version number comes as a suite of three digits <code class="docutils literal notranslate"><span class="pre">X.Y.Z</span></code>.</p>
+<ul>
+<li><p>X = major version (potentially including breaking changes).</p></li>
+<li><p>Y = minor version (only non-breaking changes).</p></li>
+<li><p>Z = patch.</p></li>
+</ul>
+</li>
+<li><p>Digits are incremented as new versions are shipped.</p></li>
+</ul>
+</section>
+<section id="pip-and-requirements-txt">
+<h4>pip and requirements.txt<a class="headerlink" href="#pip-and-requirements-txt" title="Permalink to this heading">#</a></h4>
+<p>A <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is the most basic way of declaring dependencies in Python.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>certifi&gt;=2020.11.0
+chardet==4.0.0
+click&gt;=6.5.0, &lt;7.1
+download==0.3.5
+Flask&gt;=1.1.0
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://pypi.org/project/pip/">pip</a> package installer can read this file and act accordingly, downloading dependencies from <a class="reference external" href="https://pypi.org/">PyPI</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="virtual-environments">
+<h4>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A <strong>virtual environment</strong> is an isolated Python environment where a project’s dependencies are installed.</p></li>
+<li><p>Using them prevents the risk of mixing dependencies required by different projects on the same machine.</p></li>
+<li><p>Several tools exist to manage virtual environments in Python, for example <a class="reference external" href="https://virtualenv.pypa.io">virtualenv</a> and <a class="reference external" href="https://docs.conda.io">conda</a>.</p></li>
+</ul>
+</section>
+<section id="conda-and-environment-yml">
+<h4>conda and environment.yml<a class="headerlink" href="#conda-and-environment-yml" title="Permalink to this heading">#</a></h4>
+<p>Installed as part of the <a class="reference external" href="https://www.anaconda.com/">Anaconda</a> distribution, the <a class="reference external" href="https://docs.conda.io">conda</a> package manager reads an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file to install the dependencies associated to a specific virtual environment.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-env</span>
+
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.7</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matplotlib</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
+</pre></div>
+</div>
+</section>
+<section id="poetry">
+<h4>Poetry<a class="headerlink" href="#poetry" title="Permalink to this heading">#</a></h4>
+<p><a class="reference external" href="https://python-poetry.org">Poetry</a> is a recent packaging and dependency management tool for Python. It downloads packages from <a class="reference external" href="https://pypi.org/">PyPI</a> by default.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new poetry-compliant project in the my-project folder</span>
+poetry<span class="w"> </span>new<span class="w"> </span>my-project
+
+<span class="c1"># Initialize an already existing project for Poetry</span>
+poetry<span class="w"> </span>init
+
+<span class="c1"># Install defined dependencies</span>
+poetry<span class="w"> </span>install
+
+<span class="c1"># Add a package to project dependencies and install it</span>
+poetry<span class="w"> </span>add<span class="w"> </span>&lt;package<span class="w"> </span>name&gt;
+
+<span class="c1"># Update dependencies to sync them with configuration file</span>
+poetry<span class="w"> </span>update
+</pre></div>
+</div>
+</section>
+<section id="poetry-and-virtual-environments">
+<h4>Poetry and virtual environments<a class="headerlink" href="#poetry-and-virtual-environments" title="Permalink to this heading">#</a></h4>
+<p>By default, Poetry creates a virtual environment for the configured project in a user-specific folder. A standard practice is to store it in the project’s folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tell Poetry to store the environment in the local project folder</span>
+poetry<span class="w"> </span>config<span class="w"> </span>virtualenvs.in-project<span class="w"> </span><span class="nb">true</span>
+
+<span class="c1"># Activate the environment</span>
+poetry<span class="w"> </span>shell
+</pre></div>
+</div>
+</section>
+<section id="the-pyproject-toml-file">
+<h4>The pyproject.toml file<a class="headerlink" href="#the-pyproject-toml-file" title="Permalink to this heading">#</a></h4>
+<p>Poetry configuration file, soon-to-be standard for Python projects.</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;poetry example&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&gt;=3.7.1,&lt;3.10&quot;</span>
+<span class="n">jupyter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^1.0.0&quot;</span>
+<span class="n">matplotlib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^3.3.2&quot;</span>
+<span class="n">sklearn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^0.0&quot;</span>
+<span class="n">pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^1.1.3&quot;</span>
+<span class="n">ipython</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^7.0.0&quot;</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^6.1.1&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="caret-requirements">
+<h4>Caret requirements<a class="headerlink" href="#caret-requirements" title="Permalink to this heading">#</a></h4>
+<p>Offers a way to precisely define dependency versions.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Requirement</p></th>
+<th class="head text-center"><p>Versions allowed</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>^1.2.3</p></td>
+<td class="text-center"><p>&gt;=1.2.3 &lt;2.0.0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>^1.2</p></td>
+<td class="text-center"><p>&gt;=1.2.0 &lt;2.0.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>~1.2.3</p></td>
+<td class="text-center"><p>&gt;=1.2.3 &lt;1.3.0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>~1.2</p></td>
+<td class="text-center"><p>&gt;=1.2.0 &lt;1.3.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1.2.3</p></td>
+<td class="text-center"><p>1.2.3 only</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-poetry-lock-file">
+<h4>The poetry.lock file<a class="headerlink" href="#the-poetry-lock-file" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The first time Poetry install dependencies, it creates a <code class="docutils literal notranslate"><span class="pre">poetry.lock</span></code> file that contains the exact versions of all installed packages.</p></li>
+<li><p>Subsequent installs will use these exact versions to ensure consistency.</p></li>
+<li><p>Removing this file and running another Poetry install will fetch the latest matching versions.</p></li>
+</ul>
+</section>
+</section>
+<section id="working-with-notebooks">
+<h3>Working with notebooks<a class="headerlink" href="#working-with-notebooks" title="Permalink to this heading">#</a></h3>
+<section id="advantages-of-jupyter-notebooks">
+<h4>Advantages of Jupyter notebooks<a class="headerlink" href="#advantages-of-jupyter-notebooks" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Standard format for mixing text, images and (executable) code.</p></li>
+<li><p>Open source and platform-independant.</p></li>
+<li><p>Useful for experimenting and prototyping.</p></li>
+<li><p>Growing ecosystem of <a class="reference external" href="https://tljh.jupyter.org/en/latest/howto/admin/enable-extensions.html">extensions</a> for various purposes and cloud hosting solutions (<a class="reference external" href="https://colab.research.google.com/">Colaboratory</a>, <a class="reference external" href="https://www.ovhcloud.com/en/public-cloud/ai-notebook/">AI notebooks</a>…).</p></li>
+<li><p>Integration with tools like <a class="reference external" href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">Visual Studio Code</a>.</p></li>
+</ul>
+</section>
+<section id="drawbacks-of-jupyter-notebooks">
+<h4>Drawbacks of Jupyter notebooks<a class="headerlink" href="#drawbacks-of-jupyter-notebooks" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Arbitrary execution order of cells can cause confusing errors.</p></li>
+<li><p>Notebooks don’t encourage good programming habits like modularization, linting and tests.</p></li>
+<li><p>Being JSON-based, their versioning is more difficult than for plain text files.</p></li>
+<li><p>Dependency management is also difficult, thus hindering reproducibility.</p></li>
+</ul>
+</section>
+<section id="collaborating-with-notebooks">
+<h4>Collaborating with notebooks<a class="headerlink" href="#collaborating-with-notebooks" title="Permalink to this heading">#</a></h4>
+<p>A common solution for sharing notebooks between a team is to use <a class="reference external" href="https://jupytext.readthedocs.io">Jupytext</a>. This tool can associate an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file with a Python file to facilitate collaboration and version control.</p>
+</section>
+<section id="code-organization">
+<h4>Code organization<a class="headerlink" href="#code-organization" title="Permalink to this heading">#</a></h4>
+<p>Monolithic notebooks can grow over time and become hard to understand and maintain.</p>
+<p>Just like in a traditional software project, it is possible to split them into separate parts, thus following the <a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> design principle.</p>
+<p>Code can be splitted into several sub-notebooks and/or external Python files. The latter facilitates unit testing and version control.</p>
+</section>
+<section id="notebook-workflow">
+<h4>Notebook workflow<a class="headerlink" href="#notebook-workflow" title="Permalink to this heading">#</a></h4>
+<p>Tools like <a class="reference external" href="https://papermill.readthedocs.io">papermill</a> can orchestrate the execution of several notebooks in a row. External parameters can be passed to notebooks, and the runtime flow can depend on the execution results of each notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These imports should be placed</span>
+<span class="kn">import</span> <span class="nn">papermill</span> <span class="k">as</span> <span class="nn">pm</span>
+
+
+<span class="c1"># Doesn&#39;t work on Google Colaboratory. Workaround here:</span>
+<span class="c1"># https://colab.research.google.com/github/rjdoubleu/Colab-Papermill-Patch/blob/master/Colab-Papermill-Driver.ipynb</span>
+<span class="n">notebook_dir</span> <span class="o">=</span> <span class="s2">&quot;./_papermill&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">execute_notebook</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_dir</span><span class="p">,</span> <span class="s2">&quot;simple_input.ipynb&quot;</span><span class="p">),</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_dir</span><span class="p">,</span> <span class="s2">&quot;simple_output.ipynb&quot;</span><span class="p">),</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Black is not installed, parameters wont be formatted
+/Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+Executing:   0%|                                                                                                                                                 | 0/4 [00:00&lt;?, ?cell/s]0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Executing: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00,  4.56cell/s]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 </section>
 
@@ -1660,7 +2255,45 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-and-packages">Modules and packages</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-good-practices">Python good practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-good-practices">Python good practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-pythonic-code">Writing pythonic code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-pythonic-mean">What does “Pythonic” mean?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-swapping-two-variables">Example: swapping two variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-iterating-on-a-list">Example: iterating on a list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-indexed-traversal">Example: indexed traversal</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-searching-in-a-list">Example: searching in a list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-generating-a-list">Example: generating a list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-style">Code style</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-pep8">Beyond PEP8</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-linting">Code linting</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#type-annotations">Type annotations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests">Unit tests</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packaging-and-dependency-management">Packaging and dependency management</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-dependencies-in-python">Managing dependencies in Python</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-versioning">Semantic versioning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pip-and-requirements-txt">pip and requirements.txt</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-environments">Virtual environments</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-and-environment-yml">conda and environment.yml</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poetry">Poetry</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poetry-and-virtual-environments">Poetry and virtual environments</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pyproject-toml-file">The pyproject.toml file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#caret-requirements">Caret requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poetry-lock-file">The poetry.lock file</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-notebooks">Working with notebooks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-jupyter-notebooks">Advantages of Jupyter notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-jupyter-notebooks">Drawbacks of Jupyter notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collaborating-with-notebooks">Collaborating with notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization">Code organization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-workflow">Notebook workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
