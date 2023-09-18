@@ -486,6 +486,9 @@ print(list(g2))
 
 
 # %%
+# https://docs.python.org/3/tutorial/classes.html
+
+
 class Account:
     """Represents a bank account"""
 
@@ -516,6 +519,9 @@ print(new_account.balance)
 
 
 # %%
+# https://docs.python.org/3/library/functions.html#property
+
+
 class Vehicle:
     """Represents a vehicle"""
 
@@ -605,6 +611,8 @@ print(doggo.species)
 # Simplified syntax for attribute-centric classes.
 
 # %%
+# https://realpython.com/python-data-classes/
+
 from dataclasses import dataclass
 
 
