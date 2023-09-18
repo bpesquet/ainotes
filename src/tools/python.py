@@ -45,7 +45,7 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### The Python syntax
 #
-# For more examples, see the [cheatsheet]() below.
+# For many more examples, see the cheatsheet below.
 
 
 # %%
@@ -497,15 +497,19 @@ class Account:
 
         self.balance += amount
 
+    def __str__(self):
+        return f"Account balance: {self.balance}"
+
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Class instanciation
 
 # %%
 new_account = Account(100)
+print(new_account)
+
 new_account.credit(-40)
 print(new_account.balance)
-
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Instance properties
@@ -538,6 +542,7 @@ class Vehicle:
 my_strange_vehicle = Vehicle(4, "electric")
 my_strange_vehicle.number_of_wheels = 2
 print(my_strange_vehicle.number_of_wheels)
+
 # Works, but frowned upon (accessing a private attribute)
 # We should use a property instead
 print(my_strange_vehicle._type_of_tank)
@@ -551,7 +556,7 @@ print(my_strange_vehicle._type_of_tank)
 class Employee:
     """Represents an employee"""
 
-    empCount = 0
+    empCount = 0  # Class-level attribute, shared by all instances
 
     def __init__(self, name, salary):
         self._name = name
@@ -564,12 +569,8 @@ class Employee:
 
         return f"Total employees: {Employee.empCount}"
 
-    def __str__(self):
-        return f"Name: {self._name}, salary: {self._salary}"
-
 
 e1 = Employee("Ben", "30")
-print(e1)
 print(Employee.count())
 
 
@@ -596,6 +597,27 @@ class Dog(Animal):
 doggo = Dog("Fang")
 print(doggo.name)
 print(doggo.species)
+
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Dataclasses
+#
+# Simplified syntax for attribute-centric classes.
+
+# %%
+from dataclasses import dataclass
+
+
+@dataclass
+class Student:
+    """Represents a student"""
+
+    name: str
+    id: int
+
+
+student = Student("Jack", 123456)
+print(student)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Modules and packages
