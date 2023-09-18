@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Python
+# # Programming
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup

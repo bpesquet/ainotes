@@ -14,6 +14,6 @@ parts:
       sections:
       - file: foundations/calculus
       - file: foundations/proba_stats
-  - caption: Tools
-    chapters:
-    - file: tools/python
+    - file: foundations/computer_science
+      sections:
+      - file: foundations/programming
