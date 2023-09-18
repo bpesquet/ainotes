@@ -7,11 +7,10 @@ root: index
 parts:
   - caption: Foundations
     chapters:
-    - file: foundations/calculus
-      title: Calculus
-    - file: foundations/proba_stats
-      title: Probability & Statistics
+    - file: foundations/math
+      sections:
+      - file: foundations/calculus
+      - file: foundations/proba_stats
   - caption: Tools
     chapters:
     - file: tools/python
-      title: Python
