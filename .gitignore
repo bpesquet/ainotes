@@ -1,6 +1,9 @@
 # macOS folder files
 .DS_Store
 
+# Notebook execution output
+simple_output.ipynb
+
 # JupyterBook output
 docs/_build/
 
