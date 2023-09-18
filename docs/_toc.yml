@@ -11,3 +11,7 @@ parts:
       title: Calculus
     - file: foundations/proba_stats
       title: Probability & Statistics
+  - caption: Tools
+    chapters:
+    - file: tools/python
+      title: Python
