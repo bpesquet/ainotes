@@ -6,16 +6,16 @@ This repository contains the source and configuration files for my  notes on Art
 
 This project is built with the following software:
 
-- the [Python](https://www.python.org/) programming language ;
-- [Poetry](https://python-poetry.org/) for dependency management ;
-- [Black](https://github.com/psf/black) for code formatting ;
-- [Pylint](https://github.com/pylint-dev/pylint) to detect programming mistakes before execution ;
+- the [Python](https://www.python.org/) programming language;
+- [Poetry](https://python-poetry.org/) for dependency management;
+- [Black](https://github.com/psf/black) for code formatting;
+- [Pylint](https://github.com/pylint-dev/pylint) to detect programming mistakes before execution;
 - [PyTorch](https://pytorch.org/) for tensor management and Machine Learning algorithms.
 
 Additionally, it uses the following tools to create the [online version](https://www.bpesquet.fr/ainotes) of these notes:
 
-- [Jupytext](https://jupytext.readthedocs.io) to synchronize Python source files with [Jupyter](https://jupyter.org/) notebooks ;
-- [Jupyter Book](https://jupyterbook.org) to generate a static website from the notebooks ;
+- [Jupytext](https://jupytext.readthedocs.io) to synchronize Python source files with [Jupyter](https://jupyter.org/) notebooks;
+- [Jupyter Book](https://jupyterbook.org) to generate a static website from the notebooks;
 - A [GitHub Action](.github/workflows/deploy.yaml) to implement [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) and publish the website to [GitHub Pages](https://pages.github.com/) after each code push.
 
 When teaching, I run the notebooks locally and use [RISE](https://rise.readthedocs.io) to showcase them as live [reveal.js](https://revealjs.com)-based presentations.
