@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Notes on Artificial Intelligence &#8212; ainotes</title>
+    <title>About Artificial Intelligence &#8212; ainotes</title>
   
   
   
@@ -61,10 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'about_ai';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About Artificial Intelligence" href="about_ai.html" />
+    <link rel="next" title="Mathematics" href="foundations/math.html" />
+    <link rel="prev" title="Notes on Artificial Intelligence" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -130,7 +131,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -148,8 +149,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="about_ai.html">About Artificial Intelligence</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">About Artificial Intelligence</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
@@ -233,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/bpesquet/ainotes/edit/main/docs/index.md" target="_blank"
+      <li><a href="https://github.com/bpesquet/ainotes/edit/main/docs/about_ai.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -250,7 +251,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/bpesquet/ainotes/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/bpesquet/ainotes/issues/new?title=Issue%20on%20page%20%2Fabout_ai.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -280,7 +281,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/index.md" target="_blank"
+      <li><a href="_sources/about_ai.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +350,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -360,11 +363,28 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Notes on Artificial Intelligence</h1>
+    <h1>About Artificial Intelligence</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-recent-discipline">A recent discipline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-original-ambition-of-ai">The original ambition of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-technical-definition-of-ai">A technical definition of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-areas-of-research">Main areas of research</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-moving-target">AI as a moving target</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tumultuous-history-of-ai">The tumultuous history of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-highly-interdisciplinary-field">A highly interdisciplinary field</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-social-science">AI as a social science</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-different-flavours-of-ai">The different flavours of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-broader-definition-of-ai">A broader definition of AI</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -374,13 +394,110 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="notes-on-artificial-intelligence">
-<h1>Notes on Artificial Intelligence<a class="headerlink" href="#notes-on-artificial-intelligence" title="Permalink to this heading">#</a></h1>
-<p>Welcome to my online collection of notes related to AI. They were created for <a class="reference external" href="https://www.bpesquet.fr/teaching/">teaching</a>, <a class="reference external" href="https://www.bpesquet.fr/research/">research</a>, or personal interest. I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.</p>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
+  <!-- #region slideshow={"slide_type": "slide"} -->
+<section class="tex2jax_ignore mathjax_ignore" id="about-artificial-intelligence">
+<h1>About Artificial Intelligence<a class="headerlink" href="#about-artificial-intelligence" title="Permalink to this heading">#</a></h1>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+<section id="a-recent-discipline">
+<h2>A recent discipline<a class="headerlink" href="#a-recent-discipline" title="Permalink to this heading">#</a></h2>
+<p>Attended by many brilliant minds of the era, the <a class="reference external" href="http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf">1956 Dartmouth workshop on Artificial Intelligence</a> is widely considered the event that kicked off AI as a research discipline.</p>
+<p><a class="reference external" href="https://spectrum.ieee.org/dartmouth-ai-workshop"><img alt="Dartmouth workshop participants" src="_images/dartmouth_workshop.jpg" /></a></p>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="the-original-ambition-of-ai">
+<h2>The original ambition of AI<a class="headerlink" href="#the-original-ambition-of-ai" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>“AI is the science and engineering of making intelligent machines.” (<a class="reference external" href="https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)">John McCarthy</a>)</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.” (<a class="reference external" href="https://en.wikipedia.org/wiki/Dartmouth_workshop">Dartmouth Workshop</a>, 1956)</p>
+</div></blockquote>
+<blockquote>
+<div><p>“AI is the science of making machines do things that would require intelligence if done by men.” (<a class="reference external" href="https://en.wikipedia.org/wiki/Marvin_Minsky">Marvin Minsky</a>)</p>
+</div></blockquote>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="a-technical-definition-of-ai">
+<h2>A technical definition of AI<a class="headerlink" href="#a-technical-definition-of-ai" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>“AI refers to systems that <strong>display</strong> intelligent behavior by analysing their <strong>environment</strong> and taking <strong>actions</strong> - with some degree of <strong>autonomy</strong> - to achieve specific <strong>goals</strong>.” (<a class="reference external" href="https://ec.europa.eu/newsroom/dae/document.cfm?doc_id=51625">European Commission</a>, 2018)</p>
+</div></blockquote>
+<p>AI systems can be either:</p>
+<ul class="simple">
+<li><p>Purely <strong>software</strong>-based (e.g. voice assistants, search engines, face recognition systems).</p></li>
+<li><p>Embedded in <strong>hardware</strong> devices (e.g. robots, autonomous cars, drones).</p></li>
+</ul>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="main-areas-of-research">
+<h2>Main areas of research<a class="headerlink" href="#main-areas-of-research" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Problem solving</strong> (e.g. search algorithms, constraint solving).</p></li>
+<li><p><strong>Reasoning</strong> and <strong>decision making</strong> (e.g. logic, knowledge representation).</p></li>
+<li><p><strong>Machine Learning</strong>.</p></li>
+<li><p><strong>Real-world interactions</strong> (e.g. computer vision, natural language understanding, robotics).</p></li>
+</ul>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="ai-as-a-moving-target">
+<h2>AI as a moving target<a class="headerlink" href="#ai-as-a-moving-target" title="Permalink to this heading">#</a></h2>
+<p>As soon as AI successfully solves a problem, the problem is no longer considered a part of AI.</p>
+<blockquote>
+<div><p>“<a class="reference external" href="https://en.wikipedia.org/wiki/AI_effect">AI is whatever hasn’t been done yet</a>.” (<a class="reference external" href="https://en.wikipedia.org/wiki/Larry_Tesler">Larry Tesler</a>)</p>
+</div></blockquote>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="the-tumultuous-history-of-ai">
+<h2>The tumultuous history of AI<a class="headerlink" href="#the-tumultuous-history-of-ai" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.slideshare.net/dlavenda/ai-and-productivity"><img alt="The AI timeline" src="_images/ai_timeline.png" /></a></p>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="a-highly-interdisciplinary-field">
+<h2>A highly interdisciplinary field<a class="headerlink" href="#a-highly-interdisciplinary-field" title="Permalink to this heading">#</a></h2>
+<p><img alt="AI fields" src="_images/ai_fields.png" /></p>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="ai-as-a-social-science">
+<h2>AI as a social science<a class="headerlink" href="#ai-as-a-social-science" title="Permalink to this heading">#</a></h2>
+<p>AI has many social and societal implications:</p>
+<ul class="simple">
+<li><p>Job market transformation.</p></li>
+<li><p>Human/machine interactions.</p></li>
+<li><p>Trust and acceptability.</p></li>
+<li><p>Legal aspects and regulation.</p></li>
+<li><p>Fairness.</p></li>
+<li><p>Ethical use.</p></li>
+<li><p>Privacy and usage of personal data.</p></li>
+<li><p>…</p></li>
+</ul>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="the-different-flavours-of-ai">
+<h2>The different flavours of AI<a class="headerlink" href="#the-different-flavours-of-ai" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Substitutive intelligence</strong>: replacement of men by machines on specific tasks.</p></li>
+<li><p><strong>Augmented intelligence</strong>: human-centered AI for performance augmentation or autonomy enhancement.</p></li>
+<li><p><strong>Hybrid intelligence</strong>: human-machine collaboration on complex tasks.</p></li>
+</ul>
+<!-- #endregion -->
+<!-- #region slideshow={"slide_type": "slide"} -->
+</section>
+<section id="a-broader-definition-of-ai">
+<h2>A broader definition of AI<a class="headerlink" href="#a-broader-definition-of-ai" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>“AI is an <strong>interdisciplinary</strong> field aiming at <strong>understanding</strong> and <strong>imitating</strong> the mechanisms of <strong>cognition</strong> and <strong>reasoning</strong>, in order to <strong>assist</strong> or <strong>substitute</strong> humans in their activities.” (<a class="reference external" href="https://fr.wikipedia.org/wiki/Commission_d%27enrichissement_de_la_langue_fran%C3%A7aise">Commission d’enrichissement de la langue française</a>, 2018)</p>
+</div></blockquote>
+<!-- #endregion -->
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -414,12 +531,21 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Notes on Artificial Intelligence</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="about_ai.html"
+       href="foundations/math.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">About Artificial Intelligence</p>
+        <p class="prev-next-title">Mathematics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -432,6 +558,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-recent-discipline">A recent discipline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-original-ambition-of-ai">The original ambition of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-technical-definition-of-ai">A technical definition of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-areas-of-research">Main areas of research</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-moving-target">AI as a moving target</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tumultuous-history-of-ai">The tumultuous history of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-highly-interdisciplinary-field">A highly interdisciplinary field</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-social-science">AI as a social science</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-different-flavours-of-ai">The different flavours of AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-broader-definition-of-ai">A broader definition of AI</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
