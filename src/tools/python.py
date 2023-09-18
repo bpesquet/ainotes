@@ -71,10 +71,10 @@ for friend in friends:
 # - There is a [controversy](https://en.wikipedia.org/wiki/Data_science#Relationship_to_statistics) on the expression's real usefulness.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# [![Data Science Venn diagram by Conway](images/DataScience_VD_conway.png)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
+# [![Data Science Venn diagram by Conway](_images/DataScience_VD_conway.png)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# [![Data Science Venn diagram by Kolassa](images/DataScience_VD_Kolassa.png)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
+# [![Data Science Venn diagram by Kolassa](_images/DataScience_VD_Kolassa.png)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### A prominent language
