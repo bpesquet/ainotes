@@ -36,3 +36,6 @@ elif torch.backends.mps.is_available():
 else:
     device = torch.device("cpu")
     print("No available GPU :/")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# To be continued...

@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Probability & Statistics
+# # Linear Algebra
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
