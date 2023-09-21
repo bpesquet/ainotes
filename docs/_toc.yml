@@ -10,11 +10,12 @@ parts:
     - file: about_ai
   - caption: Foundations
     chapters:
+    - file: foundations/computer_science
+      sections:
+      - file: foundations/programming
+      - file: foundations/data_manipulation
     - file: foundations/math
       sections:
       - file: foundations/linear_algebra
       - file: foundations/calculus
       - file: foundations/proba_stats
-    - file: foundations/computer_science
-      sections:
-      - file: foundations/programming
