@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/proba_stats';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -424,6 +426,29 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiment">Random experiment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-events">Relationships between events</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-algebra">Event algebra</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-partition">Event partition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-definition">Frequentist definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -437,6 +462,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-statistics">
 <h1>Probability &amp; Statistics<a class="headerlink" href="#probability-statistics" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>“Probability deals with knowing the model of our world and use it for deductions. Statistics deal with trying to identify this model based on observation of reality.”</p>
+</div></blockquote>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -477,7 +505,147 @@ PyTorch version: 2.0.1
 </div>
 </div>
 </div>
-<p>To be continued…</p>
+</section>
+<section id="probability">
+<h2>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h2>
+<section id="fundamentals">
+<h3>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this heading">#</a></h3>
+<section id="random-experiment">
+<h4>Random experiment<a class="headerlink" href="#random-experiment" title="Permalink to this heading">#</a></h4>
+<p>Experiment implying some randomness. Knowing the experimental conditions is not enough to predict its outcome. Opposite of <em>deterministic experiment</em>.</p>
+<p>Example: throwing a six-sided dice.</p>
+</section>
+<section id="sample-space">
+<h4>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h4>
+<p>Set of all possible outcomes for the random experiment, denoted by <span class="math notranslate nohighlight">\(\Omega\)</span> or <span class="math notranslate nohighlight">\(S\)</span>. Can either be finite or infinitely large.</p>
+<p>Example: <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span></p>
+</section>
+<section id="event">
+<h4>Event<a class="headerlink" href="#event" title="Permalink to this heading">#</a></h4>
+<p>Subset of the sample space, denoted by <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span>.</p>
+<p>An event is a set of elementary events (observed outcomes). An elementary event is denoted <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>. If <span class="math notranslate nohighlight">\(\omega \in E\)</span>, then event <span class="math notranslate nohighlight">\(E\)</span> has occurred.</p>
+<p>Example: <span class="math notranslate nohighlight">\(E \equiv \text{&quot;obtaining an odd number&quot;}\)</span>. <span class="math notranslate nohighlight">\(E= \{1,3,5\}\)</span></p>
+</section>
+<section id="relationships-between-events">
+<h4>Relationships between events<a class="headerlink" href="#relationships-between-events" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Inclusion <span class="math notranslate nohighlight">\(A \subset B\)</span>. If <span class="math notranslate nohighlight">\(A\)</span> occurs, <span class="math notranslate nohighlight">\(B\)</span> occurs too.</p></li>
+<li><p>Equality <span class="math notranslate nohighlight">\(A = B\)</span>. All elements are identical for both events.</p></li>
+<li><p>Incompatibility (no shared elements). The events cannot occur simultaneously.</p></li>
+</ul>
+<p>Example: <span class="math notranslate nohighlight">\(A \equiv \text{&quot;obtaining an odd number&quot;}\)</span> and <span class="math notranslate nohighlight">\(B \equiv \text{&quot;obtaining an even number&quot;}\)</span> are incompatible.</p>
+</section>
+<section id="composition-of-events">
+<h4>Composition of events<a class="headerlink" href="#composition-of-events" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Negation <span class="math notranslate nohighlight">\(E^\star = \Omega \backslash E\)</span>. Occurs if and only if <span class="math notranslate nohighlight">\(E\)</span> does not occur.</p></li>
+<li><p>Conjunction <span class="math notranslate nohighlight">\(A \cap B\)</span>. Occurs if and only if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> occur simultaneously.</p></li>
+<li><p>Union <span class="math notranslate nohighlight">\(A \cup B\)</span>. Occurs if either <span class="math notranslate nohighlight">\(A\)</span> or <span class="math notranslate nohighlight">\(B\)</span> occurs.</p></li>
+<li><p>Generalization to <span class="math notranslate nohighlight">\(n\)</span> events:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\bigcap_{i=1}^{n} A_i =  A_1 \cap A_2 \cap \cdots \cap A_n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bigcup_{i=1}^{n} A_i =  A_1 \cup A_2 \cup \cdots \cup A_n\)</span></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\((\bigcap_{i=1}^{n} A_i) \subseteq (\bigcup_{i=1}^{n} A_i)\)</span> is always verified.</p></li>
+</ul>
+</section>
+<section id="event-algebra">
+<h4>Event algebra<a class="headerlink" href="#event-algebra" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Idempotency: <span class="math notranslate nohighlight">\(A \cup A = A\)</span> and <span class="math notranslate nohighlight">\(A \cap A = A\)</span></p></li>
+<li><p>Commutativity: <span class="math notranslate nohighlight">\(A \cup B = B \cup A\)</span> and <span class="math notranslate nohighlight">\(A \cap B = B \cap A\)</span></p></li>
+<li><p>Associativity: <span class="math notranslate nohighlight">\((A \cup B) \cup C = A \cup (B \cup C) = A \cup B \cup C\)</span> and <span class="math notranslate nohighlight">\((A \cap B) \cap C = A \cap (B \cap C) = A \cap B \cap C\)</span></p></li>
+<li><p>Distributivity: <span class="math notranslate nohighlight">\((A \cup B) \cap C = (A \cap C) \cup (B \cap C)\)</span> and <span class="math notranslate nohighlight">\((A \cap B) \cup C = (A \cup B) \cap (B \cup C)\)</span></p></li>
+<li><p>Identities : <span class="math notranslate nohighlight">\(A \cup \emptyset = A\)</span>, <span class="math notranslate nohighlight">\(A \cup \Omega = \Omega\)</span>, <span class="math notranslate nohighlight">\(A \cap \emptyset = \emptyset\)</span> and <span class="math notranslate nohighlight">\(A \cap \Omega = A\)</span></p></li>
+<li><p>Complementarity: <span class="math notranslate nohighlight">\(A \cup A^* = \Omega\)</span>, <span class="math notranslate nohighlight">\(A \cap A^* = \emptyset\)</span>, <span class="math notranslate nohighlight">\((A^*)^* = A\)</span>, <span class="math notranslate nohighlight">\(\emptyset^* = \Omega\)</span> and <span class="math notranslate nohighlight">\(\Omega^* = \emptyset\)</span></p></li>
+<li><p>De Morgan laws: <span class="math notranslate nohighlight">\((A \cup B)^* = A^* \cap B^*\)</span> and <span class="math notranslate nohighlight">\((A \cap B)^* = A^* \cup B^*\)</span></p></li>
+</ul>
+</section>
+<section id="event-partition">
+<h4>Event partition<a class="headerlink" href="#event-partition" title="Permalink to this heading">#</a></h4>
+<p>An event set <span class="math notranslate nohighlight">\(\{ A_1, \dots, A_n \}\)</span> is a partition of the sample space if and only if:</p>
+<ul class="simple">
+<li><p>No event is impossible: <span class="math notranslate nohighlight">\(\forall i, A_i \ne \emptyset\)</span></p></li>
+<li><p>Events are incompatible two by two: <span class="math notranslate nohighlight">\(\forall i \ne j, A_i \cap A_j = \emptyset\)</span></p></li>
+<li><p>Union of all events is equal to the sample space: <span class="math notranslate nohighlight">\(\bigcup_{i=1}^{n} A_i = \Omega\)</span></p></li>
+</ul>
+</section>
+<section id="combination-of-random-experiments">
+<h4>Combination of random experiments<a class="headerlink" href="#combination-of-random-experiments" title="Permalink to this heading">#</a></h4>
+<p>For two joint experiments characterized by sample spaces <span class="math notranslate nohighlight">\(\Omega_1\)</span> and <span class="math notranslate nohighlight">\(\Omega_2\)</span>, we can define a new sample space <span class="math notranslate nohighlight">\(\Omega\)</span> as their cartesian product: <span class="math notranslate nohighlight">\(\Omega = \Omega_1 \times \Omega_2\)</span></p>
+<p>Example for rolling two dices: <span class="math notranslate nohighlight">\(\Omega_1 = \Omega_2 = \{1,2,3,4,5,6\}\)</span> and <span class="math notranslate nohighlight">\(\Omega = \{(1,1), (1,2), \dots, (6,5), (6,6) \}\)</span> (36 couples).</p>
+</section>
+</section>
+<section id="probability-basics">
+<h3>Probability basics<a class="headerlink" href="#probability-basics" title="Permalink to this heading">#</a></h3>
+<section id="classical-definition">
+<h4>Classical definition<a class="headerlink" href="#classical-definition" title="Permalink to this heading">#</a></h4>
+<p>The probability of an event is the ratio of the number of cases favorable to it, to the number of all cases possible when nothing leads us to expect that any one of these cases should occur more than any other, which renders them, for us, equally possible. (Laplace, 1819)</p>
+<div class="math notranslate nohighlight">
+\[P(A) = \frac{\# A}{\# \Omega}\]</div>
+<p>Assumes equiprobability and a finite number of cases.</p>
+</section>
+<section id="frequentist-definition">
+<h4>Frequentist definition<a class="headerlink" href="#frequentist-definition" title="Permalink to this heading">#</a></h4>
+<p>For <span class="math notranslate nohighlight">\(n\)</span> repetitions under the same conditions of a random experiment, <span class="math notranslate nohighlight">\(P(A)\)</span> is the theorical frequency of event <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[P(A) = \lim_{n\to \infty} \frac{\# A}{n}\]</div>
+<p>Assumes the possibility of indefinitely repeating an experiment without changing its conditions.</p>
+</section>
+<section id="axiomatic-definition">
+<h4>Axiomatic definition<a class="headerlink" href="#axiomatic-definition" title="Permalink to this heading">#</a></h4>
+<p>A probability is a number that satisfies the following axioms (Kolmogorov, 1933):</p>
+<ul class="simple">
+<li><p>For any event <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(P(A) \ge 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\Omega) = 1\)</span></p></li>
+<li><p>If events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are incompatible (<span class="math notranslate nohighlight">\(A \cap B = \emptyset \)</span>), then <span class="math notranslate nohighlight">\(P(A \cup B) = P(A)+P(B)\)</span></p></li>
+</ul>
+</section>
+<section id="properties-of-probabilities">
+<h4>Properties of probabilities<a class="headerlink" href="#properties-of-probabilities" title="Permalink to this heading">#</a></h4>
+<p>The previous definition has the following consequences:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(\emptyset) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A) \le 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A^*) = 1 - P(A)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\forall i \ne j, A_i \cap A_j = \emptyset\)</span>, then <span class="math notranslate nohighlight">\(P(\bigcup_{i=1}^{n} A_i) = \sum_{i=1}^{n} P(A_i)\)</span></p></li>
+<li><p>In the general case, <span class="math notranslate nohighlight">\(P(\bigcup_{i=1}^{n} A_i) \le \sum_{i=1}^{n} P(A_i)\)</span></p></li>
+</ul>
+</section>
+<section id="conditional-probability">
+<h4>Conditional probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h4>
+<p>The probability <span class="math notranslate nohighlight">\(P(A|B)\)</span> of event <span class="math notranslate nohighlight">\(A\)</span> knowing that event <span class="math notranslate nohighlight">\(B\)</span> has occurred is given by:</p>
+<div class="math notranslate nohighlight">
+\[P(A|B) = \frac{P(A \cap B)}{P(B)} \qquad \text{with} \space P(B) \ne 0\]</div>
+<p>There is no fundamental difference between conditional and non-conditional probabilities: <span class="math notranslate nohighlight">\(P(A) = P(A|\Omega)\)</span></p>
+</section>
+<section id="properties-of-conditional-probabilities">
+<h4>Properties of conditional probabilities<a class="headerlink" href="#properties-of-conditional-probabilities" title="Permalink to this heading">#</a></h4>
+<p>The previous definition has the following consequences:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(\Omega|B) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\emptyset|B) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A^*|B) = 1 - P(A|B)\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\forall i \ne j, A_i \cap A_j = \emptyset\)</span>, then <span class="math notranslate nohighlight">\(P(\bigcup_{i=1}^{n} A_i|B) = \sum_{i=1}^{n} P(A_i|B)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P((A \cup C)|B) = P(A|B)+P(C|B)-P((A \cap C)|B)\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(B \subset A\)</span>, <span class="math notranslate nohighlight">\(P(A|B) = 1\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A \subset B\)</span>, <span class="math notranslate nohighlight">\(P(A|B) = \frac{P(A)}{P(B)} \ge P(A)\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://www.tensorflow.org/guide/tensor</span>
+<span class="c1"># https://pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html</span>
+<span class="c1"># https://en.wikipedia.org/wiki/Event_(probability_theory)</span>
+<span class="c1"># https://devmath.fr/tools/latex-symbols-list/#</span>
+<span class="c1">#</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 </section>
 
@@ -540,6 +708,29 @@ PyTorch version: 2.0.1
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiment">Random experiment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-events">Relationships between events</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-algebra">Event algebra</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-partition">Event partition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-definition">Frequentist definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
