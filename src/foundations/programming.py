@@ -1033,10 +1033,8 @@ assert inc(3) == 4
 #
 # Tools like [papermill](https://papermill.readthedocs.io) can orchestrate the execution of several notebooks in a row. External parameters can be passed to notebooks, and the runtime flow can depend on the execution results of each notebook.
 
-# %%
-# These imports should be placed
+# %% tags=["hide-output"] slideshow={"slide_type": "slide"}
 import papermill as pm
-
 
 # Doesn't work on Google Colaboratory. Workaround here:
 # https://colab.research.google.com/github/rjdoubleu/Colab-Papermill-Patch/blob/master/Colab-Papermill-Driver.ipynb
@@ -1046,5 +1044,10 @@ result = pm.execute_notebook(
     os.path.join(notebook_dir, "simple_output.ipynb"),
     parameters={"msg": "Hello"},
 )
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Additional resources
+#
+# [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
 
 # %%
