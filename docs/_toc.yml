@@ -19,3 +19,6 @@ parts:
       - file: foundations/linear_algebra
       - file: foundations/calculus
       - file: foundations/proba_stats
+  - caption: Search
+    chapters:
+    - file: search/a_star
