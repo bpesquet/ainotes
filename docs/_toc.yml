@@ -19,6 +19,8 @@ parts:
       - file: foundations/linear_algebra
       - file: foundations/calculus
       - file: foundations/proba_stats
+    - file: foundations/neuroscience
+    - file: foundations/cognitive_science
   - caption: Search
     chapters:
-    - file: search/a_star
+    - file: search/dijkstra_astar
