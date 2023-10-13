@@ -177,6 +177,32 @@ else:
 # * If $B \subset A$, $P(A|B) = 1$
 # * If $A \subset B$, $P(A|B) = \frac{P(A)}{P(B)} \ge P(A)$
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Chain rule
+#
+# * $P(A \cap B) = P(A|B)P(B)$
+# * More generally, for any events $A_1, A_2,\dots,A_n$,
+#
+# $$P(A_1 \cap \cdots \cap A_n ) = P(A_1)P(A_2|A_1)P(A_3|(A_1 \cap A_2)) \dots P(A_n|(A_1 \cap \cdots \cap A_{n-1}))$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Law of total probability
+#
+# If the set of events $\{B_1, B_2, \dots, B_n\}$ is a partition of $\Omega$, then:
+#
+# $$P(A) = \sum_{i=1}^{n} P(A|B_i)P(B_i)$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Bayes' theorem
+#
+# If the set of events $\{B_1, B_2, \dots, B_n\}$ is a partition of $\Omega$, then:
+#
+# $$P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{i=1}^{n} P(A|B_i)P(B_i)}$$
+#
+# $P(B_i)$ is the prior probability (known before the random experiment). $P(B_i|A)$ is the posterior probability.
+#
+# The $B_i$ events can be seen as the possible causes responsible for the occurrence of $A$.
+
 # %% slideshow={"slide_type": "slide"}
 
 # https://www.tensorflow.org/guide/tensor
