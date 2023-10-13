@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Data Manipulation" href="data_manipulation.html" />
-    <link rel="prev" title="Computer Science" href="computer_science.html" />
+    <link rel="prev" title="Computer science" href="computer_science.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="computer_science.html">Computer Science</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="computer_science.html">Computer science</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data Manipulation</a></li>
 </ul>
@@ -165,6 +165,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="proba_stats.html">Probability &amp; Statistics</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="neuroscience.html">Neuroscience</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cognitive_science.html">Cognitive science</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Search</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../search/dijkstra_astar.html">Dijkstra’s and A* algorithms</a></li>
 </ul>
 
     </div>
@@ -529,6 +535,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-workflow">Notebook workflow</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 </ul>
@@ -1598,31 +1605,6 @@ Mammal
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren&#39;t special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you&#39;re Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it&#39;s a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let&#39;s do more of those!
-</pre></div>
-</div>
-</div>
 </div>
 <section id="what-does-pythonic-mean">
 <h4>What does “Pythonic” mean?<a class="headerlink" href="#what-does-pythonic-mean" title="Permalink to this heading">#</a></h4>
@@ -2097,11 +2079,9 @@ poetry<span class="w"> </span>shell
 <section id="notebook-workflow">
 <h4>Notebook workflow<a class="headerlink" href="#notebook-workflow" title="Permalink to this heading">#</a></h4>
 <p>Tools like <a class="reference external" href="https://papermill.readthedocs.io">papermill</a> can orchestrate the execution of several notebooks in a row. External parameters can be passed to notebooks, and the runtime flow can depend on the execution results of each notebook.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These imports should be placed</span>
-<span class="kn">import</span> <span class="nn">papermill</span> <span class="k">as</span> <span class="nn">pm</span>
-
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">papermill</span> <span class="k">as</span> <span class="nn">pm</span>
 
 <span class="c1"># Doesn&#39;t work on Google Colaboratory. Workaround here:</span>
 <span class="c1"># https://colab.research.google.com/github/rjdoubleu/Colab-Papermill-Patch/blob/master/Colab-Papermill-Driver.ipynb</span>
@@ -2114,20 +2094,28 @@ poetry<span class="w"> </span>shell
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Black is not installed, parameters wont be formatted
-/Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-Executing:   0%|                                                                                                                                                 | 0/4 [00:00&lt;?, ?cell/s]0.00s - Debugger warning: It seems that frozen modules are being used, which may
+Executing:   0%|                                                                                                                                   | 0/4 [00:00&lt;?, ?cell/s]0.00s - Debugger warning: It seems that frozen modules are being used, which may
 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
 0.00s - to python to disable frozen modules.
 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-Executing: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00,  4.56cell/s]
+Executing: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00,  5.66cell/s]
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
+</section>
+<section id="additional-resources">
+<h3>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://docs.quantifiedcode.com/python-anti-patterns/index.html">The Little Book of Python Anti-Patterns</a></p>
 </section>
 </section>
 </section>
@@ -2169,7 +2157,7 @@ Executing: 100%|█████████████████████�
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Computer Science</p>
+        <p class="prev-next-title">Computer science</p>
       </div>
     </a>
     <a class="right-next"
@@ -2304,6 +2292,7 @@ Executing: 100%|█████████████████████�
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-workflow">Notebook workflow</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional resources</a></li>
 </ul>
 </li>
 </ul>

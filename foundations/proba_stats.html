@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/proba_stats';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neuroscience" href="neuroscience.html" />
     <link rel="prev" title="Calculus" href="calculus.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,7 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="computer_science.html">Computer Science</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="computer_science.html">Computer science</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data Manipulation</a></li>
 </ul>
@@ -166,6 +167,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Probability &amp; Statistics</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="neuroscience.html">Neuroscience</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cognitive_science.html">Cognitive science</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Search</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../search/dijkstra_astar.html">Dijkstra’s and A* algorithms</a></li>
 </ul>
 
     </div>
@@ -445,6 +452,9 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule">Chain rule</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-total-probability">Law of total probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ theorem</a></li>
 </ul>
 </li>
 </ul>
@@ -633,6 +643,29 @@ PyTorch version: 2.0.1
 <li><p>If <span class="math notranslate nohighlight">\(B \subset A\)</span>, <span class="math notranslate nohighlight">\(P(A|B) = 1\)</span></p></li>
 <li><p>If <span class="math notranslate nohighlight">\(A \subset B\)</span>, <span class="math notranslate nohighlight">\(P(A|B) = \frac{P(A)}{P(B)} \ge P(A)\)</span></p></li>
 </ul>
+</section>
+<section id="chain-rule">
+<h4>Chain rule<a class="headerlink" href="#chain-rule" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(A \cap B) = P(A|B)P(B)\)</span></p></li>
+<li><p>More generally, for any events <span class="math notranslate nohighlight">\(A_1, A_2,\dots,A_n\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(A_1 \cap \cdots \cap A_n ) = P(A_1)P(A_2|A_1)P(A_3|(A_1 \cap A_2)) \dots P(A_n|(A_1 \cap \cdots \cap A_{n-1}))\]</div>
+</section>
+<section id="law-of-total-probability">
+<h4>Law of total probability<a class="headerlink" href="#law-of-total-probability" title="Permalink to this heading">#</a></h4>
+<p>If the set of events <span class="math notranslate nohighlight">\(\{B_1, B_2, \dots, B_n\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[P(A) = \sum_{i=1}^{n} P(A|B_i)P(B_i)\]</div>
+</section>
+<section id="bayes-theorem">
+<h4>Bayes’ theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h4>
+<p>If the set of events <span class="math notranslate nohighlight">\(\{B_1, B_2, \dots, B_n\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{i=1}^{n} P(A|B_i)P(B_i)}\]</div>
+<p><span class="math notranslate nohighlight">\(P(B_i)\)</span> is the prior probability (known before the random experiment). <span class="math notranslate nohighlight">\(P(B_i|A)\)</span> is the posterior probability.</p>
+<p>The <span class="math notranslate nohighlight">\(B_i\)</span> events can be seen as the possible causes responsible for the occurrence of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://www.tensorflow.org/guide/tensor</span>
@@ -689,6 +722,15 @@ PyTorch version: 2.0.1
         <p class="prev-next-title">Calculus</p>
       </div>
     </a>
+    <a class="right-next"
+       href="neuroscience.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neuroscience</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -727,6 +769,9 @@ PyTorch version: 2.0.1
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule">Chain rule</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-total-probability">Law of total probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ theorem</a></li>
 </ul>
 </li>
 </ul>
