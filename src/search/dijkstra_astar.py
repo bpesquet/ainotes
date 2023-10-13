@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # A* algorithm
+# # Dijkstra's and A* algorithms
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
