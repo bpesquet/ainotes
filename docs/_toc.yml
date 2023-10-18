@@ -24,3 +24,6 @@ parts:
   - caption: Search
     chapters:
     - file: search/dijkstra_astar
+  - caption: Reference
+    chapters:
+    - file: reference/bibliography

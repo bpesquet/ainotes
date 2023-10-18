@@ -40,3 +40,7 @@ html:
   use_issues_button: true
   use_edit_page_button: true
   home_page_in_navbar: false  # Whether to include your home page in the left Navigation Bar
+
+sphinx:
+  config:
+    bibtex_reference_style: author_year
