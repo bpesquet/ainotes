@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Probability & Statistics
+# # Probability & statistics
 #
 # > "Probability deals with knowing the model of our world and use it for deductions. Statistics deal with trying to identify this model based on observation of reality."
 

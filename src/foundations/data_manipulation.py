@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Data Manipulation
+# # Data manipulation
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup

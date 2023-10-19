@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Linear Algebra
+# # Linear algebra
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
