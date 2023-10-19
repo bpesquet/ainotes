@@ -20,6 +20,8 @@ parts:
       - file: foundations/calculus
       - file: foundations/proba_stats
     - file: foundations/neuroscience
+      sections:
+      - file: foundations/human_brain
     - file: foundations/cognitive_science
   - caption: Search
     chapters:
