@@ -18,6 +18,7 @@ jupyter-book = "^0.15.1"
 jupytext = "^1.15.1"
 pylint = "^2.17.5"
 rise = "^5.7.1"
+jupyter-contrib-nbextensions = "^0.7.0"
 
 [tool.jupytext]
 # Associate every .ipynb notebook with a .py file with explicit cell delimiters (# %%)
