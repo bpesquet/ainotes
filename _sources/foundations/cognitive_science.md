@@ -12,6 +12,8 @@
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Decision
+
+> "A decision is a deliberative process that results in the commitment to a categorical proposition." {cite}`goldNeuralBasisDecision2007`.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
