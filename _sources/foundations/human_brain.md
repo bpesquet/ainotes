@@ -42,45 +42,48 @@
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-#### Gyri and sulci
+##### Gyri and sulci
 
-The surface of the cerebral cortex folds to create gyri (folds or ridges) and sulci (depressions or grooves) which increase the total area.
+The surface of the cerebral cortex folds to create gyri (folds or ridges) and sulci (depressions or grooves) which increase its total area.
 
 [![Gyri and sulci](_images/Gyrus_sulcus.png)](https://en.wikipedia.org/wiki/Gyrus)
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-#### Cerebral lobes
+##### Cerebral lobes
 
 - The cerebral cortex is generally classified into four lobes: the frontal, parietal, occipital and temporal lobes.
 - Together, they comprise the surface of each hemisphere of the cerebrum.
 
 [![Cerebral lobes](_images/Cerebral_lobes.png)](https://en.wikipedia.org/wiki/Lobes_of_the_brain)
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-##### Frontal lobe
 
 [![Frontal lobe 3D animation](_images/Frontal_lobe.gif)](https://en.wikipedia.org/wiki/Frontal_lobe)
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-##### Parietal lobe
 
 [![Parietal lobe 3D animation](_images/Parietal_lobe.gif)](https://en.wikipedia.org/wiki/Parietal_lobe)
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-##### Occipital lobe
 
 [![Occipital lobe 3D animation](_images/Occipital_lobe.gif)](https://en.wikipedia.org/wiki/Occipital_lobe)
+
+[![Temporal lobe 3D animation](_images/Temporal_lobe.gif)](https://en.wikipedia.org/wiki/Temporal_lobe)
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-##### Temporal lobe
+#### Hippocampus
 
-[![Temporal lobe 3D animation](_images/Temporal_lobe.gif)](https://en.wikipedia.org/wiki/Temporal_lobe)
+- Part of the temporal lobe and located in the allocortex, the hippocampus belongs to the limbic system.
+- It plays important roles in the consolidation of information from short-term to long-term memory, and in spatial memory that enables navigation.
+
+[![Hippocampus 3D animation](_images/Hippocampus.gif)](https://en.wikipedia.org/wiki/Hippocampus)
 <!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+#### Basal ganglia
+<!-- #endregion -->
+
+- The basal ganglia are a collection of distinct masses of gray matter lying to the side of and surrounding the thalamus.
+- They are associated with a variety of functions, including regulating voluntary motor movements, procedural learning, habit formation, conditional learning, eye movements, cognition, and emotion.
+
+[![Basal ganglia 3D animation](_images/Basal_ganglia.gif)](https://en.wikipedia.org/wiki/Basal_ganglia)
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Diencephalon
