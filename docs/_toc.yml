@@ -28,4 +28,5 @@ parts:
     - file: search/dijkstra_astar
   - caption: Reference
     chapters:
+    - file: reference/acknowledgments
     - file: reference/bibliography
