@@ -28,7 +28,9 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## A* on a real map
 #
-# City streets of Chicago and Rome. Intersections of streets represented as nodes and streets as edges.
+# Uses the streets of Chicago and Rome. Intersections of streets are represented as nodes and streets as edges.
+#
+# Another cool resource on the same topic: <https://github.com/honzaap/Pathfinding>
 
 # %%
 YouTubeVideo("CgW0HPHqFE8")
