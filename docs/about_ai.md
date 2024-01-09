@@ -36,7 +36,7 @@ AI systems can be either:
 
 - **Problem solving** (e.g. search algorithms, constraint solving).
 - **Reasoning** and **decision making** (e.g. logic, knowledge representation).
-- **Machine Learning**.
+- **Machine Learning** (e.g. systems that improve with experience).
 - **Real-world interactions** (e.g. computer vision, natural language understanding, robotics).
 <!-- #endregion -->
 
