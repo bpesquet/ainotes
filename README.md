@@ -1,6 +1,6 @@
 # AI notes
 
-This repository contains the source and configuration files for my  notes on Artificial Intelligence.
+This repository contains the source and configuration files for my notes on Artificial Intelligence.
 
 ## Dependencies and toolchain
 
