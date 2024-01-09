@@ -19,13 +19,17 @@ parts:
       - file: foundations/linear_algebra
       - file: foundations/calculus
       - file: foundations/proba_stats
-    - file: foundations/neuroscience
-      sections:
-      - file: foundations/human_brain
-    - file: foundations/cognitive_science
   - caption: Search
     chapters:
     - file: search/dijkstra_astar
+  - caption: Machine Learning
+    chapters:
+    - file: ml/introduction
+      title: Introduction
+    - file: ml/supervised_learning
+      sections:
+      - file: ml/hands_on_regression
+        title: Hands-on regression
   - caption: Reference
     chapters:
     - file: reference/acknowledgments

@@ -203,6 +203,9 @@ else:
 #
 # The $B_i$ events can be seen as the possible causes responsible for the occurrence of $A$.
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# To be continued...
+
 # %% slideshow={"slide_type": "slide"}
 
 # https://www.tensorflow.org/guide/tensor
