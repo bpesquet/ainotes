@@ -62,15 +62,6 @@ print(f"Python version: {platform.python_version()}")
 # [![ML on XKCD](_images/ml_xkcd.png)](https://xkcd.com/1838/)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### ML is not a silver bullet!
-#
-# - Some use cases are a better fit for ML than others:
-#   - Difficulty to express the actions as rules.
-#   - Data too complex for traditional analytical methods.
-#   - Performance > interpretability.
-# - Data quality is paramount.
-
-# %% [markdown] slideshow={"slide_type": "slide"}
 # ## The Machine Learning landscape
 
 # %% [markdown] slideshow={"slide_type": "slide"}
