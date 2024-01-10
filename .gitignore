@@ -3,6 +3,7 @@
 
 # Notebook execution output
 simple_output.ipynb
+*.pkl
 
 # JupyterBook output
 docs/_build/
