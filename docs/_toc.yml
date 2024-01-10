@@ -28,8 +28,12 @@ parts:
       title: Introduction
     - file: ml/supervised_learning
       sections:
-      - file: ml/hands_on_regression
-        title: Hands-on regression
+      - file: ml/principles
+        title: Principles
+      - file: ml/regression
+        title: Regression
+      - file: ml/classification
+        title: Classification
   - caption: Reference
     chapters:
     - file: reference/acknowledgments
