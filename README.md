@@ -10,7 +10,6 @@ This project is built with the following software:
 - [Poetry](https://python-poetry.org/) for dependency management;
 - [Black](https://github.com/psf/black) for code formatting;
 - [Pylint](https://github.com/pylint-dev/pylint) to detect programming mistakes before execution;
-- [PyTorch](https://pytorch.org/) for tensor management and Machine Learning algorithms.
 
 Additionally, it uses the following tools to create the [online version](https://www.bpesquet.fr/ainotes) of these notes:
 
@@ -18,11 +17,13 @@ Additionally, it uses the following tools to create the [online version](https:/
 - [Jupyter Book](https://jupyterbook.org) to generate a static website from the notebooks;
 - A [GitHub Action](.github/workflows/deploy.yaml) to implement [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) and publish the website to [GitHub Pages](https://pages.github.com/) after each code push.
 
-When teaching, I run the notebooks locally and use [RISE](https://rise.readthedocs.io) to showcase them as live [reveal.js](https://revealjs.com)-based presentations.
+When teaching, I run the notebooks in a local Jupyter server and use [RISE](https://rise.readthedocs.io) to showcase them as live [reveal.js](https://revealjs.com)-based presentations.
 
-## Usage
+## Development notes
 
-Once a new `.ipynb` is created in the `docs/` folder, it is automagically paired with a `.py` file by the same name in the `src/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file. The `.ipynb` files are still versioned in order to show their output online, and access them from cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
+Once a new `.ipynb` is created in the `docs/` folder, it is automagically paired with a `.py` file by the same name in the `src/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file.
+
+The `.ipynb` files are still versioned in order to show their output online, and access them from cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
 
 Here are some useful commands for running this project:
 
