@@ -14,14 +14,12 @@ parts:
       sections:
       - file: foundations/programming
       - file: foundations/data_manipulation
+      - file: foundations/data_preprocessing
     - file: foundations/math
       sections:
       - file: foundations/linear_algebra
       - file: foundations/calculus
       - file: foundations/proba_stats
-  - caption: Search
-    chapters:
-    - file: search/dijkstra_astar
   - caption: Machine Learning
     chapters:
     - file: ml/introduction
@@ -34,6 +32,9 @@ parts:
         title: Regression
       - file: ml/classification
         title: Classification
+  - caption: Search algorithms
+    chapters:
+    - file: search/dijkstra_astar
   - caption: Reference
     chapters:
     - file: reference/acknowledgments

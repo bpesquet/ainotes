@@ -15,12 +15,24 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # # End-to-end regression example: predict housing prices
 #
-# > This content is heavily inspired by chapter 2 of the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
+# > This chapter is heavily inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Objectives
+#
+# - Train a Machine Learning model to deduce prices from housing properties (number of rooms, median income, proximity to ocean, etc) in geographical areas.
+# - Get familiar with the different steps of an ML-based project.
+# - Learn how to leverage the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
+#
+# > You may test the trained model [here](https://housing-prices-api.herokuapp.com/).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
 # %% slideshow={"slide_type": "slide"}
+# Relax some linting rules not needed here
+# pylint: disable=invalid-name, wrong-import-position
+
 import platform
 
 import numpy as np
@@ -33,8 +45,10 @@ print(f"Python version: {platform.python_version()}")
 print(f"NumPy version: {np.__version__}")
 print(f"scikit-learn version: {sklearn.__version__}")
 
+
 # %% slideshow={"slide_type": "slide"}
 # sklearn does not automatically import its subpackages
+# https://stackoverflow.com/a/9049246/2380880
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -50,7 +64,6 @@ import joblib
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
-# Note: these configuration lines work better in their own cell
 
 # Include matplotlib graphs into the notebook, next to the code
 # https://stackoverflow.com/a/43028034/2380880
@@ -189,20 +202,11 @@ plot_correlation_matrix(df_housing)
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 2.3: split the dataset
 #
-# Once trained, a model must be able to **generalize** (perform well with new data). In order to assert this ability, data is always split into 2 or 3 sets at the begging of the preparation phase:
-#
-# - **Training set** (typically 80% or more): fed to the model during training.
-# - **Validation set**: used to tune the model without biasing it in favor of the test set.
-# - **Test set**: used to check the final model's performance on unseen data.
-#
-# ![Dataset splitting](_images/dataset_splitting.png)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
 # A simple solution for splitting datasets is to use the `train_test_split`function from scikit-learn.
 #
 # Just before or after that, inputs (features given to the model) have to be separated from targets (values it must predict).
 #
-# ![Using train_test_split](_images/train-test-split.jpg)
+# [![Using train_test_split](_images/train-test-split.jpg)](https://mgalarnyk.github.io/)
 
 # %% slideshow={"slide_type": "slide"}
 # Separate inputs from targets
@@ -213,17 +217,17 @@ df_x = df_housing.drop("median_house_value", axis=1)
 # Targets are stored separately in a new variable
 df_y = df_housing["median_house_value"]
 
-print(f"Inputs: {df_x.shape}")
-print(f"Targets: {df_y.shape}")
+print(f"df_x: {df_x.shape}. df_y: {df_y.shape}")
 
 # %% slideshow={"slide_type": "slide"}
-# Split dataset between training and test sets (no validation set for now)
+# Split dataset between training and test sets
 # A unique call to train_test_split is mandatory to maintain inputs/target correspondance between samples
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
-df_x_train, df_x_test, df_y_train, df_y_test = sklearn.model_selection.train_test_split(df_x, df_y, test_size=0.2)
+df_x_train, df_x_test, df_y_train, df_y_test = train_test_split(
+    df_x, df_y, test_size=0.2
+)
 
-print(f"Training inputs: {df_x_train.shape}, training targets: {df_y_train.shape}")
-print(f"Test inputs: {df_x_test.shape}, test targets: {df_y_test.shape}")
+print(f"df_x_train: {df_x_train.shape}. df_y_train: {df_y_train.shape}")
+print(f"df_x_test: {df_x_test.shape}. df_y_test: {df_y_test.shape}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 2.4: data preprocessing
@@ -232,19 +236,9 @@ print(f"Test inputs: {df_x_test.shape}, test targets: {df_y_test.shape}")
 #
 # - Removing of superflous features (if any).
 # - Adding missing values.
-# - Transforming values into numeric form.
 # - Scaling data.
+# - Transforming values into numeric form.
 # - Labelling (if needed).
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Handling missing values
-#
-# Most ML algorithms cannot work with missing values in features.
-#
-# Three options exist:
-# - Remove the corresponding data samples.
-# - Remove the whole feature(s).
-# - Replace the missing values (using 0, the mean, the median or something else).
 
 # %% slideshow={"slide_type": "slide"}
 # Compute number and percent of missing values among features
@@ -260,64 +254,6 @@ df_missing_data.head()
 df_x_train[df_x_train.isnull().any(axis=1)].head()
 
 # %% slideshow={"slide_type": "slide"}
-# Replace missing values with column-wise mean
-inputer = SimpleImputer(strategy="mean")
-inputer.fit_transform([[7, 2, 3], [4, np.nan, 6], [10, 5, 9]])
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Feature scaling
-#
-# Most ML models work best when all features have a similar scale.
-#
-# One way to achieve this result is to apply **standardization**, the process of centering and reducing features: they are substracted by their mean and divided by their standard deviation.
-#
-# The resulting features have a mean of 0 and a standard deviation of 1.
-
-# %% slideshow={"slide_type": "slide"}
-# Generate a random (3,3) tensor with values between 1 and 10
-x = np.random.randint(1, 10, (3, 3))
-print(x)
-
-# %% slideshow={"slide_type": "-"}
-# Center and reduce data
-scaler = StandardScaler().fit(x)
-print(scaler.mean_)
-
-x_scaled = scaler.transform(x)
-print(x_scaled)
-
-# New mean is 0. New standard deviation is 1
-print(f"Mean: {x_scaled.mean()}. Std: {x_scaled.std()}")
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### One-hot encoding
-#
-# ML models expect data to be exclusively under numerical form.
-#
-# **One-hot encoding** produces a matrix of binary vectors from a vector of categorical values.
-#
-# it is useful to convert categorical features into numerical features without using arbitrary integer values, which could create a proximity relationship between the new values.
-
-# %% slideshow={"slide_type": "slide"}
-# Create a categorical variable with 3 different values
-x = [["GOOD"], ["AVERAGE"], ["GOOD"], ["POOR"], ["POOR"]]
-
-# Encoder input must be a matrix
-# Output will be a sparse matrix where each column corresponds to one possible value of one feature
-encoder = OneHotEncoder().fit(x)
-x_hot = encoder.transform(x).toarray()
-
-print(x_hot)
-print(encoder.categories_)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Preprocessing pipelines
-#
-# Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding...).
-#
-# scikit-learn support the definition of **pipelines** for streamlining these operations.
-
-# %% slideshow={"slide_type": "slide"}
 # Print numerical features
 num_features = df_x_train.select_dtypes(include=[np.number]).columns
 print(num_features)
@@ -328,6 +264,13 @@ print(cat_features)
 
 # Print all values for the "ocean_proximity" feature
 df_x_train["ocean_proximity"].value_counts()
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Preprocessing pipelines
+#
+# Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding...).
+#
+# scikit-learn support the definition of **pipelines** for streamlining these operations. This is useful to prevent mistakes and oversights when preprocessing new data.
 
 # %% slideshow={"slide_type": "slide"}
 # This pipeline handles missing values and standardizes features
@@ -347,14 +290,20 @@ full_pipeline = ColumnTransformer(
     ]
 )
 
-# Apply the last pipeline on training data
+# %% slideshow={"slide_type": "slide"}
+# Apply all preprocessing operations to the training set through pipelines
 x_train = full_pipeline.fit_transform(df_x_train)
+
+# Transform the targets DataFrame into a plain tensor
+y_train = df_y_train.to_numpy()
 
 # Print preprocessed data shape and first sample
 # "ocean_proximity" attribute has 5 different values
 # To represent them, one-hot encoding has added 4 features to the dataset
 print(f"x_train: {x_train.shape}")
 print(x_train[0])
+
+# Data is now ready for model training :)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Step 3: select and train models
@@ -405,18 +354,18 @@ lin_model = LinearRegression()
 lin_model.fit(x_train, y_train)
 
 
-# Return RMSE for a model and a training set
+# Return root of MSE (RMSE) for a model and a training set
 def compute_error(model, x, y_true):
     # Compute model predictions (median house prices) for training set
     y_pred = model.predict(x)
 
     # Compute the error between actual and expected median house prices
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    return rmse
+    error = np.sqrt(mean_squared_error(y_true, y_pred))
+    return error
 
 
-lin_rmse = compute_error(lin_model, x_train, y_train)
-print(f"Training error for linear regression: {lin_rmse:.02f}")
+lin_error = compute_error(lin_model, x_train, y_train)
+print(f"Training error for linear regression: {lin_error:.02f}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 3.3: try other models
@@ -426,19 +375,19 @@ print(f"Training error for linear regression: {lin_rmse:.02f}")
 dt_model = DecisionTreeRegressor()
 dt_model.fit(x_train, y_train)
 
-dt_rmse = compute_error(dt_model, x_train, y_train)
-print(f"Training error for decision tree: {dt_rmse:.02f}")
+dt_error = compute_error(dt_model, x_train, y_train)
+print(f"Training error for decision tree: {dt_error:.02f}")
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Using a validation set
+# ### Step 3.4: Use a validation set to evaluate model performance
 #
 # The previous result (*error = 0*) looks too good to be true. It might very well be a case of severe overfitting to the training set, which means the model won't perform well with unseen data.
 #
 # One way to assert overfitting is to split training data between a smaller training set and a **validation set**, used only to evaluate model performance.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Cross-validation
+# #### Cross-validation
 #
 # A more sophisticated strategy is to apply **K-fold cross validation**. Training data is randomly split into $K$ subsets called *folds*. The model is trained and evaluated $K$ times, using a different fold for validation.
 #
@@ -448,33 +397,34 @@ print(f"Training error for decision tree: {dt_rmse:.02f}")
 # %% slideshow={"slide_type": "slide"}
 # Return the mean of cross validation scores for a model and a training set
 def compute_crossval_mean_score(model, x, y_true):
-    scores = cross_val_score(model, x, y_true, scoring="neg_mean_squared_error", cv=10)
-    rmse_scores = np.sqrt(-scores)
-    return rmse_scores.mean()
+    cv_scores = -cross_val_score(
+        model, x, y_true, scoring="neg_mean_squared_error", cv=10
+    )
+    return np.sqrt(cv_scores).mean()
 
 
-lin_crossval_mean = compute_crossval_mean_score(lin_model, x_train, y_train)
-print(f"Mean CV error for linear regression: {lin_crossval_mean:.02f}")
+lin_cv_mean = compute_crossval_mean_score(lin_model, x_train, y_train)
+print(f"Mean cross-validation error for linear regression: {lin_cv_mean:.02f}")
 
-dt_crossval_mean = compute_crossval_mean_score(dt_model, x_train, y_train)
-print(f"Mean CV error for decision tree: {dt_crossval_mean:.02f}")
+dt_cv_mean = compute_crossval_mean_score(dt_model, x_train, y_train)
+print(f"Mean cross-validation error for decision tree: {dt_cv_mean:.02f}")
 
 # %% slideshow={"slide_type": "slide"}
 # Fit a random forest model to the training set
 rf_model = RandomForestRegressor(n_estimators=20)
 rf_model.fit(x_train, y_train)
 
-rf_rmse = compute_error(rf_model, x_train, y_train)
-print(f"Training error for random forest: {rf_rmse:.02f}")
+rf_error = compute_error(rf_model, x_train, y_train)
+print(f"Training error for random forest: {rf_error:.02f}")
 
-rf_crossval_mean = compute_crossval_mean_score(rf_model, x_train, y_train)
-print(f"Mean CV error for random forest: {rf_crossval_mean:.02f}")
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ## Step 4: tune the chosen model
+rf_cv_mean = compute_crossval_mean_score(rf_model, x_train, y_train)
+print(f"Mean cross-validation error for random forest: {rf_cv_mean:.02f}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Searching for the best hyperparameters
+# ## Step 4: tune the most promising model
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Step 4.1: search for the best hyperparameters
 #
 # Once a model looks promising, it must be **tuned** in order to offer the best compromise between optimization and generalization.
 #
@@ -509,23 +459,19 @@ final_model = grid_search.best_estimator_
 print(grid_search.best_params_)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Checking final model performance on test dataset
+# ### Step 4.2: check final model performance on test dataset
 #
 # Now is the time to evaluate the final model on the test set that we put apart before.
 #
-# An important point is that preprocessing operations should be applied to test data using preprocessing values (mean, categories...) previously computed on training data. This prevents **information leakage** from test data ([explanation 1](https://machinelearningmastery.com/data-leakage-machine-learning/), [explanation 2](https://stats.stackexchange.com/questions/174823/how-to-apply-standardization-normalization-to-train-and-testset-if-prediction-i))
+# An important point is that preprocessing operations should be applied to test data using preprocessing values (mean, categories...) previously computed on training data. This prevents **information leakage** from test data ([explanation](https://machinelearningmastery.com/data-leakage-machine-learning/))
 
 # %% slideshow={"slide_type": "slide"}
-# Split test dataset between inputs and target
-df_x_test = df_test.drop("median_house_value", axis=1)
-y_test = df_test["median_house_value"].to_numpy()
-
-print(f"Test data: {df_x_test.shape}")
-print(f"Test labels: {y_test.shape}")
-
 # Apply preprocessing operations to test inputs
 # Calling transform() and not fit_transform() uses preprocessing values computed on training set
 x_test = full_pipeline.transform(df_x_test)
+
+# Transform the targets DataFrame into a plain tensor
+y_test = df_y_test.to_numpy()
 
 test_rmse = compute_error(final_model, x_test, y_test)
 print(f"Test error for final model: {test_rmse:.02f}")
@@ -549,13 +495,13 @@ x_new = full_pipeline.transform(df_new_sample)
 
 # Use trained model to predict median housing price
 y_new = final_model.predict(x_new)
-print(f"Predicted result: {y_new[0]:.02f}")
+print(f"Predicted median price: {y_new[0]:.02f}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Step 5: deploy to production and maintain the system
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Step 5.1: saving the final model and data pipeline
+# ### Step 5.1: save the final model and data pipeline
 #
 # A trained model can be saved to several formats. A standard common is to use Python's built-in persistence model, [pickle](https://docs.python.org/3/library/pickle.html), through the [joblib](https://pypi.org/project/joblib/) library for efficiency reasons.
 
@@ -570,7 +516,7 @@ joblib.dump(full_pipeline, "full_pipeline.pkl")
 # ...
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Step 5.2: deploying the model
+# ### Step 5.2: deploy the model
 #
 # This step is highly context-dependent. A deployed model is often a part of a more important system. Some common solutions:
 #
@@ -580,15 +526,6 @@ joblib.dump(full_pipeline, "full_pipeline.pkl")
 # The [Flask](https://flask.palletsprojects.com) web framework is often used to create a web API from a trained Python model.
 #
 # [![Model deployement on the web](_images/model_deployment_web.png)](https://github.com/ageron/handson-ml2)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Example: testing the deployed model
-#
-# The model trained in this notebook has been deployed as a [Flask web app](https://housing-prices-api.herokuapp.com/).
-#
-# You may access it using the web app or through a direct HTTP request to its prediction API.
-#
-# More details [here](https://github.com/bpesquet/housing_prices_api).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 5.3: monitor and maintain the system
