@@ -177,13 +177,14 @@ corr_matrix["median_house_value"].sort_values(ascending=False)
 
 
 # %% slideshow={"slide_type": "skip"} tags=["hide-input"]
-# Plot correlation matrix
 def plot_correlation_matrix(df):
+    """Plot a correlation matrix for a DataFrame"""
+
     # Select numerical columns
     df_numerical = df.select_dtypes(include=[np.number])
 
-    f, ax = plt.subplots()
-    ax = sns.heatmap(
+    plt.subplots()
+    sns.heatmap(
         df.corr(numeric_only=True),
         vmax=0.8,
         linewidths=0.01,
@@ -354,8 +355,9 @@ lin_model = LinearRegression()
 lin_model.fit(x_train, y_train)
 
 
-# Return root of MSE (RMSE) for a model and a training set
 def compute_error(model, x, y_true):
+    """Compute error (as root of MSE) for a model and a training set"""
+
     # Compute model predictions (median house prices) for training set
     y_pred = model.predict(x)
 
@@ -395,8 +397,9 @@ print(f"Training error for decision tree: {dt_error:.02f}")
 
 
 # %% slideshow={"slide_type": "slide"}
-# Return the mean of cross validation scores for a model and a training set
 def compute_crossval_mean_score(model, x, y_true):
+    """Return the mean of cross validation scores for a model and a training set"""
+
     cv_scores = -cross_val_score(
         model, x, y_true, scoring="neg_mean_squared_error", cv=10
     )
