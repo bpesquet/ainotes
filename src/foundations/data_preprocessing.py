@@ -32,7 +32,6 @@ import platform
 
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import sklearn
 
 print(f"Python version: {platform.python_version()}")
