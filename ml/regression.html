@@ -1,0 +1,1899 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>End-to-end regression example: predict housing prices &#8212; ainotes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ml/regression';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="End-to-end classification example: recognize handwritten digits" href="classification.html" />
+    <link rel="prev" title="Principles of supervised learning" href="principles.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../about_ai.html">About Artificial Intelligence</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/computer_science.html">Computer science</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/programming.html">Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/data_manipulation.html">Data manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/data_preprocessing.html">Data preprocessing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/linear_algebra.html">Linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/calculus.html">Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/proba_stats.html">Probability &amp; statistics</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principles.html">Principles</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Search algorithms</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../search/dijkstra_astar.html">Dijkstra’s and A* algorithms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/ainotes/main?urlpath=tree/docs/ml/regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/ainotes/blob/main/docs/ml/regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/ainotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/ainotes/edit/main/docs/ml/regression.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/ainotes/issues/new?title=Issue%20on%20page%20%2Fml/regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ml/regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>End-to-end regression example: predict housing prices</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-frame-the-problem">Step 1: frame the problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-objective-predict-housing-prices">Business objective: predict housing prices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">Step 2: collect, analyze and prepare data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-crucial-step">A crucial step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-california-housing-dataset">The California housing dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-1-discover-data">Step 2.1: discover data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-2-analyze-data">Step 2.2: analyze data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-3-split-the-dataset">Step 2.3: split the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-4-data-preprocessing">Step 2.4: data preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-select-and-train-models">Step 3: select and train models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-and-empirical-step">An iterative and empirical step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">The optimization/generalization dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-and-overfitting">Underfitting and overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-1-choose-an-evaluation-metric">Step 3.1: choose an evaluation metric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-2-start-with-a-baseline-model">Step 3.2: start with a baseline model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-3-try-other-models">Step 3.3: try other models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-4-use-a-validation-set-to-evaluate-model-performance">Step 3.4: Use a validation set to evaluate model performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-tune-the-most-promising-model">Step 4: tune the most promising model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-1-search-for-the-best-hyperparameters">Step 4.1: search for the best hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-2-check-final-model-performance-on-test-dataset">Step 4.2: check final model performance on test dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-model-to-make-predictions-on-new-data">Using the model to make predictions on new data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">Step 5: deploy to production and maintain the system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-1-save-the-final-model-and-data-pipeline">Step 5.1: save the final model and data pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-2-deploy-the-model">Step 5.2: deploy the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-3-monitor-and-maintain-the-system">Step 5.3: monitor and maintain the system</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="end-to-end-regression-example-predict-housing-prices">
+<h1>End-to-end regression example: predict housing prices<a class="headerlink" href="#end-to-end-regression-example-predict-housing-prices" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>This chapter is heavily inspired by the book <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a>.</p>
+</div></blockquote>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Train a Machine Learning model to deduce prices from housing properties (number of rooms, median income, proximity to ocean, etc) in geographical areas.</p></li>
+<li><p>Get familiar with the different steps of an ML-based project.</p></li>
+<li><p>Learn how to leverage the <a class="reference external" href="https://pandas.pydata.org/">pandas</a> and <a class="reference external" href="https://scikit-learn.org">scikit-learn</a> libraries.</p></li>
+</ul>
+<blockquote>
+<div><p>You may test the trained model <a class="reference external" href="https://housing-prices-api.herokuapp.com/">here</a>.</p>
+</div></blockquote>
+</section>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Relax some linting rules not needed here</span>
+<span class="c1"># pylint: disable=invalid-name, wrong-import-position</span>
+
+<span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.26.3
+scikit-learn version: 1.3.2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sklearn does not automatically import its subpackages</span>
+<span class="c1"># https://stackoverflow.com/a/9049246/2380880</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+
+<span class="c1"># For saving models and pipelines to disk</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
+
+<span class="c1"># Include matplotlib graphs into the notebook, next to the code</span>
+<span class="c1"># https://stackoverflow.com/a/43028034/2380880</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Increase default plot size</span>
+<span class="c1"># https://matplotlib.org/stable/users/explain/customizing.html#matplotlibrc-sample</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">7.5</span>
+
+<span class="c1"># Improve plot quality</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;retina&quot;
+
+<span class="c1"># Setup seaborn default theme</span>
+<span class="c1"># http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-frame-the-problem">
+<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this heading">#</a></h2>
+<section id="business-objective-predict-housing-prices">
+<h3>Business objective: predict housing prices<a class="headerlink" href="#business-objective-predict-housing-prices" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Inputs: housing properties in an area.</p></li>
+<li><p>Output: median housing price in the area.</p></li>
+</ul>
+<p><a class="reference external" href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview"><img alt="Kaggle houses banner" src="../_images/kaggle_housesbanner.png" /></a></p>
+</section>
+</section>
+<section id="step-2-collect-analyze-and-prepare-data">
+<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this heading">#</a></h2>
+<section id="a-crucial-step">
+<h3>A crucial step<a class="headerlink" href="#a-crucial-step" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Real data is messy, incomplete and often scattered across many sources.</p></li>
+<li><p>Data labeling is a manual and tedious process.</p></li>
+<li><p>Predefined datasets offer a convenient way to bypass the data wrangling step. Alas, using one is not always an option.</p></li>
+</ul>
+</section>
+<section id="the-california-housing-dataset">
+<h3>The California housing dataset<a class="headerlink" href="#the-california-housing-dataset" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Based on data from the 1990 California census.</p></li>
+<li><p>Slightly modified for teaching purposes by A. Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
+</ul>
+</section>
+<section id="step-2-1-discover-data">
+<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Permalink to this heading">#</a></h3>
+<p>Our first objective is to familiarize ourselves with the dataset.</p>
+<p>Once data is loaded, the <a class="reference external" href="https://pandas.pydata.org/">pandas</a> library  provides many useful functions for making sense of it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the dataset in a pandas DataFrame</span>
+<span class="c1"># The df_ prefix is used to distinguish dataframes froms plain NumPy arrays</span>
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/ageron/handson-ml2/master/datasets/housing/housing.csv&quot;</span>
+<span class="n">df_housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataset_url</span><span class="p">)</span>
+
+<span class="c1"># Print dataset shape (rows and columns)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset shape: </span><span class="si">{</span><span class="n">df_housing</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset shape: (20640, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print a concise summary of the dataset</span>
+<span class="c1"># 9 attributes are numerical, one (&quot;ocean_proximity&quot;) is categorical</span>
+<span class="c1"># &quot;median_house_value&quot; is the target attribute</span>
+<span class="c1"># One attribute (&quot;total_bedrooms&quot;) has missing values</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 10 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   longitude           20640 non-null  float64
+ 1   latitude            20640 non-null  float64
+ 2   housing_median_age  20640 non-null  float64
+ 3   total_rooms         20640 non-null  float64
+ 4   total_bedrooms      20433 non-null  float64
+ 5   population          20640 non-null  float64
+ 6   households          20640 non-null  float64
+ 7   median_income       20640 non-null  float64
+ 8   median_house_value  20640 non-null  float64
+ 9   ocean_proximity     20640 non-null  object 
+dtypes: float64(9), object(1)
+memory usage: 1.6+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show 10 random samples of the dataset</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6099</th>
+      <td>-117.88</td>
+      <td>34.11</td>
+      <td>30.0</td>
+      <td>3082.0</td>
+      <td>602.0</td>
+      <td>2008.0</td>
+      <td>619.0</td>
+      <td>4.1411</td>
+      <td>182700.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>20104</th>
+      <td>-120.33</td>
+      <td>37.97</td>
+      <td>17.0</td>
+      <td>2530.0</td>
+      <td>526.0</td>
+      <td>1024.0</td>
+      <td>496.0</td>
+      <td>2.0057</td>
+      <td>118900.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>4222</th>
+      <td>-118.26</td>
+      <td>34.12</td>
+      <td>52.0</td>
+      <td>2290.0</td>
+      <td>520.0</td>
+      <td>1278.0</td>
+      <td>485.0</td>
+      <td>3.8393</td>
+      <td>238200.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>16704</th>
+      <td>-120.56</td>
+      <td>35.07</td>
+      <td>14.0</td>
+      <td>6788.0</td>
+      <td>1216.0</td>
+      <td>2866.0</td>
+      <td>1036.0</td>
+      <td>3.3603</td>
+      <td>280200.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>18807</th>
+      <td>-121.64</td>
+      <td>40.90</td>
+      <td>24.0</td>
+      <td>2237.0</td>
+      <td>434.0</td>
+      <td>834.0</td>
+      <td>318.0</td>
+      <td>1.7538</td>
+      <td>90300.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>18787</th>
+      <td>-122.43</td>
+      <td>40.47</td>
+      <td>16.0</td>
+      <td>3552.0</td>
+      <td>704.0</td>
+      <td>1801.0</td>
+      <td>658.0</td>
+      <td>2.1496</td>
+      <td>97700.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>3500</th>
+      <td>-118.46</td>
+      <td>34.27</td>
+      <td>30.0</td>
+      <td>1576.0</td>
+      <td>282.0</td>
+      <td>1004.0</td>
+      <td>284.0</td>
+      <td>4.8015</td>
+      <td>179700.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>17330</th>
+      <td>-120.09</td>
+      <td>34.61</td>
+      <td>11.0</td>
+      <td>586.0</td>
+      <td>125.0</td>
+      <td>317.0</td>
+      <td>74.0</td>
+      <td>2.8906</td>
+      <td>84400.0</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>11372</th>
+      <td>-117.96</td>
+      <td>33.68</td>
+      <td>26.0</td>
+      <td>1374.0</td>
+      <td>234.0</td>
+      <td>731.0</td>
+      <td>244.0</td>
+      <td>6.0905</td>
+      <td>224800.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>1839</th>
+      <td>-122.29</td>
+      <td>37.92</td>
+      <td>36.0</td>
+      <td>1450.0</td>
+      <td>235.0</td>
+      <td>568.0</td>
+      <td>234.0</td>
+      <td>6.0000</td>
+      <td>311400.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print descriptive statistics for all numerical attributes</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20433.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-119.569704</td>
+      <td>35.631861</td>
+      <td>28.639486</td>
+      <td>2635.763081</td>
+      <td>537.870553</td>
+      <td>1425.476744</td>
+      <td>499.539680</td>
+      <td>3.870671</td>
+      <td>206855.816909</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.003532</td>
+      <td>2.135952</td>
+      <td>12.585558</td>
+      <td>2181.615252</td>
+      <td>421.385070</td>
+      <td>1132.462122</td>
+      <td>382.329753</td>
+      <td>1.899822</td>
+      <td>115395.615874</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-124.350000</td>
+      <td>32.540000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>0.499900</td>
+      <td>14999.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-121.800000</td>
+      <td>33.930000</td>
+      <td>18.000000</td>
+      <td>1447.750000</td>
+      <td>296.000000</td>
+      <td>787.000000</td>
+      <td>280.000000</td>
+      <td>2.563400</td>
+      <td>119600.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-118.490000</td>
+      <td>34.260000</td>
+      <td>29.000000</td>
+      <td>2127.000000</td>
+      <td>435.000000</td>
+      <td>1166.000000</td>
+      <td>409.000000</td>
+      <td>3.534800</td>
+      <td>179700.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>-118.010000</td>
+      <td>37.710000</td>
+      <td>37.000000</td>
+      <td>3148.000000</td>
+      <td>647.000000</td>
+      <td>1725.000000</td>
+      <td>605.000000</td>
+      <td>4.743250</td>
+      <td>264725.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>-114.310000</td>
+      <td>41.950000</td>
+      <td>52.000000</td>
+      <td>39320.000000</td>
+      <td>6445.000000</td>
+      <td>35682.000000</td>
+      <td>6082.000000</td>
+      <td>15.000100</td>
+      <td>500001.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="step-2-2-analyze-data">
+<h3>Step 2.2: analyze data<a class="headerlink" href="#step-2-2-analyze-data" title="Permalink to this heading">#</a></h3>
+<p>The objective here is to gain insights about the data, in order to prepare it optimally for training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histograms for all numerical attributes</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f7e7c6c932a3772cc43d3ec377fedcaf495b791c9d00fbe5b4d330664e9b8eba.png" src="../_images/f7e7c6c932a3772cc43d3ec377fedcaf495b791c9d00fbe5b4d330664e9b8eba.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This dataset has the particularity of including geographical coordinates</span>
+<span class="c1"># Visualise prices relative to them</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">df_housing</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;population&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span>
+    <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14f5ef28b648a7c7eec2c3f46e559075a8a094c7fc0b488235254af67716682a.png" src="../_images/14f5ef28b648a7c7eec2c3f46e559075a8a094c7fc0b488235254af67716682a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute pairwise correlations of attributes</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df_housing</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value    1.000000
+median_income         0.688075
+total_rooms           0.134153
+housing_median_age    0.105623
+households            0.065843
+total_bedrooms        0.049686
+population           -0.024650
+longitude            -0.045967
+latitude             -0.144160
+Name: median_house_value, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_correlation_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a correlation matrix for a DataFrame&quot;&quot;&quot;</span>
+
+    <span class="c1"># Select numerical columns</span>
+    <span class="n">df_numerical</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">vmax</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="n">xticklabels</span><span class="o">=</span><span class="n">df_numerical</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+        <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">},</span>
+        <span class="n">yticklabels</span><span class="o">=</span><span class="n">df_numerical</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_correlation_matrix</span><span class="p">(</span><span class="n">df_housing</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ecbb456e70bcf61ae1dd060486c52557c2b30517ae3226946d0afadcc8af21cc.png" src="../_images/ecbb456e70bcf61ae1dd060486c52557c2b30517ae3226946d0afadcc8af21cc.png" />
+</div>
+</div>
+</section>
+<section id="step-2-3-split-the-dataset">
+<h3>Step 2.3: split the dataset<a class="headerlink" href="#step-2-3-split-the-dataset" title="Permalink to this heading">#</a></h3>
+<p>A simple solution for splitting datasets is to use the <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>function from scikit-learn.</p>
+<p>Just before or after that, inputs (features given to the model) have to be separated from targets (values it must predict).</p>
+<p><a class="reference external" href="https://mgalarnyk.github.io/"><img alt="Using train_test_split" src="../_images/train-test-split.jpg" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separate inputs from targets</span>
+
+<span class="c1"># Target attribute is removed from dataset</span>
+<span class="n">df_x</span> <span class="o">=</span> <span class="n">df_housing</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Targets are stored separately in a new variable</span>
+<span class="n">df_y</span> <span class="o">=</span> <span class="n">df_housing</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df_x: </span><span class="si">{</span><span class="n">df_x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. df_y: </span><span class="si">{</span><span class="n">df_y</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>df_x: (20640, 9). df_y: (20640,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split dataset between training and test sets</span>
+<span class="c1"># A unique call to train_test_split is mandatory to maintain inputs/target correspondance between samples</span>
+<span class="n">df_x_train</span><span class="p">,</span> <span class="n">df_x_test</span><span class="p">,</span> <span class="n">df_y_train</span><span class="p">,</span> <span class="n">df_y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">df_x</span><span class="p">,</span> <span class="n">df_y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df_x_train: </span><span class="si">{</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. df_y_train: </span><span class="si">{</span><span class="n">df_y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df_x_test: </span><span class="si">{</span><span class="n">df_x_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. df_y_test: </span><span class="si">{</span><span class="n">df_y_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>df_x_train: (16512, 9). df_y_train: (16512,)
+df_x_test: (4128, 9). df_y_test: (4128,)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-4-data-preprocessing">
+<h3>Step 2.4: data preprocessing<a class="headerlink" href="#step-2-4-data-preprocessing" title="Permalink to this heading">#</a></h3>
+<p>This task typically involves:</p>
+<ul class="simple">
+<li><p>Removing of superflous features (if any).</p></li>
+<li><p>Adding missing values.</p></li>
+<li><p>Scaling data.</p></li>
+<li><p>Transforming values into numeric form.</p></li>
+<li><p>Labelling (if needed).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute number and percent of missing values among features</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">df_missing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">total</span><span class="p">,</span> <span class="n">percent</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="s2">&quot;Percent&quot;</span><span class="p">])</span>
+<span class="n">df_missing_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>total_bedrooms</th>
+      <td>160</td>
+      <td>0.968992</td>
+    </tr>
+    <tr>
+      <th>longitude</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>latitude</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>housing_median_age</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>total_rooms</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show the first samples with missing values</span>
+<span class="n">df_x_train</span><span class="p">[</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>16757</th>
+      <td>-122.48</td>
+      <td>37.70</td>
+      <td>33.0</td>
+      <td>4492.0</td>
+      <td>NaN</td>
+      <td>3477.0</td>
+      <td>1537.0</td>
+      <td>3.0546</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>14386</th>
+      <td>-117.23</td>
+      <td>32.75</td>
+      <td>5.0</td>
+      <td>1824.0</td>
+      <td>NaN</td>
+      <td>892.0</td>
+      <td>426.0</td>
+      <td>3.4286</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>14521</th>
+      <td>-117.14</td>
+      <td>32.90</td>
+      <td>16.0</td>
+      <td>3217.0</td>
+      <td>NaN</td>
+      <td>2054.0</td>
+      <td>687.0</td>
+      <td>4.2234</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>16038</th>
+      <td>-122.46</td>
+      <td>37.72</td>
+      <td>39.0</td>
+      <td>2254.0</td>
+      <td>NaN</td>
+      <td>1388.0</td>
+      <td>404.0</td>
+      <td>2.9688</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>3485</th>
+      <td>-118.55</td>
+      <td>34.28</td>
+      <td>16.0</td>
+      <td>8879.0</td>
+      <td>NaN</td>
+      <td>3468.0</td>
+      <td>1200.0</td>
+      <td>8.1125</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print numerical features</span>
+<span class="n">num_features</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_features</span><span class="p">)</span>
+
+<span class="c1"># Print categorical features</span>
+<span class="n">cat_features</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cat_features</span><span class="p">)</span>
+
+<span class="c1"># Print all values for the &quot;ocean_proximity&quot; feature</span>
+<span class="n">df_x_train</span><span class="p">[</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;longitude&#39;, &#39;latitude&#39;, &#39;housing_median_age&#39;, &#39;total_rooms&#39;,
+       &#39;total_bedrooms&#39;, &#39;population&#39;, &#39;households&#39;, &#39;median_income&#39;],
+      dtype=&#39;object&#39;)
+Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ocean_proximity
+&lt;1H OCEAN     7300
+INLAND        5240
+NEAR OCEAN    2125
+NEAR BAY      1843
+ISLAND           4
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing-pipelines">
+<h3>Preprocessing pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Permalink to this heading">#</a></h3>
+<p>Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding…).</p>
+<p>scikit-learn support the definition of <strong>pipelines</strong> for streamlining these operations. This is useful to prevent mistakes and oversights when preprocessing new data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This pipeline handles missing values and standardizes features</span>
+<span class="n">num_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;std_scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># This pipeline applies the previous one on numerical features</span>
+<span class="c1"># It also one-hot encodes the categorical features</span>
+<span class="n">full_pipeline</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="n">num_pipeline</span><span class="p">,</span> <span class="n">num_features</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(),</span> <span class="n">cat_features</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply all preprocessing operations to the training set through pipelines</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">full_pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_x_train</span><span class="p">)</span>
+
+<span class="c1"># Transform the targets DataFrame into a plain tensor</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df_y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># Print preprocessed data shape and first sample</span>
+<span class="c1"># &quot;ocean_proximity&quot; attribute has 5 different values</span>
+<span class="c1"># To represent them, one-hot encoding has added 4 features to the dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_train: </span><span class="si">{</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Data is now ready for model training :)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
+[ 0.72747462 -0.73784289  0.49960744 -0.41272017 -0.23341575 -0.10444177
+ -0.22701845 -0.70770548  1.          0.          0.          0.
+  0.        ]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3-select-and-train-models">
+<h2>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Permalink to this heading">#</a></h2>
+<section id="an-iterative-and-empirical-step">
+<h3>An iterative and empirical step<a class="headerlink" href="#an-iterative-and-empirical-step" title="Permalink to this heading">#</a></h3>
+<p>At long last, our data is ready and we can start training models.</p>
+<p>This step is often iterative and can be quite empirical. Depending on data and model complexity, it can also be resource-intensive.</p>
+<p><img alt="Busy training" src="../_images/busy_training.jpg" /></p>
+</section>
+<section id="the-optimization-generalization-dilemna">
+<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this heading">#</a></h3>
+<p><img alt="Underfitting and overfitting" src="../_images/underfitting_overfitting.png" /></p>
+</section>
+<section id="underfitting-and-overfitting">
+<h3>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Underfitting</strong> (sometimes called <em>bias</em>): insufficient performance on training set.</p></li>
+<li><p><strong>Overfitting</strong> (sometimes called <em>variance</em>): performance gap between training and validation sets.</p></li>
+</ul>
+<p>Ultimately, we look for a tradeoff between underfitting and overfitting.</p>
+<p>The goal of the training step is to find a model powerful enough to <strong>overfit the training set</strong>.</p>
+</section>
+<section id="step-3-1-choose-an-evaluation-metric">
+<h3>Step 3.1: choose an evaluation metric<a class="headerlink" href="#step-3-1-choose-an-evaluation-metric" title="Permalink to this heading">#</a></h3>
+<p>Model performance is assessed through an <strong>evaluation metric</strong>.</p>
+<p>It quantifies the difference (often called <strong>error</strong>) between the expected results (<em>ground truth</em>) and the actual results computed by the model.</p>
+<p>A classic evaluation metric for regression tasks is the <strong>Root Mean Square Error (RMSE)</strong>. It gives an idea of how much error the model typically makes in its predictions.</p>
+</section>
+<section id="step-3-2-start-with-a-baseline-model">
+<h3>Step 3.2: start with a baseline model<a class="headerlink" href="#step-3-2-start-with-a-baseline-model" title="Permalink to this heading">#</a></h3>
+<p>For each learning type (supervised, unsupervised…), several models of various complexity exist.</p>
+<p>It is often useful to begin the training step by using a basic model. Its results will serve as a <strong>baseline</strong> when training more complicated models. In some cases, its performance might even be surprisingly good.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a linear regression model to the training set</span>
+<span class="n">lin_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lin_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">compute_error</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_true</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute error (as root of MSE) for a model and a training set&quot;&quot;&quot;</span>
+
+    <span class="c1"># Compute model predictions (median house prices) for training set</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Compute the error between actual and expected median house prices</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">error</span>
+
+
+<span class="n">lin_error</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">lin_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training error for linear regression: </span><span class="si">{</span><span class="n">lin_error</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68667.87
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-3-try-other-models">
+<h3>Step 3.3: try other models<a class="headerlink" href="#step-3-3-try-other-models" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a decision tree model to the training set</span>
+<span class="n">dt_model</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">dt_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">dt_error</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">dt_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training error for decision tree: </span><span class="si">{</span><span class="n">dt_error</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for decision tree: 0.00
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-4-use-a-validation-set-to-evaluate-model-performance">
+<h3>Step 3.4: Use a validation set to evaluate model performance<a class="headerlink" href="#step-3-4-use-a-validation-set-to-evaluate-model-performance" title="Permalink to this heading">#</a></h3>
+<p>The previous result (<em>error = 0</em>) looks too good to be true. It might very well be a case of severe overfitting to the training set, which means the model won’t perform well with unseen data.</p>
+<p>One way to assert overfitting is to split training data between a smaller training set and a <strong>validation set</strong>, used only to evaluate model performance.</p>
+<section id="cross-validation">
+<h4>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this heading">#</a></h4>
+<p>A more sophisticated strategy is to apply <strong>K-fold cross validation</strong>. Training data is randomly split into <span class="math notranslate nohighlight">\(K\)</span> subsets called <em>folds</em>. The model is trained and evaluated <span class="math notranslate nohighlight">\(K\)</span> times, using a different fold for validation.</p>
+<p><img alt="K-fold Cross Validation" src="../_images/k-fold-cross-validation.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_crossval_mean_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_true</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the mean of cross validation scores for a model and a training set&quot;&quot;&quot;</span>
+
+    <span class="n">cv_scores</span> <span class="o">=</span> <span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cv_scores</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+
+<span class="n">lin_cv_mean</span> <span class="o">=</span> <span class="n">compute_crossval_mean_score</span><span class="p">(</span><span class="n">lin_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean cross-validation error for linear regression: </span><span class="si">{</span><span class="n">lin_cv_mean</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">dt_cv_mean</span> <span class="o">=</span> <span class="n">compute_crossval_mean_score</span><span class="p">(</span><span class="n">dt_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean cross-validation error for decision tree: </span><span class="si">{</span><span class="n">dt_cv_mean</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean cross-validation error for linear regression: 68789.37
+Mean cross-validation error for decision tree: 68434.76
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a random forest model to the training set</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">rf_error</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training error for random forest: </span><span class="si">{</span><span class="n">rf_error</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rf_cv_mean</span> <span class="o">=</span> <span class="n">compute_crossval_mean_score</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean cross-validation error for random forest: </span><span class="si">{</span><span class="n">rf_cv_mean</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19586.78
+Mean cross-validation error for random forest: 50004.22
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="step-4-tune-the-most-promising-model">
+<h2>Step 4: tune the most promising model<a class="headerlink" href="#step-4-tune-the-most-promising-model" title="Permalink to this heading">#</a></h2>
+<section id="step-4-1-search-for-the-best-hyperparameters">
+<h3>Step 4.1: search for the best hyperparameters<a class="headerlink" href="#step-4-1-search-for-the-best-hyperparameters" title="Permalink to this heading">#</a></h3>
+<p>Once a model looks promising, it must be <strong>tuned</strong> in order to offer the best compromise between optimization and generalization.</p>
+<p>The goal is to find the set of model properties that gives the best performance. Model properties are often called <strong>hyperparameters</strong> (example: maximum depth for a decision tree).</p>
+<p>This step can be either:</p>
+<ul class="simple">
+<li><p>manual, tweaking model hyperparameters by hand.</p></li>
+<li><p>automated, using a tool to explore the model hyperparameter spaces.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grid search explores a user-defined set of hyperparameter values</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># try 12 (3×4) combinations of hyperparameters</span>
+    <span class="p">{</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]},</span>
+<span class="p">]</span>
+
+<span class="c1"># train across 5 folds, that&#39;s a total of 12*5=60 rounds of training</span>
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">rf_model</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span>
+    <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Store the best model found</span>
+<span class="n">final_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="c1"># Print the best combination of hyperparameters found</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 6, &#39;n_estimators&#39;: 150}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-2-check-final-model-performance-on-test-dataset">
+<h3>Step 4.2: check final model performance on test dataset<a class="headerlink" href="#step-4-2-check-final-model-performance-on-test-dataset" title="Permalink to this heading">#</a></h3>
+<p>Now is the time to evaluate the final model on the test set that we put apart before.</p>
+<p>An important point is that preprocessing operations should be applied to test data using preprocessing values (mean, categories…) previously computed on training data. This prevents <strong>information leakage</strong> from test data (<a class="reference external" href="https://machinelearningmastery.com/data-leakage-machine-learning/">explanation</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply preprocessing operations to test inputs</span>
+<span class="c1"># Calling transform() and not fit_transform() uses preprocessing values computed on training set</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">full_pipeline</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_x_test</span><span class="p">)</span>
+
+<span class="c1"># Transform the targets DataFrame into a plain tensor</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df_y_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">test_rmse</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">final_model</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test error for final model: </span><span class="si">{</span><span class="n">test_rmse</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test error for final model: 48696.31
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-model-to-make-predictions-on-new-data">
+<h3>Using the model to make predictions on new data<a class="headerlink" href="#using-the-model-to-make-predictions-on-new-data" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new data sample</span>
+<span class="n">new_sample</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">122</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">3700</span><span class="p">,</span> <span class="mi">575</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">543</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">,</span> <span class="s2">&quot;NEAR BAY&quot;</span><span class="p">]]</span>
+
+<span class="c1"># Put it into a DataFrame so that it can be preprocessed</span>
+<span class="n">df_new_sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_sample</span><span class="p">)</span>
+<span class="n">df_new_sample</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">df_new_sample</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-122</td>
+      <td>38</td>
+      <td>49</td>
+      <td>3700</td>
+      <td>575</td>
+      <td>1200</td>
+      <td>543</td>
+      <td>5.2</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply preprocessing operations to new sample</span>
+<span class="c1"># Calling transform() and not fit_transform() uses preprocessing values computed on training set</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="n">full_pipeline</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_new_sample</span><span class="p">)</span>
+
+<span class="c1"># Use trained model to predict median housing price</span>
+<span class="n">y_new</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted median price: </span><span class="si">{</span><span class="n">y_new</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted median price: 255285.39
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-5-deploy-to-production-and-maintain-the-system">
+<h2>Step 5: deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Permalink to this heading">#</a></h2>
+<section id="step-5-1-save-the-final-model-and-data-pipeline">
+<h3>Step 5.1: save the final model and data pipeline<a class="headerlink" href="#step-5-1-save-the-final-model-and-data-pipeline" title="Permalink to this heading">#</a></h3>
+<p>A trained model can be saved to several formats. A standard common is to use Python’s built-in persistence model, <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, through the <a class="reference external" href="https://pypi.org/project/joblib/">joblib</a> library for efficiency reasons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Serialize final model and input pipeline to disk</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">final_model</span><span class="p">,</span> <span class="s2">&quot;final_model.pkl&quot;</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">full_pipeline</span><span class="p">,</span> <span class="s2">&quot;full_pipeline.pkl&quot;</span><span class="p">)</span>
+
+<span class="c1"># (Later in the process)</span>
+<span class="c1"># model = joblib.load(&quot;final_model.pkl&quot;)</span>
+<span class="c1"># pipeline = joblib.load(&quot;full_pipeline.pkl&quot;)</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;full_pipeline.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-2-deploy-the-model">
+<h3>Step 5.2: deploy the model<a class="headerlink" href="#step-5-2-deploy-the-model" title="Permalink to this heading">#</a></h3>
+<p>This step is highly context-dependent. A deployed model is often a part of a more important system. Some common solutions:</p>
+<ul class="simple">
+<li><p>deploying the model as a web service accessible through an API.</p></li>
+<li><p>embedding the model into the user device.</p></li>
+</ul>
+<p>The <a class="reference external" href="https://flask.palletsprojects.com">Flask</a> web framework is often used to create a web API from a trained Python model.</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Model deployement on the web" src="../_images/model_deployment_web.png" /></a></p>
+</section>
+<section id="step-5-3-monitor-and-maintain-the-system">
+<h3>Step 5.3: monitor and maintain the system<a class="headerlink" href="#step-5-3-monitor-and-maintain-the-system" title="Permalink to this heading">#</a></h3>
+<p>In order to guarantee an optimal quality of service, the deployed system must be carefully monitored. This may involve:</p>
+<ul class="simple">
+<li><p>Checking the system’s live availability and performance at regular intervals.</p></li>
+<li><p>Sampling the system’s predictions and evaluating them.</p></li>
+<li><p>Checking input data quality.</p></li>
+<li><p>Retraining the model on fresh data.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="principles.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Principles of supervised learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">End-to-end classification example: recognize handwritten digits</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-frame-the-problem">Step 1: frame the problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-objective-predict-housing-prices">Business objective: predict housing prices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">Step 2: collect, analyze and prepare data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-crucial-step">A crucial step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-california-housing-dataset">The California housing dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-1-discover-data">Step 2.1: discover data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-2-analyze-data">Step 2.2: analyze data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-3-split-the-dataset">Step 2.3: split the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-4-data-preprocessing">Step 2.4: data preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-select-and-train-models">Step 3: select and train models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-and-empirical-step">An iterative and empirical step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">The optimization/generalization dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-and-overfitting">Underfitting and overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-1-choose-an-evaluation-metric">Step 3.1: choose an evaluation metric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-2-start-with-a-baseline-model">Step 3.2: start with a baseline model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-3-try-other-models">Step 3.3: try other models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-4-use-a-validation-set-to-evaluate-model-performance">Step 3.4: Use a validation set to evaluate model performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-tune-the-most-promising-model">Step 4: tune the most promising model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-1-search-for-the-best-hyperparameters">Step 4.1: search for the best hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-2-check-final-model-performance-on-test-dataset">Step 4.2: check final model performance on test dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-model-to-make-predictions-on-new-data">Using the model to make predictions on new data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">Step 5: deploy to production and maintain the system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-1-save-the-final-model-and-data-pipeline">Step 5.1: save the final model and data pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-2-deploy-the-model">Step 5.2: deploy the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-3-monitor-and-maintain-the-system">Step 5.3: monitor and maintain the system</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023-present.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
