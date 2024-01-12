@@ -108,6 +108,19 @@
 # ### Targets matrix
 #
 # Accordingly, expected results are often stored in a $m \times K$ matrix denoted $\pmb{Y}$.
+#
+# $$\pmb{Y} = \begin{bmatrix}
+#        \ \pmb{y}^{(1)T} \\
+#        \ \pmb{y}^{(2)T} \\
+#        \ \vdots \\
+#        \ \pmb{y}^{(m)T} \\
+#      \end{bmatrix} =
+# \begin{bmatrix}
+#        \ y^{(1)}_1 & y^{(1)}_2 & \cdots & y^{(1)}_K \\
+#        \ y^{(2)}_1 & y^{(2)}_2 & \cdots & y^{(2)}_K \\
+#        \ \vdots & \vdots & \ddots & \vdots \\
+#        \ y^{(m)}_1 & y^{(m)}_2 & \cdots & y^{(m)}_K
+#      \end{bmatrix}$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Model

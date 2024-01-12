@@ -22,13 +22,14 @@
 # !pip install papermill
 
 # %%
+# Relax some linting rules not needed here
+# pylint: disable=invalid-name,redefined-outer-name,consider-using-f-string,duplicate-value,unnecessary-lambda-assignment,protected-access,too-few-public-methods,wrong-import-position,unused-import,consider-swap-variables,consider-using-enumerate,too-many-lines
+
 import platform
 import os
 
 print(f"Python version: {platform.python_version()}")
 
-# Relax some linting rules for code examples
-# pylint: disable=invalid-name,redefined-outer-name,consider-using-f-string,duplicate-value,unnecessary-lambda-assignment,protected-access,too-few-public-methods,wrong-import-position,unused-import,consider-swap-variables,consider-using-enumerate,too-many-lines
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Python for AI and Data Science
