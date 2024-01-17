@@ -13,18 +13,18 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Data preprocessing
+# # Data manipulation
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Objectives
 #
-# - Being able to load and prepare a dataset (tabular data, images or videos) for training a Machine Learning model.
-# - Learn how the [scikit-learn](https://scikit-learn.org) library can simplify this task.
+# - Discover what tensors are and how to manipulate them with [NumPy](https://numpy.org/) and [PyTorch](https://pytorch.org/).
+# - Be able to load and prepare datasets of different types (tabular data, images or videos) for training a Machine Learning model, using the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
-# %% slideshow={"slide_type": "-"}
+# %% slideshow={"slide_type": "slide"}
 # Relax some linting rules not needed here
 # pylint: disable=invalid-name,wrong-import-position
 
@@ -33,10 +33,12 @@ import platform
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn
+import torch
 
 print(f"Python version: {platform.python_version()}")
 print(f"NumPy version: {np.__version__}")
 print(f"scikit-learn version: {sklearn.__version__}")
+print(f"PyTorch version: {torch.__version__}")
 
 # %% slideshow={"slide_type": "slide"}
 # sklearn does not automatically import its subpackages
@@ -46,6 +48,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, OneHotEncoder
 
+
+# %% slideshow={"slide_type": "slide"}
+# PyTorch device configuration
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
+elif torch.backends.mps.is_available():
+    device = torch.device("mps")
+    print("Metal GPU found :)")
+else:
+    device = torch.device("cpu")
+    print("No available GPU :/")
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
@@ -61,9 +75,101 @@ plt.rcParams["figure.figsize"] = 10, 7.5
 # Improve plot quality
 # %config InlineBackend.figure_format = "retina"
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Working with tensors
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Image and video reshaping
+# ### Definition
+#
+# In the context of AI, a **tensor** is a set of primitive values sharing the same type (most often numerical), shaped into an array of any number of dimensions. It is a fancy name for a multidimensional array.
+#
+# Tensors are heavily used by AI algorithms to represent and manipulate information. They are, in particular, the core data structures of Machine Learning.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Tensor properties
+#
+# - A tensor's dimension is also called an **axis**.
+# - A tensor's **rank** is its number of axes.
+# - The tensor's **shape** describes the number of values along each axis.
+#
+# In mathematical terms, a rank 0 tensor is a **scalar**, a rank 1 tensor is a **vector** and a rank 2 tensor is a **matrix**.
+#
+# > Warning: *rank* and *dimension* are polysemic terms, which can be confusing.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Tensors in Python
+#
+# Python offers limited native support for manipulating tensors. Lists can be used to store information, but their mathematical capacities are insufficient for any serious work.
+
+# %%
+# A vector (rank 1 tensor)
+a = [1, 2, 3]
+print(a)
+
+# A matrix (rank 2 tensor)
+b = [a, [4, 5, 6]]
+print(b)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Dedicated libraries
+#
+# Over the years, several tools have been developed to overcome Python's native limitations. One of the most widely used is [NumPy](https://numpy.org/), which supports tensors in the form of `ndarray` objects. It offers a comprehensive set of operations on them, including creating, sorting, selecting, linear algebra and statistical operations.
+#
+# For all its qualities, NumPy has a limitation which can be critical in some contexts: it only runs on the machine's [CPU](https://en.wikipedia.org/wiki/Processor_(computing)). Among other advantages, newer tools offer support for dedicated high-performance processors like [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) or [TPUs](https://en.wikipedia.org/wiki/Tensor_Processing_Unit), while providing a NumPy-like API to make onboarding easier. The most prominent ones are currently [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org) and [JAX](https://jax.readthedocs.io).
+#
+# This content uses PyTorch, which strikes a good balance between power, flexibility and user-friendliness.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Data loading
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Data preparation
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### A mandatory step
+#
+# In Machine Learning, the chosen dataset has to be carefully prepared before using it to train a model. This can have a major impact on the outcome of the training process.
+#
+# This important task, sometimes called *data preprocessing*, might involve:
+#
+# - Splitting data between training, validation and test sets.
+# - Reshaping data.
+# - Removing superflous features (if any).
+# - Adding missing values.
+# - Scaling data.
+# - Transforming values into numeric form.
+# - Augmenting data.
+# - Engineering new features.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Data splitting
+#
+# Once trained, a ML model must be able to **generalize** (perform well with new data). In order to assert this ability, data is always split into two or three sets before training:
+#
+# - **Training set** (typically 80% or more): fed to the model during training.
+# - **Validation set**: used to tune the model without biasing it in favor of the test set.
+# - **Test set**: used to check the final model's performance on unseen data.
+#
+# ![Dataset splitting](_images/dataset_splitting.png)
+
+# %% slideshow={"slide_type": "slide"}
+# Demonstrate the use of scikit-learn's train_test_split for splitting a dataset
+
+# Create a random 30x4 matrix (fictitious inputs) and a random 30x1 vector (fictitious results)
+x = np.random.rand(30, 4)
+y = np.random.rand(30)
+print(f"x: {x.shape}. y: {y.shape}")
+
+# Split fictitious dataset between training and test sets, using a 75/25 ratio
+# A unique call to train_test_split is mandatory to maintain inputs/target correspondance between samples
+# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)
+
+print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
+print(f"x_test: {x_test.shape}. y_test: {y_test.shape}")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Image and video reshaping
 #
 # A bitmap image can be represented as a 3D multidimensional array of dimensions $height \times width \times color\_channels$.
 #
@@ -98,34 +204,7 @@ flattened_image = sample_image.flatten()
 print(f"Flattened image: {flattened_image.shape}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Dataset splitting
-#
-# Once trained, a ML model must be able to **generalize** (perform well with new data). In order to assert this ability, data is always split into two or three sets before training:
-#
-# - **Training set** (typically 80% or more): fed to the model during training.
-# - **Validation set**: used to tune the model without biasing it in favor of the test set.
-# - **Test set**: used to check the final model's performance on unseen data.
-#
-# ![Dataset splitting](_images/dataset_splitting.png)
-
-# %% slideshow={"slide_type": "slide"}
-# Demonstrate the use of scikit-learn's train_test_split for splitting a dataset
-
-# Create a random 30x4 matrix (fictitious inputs) and a random 30x1 vector (fictitious results)
-x = np.random.rand(30, 4)
-y = np.random.rand(30)
-print(f"x: {x.shape}. y: {y.shape}")
-
-# Split fictitious dataset between training and test sets, using a 75/25 ratio
-# A unique call to train_test_split is mandatory to maintain inputs/target correspondance between samples
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)
-
-print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
-print(f"x_test: {x_test.shape}. y_test: {y_test.shape}")
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ## Handling of missing values
+# ### Handling of missing values
 #
 # Most ML algorithms cannot work with missing values in features.
 #
@@ -146,14 +225,12 @@ imputer = SimpleImputer(strategy="constant", missing_values=None, fill_value="Un
 print(imputer.fit_transform([["M"], ["M"], [None], ["F"], [None]]))
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Feature scaling
+# ### Feature scaling
 #
 # Most ML algorithms work best when all features have a **similar scale**. Several solutions exist:
 #
 # - **Min-Max scaling**: features are shifted and rescaled to the $[0,1]$ range by substracting the `min` value and dividing by `(max-min)` on the first axis.
 # - **Standardization**: features are centered (substracted by their mean) then reduced (divided by their standard deviation) on the first axis. All resulting features have a mean of 0 and a standard deviation of 1.
-#
-# In order to avoid [information leakage](https://stats.stackexchange.com/a/174865), the test set must be scaled with values calculated on the training set.
 
 # %% slideshow={"slide_type": "slide"}
 # Demonstrate the use of scikit-learn's MinMaxScaler to rescale values
@@ -185,7 +262,12 @@ print(x_scaled)
 # New mean is 0. New standard deviation is 1
 print(f"Mean: {x_scaled.mean()}. Std: {x_scaled.std()}")
 
-# %% slideshow={"slide_type": "slide"}
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Feature scaling and training/test sets
+#
+# In order to avoid [information leakage](https://stats.stackexchange.com/a/174865), the test set must be scaled with values calculated on the training set.
+
+# %% slideshow={"slide_type": "-"}
 # Compute mean and std on training set
 scaler = StandardScaler().fit(x_train)
 
@@ -199,11 +281,11 @@ print(f"Test mean: {x_test_scaled.mean(axis=0)}")
 print(f"Test std: {x_test_scaled.std(axis=0)}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Image and video scaling
+# #### Image and video scaling
 #
 # Individual pixel values for images and videos are typically integers in the $[0,255]$ range. This is not ideal for most ML algorithms.
 #
-# Dividing them by 255.0 to obtain floats into the $[0,1]$ range is a common practice.
+# Dividing them by $255.0$ to obtain floats into the $[0,1]$ range is a common practice.
 
 # %% slideshow={"slide_type": "-"}
 # Scaling sample image pixels between 0 and 1
@@ -214,7 +296,7 @@ assert scaled_image.min() >= 0
 assert scaled_image.max() <= 1
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Encoding of categorical features
+# ### Encoding of categorical features
 #
 # Some features or targets may come as discrete rather than continuous values. Moreover, these discrete values might be strings. ML models are only able to manage numerical-only data.
 #
@@ -237,6 +319,8 @@ print(x_hot)
 print(encoder.categories_)
 
 # %% slideshow={"slide_type": "slide"}
+# Demonstrate one-hot encoding of categorical features given as integers
+
 # Generate a (5,1) tensor with integer values between 0 and 9
 x = np.random.randint(0, 9, (5, 1))
 print(x)
@@ -248,7 +332,7 @@ x_hot = OneHotEncoder().fit_transform(x).toarray()
 print(x_hot)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### One-hot encoding and training/test sets
+# #### One-hot encoding and training/test sets
 #
 # Depending on value distribution between training and test sets, some categories might appear only in one set.
 #
@@ -283,14 +367,14 @@ print(
 )
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Data augmentation
+# ### Data augmentation
 #
 # **Data augmentation** is the process of enriching a dataset by adding new samples, slightly modified copies of existing data or newly created synthetic data.
 #
 # [![Image augmentation example](_images/image_augmentation.png)](https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Feature engineering
+# ### Feature engineering
 #
 # **Feature engineering** is the process of preparing the proper input features, in order to facilitate the learning task. The problem is made easier by expressing it in a simpler way. This usually requires a good domain knowledge.
 #

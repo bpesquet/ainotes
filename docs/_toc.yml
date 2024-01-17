@@ -13,8 +13,6 @@ parts:
     - file: foundations/computer_science
       sections:
       - file: foundations/programming
-      - file: foundations/data_manipulation
-      - file: foundations/data_preprocessing
     - file: foundations/math
       sections:
       - file: foundations/linear_algebra
@@ -28,6 +26,7 @@ parts:
       sections:
       - file: ml/principles
         title: Principles
+      - file: ml/data_manipulation
       - file: ml/regression
         title: Regression
       - file: ml/classification
