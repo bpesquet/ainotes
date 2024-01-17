@@ -173,8 +173,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="principles.html">Principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data manipulation</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Regression example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification example</a></li>
 </ul>
 </li>
 </ul>
@@ -447,7 +447,13 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-project-workflow">The Machine Learning project workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-steps-of-a-supervised-learning-project">Main steps of a supervised learning project</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-frame-the-problem">Step 1: frame the problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">Properties of ML-friendly problems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-objective-predict-housing-prices">Business objective: predict housing prices</a></li>
 </ul>
 </li>
@@ -506,7 +512,7 @@ document.write(`
 <h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Train a Machine Learning model to deduce prices from housing properties (number of rooms, median income, proximity to ocean, etc) in geographical areas.</p></li>
-<li><p>Get familiar with the different steps of a supervised ML project.</p></li>
+<li><p>Get familiar with the general workflow of a supervised ML project.</p></li>
 <li><p>Learn how to leverage the <a class="reference external" href="https://pandas.pydata.org/">pandas</a> and <a class="reference external" href="https://scikit-learn.org">scikit-learn</a> libraries.</p></li>
 </ul>
 <blockquote>
@@ -585,8 +591,47 @@ scikit-learn version: 1.3.2
 </div>
 </div>
 </section>
+<section id="the-machine-learning-project-workflow">
+<h2>The Machine Learning project workflow<a class="headerlink" href="#the-machine-learning-project-workflow" title="Permalink to this heading">#</a></h2>
+<section id="main-steps-of-a-supervised-learning-project">
+<h3>Main steps of a supervised learning project<a class="headerlink" href="#main-steps-of-a-supervised-learning-project" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Frame</strong> the problem.</p></li>
+<li><p>Collect, analyze and prepare <strong>data</strong>.</p></li>
+<li><p>Select and train several <strong>models</strong> on data.</p></li>
+<li><p><strong>Tune</strong> the most promising model.</p></li>
+<li><p><strong>Deploy</strong> the model to production and monitor it.</p></li>
+</ol>
+<p><a class="reference external" href="https://www.redhat.com/files/summit/session-assets/2019/T957A0.pdf"><img alt="ML workflow by RedHat" src="../_images/wiidii_ml_workflow.png" /></a></p>
+</section>
+</section>
 <section id="step-1-frame-the-problem">
 <h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this heading">#</a></h2>
+<section id="key-questions">
+<h3>Key questions<a class="headerlink" href="#key-questions" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>What is the business objective?</p></li>
+<li><p>How good are the current solutions?</p></li>
+<li><p>What data is available?</p></li>
+<li><p>Is the problem a good fit for ML?</p></li>
+<li><p>What is the expected learning type (supervised or not, batch/online…)?</p></li>
+<li><p>How will the model’s performance be evaluated?</p></li>
+</ul>
+</section>
+<section id="properties-of-ml-friendly-problems">
+<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Difficulty to express the actions as rules.</p></li>
+<li><p>Data too complex for traditional analytical methods.</p>
+<ul>
+<li><p>High number of features.</p></li>
+<li><p>Highly correlated data (data with similar or closely related values).</p></li>
+</ul>
+</li>
+<li><p>Performance &gt; interpretability.</p></li>
+<li><p>Data quality is paramount.</p></li>
+</ul>
+</section>
 <section id="business-objective-predict-housing-prices">
 <h3>Business objective: predict housing prices<a class="headerlink" href="#business-objective-predict-housing-prices" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -610,7 +655,7 @@ scikit-learn version: 1.3.2
 <h3>The California housing dataset<a class="headerlink" href="#the-california-housing-dataset" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Based on data from the 1990 California census.</p></li>
-<li><p>Slightly modified for teaching purposes by A. Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
+<li><p>Slightly modified for teaching purposes by Aurélien Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
 </ul>
 </section>
 <section id="step-2-1-discover-data">
@@ -620,8 +665,8 @@ scikit-learn version: 1.3.2
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the dataset in a pandas DataFrame</span>
-<span class="c1"># The df_ prefix is used to distinguish dataframes froms plain NumPy arrays</span>
-<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/ageron/handson-ml2/master/datasets/housing/housing.csv&quot;</span>
+<span class="c1"># The df_ prefix is used to distinguish dataframes from plain NumPy arrays</span>
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/bpesquet/ainotes/master/data/california_housing.csv&quot;</span>
 <span class="n">df_housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataset_url</span><span class="p">)</span>
 
 <span class="c1"># Print dataset shape (rows and columns)</span>
@@ -707,134 +752,134 @@ memory usage: 1.6+ MB
   </thead>
   <tbody>
     <tr>
-      <th>6099</th>
-      <td>-117.88</td>
-      <td>34.11</td>
-      <td>30.0</td>
-      <td>3082.0</td>
-      <td>602.0</td>
-      <td>2008.0</td>
-      <td>619.0</td>
-      <td>4.1411</td>
-      <td>182700.0</td>
+      <th>6584</th>
+      <td>-118.22</td>
+      <td>34.23</td>
+      <td>34.0</td>
+      <td>3296.0</td>
+      <td>483.0</td>
+      <td>1268.0</td>
+      <td>478.0</td>
+      <td>8.4802</td>
+      <td>500001.0</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>20104</th>
-      <td>-120.33</td>
-      <td>37.97</td>
-      <td>17.0</td>
-      <td>2530.0</td>
-      <td>526.0</td>
-      <td>1024.0</td>
-      <td>496.0</td>
-      <td>2.0057</td>
-      <td>118900.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>4222</th>
-      <td>-118.26</td>
-      <td>34.12</td>
+      <th>8286</th>
+      <td>-118.15</td>
+      <td>33.77</td>
       <td>52.0</td>
-      <td>2290.0</td>
-      <td>520.0</td>
-      <td>1278.0</td>
-      <td>485.0</td>
-      <td>3.8393</td>
-      <td>238200.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>16704</th>
-      <td>-120.56</td>
-      <td>35.07</td>
-      <td>14.0</td>
-      <td>6788.0</td>
-      <td>1216.0</td>
-      <td>2866.0</td>
-      <td>1036.0</td>
-      <td>3.3603</td>
-      <td>280200.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>18807</th>
-      <td>-121.64</td>
-      <td>40.90</td>
-      <td>24.0</td>
-      <td>2237.0</td>
-      <td>434.0</td>
-      <td>834.0</td>
-      <td>318.0</td>
-      <td>1.7538</td>
-      <td>90300.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>18787</th>
-      <td>-122.43</td>
-      <td>40.47</td>
-      <td>16.0</td>
-      <td>3552.0</td>
-      <td>704.0</td>
-      <td>1801.0</td>
-      <td>658.0</td>
-      <td>2.1496</td>
-      <td>97700.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>3500</th>
-      <td>-118.46</td>
-      <td>34.27</td>
-      <td>30.0</td>
-      <td>1576.0</td>
-      <td>282.0</td>
-      <td>1004.0</td>
-      <td>284.0</td>
-      <td>4.8015</td>
-      <td>179700.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>17330</th>
-      <td>-120.09</td>
-      <td>34.61</td>
-      <td>11.0</td>
-      <td>586.0</td>
-      <td>125.0</td>
-      <td>317.0</td>
-      <td>74.0</td>
-      <td>2.8906</td>
-      <td>84400.0</td>
+      <td>2204.0</td>
+      <td>498.0</td>
+      <td>899.0</td>
+      <td>445.0</td>
+      <td>4.1765</td>
+      <td>393900.0</td>
       <td>NEAR OCEAN</td>
     </tr>
     <tr>
-      <th>11372</th>
-      <td>-117.96</td>
-      <td>33.68</td>
-      <td>26.0</td>
-      <td>1374.0</td>
-      <td>234.0</td>
-      <td>731.0</td>
-      <td>244.0</td>
-      <td>6.0905</td>
-      <td>224800.0</td>
+      <th>3995</th>
+      <td>-118.58</td>
+      <td>34.17</td>
+      <td>29.0</td>
+      <td>3393.0</td>
+      <td>574.0</td>
+      <td>1471.0</td>
+      <td>587.0</td>
+      <td>6.2064</td>
+      <td>334900.0</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>1839</th>
-      <td>-122.29</td>
-      <td>37.92</td>
-      <td>36.0</td>
-      <td>1450.0</td>
-      <td>235.0</td>
-      <td>568.0</td>
-      <td>234.0</td>
-      <td>6.0000</td>
-      <td>311400.0</td>
-      <td>NEAR BAY</td>
+      <th>3393</th>
+      <td>-118.31</td>
+      <td>34.27</td>
+      <td>35.0</td>
+      <td>1446.0</td>
+      <td>274.0</td>
+      <td>759.0</td>
+      <td>291.0</td>
+      <td>6.0808</td>
+      <td>215600.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>17794</th>
+      <td>-121.82</td>
+      <td>37.37</td>
+      <td>42.0</td>
+      <td>2913.0</td>
+      <td>577.0</td>
+      <td>1873.0</td>
+      <td>580.0</td>
+      <td>3.7214</td>
+      <td>167900.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>17776</th>
+      <td>-121.84</td>
+      <td>37.38</td>
+      <td>34.0</td>
+      <td>762.0</td>
+      <td>182.0</td>
+      <td>611.0</td>
+      <td>193.0</td>
+      <td>3.5625</td>
+      <td>201800.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>12516</th>
+      <td>-121.47</td>
+      <td>38.56</td>
+      <td>52.0</td>
+      <td>889.0</td>
+      <td>162.0</td>
+      <td>273.0</td>
+      <td>145.0</td>
+      <td>3.1250</td>
+      <td>85600.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>9574</th>
+      <td>-120.59</td>
+      <td>37.35</td>
+      <td>15.0</td>
+      <td>3249.0</td>
+      <td>613.0</td>
+      <td>1569.0</td>
+      <td>595.0</td>
+      <td>3.5393</td>
+      <td>88000.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>9057</th>
+      <td>-118.14</td>
+      <td>34.68</td>
+      <td>31.0</td>
+      <td>2666.0</td>
+      <td>662.0</td>
+      <td>1337.0</td>
+      <td>602.0</td>
+      <td>2.4432</td>
+      <td>101100.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>13111</th>
+      <td>-121.37</td>
+      <td>38.39</td>
+      <td>15.0</td>
+      <td>1883.0</td>
+      <td>254.0</td>
+      <td>893.0</td>
+      <td>256.0</td>
+      <td>6.2575</td>
+      <td>143500.0</td>
+      <td>INLAND</td>
     </tr>
   </tbody>
 </table>
@@ -1179,8 +1224,8 @@ df_x_test: (4128, 9). df_y_test: (4128,)
   <tbody>
     <tr>
       <th>total_bedrooms</th>
-      <td>160</td>
-      <td>0.968992</td>
+      <td>167</td>
+      <td>1.011386</td>
     </tr>
     <tr>
       <th>longitude</th>
@@ -1245,64 +1290,64 @@ df_x_test: (4128, 9). df_y_test: (4128,)
   </thead>
   <tbody>
     <tr>
-      <th>16757</th>
-      <td>-122.48</td>
-      <td>37.70</td>
-      <td>33.0</td>
-      <td>4492.0</td>
+      <th>19932</th>
+      <td>-119.33</td>
+      <td>36.30</td>
+      <td>11.0</td>
+      <td>3045.0</td>
       <td>NaN</td>
-      <td>3477.0</td>
-      <td>1537.0</td>
-      <td>3.0546</td>
-      <td>NEAR OCEAN</td>
+      <td>1563.0</td>
+      <td>516.0</td>
+      <td>5.4337</td>
+      <td>INLAND</td>
     </tr>
     <tr>
-      <th>14386</th>
-      <td>-117.23</td>
-      <td>32.75</td>
-      <td>5.0</td>
-      <td>1824.0</td>
-      <td>NaN</td>
-      <td>892.0</td>
-      <td>426.0</td>
-      <td>3.4286</td>
-      <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>14521</th>
-      <td>-117.14</td>
-      <td>32.90</td>
-      <td>16.0</td>
-      <td>3217.0</td>
-      <td>NaN</td>
-      <td>2054.0</td>
-      <td>687.0</td>
-      <td>4.2234</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>16038</th>
-      <td>-122.46</td>
-      <td>37.72</td>
-      <td>39.0</td>
-      <td>2254.0</td>
-      <td>NaN</td>
-      <td>1388.0</td>
-      <td>404.0</td>
-      <td>2.9688</td>
-      <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>3485</th>
+      <th>3912</th>
       <td>-118.55</td>
-      <td>34.28</td>
-      <td>16.0</td>
-      <td>8879.0</td>
+      <td>34.19</td>
+      <td>18.0</td>
+      <td>5862.0</td>
       <td>NaN</td>
-      <td>3468.0</td>
-      <td>1200.0</td>
-      <td>8.1125</td>
+      <td>3161.0</td>
+      <td>1280.0</td>
+      <td>3.1106</td>
       <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>5665</th>
+      <td>-118.29</td>
+      <td>33.73</td>
+      <td>30.0</td>
+      <td>3161.0</td>
+      <td>NaN</td>
+      <td>1865.0</td>
+      <td>771.0</td>
+      <td>2.7139</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>7806</th>
+      <td>-118.09</td>
+      <td>33.89</td>
+      <td>42.0</td>
+      <td>991.0</td>
+      <td>NaN</td>
+      <td>717.0</td>
+      <td>219.0</td>
+      <td>4.0926</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>563</th>
+      <td>-122.24</td>
+      <td>37.75</td>
+      <td>45.0</td>
+      <td>891.0</td>
+      <td>NaN</td>
+      <td>384.0</td>
+      <td>146.0</td>
+      <td>4.9489</td>
+      <td>NEAR BAY</td>
     </tr>
   </tbody>
 </table>
@@ -1331,10 +1376,10 @@ Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ocean_proximity
-&lt;1H OCEAN     7300
-INLAND        5240
-NEAR OCEAN    2125
-NEAR BAY      1843
+&lt;1H OCEAN     7316
+INLAND        5274
+NEAR OCEAN    2098
+NEAR BAY      1820
 ISLAND           4
 Name: count, dtype: int64
 </pre></div>
@@ -1388,8 +1433,8 @@ Name: count, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
-[ 0.72747462 -0.73784289  0.49960744 -0.41272017 -0.23341575 -0.10444177
- -0.22701845 -0.70770548  1.          0.          0.          0.
+[-1.03768377  0.49043989 -1.79989368  3.66316378  4.63799098  5.17841074
+  4.88351236 -0.04404863  1.          0.          0.          0.
   0.        ]
 </pre></div>
 </div>
@@ -1452,7 +1497,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68667.87
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68017.66
 </pre></div>
 </div>
 </div>
@@ -1506,8 +1551,8 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean cross-validation error for linear regression: 68789.37
-Mean cross-validation error for decision tree: 68434.76
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean cross-validation error for linear regression: 68229.35
+Mean cross-validation error for decision tree: 69617.45
 </pre></div>
 </div>
 </div>
@@ -1527,8 +1572,8 @@ Mean cross-validation error for decision tree: 68434.76
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19586.78
-Mean cross-validation error for random forest: 50004.22
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19480.35
+Mean cross-validation error for random forest: 50195.21
 </pre></div>
 </div>
 </div>
@@ -1599,7 +1644,7 @@ Mean cross-validation error for random forest: 50004.22
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test error for final model: 48696.31
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test error for final model: 50306.57
 </pre></div>
 </div>
 </div>
@@ -1679,7 +1724,7 @@ Mean cross-validation error for random forest: 50004.22
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted median price: 255285.39
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted median price: 265950.05
 </pre></div>
 </div>
 </div>
@@ -1803,7 +1848,13 @@ Mean cross-validation error for random forest: 50004.22
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-project-workflow">The Machine Learning project workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-steps-of-a-supervised-learning-project">Main steps of a supervised learning project</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-frame-the-problem">Step 1: frame the problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">Properties of ML-friendly problems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-objective-predict-housing-prices">Business objective: predict housing prices</a></li>
 </ul>
 </li>

@@ -173,8 +173,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data manipulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="regression.html">Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression.html">Regression example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification example</a></li>
 </ul>
 </li>
 </ul>
@@ -506,12 +506,6 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-project-workflow">Machine Learning project workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-steps-of-a-supervised-learning-project">Main steps of a supervised learning project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key questions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">Properties of ML-friendly problems</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -530,7 +524,6 @@ document.write(`
 <ul class="simple">
 <li><p>Define how a supervised ML system can be formalized.</p></li>
 <li><p>Develop an intuition of learning via gradient descent.</p></li>
-<li><p>Know the general workflow of a supervised ML project.</p></li>
 </ul>
 </section>
 <section id="environment-setup">
@@ -864,45 +857,6 @@ document.write(`
 </section>
 </section>
 </section>
-<section id="machine-learning-project-workflow">
-<h2>Machine Learning project workflow<a class="headerlink" href="#machine-learning-project-workflow" title="Permalink to this heading">#</a></h2>
-<section id="main-steps-of-a-supervised-learning-project">
-<h3>Main steps of a supervised learning project<a class="headerlink" href="#main-steps-of-a-supervised-learning-project" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Frame</strong> the problem.</p></li>
-<li><p>Collect, analyze and prepare <strong>data</strong>.</p></li>
-<li><p>Select and train several <strong>models</strong> on data.</p></li>
-<li><p><strong>Tune</strong> the most promising model.</p></li>
-<li><p><strong>Deploy</strong> the model to production and monitor it.</p></li>
-</ol>
-<p><a class="reference external" href="https://www.redhat.com/files/summit/session-assets/2019/T957A0.pdf"><img alt="ML workflow by RedHat" src="../_images/wiidii_ml_workflow.png" /></a></p>
-</section>
-<section id="key-questions">
-<h3>Key questions<a class="headerlink" href="#key-questions" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>What is the business objective?</p></li>
-<li><p>How good are the current solutions?</p></li>
-<li><p>What data is available?</p></li>
-<li><p>Is the problem a good fit for ML?</p></li>
-<li><p>What is the expected learning type (supervised or not, batch/online…)?</p></li>
-<li><p>How will the model’s performance be evaluated?</p></li>
-</ul>
-</section>
-<section id="properties-of-ml-friendly-problems">
-<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Difficulty to express the actions as rules.</p></li>
-<li><p>Data too complex for traditional analytical methods.</p>
-<ul>
-<li><p>High number of features.</p></li>
-<li><p>Highly correlated data (data with similar or closely related values).</p></li>
-</ul>
-</li>
-<li><p>Performance &gt; interpretability.</p></li>
-<li><p>Data quality is paramount.</p></li>
-</ul>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1031,12 +985,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adam-and-other-techniques">Adam and other techniques</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-project-workflow">Machine Learning project workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-steps-of-a-supervised-learning-project">Main steps of a supervised learning project</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key questions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">Properties of ML-friendly problems</a></li>
 </ul>
 </li>
 </ul>
