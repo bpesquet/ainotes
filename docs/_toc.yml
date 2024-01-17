@@ -28,9 +28,9 @@ parts:
         title: Principles
       - file: ml/data_manipulation
       - file: ml/regression
-        title: Regression
+        title: Regression example
       - file: ml/classification
-        title: Classification
+        title: Classification example
   - caption: Search algorithms
     chapters:
     - file: search/dijkstra_astar
