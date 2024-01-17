@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/programming';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data manipulation" href="data_manipulation.html" />
+    <link rel="next" title="Mathematics" href="math.html" />
     <link rel="prev" title="Computer science" href="computer_science.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -156,8 +156,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="computer_science.html">Computer science</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data manipulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_preprocessing.html">Data preprocessing</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -172,6 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ml/supervised_learning.html">Supervised Learning</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ml/principles.html">Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ml/data_manipulation.html">Data manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ml/regression.html">Regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ml/classification.html">Classification</a></li>
 </ul>
@@ -444,11 +443,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-for-ai-and-data-science">Python for AI and Data Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-python-language">The Python language</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-in-a-nutshell">Python in a nutshell</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-python-syntax">The Python syntax</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-science">What is Data Science?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-prominent-language">A prominent language</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gems-from-the-ecosystem">Gems from the ecosystem</a></li>
 </ul>
@@ -565,6 +564,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="programming">
 <h1>Programming<a class="headerlink" href="#programming" title="Permalink to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Review the essential concepts of programming: variables, flow control, data structures, etc.</p></li>
+<li><p>Demonstrate their implementation in the <a class="reference external" href="https://www.python.org/">Python</a> programming language.</p></li>
+<li><p>Learn about some good practices for Python-based software development.</p></li>
+</ul>
+</section>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell tag_hide-output docutils container">
@@ -609,6 +616,9 @@ Requirement already satisfied: pyzmq&gt;=23.0 in /Users/baptiste/Documents/Proje
 Requirement already satisfied: tornado&gt;=6.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (6.3.3)
 Requirement already satisfied: platformdirs&gt;=2.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from jupyter-core!=5.0.*,&gt;=4.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (3.10.0)
 Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.2.0-&gt;papermill) (1.16.0)
+
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">23.3.2</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
 </pre></div>
 </div>
 </div>
@@ -633,8 +643,8 @@ Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/
 </div>
 </div>
 </section>
-<section id="python-for-ai-and-data-science">
-<h2>Python for AI and Data Science<a class="headerlink" href="#python-for-ai-and-data-science" title="Permalink to this heading">#</a></h2>
+<section id="the-python-language">
+<h2>The Python language<a class="headerlink" href="#the-python-language" title="Permalink to this heading">#</a></h2>
 <section id="python-in-a-nutshell">
 <h3>Python in a nutshell<a class="headerlink" href="#python-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://www.python.org">Python</a> is a multi-purpose programming language created in 1989 by <a class="reference external" href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido van Rossum</a> and developed under a open source license.</p>
@@ -648,7 +658,9 @@ Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/
 </section>
 <section id="the-python-syntax">
 <h3>The Python syntax<a class="headerlink" href="#the-python-syntax" title="Permalink to this heading">#</a></h3>
-<p>For many more examples, see the cheatsheet below.</p>
+<blockquote>
+<div><p>For many more examples, see the cheatsheet below.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
@@ -673,21 +685,9 @@ Hello, Iggy
 </div>
 </div>
 </section>
-<section id="what-is-data-science">
-<h3>What is Data Science?<a class="headerlink" href="#what-is-data-science" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Expression born in 1997 in the statistician community.</p></li>
-<li><p>“A Data Scientist is a statistician that lives in San Francisco.”</p></li>
-<li><p>Main objective: extract insight from data.</p></li>
-<li><p>2012 : “Sexiest job of the 21st century” (Harvard Business Review).</p></li>
-<li><p>There is a <a class="reference external" href="https://en.wikipedia.org/wiki/Data_science#Relationship_to_statistics">controversy</a> on the expression’s real usefulness.</p></li>
-</ul>
-<p><a class="reference external" href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram"><img alt="Data Science Venn diagram by Conway" src="../_images/DataScience_VD_conway.png" /></a></p>
-<p><a class="reference external" href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram"><img alt="Data Science Venn diagram by Kolassa" src="../_images/DataScience_VD_Kolassa.png" /></a></p>
-</section>
 <section id="a-prominent-language">
 <h3>A prominent language<a class="headerlink" href="#a-prominent-language" title="Permalink to this heading">#</a></h3>
-<p>For the following reasons, Python has become the language of choice in these fields:</p>
+<p>Python has become the language of choice for artificial intelligence and <a class="reference external" href="https://en.wikipedia.org/wiki/Data_science">Data Science</a>, for the following reasons:</p>
 <ul class="simple">
 <li><p>language qualities (ease of use, simplicity, versatility);</p></li>
 <li><p>involvement of the scientific and academical communities;</p></li>
@@ -1619,6 +1619,31 @@ Mammal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&#39;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you&#39;re Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it&#39;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let&#39;s do more of those!
+</pre></div>
+</div>
+</div>
 </div>
 <section id="what-does-pythonic-mean">
 <h4>What does “Pythonic” mean?<a class="headerlink" href="#what-does-pythonic-mean" title="Permalink to this heading">#</a></h4>
@@ -2115,11 +2140,13 @@ poetry<span class="w"> </span>shell
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Black is not installed, parameters wont be formatted
-Executing:   0%|                                                                                                                                   | 0/4 [00:00&lt;?, ?cell/s]0.00s - Debugger warning: It seems that frozen modules are being used, which may
+/Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+Executing:   0%|                                                                                                                                 | 0/4 [00:00&lt;?, ?cell/s]0.00s - Debugger warning: It seems that frozen modules are being used, which may
 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
 0.00s - to python to disable frozen modules.
 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-Executing: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00,  5.66cell/s]
+Executing: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00,  4.60cell/s]
 </pre></div>
 </div>
 </div>
@@ -2175,11 +2202,11 @@ Executing: 100%|█████████████████████�
       </div>
     </a>
     <a class="right-next"
-       href="data_manipulation.html"
+       href="math.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data manipulation</p>
+        <p class="prev-next-title">Mathematics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2201,11 +2228,11 @@ Executing: 100%|█████████████████████�
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-for-ai-and-data-science">Python for AI and Data Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-python-language">The Python language</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-in-a-nutshell">Python in a nutshell</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-python-syntax">The Python syntax</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-science">What is Data Science?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-prominent-language">A prominent language</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gems-from-the-ecosystem">Gems from the ecosystem</a></li>
 </ul>

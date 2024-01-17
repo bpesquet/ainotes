@@ -156,8 +156,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/computer_science.html">Computer science</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../foundations/programming.html">Programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/data_manipulation.html">Data manipulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/data_preprocessing.html">Data preprocessing</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -172,6 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="principles.html">Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="regression.html">Regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classification.html">Classification</a></li>
 </ul>
@@ -444,6 +443,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-is-machine-learning">Whats is Machine Learning?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-definition-of-machine-learning">The first definition of Machine Learning</a></li>
@@ -488,6 +488,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning">
 <h1>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Know what Machine Learning and Deep Learning are about.</p></li>
+<li><p>Understand the main categories of ML systems.</p></li>
+<li><p>Discover some of the many existing ML algorithms.</p></li>
+</ul>
+</section>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -632,7 +640,7 @@ document.write(`
 <h3>The Deep Learning tsunami<a class="headerlink" href="#the-deep-learning-tsunami" title="Permalink to this heading">#</a></h3>
 <p>DL is a subfield of Machine Learning consisting of multilayered neural networks trained on vast amounts of data.</p>
 <p><a class="reference external" href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf"><img alt="AlexNet'12 (simplified)" src="../_images/alexnet.png" /></a></p>
-<p>Since 2010, DL-based approaches outperformed previous state-of-the-art techniques in many fields (language translation, image and scene recognition…).</p>
+<p>Since 2010, DL-based approaches outperformed previous state-of-the-art techniques in many fields (language translation, image and scene recognition, and <a class="reference external" href="https://huggingface.co/spaces/akhaliq/AnimeGANv2">much more</a>).</p>
 </section>
 <section id="reasons-for-success">
 <h3>Reasons for success<a class="headerlink" href="#reasons-for-success" title="Permalink to this heading">#</a></h3>
@@ -721,6 +729,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-is-machine-learning">Whats is Machine Learning?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-definition-of-machine-learning">The first definition of Machine Learning</a></li>
