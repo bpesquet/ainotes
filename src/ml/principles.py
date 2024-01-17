@@ -20,7 +20,6 @@
 #
 # - Define how a supervised ML system can be formalized.
 # - Develop an intuition of learning via gradient descent.
-# - Know the general workflow of a supervised ML project.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
@@ -353,38 +352,3 @@ YouTubeVideo("Q3pTEtSEvDI")
 # *Adam* (*Adaptive Moment Estimation*) combines the ideas of momentum and RMSprop. It is the *de facto* choice nowadays.
 #
 # Gradient descent optimization is a rich subfield of Machine Learning. Read more in [this article](http://ruder.io/optimizing-gradient-descent/).
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ## Machine Learning project workflow
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Main steps of a supervised learning project
-#
-# 1. **Frame** the problem.
-# 1. Collect, analyze and prepare **data**.
-# 1. Select and train several **models** on data.
-# 1. **Tune** the most promising model.
-# 1. **Deploy** the model to production and monitor it.
-#
-# [![ML workflow by RedHat](_images/wiidii_ml_workflow.png)](https://www.redhat.com/files/summit/session-assets/2019/T957A0.pdf)
-#
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Key questions
-#
-# - What is the business objective?
-# - How good are the current solutions?
-# - What data is available?
-# - Is the problem a good fit for ML?
-# - What is the expected learning type (supervised or not, batch/online...)?
-# - How will the model's performance be evaluated?
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Properties of ML-friendly problems
-#
-# - Difficulty to express the actions as rules.
-# - Data too complex for traditional analytical methods.
-#   - High number of features.
-#   - Highly correlated data (data with similar or closely related values).
-# - Performance > interpretability.
-# - Data quality is paramount.

@@ -21,7 +21,7 @@
 # ## Learning objectives
 #
 # - Train a Machine Learning model to deduce prices from housing properties (number of rooms, median income, proximity to ocean, etc) in geographical areas.
-# - Get familiar with the different steps of a supervised ML project.
+# - Get familiar with the general workflow of a supervised ML project.
 # - Learn how to leverage the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
 #
 # > You may test the trained model [here](https://housing-prices-api.herokuapp.com/).
@@ -81,7 +81,43 @@ plt.rcParams["figure.figsize"] = 10, 7.5
 sns.set_theme()
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ## The Machine Learning project workflow
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Main steps of a supervised learning project
+#
+# 1. **Frame** the problem.
+# 1. Collect, analyze and prepare **data**.
+# 1. Select and train several **models** on data.
+# 1. **Tune** the most promising model.
+# 1. **Deploy** the model to production and monitor it.
+#
+# [![ML workflow by RedHat](_images/wiidii_ml_workflow.png)](https://www.redhat.com/files/summit/session-assets/2019/T957A0.pdf)
+#
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Step 1: frame the problem
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Key questions
+#
+# - What is the business objective?
+# - How good are the current solutions?
+# - What data is available?
+# - Is the problem a good fit for ML?
+# - What is the expected learning type (supervised or not, batch/online...)?
+# - How will the model's performance be evaluated?
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Properties of ML-friendly problems
+#
+# - Difficulty to express the actions as rules.
+# - Data too complex for traditional analytical methods.
+#   - High number of features.
+#   - Highly correlated data (data with similar or closely related values).
+# - Performance > interpretability.
+# - Data quality is paramount.
+
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Business objective: predict housing prices
@@ -107,7 +143,7 @@ sns.set_theme()
 # ### The California housing dataset
 #
 # - Based on data from the 1990 California census.
-# - Slightly modified for teaching purposes by A. Géron ([original version](https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html)).
+# - Slightly modified for teaching purposes by Aurélien Géron ([original version](https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html)).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 2.1: discover data
@@ -118,8 +154,8 @@ sns.set_theme()
 
 # %% slideshow={"slide_type": "slide"}
 # Load the dataset in a pandas DataFrame
-# The df_ prefix is used to distinguish dataframes froms plain NumPy arrays
-dataset_url = "https://raw.githubusercontent.com/ageron/handson-ml2/master/datasets/housing/housing.csv"
+# The df_ prefix is used to distinguish dataframes from plain NumPy arrays
+dataset_url = "https://raw.githubusercontent.com/bpesquet/ainotes/master/data/california_housing.csv"
 df_housing = pd.read_csv(dataset_url)
 
 # Print dataset shape (rows and columns)
