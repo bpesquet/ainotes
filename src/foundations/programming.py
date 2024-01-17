@@ -16,12 +16,19 @@
 # # Programming
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ## Objectives
+#
+# - Review the essential concepts of programming: variables, flow control, data structures, etc.
+# - Demonstrate their implementation in the [Python](https://www.python.org/) programming language.
+# - Learn about some good practices for Python-based software development.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
 # %% slideshow={"slide_type": "skip"} tags=["hide-output"]
 # !pip install papermill
 
-# %%
+# %% slideshow={"slide_type": "slide"}
 # Relax some linting rules not needed here
 # pylint: disable=invalid-name,redefined-outer-name,consider-using-f-string,duplicate-value,unnecessary-lambda-assignment,protected-access,too-few-public-methods,wrong-import-position,unused-import,consider-swap-variables,consider-using-enumerate,too-many-lines
 
@@ -32,7 +39,7 @@ print(f"Python version: {platform.python_version()}")
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Python for AI and Data Science
+# ## The Python language
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -50,7 +57,7 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### The Python syntax
 #
-# For many more examples, see the cheatsheet below.
+# > For many more examples, see the cheatsheet below.
 
 
 # %%
@@ -67,24 +74,9 @@ for friend in friends:
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### What is Data Science?
-#
-# - Expression born in 1997 in the statistician community.
-# - "A Data Scientist is a statistician that lives in San Francisco."
-# - Main objective: extract insight from data.
-# - 2012 : "Sexiest job of the 21st century" (Harvard Business Review).
-# - There is a [controversy](https://en.wikipedia.org/wiki/Data_science#Relationship_to_statistics) on the expression's real usefulness.
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# [![Data Science Venn diagram by Conway](_images/DataScience_VD_conway.png)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# [![Data Science Venn diagram by Kolassa](_images/DataScience_VD_Kolassa.png)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
 # ### A prominent language
 #
-# For the following reasons, Python has become the language of choice in these fields:
+# Python has become the language of choice for artificial intelligence and [Data Science](https://en.wikipedia.org/wiki/Data_science), for the following reasons:
 #
 # - language qualities (ease of use, simplicity, versatility);
 # - involvement of the scientific and academical communities;
