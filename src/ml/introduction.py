@@ -16,9 +16,16 @@
 # # Introduction to Machine Learning
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ## Learning objectives
+#
+# - Know what Machine Learning and Deep Learning are about.
+# - Understand the main categories of ML systems.
+# - Discover some of the many existing ML algorithms.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
-# %% slideshow={"slide_type": "slide"}
+# %% slideshow={"slide_type": "-"}
 import platform
 from IPython.display import YouTubeVideo
 
@@ -159,7 +166,7 @@ YouTubeVideo("TmPfTpjtdgg")
 #
 # [![AlexNet'12 (simplified)](_images/alexnet.png)](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 #
-# Since 2010, DL-based approaches outperformed previous state-of-the-art techniques in many fields (language translation, image and scene recognition...).
+# Since 2010, DL-based approaches outperformed previous state-of-the-art techniques in many fields (language translation, image and scene recognition, and [much more](https://huggingface.co/spaces/akhaliq/AnimeGANv2)).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Reasons for success

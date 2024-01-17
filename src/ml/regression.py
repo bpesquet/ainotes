@@ -18,10 +18,10 @@
 # > This chapter is heavily inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Objectives
+# ## Learning objectives
 #
 # - Train a Machine Learning model to deduce prices from housing properties (number of rooms, median income, proximity to ocean, etc) in geographical areas.
-# - Get familiar with the different steps of an ML-based project.
+# - Get familiar with the different steps of a supervised ML project.
 # - Learn how to leverage the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
 #
 # > You may test the trained model [here](https://housing-prices-api.herokuapp.com/).

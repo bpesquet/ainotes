@@ -16,7 +16,7 @@
 # # Programming
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Objectives
+# ## Learning objectives
 #
 # - Review the essential concepts of programming: variables, flow control, data structures, etc.
 # - Demonstrate their implementation in the [Python](https://www.python.org/) programming language.

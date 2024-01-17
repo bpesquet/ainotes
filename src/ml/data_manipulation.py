@@ -16,10 +16,11 @@
 # # Data manipulation
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Objectives
+# ## Learning objectives
 #
 # - Discover what tensors are and how to manipulate them with [NumPy](https://numpy.org/) and [PyTorch](https://pytorch.org/).
-# - Be able to load and prepare datasets of different types (tabular data, images or videos) for training a Machine Learning model, using the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
+# - Be able to load and prepare datasets of different types (tabular data, images or videos) for training a Machine Learning model.
+# - Learn how the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries can help achieve the previous task.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
