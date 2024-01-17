@@ -114,11 +114,203 @@ print(b)
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Dedicated libraries
 #
-# Over the years, several tools have been developed to overcome Python's native limitations. One of the most widely used is [NumPy](https://numpy.org/), which supports tensors in the form of `ndarray` objects. It offers a comprehensive set of operations on them, including creating, sorting, selecting, linear algebra and statistical operations.
+# Over the years, several tools have been developed to overcome Python's native limitations.
 #
-# For all its qualities, NumPy has a limitation which can be critical in some contexts: it only runs on the machine's [CPU](https://en.wikipedia.org/wiki/Processor_(computing)). Among other advantages, newer tools offer support for dedicated high-performance processors like [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) or [TPUs](https://en.wikipedia.org/wiki/Tensor_Processing_Unit), while providing a NumPy-like API to make onboarding easier. The most prominent ones are currently [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org) and [JAX](https://jax.readthedocs.io).
+# The most widely used is [NumPy](https://numpy.org/), which supports tensors in the form of `ndarray` objects. It offers a comprehensive set of operations on them, including creating, sorting, selecting, linear algebra and statistical operations.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Tensor management with NumPy
 #
-# This content uses PyTorch, which strikes a good balance between power, flexibility and user-friendliness.
+# #### Creating tensors
+#
+# The [np.array](https://numpy.org/doc/stable/reference/generated/numpy.array.html) function creates and returns a new tensor.
+#
+# [![NumPy array creation](_images/numpy_array.png)](https://numpy.org/doc/stable/user/absolute_beginners.html#how-to-create-a-basic-array)
+#
+# The [NumPy API](https://numpy.org/doc/stable/reference/routines.array-creation.html) contains many functions for creating tensors using predefined values.
+
+
+# %% slideshow={"slide_type": "slide"}
+def print_tensor_info(t):
+    """Print values, number of dimensions and shape of a tensor"""
+
+    print(t)
+    print(f"Dimensions: {t.ndim}")
+    print(f"Shape: {t.shape}")
+
+
+# %% slideshow={"slide_type": "-"}
+# Create a scalar
+x = np.array(12)
+
+print_tensor_info(x)
+
+# %% slideshow={"slide_type": "-"}
+# Create a vector (1D tensor)
+x = np.array([1, 2, 3])
+
+print_tensor_info(x)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Generating random tensors
+#
+# The [NumPy API](https://numpy.org/doc/stable/reference/random/index.html) also permits the creation of (pseudo-)randomly valued tensors, using various statistical laws and data types.
+
+# %% slideshow={"slide_type": "-"}
+# Init a NumPy random number generator
+rng = np.random.default_rng()
+
+# Create a 3x4 random matrix (2D tensor) with real values sampled from a uniform distribution
+x = rng.uniform(size=(3, 4))
+
+print_tensor_info(x)
+
+# %% slideshow={"slide_type": "slide"}
+# Create a 3x2x5 3D tensor with integer values sampled from a uniform distribution
+x = rng.integers(low=0, high=100, size=(3, 2, 5))
+
+print_tensor_info(x)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Shape management
+#
+# A common operation on tensors is **reshaping**: giving it a new shape without changing its data.
+#
+# The new shape must be compatible with the current one: the new tensor needs to have the same number of elements as the original one.
+#
+# [![NumPy reshaping](_images/numpy_reshaping.png)](https://numpy.org/doc/stable/user/absolute_beginners.html#transposing-and-reshaping-a-matrix)
+
+# %% slideshow={"slide_type": "slide"}
+# Reshape a 3x2 matrix into a 2x3 matrix
+x = np.array([[1, 2], [3, 4], [5, 6]])
+x_reshaped = x.reshape(2, 3)
+
+print_tensor_info(x_reshaped)
+
+# %% slideshow={"slide_type": "-"}
+# Reshape the previous matrix into a vector
+x_reshaped = x.reshape(
+    6,
+)
+
+print_tensor_info(x_reshaped)
+
+# %% slideshow={"slide_type": "-"}
+# Error: incompatible shapes!
+# x.reshape(5, )
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Indexing and slicing
+#
+# Tensors can be indexed and sliced just like regular Python lists.
+#
+# [![NumPy indexing](_images/numpy_indexing.png)](https://numpy.org/doc/stable/user/absolute_beginners.html#indexing-and-slicing)
+
+# %% slideshow={"slide_type": "slide"}
+x = np.array([1, 2, 3])
+
+# Select element at index 1
+assert x[1] == 2
+
+# Select elements between indexes 0 (included) and 2 (excluded)
+assert np.array_equal(x[0:2], [1, 2])
+
+# Select elements starting at index 1 (included)
+assert np.array_equal(x[1:], [2, 3])
+
+# Select last element
+assert np.array_equal(x[-1], 3)
+
+# Select all elements but last one
+assert np.array_equal(x[:-1], [1, 2])
+
+# Select last 2 elements
+assert np.array_equal(x[-2:], [2, 3])
+
+# Select second-to-last element
+assert np.array_equal(x[-2:-1], [2])
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Tensor axes
+#
+# Many tensor operations can be applied along one or several **axes**. They are indexed starting at 0.
+#
+# [![NumPy axes](_images/numpy_axes.png)](https://www.sharpsightlabs.com/blog/numpy-axes-explained/)
+
+# %% slideshow={"slide_type": "slide"}
+# Create a 2x2 matrix (2D tensor)
+x = np.array([[1, 1], [2, 2]])
+print(x)
+
+# Summing values on first axis (rows)
+print(x.sum(axis=0))
+
+# Summing values on second axis (columns)
+print(x.sum(axis=1))
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Element-wise operations
+#
+# These operations are applied independently to each entry in the tensors being considered.
+
+# %%
+# Element-wise product between two matrices (shapes must be identical)
+x = np.array([[1, 2, 3], [3, 2, 1]])
+y = np.array([[3, 0, 2], [1, 4, -2]])
+z = x * y
+
+print_tensor_info(z)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Dot product
+#
+# On the contrary, operations like dot product combine entries in the input tensors to produce a differently shaped result.
+
+# %%
+# Dot product between two matrices (shapes must be compatible)
+
+# x has shape (2, 3), y has shape (3, 2): operation is possible
+x = np.array([[1, 2, 3], [3, 2, 1]])
+y = np.array([[3, 0], [2, 1], [4, -2]])
+# alternative syntax: z = x.dot(y)
+z = np.dot(x, y)
+
+print_tensor_info(z)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Broadcasting
+#
+# **Broadcasting** is a mechanism that allows operations to be performed on tensors of different shapes. Subject to [certain constraints](https://numpy.org/doc/stable/user/basics.broadcasting.html#general-broadcasting-rules), the smaller tensor may be “broadcast” across the larger one so that they have compatible shapes.
+#
+# [![NumPy broadcasting](_images/numpy_broadcasting.png)](https://numpy.org/doc/stable/user/absolute_beginners.html#broadcasting)
+#
+# Broadcasting provides a efficient means of *vectorizing* tensor operations.
+
+# %%
+# Broadcasting between a vector and a scalar
+x = np.array([1.0, 2.0])
+print(x * 1.6)
+
+
+# %% slideshow={"slide_type": "slide"}
+# Broadcasting between a matrix and a vector
+x = np.array([[0, 1, 2], [-2, 5, 3]])
+y = np.array([1, 2, 3])
+z = x + y
+
+print_tensor_info(z)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### GPU-based tensors
+#
+# For all its qualities, NumPy has a limitation which can be critical in some contexts: it only runs on the machine's [CPU](https://en.wikipedia.org/wiki/Processor_(computing)).
+#
+# Among other advantages, newer tools offer support for dedicated high-performance processors like [GPUs](https://en.wikipedia.org/wiki/Graphics_processing_unit) or [TPUs](https://en.wikipedia.org/wiki/Tensor_Processing_Unit), while providing a NumPy-like API to make onboarding easier. The most prominent ones are currently [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org) and [JAX](https://jax.readthedocs.io).
+
+# %%
+# Create a 2x2 random PyTorch tensor, trying to store it into the GPU memory
+x = torch.rand(size=(2, 2), device=device)
+print(x)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Data loading
