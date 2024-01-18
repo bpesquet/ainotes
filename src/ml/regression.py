@@ -372,11 +372,13 @@ print(x_train[0])
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 3.1: choose an evaluation metric
 #
-# Model performance is assessed through an **evaluation metric**.
+# Model performance is assessed through an **evaluation metric**. Like the loss function, it depends on the problem type.
 #
-# It quantifies the difference (often called **error**) between the expected results (*ground truth*) and the actual results computed by the model.
+# A classic choice for regression tasks is the **Root Mean Square Error (RMSE)**. It gives an idea of how much error the trained model typically makes in its predictions. Of course, the smaller the better in that case.
 #
-# A classic evaluation metric for regression tasks is the **Root Mean Square Error (RMSE)**. It gives an idea of how much error the model typically makes in its predictions.
+# $$\mathrm{RMSE}(\pmb{Y}, \pmb{Y'}) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\pmb{y'}^{(i)} - \pmb{y}^{(i)})^2}$$
+#
+# **Mean Absolute Error** (less sensitive to outliers) and **MSE** may also be used.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 3.2: start with a baseline model

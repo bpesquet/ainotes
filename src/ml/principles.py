@@ -169,8 +169,10 @@ print(f"Python version: {platform.python_version()}")
 # This function, called the **hypothesis function**, is denoted $h_{\pmb{\omega}}$ to show that it is parametrized by $\pmb{\omega}$. Its output (predicted result) is denoted  $\pmb{y'}$ or $\hat{\pmb{y}}$.
 #
 # $$\pmb{y'}^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)})$$
+# $$\pmb{Y'} = h_{\pmb{\omega}}(\pmb{X})$$
 #
 # - $\pmb{y'}^{(i)}, i \in [1,m]$: predicted output for the $i$th sample.
+# - $\pmb{Y'}$: predictions matrix for the whole dataset.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Loss function
@@ -186,9 +188,9 @@ print(f"Python version: {platform.python_version()}")
 #
 # The choice of the loss function depends on the problem type.
 #
-# For regression tasks, a popular choice is the **Mean Squared Error** or squared L2 norm.
+# For regression tasks, a popular choice is the **Mean Squared Error** a.k.a. *squared L2 norm*.
 #
-# $$\mathcal{L}_{MSE}(\pmb{\omega}) = \frac{1}{m}\sum_{i=1}^m (h_{\pmb{\omega}}(\pmb{x}^{(i)}) - \pmb{y}^{(i)})^2$$
+# $$\mathcal{L}_{\mathrm{MSE}}(\pmb{\omega}) = \frac{1}{m}\sum_{i=1}^m (h_{\pmb{\omega}}(\pmb{x}^{(i)}) - \pmb{y}^{(i)})^2 = \frac{1}{m}{{\lVert{h_{\pmb{\omega}}(\pmb{X}) - \pmb{Y}}\rVert}_2}^2$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Optimization algorithm
