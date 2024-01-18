@@ -33,6 +33,7 @@ import platform
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import sklearn
 import torch
 
@@ -313,10 +314,121 @@ x = torch.rand(size=(2, 2), device=device)
 print(x)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Data loading
+# ## Loading and exploring data
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Data preparation
+# ### Introduction to pandas
+#
+# The [pandas](https://pandas.pydata.org/) library is dedicated to data analysis in Python. It greatly facilitates loading, exploring and processing tabular data files.
+#
+# The primary data structures in pandas are implemented as two classes:
+#
+# - `DataFrame`, which is quite similar to as a relational data table, with rows and named columns.
+# - `Series`, which represents a single data column. A DataFrame contains one or more Series and a name for each Series.
+#
+# The DataFrame is a commonly used abstraction for data manipulation.
+
+# %% slideshow={"slide_type": "slide"}
+# Create two data Series
+pop = pd.Series({"CAL": 38332521, "TEX": 26448193, "NY": 19651127})
+area = pd.Series({"CAL": 423967, "TEX": 695662, "NY": 141297})
+
+# Create a DataFrame contraining the two Series
+# The df_ prefix is used to distinguish pandas dataframes from plain NumPy arrays
+df_poprep = pd.DataFrame({"population": pop, "area": area})
+
+print(df_poprep)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Loading a tabular dataset
+#
+# When describing tabular information, most datasets are stored as a CSV (Comma-Separated Values) text file.
+#
+# The [pd.read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html) function can load a CSV file into a DataFrame from either a local path or a URL.
+#
+# The following code loads a dataset which was extracted from a [Kaggle competition](https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results).
+
+# %%
+# Load a CSV file into a DataFrame
+# Data comes from this Kaggle competition:
+df_olympics = pd.read_csv(
+    "https://raw.githubusercontent.com/bpesquet/ainotes/master/data/athlete_events.csv"
+)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Exploring tabular data
+#
+# Once a dataset is loaded into a DataFrame, many operations can be applied to it for visualization or transformation purposes. For more details, see the [10 minutes to pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) tutorial.
+#
+# Let's use pandas to perform the very first steps of what is often called *Exploratory Data Analysis*.
+
+# %%
+# Print dataset shape (rows x columns)
+print(f"df_olympics: {df_olympics.shape}")
+
+# %% slideshow={"slide_type": "slide"}
+# Print a concise summary of the dataset
+df_olympics.info()
+
+# %% slideshow={"slide_type": "slide"}
+# Print the first 10 rows of the dataset
+df_olympics.head(n=10)
+
+# %% slideshow={"slide_type": "slide"}
+# Print 5 random samples
+df_olympics.sample(n=5)
+
+# %% slideshow={"slide_type": "slide"}
+# Print descriptive statistics for all numerical attributes
+df_olympics.describe()
+
+# %% slideshow={"slide_type": "slide"}
+# Print descriptive statistics for all non-numerical attributes
+df_olympics.describe(include=["object", "bool"])
+
+# %% slideshow={"slide_type": "slide"}
+# Print the number of samples by sport
+df_olympics["Sport"].value_counts()
+
+# %% slideshow={"slide_type": "slide"}
+# Print rounded average age for women
+age_mean = df_olympics[df_olympics["Sex"] == "F"]["Age"].mean()
+print(f"{age_mean:.0f}")
+
+# %% slideshow={"slide_type": "-"}
+# Print percent of athletes for some countries
+
+athletes_count = df_olympics.shape[0]
+
+for country in ["USA", "FRA", "GBR", "GER"]:
+    percent = (df_olympics["NOC"] == country).sum() / athletes_count
+    print(f"Athletes from {country}: {percent*100:.2f}%")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Loading images
+#
+# Digital images are stored using either the **bitmap** format (an array of color values for all individual pixels in the image) or the **vector format** (a description of the elementary shapes in the image).
+#
+# Bitmap images can be easily manipulated as tensors. Each pixel color is typically expressed using a combination of the three primary colors: red, green and blue.
+#
+# [![RGB wheel](_images/rgb_wheel.jpg)](https://medium.com/@brugmanj/coding-and-colors-a-practical-approach-to-hex-and-rgb-values-9a6e98720b25)
+
+# %% slideshow={"slide_type": "slide"}
+# Load sample images provided by scikit-learn into a NumPy array
+images = np.asarray(load_sample_images().images)
+
+# Load the last sample image
+sample_image = images[-1]
+
+# Show image
+plt.imshow(sample_image)
+
+print(f"Image: {images.shape}")
+print(f"Sample image: {sample_image.shape}")
+print(f"Sample pixel: {sample_image[225, 300]}")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Preparing data for training
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### A mandatory step
@@ -372,15 +484,6 @@ print(f"x_test: {x_test.shape}. y_test: {y_test.shape}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ![Reshaping an image](_images/image2vector.jpeg)
-
-# %% slideshow={"slide_type": "slide"}
-# Load a sample image provided by scikit-learn
-sample_image = np.asarray(load_sample_images().images)[1]
-
-# Show image
-plt.imshow(sample_image)
-
-print(f"Sample image: {sample_image.shape}")
 
 # %% slideshow={"slide_type": "slide"}
 # Flatten the image, which is a 3D tensor, into a vector (1D tensor)
@@ -574,7 +677,7 @@ print(
 # The ability of deep neural networks to discover useful features by themselves has somewhat reduced the criticality of feature engineering. Nevertheless, it remains important in order to solve problems more elegantly and with fewer data.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# Example: the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.
+# Example (taken from the book [Deep Learning with Python](https://github.com/fchollet/deep-learning-with-python-notebooks)): the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.
 #
 # [![Feature engineering](_images/feature_engineering.png)](https://www.manning.com/books/deep-learning-with-python)
 
