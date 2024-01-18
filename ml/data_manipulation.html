@@ -161,8 +161,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/linear_algebra.html">Linear algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/calculus.html">Calculus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../foundations/proba_stats.html">Probability &amp; statistics</a></li>
 </ul>
 </li>
@@ -466,8 +464,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-based-tensors">GPU-based tensors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data loading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-exploring-data">Loading and exploring data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pandas">Introduction to pandas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-tabular-dataset">Loading a tabular dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-tabular-data">Exploring tabular data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-images">Loading images</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-for-training">Preparing data for training</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mandatory-step">A mandatory step</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">Data splitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-and-video-reshaping">Image and video reshaping</a></li>
@@ -517,6 +521,7 @@ document.write(`
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
@@ -965,11 +970,768 @@ Shape: (2, 3)
 </div>
 </section>
 </section>
-<section id="data-loading">
-<h2>Data loading<a class="headerlink" href="#data-loading" title="Permalink to this heading">#</a></h2>
+<section id="loading-and-exploring-data">
+<h2>Loading and exploring data<a class="headerlink" href="#loading-and-exploring-data" title="Permalink to this heading">#</a></h2>
+<section id="introduction-to-pandas">
+<h3>Introduction to pandas<a class="headerlink" href="#introduction-to-pandas" title="Permalink to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://pandas.pydata.org/">pandas</a> library is dedicated to data analysis in Python. It greatly facilitates loading, exploring and processing tabular data files.</p>
+<p>The primary data structures in pandas are implemented as two classes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, which is quite similar to as a relational data table, with rows and named columns.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Series</span></code>, which represents a single data column. A DataFrame contains one or more Series and a name for each Series.</p></li>
+</ul>
+<p>The DataFrame is a commonly used abstraction for data manipulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create two data Series</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">&quot;CAL&quot;</span><span class="p">:</span> <span class="mi">38332521</span><span class="p">,</span> <span class="s2">&quot;TEX&quot;</span><span class="p">:</span> <span class="mi">26448193</span><span class="p">,</span> <span class="s2">&quot;NY&quot;</span><span class="p">:</span> <span class="mi">19651127</span><span class="p">})</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">&quot;CAL&quot;</span><span class="p">:</span> <span class="mi">423967</span><span class="p">,</span> <span class="s2">&quot;TEX&quot;</span><span class="p">:</span> <span class="mi">695662</span><span class="p">,</span> <span class="s2">&quot;NY&quot;</span><span class="p">:</span> <span class="mi">141297</span><span class="p">})</span>
+
+<span class="c1"># Create a DataFrame contraining the two Series</span>
+<span class="c1"># The df_ prefix is used to distinguish pandas dataframes from plain NumPy arrays</span>
+<span class="n">df_poprep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;population&quot;</span><span class="p">:</span> <span class="n">pop</span><span class="p">,</span> <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="n">area</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_poprep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     population    area
+CAL    38332521  423967
+TEX    26448193  695662
+NY     19651127  141297
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="data-preparation">
-<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this heading">#</a></h2>
+<section id="loading-a-tabular-dataset">
+<h3>Loading a tabular dataset<a class="headerlink" href="#loading-a-tabular-dataset" title="Permalink to this heading">#</a></h3>
+<p>When describing tabular information, most datasets are stored as a CSV (Comma-Separated Values) text file.</p>
+<p>The <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pd.read_csv</a> function can load a CSV file into a DataFrame from either a local path or a URL.</p>
+<p>The following code loads a dataset which was extracted from a <a class="reference external" href="https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results">Kaggle competition</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a CSV file into a DataFrame</span>
+<span class="c1"># Data comes from this Kaggle competition:</span>
+<span class="n">df_olympics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/bpesquet/ainotes/master/data/athlete_events.csv&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exploring-tabular-data">
+<h3>Exploring tabular data<a class="headerlink" href="#exploring-tabular-data" title="Permalink to this heading">#</a></h3>
+<p>Once a dataset is loaded into a DataFrame, many operations can be applied to it for visualization or transformation purposes. For more details, see the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html">10 minutes to pandas</a> tutorial.</p>
+<p>Let’s use pandas to perform the very first steps of what is often called <em>Exploratory Data Analysis</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print dataset shape (rows x columns)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df_olympics: </span><span class="si">{</span><span class="n">df_olympics</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>df_olympics: (271116, 15)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print a concise summary of the dataset</span>
+<span class="n">df_olympics</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 271116 entries, 0 to 271115
+Data columns (total 15 columns):
+ #   Column  Non-Null Count   Dtype  
+---  ------  --------------   -----  
+ 0   ID      271116 non-null  int64  
+ 1   Name    271116 non-null  object 
+ 2   Sex     271116 non-null  object 
+ 3   Age     261642 non-null  float64
+ 4   Height  210945 non-null  float64
+ 5   Weight  208241 non-null  float64
+ 6   Team    271116 non-null  object 
+ 7   NOC     271116 non-null  object 
+ 8   Games   271116 non-null  object 
+ 9   Year    271116 non-null  int64  
+ 10  Season  271116 non-null  object 
+ 11  City    271116 non-null  object 
+ 12  Sport   271116 non-null  object 
+ 13  Event   271116 non-null  object 
+ 14  Medal   39783 non-null   object 
+dtypes: float64(3), int64(2), object(10)
+memory usage: 31.0+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the first 10 rows of the dataset</span>
+<span class="n">df_olympics</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>A Dijiang</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>180.0</td>
+      <td>80.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>A Lamusi</td>
+      <td>M</td>
+      <td>23.0</td>
+      <td>170.0</td>
+      <td>60.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>2012 Summer</td>
+      <td>2012</td>
+      <td>Summer</td>
+      <td>London</td>
+      <td>Judo</td>
+      <td>Judo Men's Extra-Lightweight</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Gunnar Nielsen Aaby</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark</td>
+      <td>DEN</td>
+      <td>1920 Summer</td>
+      <td>1920</td>
+      <td>Summer</td>
+      <td>Antwerpen</td>
+      <td>Football</td>
+      <td>Football Men's Football</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Edgar Lindenau Aabye</td>
+      <td>M</td>
+      <td>34.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark/Sweden</td>
+      <td>DEN</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Tug-Of-War</td>
+      <td>Tug-Of-War Men's Tug-Of-War</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1988 Winter</td>
+      <td>1988</td>
+      <td>Winter</td>
+      <td>Calgary</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1988 Winter</td>
+      <td>1988</td>
+      <td>Winter</td>
+      <td>Calgary</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 1,000 metres</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>25.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1992 Winter</td>
+      <td>1992</td>
+      <td>Winter</td>
+      <td>Albertville</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>25.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1992 Winter</td>
+      <td>1992</td>
+      <td>Winter</td>
+      <td>Albertville</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 1,000 metres</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>27.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1994 Winter</td>
+      <td>1994</td>
+      <td>Winter</td>
+      <td>Lillehammer</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>27.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1994 Winter</td>
+      <td>1994</td>
+      <td>Winter</td>
+      <td>Lillehammer</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 1,000 metres</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print 5 random samples</span>
+<span class="n">df_olympics</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>248569</th>
+      <td>124434</td>
+      <td>Adrianus Aloysius Jacobus "Adrie" van der Poel</td>
+      <td>M</td>
+      <td>21.0</td>
+      <td>181.0</td>
+      <td>70.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1980 Summer</td>
+      <td>1980</td>
+      <td>Summer</td>
+      <td>Moskva</td>
+      <td>Cycling</td>
+      <td>Cycling Men's 100 kilometres Team Time Trial</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>230038</th>
+      <td>115485</td>
+      <td>Hestrie Storbeck-Cloete (-Els)</td>
+      <td>F</td>
+      <td>25.0</td>
+      <td>185.0</td>
+      <td>68.0</td>
+      <td>South Africa</td>
+      <td>RSA</td>
+      <td>2004 Summer</td>
+      <td>2004</td>
+      <td>Summer</td>
+      <td>Athina</td>
+      <td>Athletics</td>
+      <td>Athletics Women's High Jump</td>
+      <td>Silver</td>
+    </tr>
+    <tr>
+      <th>28864</th>
+      <td>14942</td>
+      <td>Joo Carlos Brenha Alves Pereira</td>
+      <td>M</td>
+      <td>34.0</td>
+      <td>193.0</td>
+      <td>88.0</td>
+      <td>Portugal</td>
+      <td>POR</td>
+      <td>2004 Summer</td>
+      <td>2004</td>
+      <td>Summer</td>
+      <td>Athina</td>
+      <td>Beach Volleyball</td>
+      <td>Beach Volleyball Men's Beach Volleyball</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>56603</th>
+      <td>28995</td>
+      <td>Ren Dobrinovitz</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Belgium</td>
+      <td>BEL</td>
+      <td>1906 Summer</td>
+      <td>1906</td>
+      <td>Summer</td>
+      <td>Athina</td>
+      <td>Wrestling</td>
+      <td>Wrestling Men's Lightweight, Greco-Roman</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>194136</th>
+      <td>97452</td>
+      <td>Jari Markus Puikkonen</td>
+      <td>M</td>
+      <td>28.0</td>
+      <td>180.0</td>
+      <td>68.0</td>
+      <td>Finland</td>
+      <td>FIN</td>
+      <td>1988 Winter</td>
+      <td>1988</td>
+      <td>Winter</td>
+      <td>Calgary</td>
+      <td>Ski Jumping</td>
+      <td>Ski Jumping Men's Large Hill, Team</td>
+      <td>Gold</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print descriptive statistics for all numerical attributes</span>
+<span class="n">df_olympics</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>271116.000000</td>
+      <td>261642.000000</td>
+      <td>210945.000000</td>
+      <td>208241.000000</td>
+      <td>271116.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>68248.954396</td>
+      <td>25.556898</td>
+      <td>175.338970</td>
+      <td>70.702393</td>
+      <td>1978.378480</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>39022.286345</td>
+      <td>6.393561</td>
+      <td>10.518462</td>
+      <td>14.348020</td>
+      <td>29.877632</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>10.000000</td>
+      <td>127.000000</td>
+      <td>25.000000</td>
+      <td>1896.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>34643.000000</td>
+      <td>21.000000</td>
+      <td>168.000000</td>
+      <td>60.000000</td>
+      <td>1960.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>68205.000000</td>
+      <td>24.000000</td>
+      <td>175.000000</td>
+      <td>70.000000</td>
+      <td>1988.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>102097.250000</td>
+      <td>28.000000</td>
+      <td>183.000000</td>
+      <td>79.000000</td>
+      <td>2002.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>135571.000000</td>
+      <td>97.000000</td>
+      <td>226.000000</td>
+      <td>214.000000</td>
+      <td>2016.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print descriptive statistics for all non-numerical attributes</span>
+<span class="n">df_olympics</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">,</span> <span class="s2">&quot;bool&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>271116</td>
+      <td>39783</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>134732</td>
+      <td>2</td>
+      <td>1184</td>
+      <td>230</td>
+      <td>51</td>
+      <td>2</td>
+      <td>42</td>
+      <td>66</td>
+      <td>765</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>Robert Tait McKenzie</td>
+      <td>M</td>
+      <td>United States</td>
+      <td>USA</td>
+      <td>2000 Summer</td>
+      <td>Summer</td>
+      <td>London</td>
+      <td>Athletics</td>
+      <td>Football Men's Football</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>58</td>
+      <td>196594</td>
+      <td>17847</td>
+      <td>18853</td>
+      <td>13821</td>
+      <td>222552</td>
+      <td>22426</td>
+      <td>38624</td>
+      <td>5733</td>
+      <td>13372</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the number of samples by sport</span>
+<span class="n">df_olympics</span><span class="p">[</span><span class="s2">&quot;Sport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sport
+Athletics        38624
+Gymnastics       26707
+Swimming         23195
+Shooting         11448
+Cycling          10859
+                 ...  
+Racquets            12
+Jeu De Paume        11
+Roque                4
+Basque Pelota        2
+Aeronautics          1
+Name: count, Length: 66, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print rounded average age for women</span>
+<span class="n">age_mean</span> <span class="o">=</span> <span class="n">df_olympics</span><span class="p">[</span><span class="n">df_olympics</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;F&quot;</span><span class="p">][</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">age_mean</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print percent of athletes for some countries</span>
+
+<span class="n">athletes_count</span> <span class="o">=</span> <span class="n">df_olympics</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;FRA&quot;</span><span class="p">,</span> <span class="s2">&quot;GBR&quot;</span><span class="p">,</span> <span class="s2">&quot;GER&quot;</span><span class="p">]:</span>
+    <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_olympics</span><span class="p">[</span><span class="s2">&quot;NOC&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">country</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">athletes_count</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Athletes from </span><span class="si">{</span><span class="n">country</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">percent</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Athletes from USA: 6.95%
+Athletes from FRA: 4.71%
+Athletes from GBR: 4.52%
+Athletes from GER: 3.63%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-images">
+<h3>Loading images<a class="headerlink" href="#loading-images" title="Permalink to this heading">#</a></h3>
+<p>Digital images are stored using either the <strong>bitmap</strong> format (an array of color values for all individual pixels in the image) or the <strong>vector format</strong> (a description of the elementary shapes in the image).</p>
+<p>Bitmap images can be easily manipulated as tensors. Each pixel color is typically expressed using a combination of the three primary colors: red, green and blue.</p>
+<p><a class="reference external" href="https://medium.com/&#64;brugmanj/coding-and-colors-a-practical-approach-to-hex-and-rgb-values-9a6e98720b25"><img alt="RGB wheel" src="../_images/rgb_wheel.jpg" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load sample images provided by scikit-learn into a NumPy array</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">load_sample_images</span><span class="p">()</span><span class="o">.</span><span class="n">images</span><span class="p">)</span>
+
+<span class="c1"># Load the last sample image</span>
+<span class="n">sample_image</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Show image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sample_image</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image: </span><span class="si">{</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample image: </span><span class="si">{</span><span class="n">sample_image</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample pixel: </span><span class="si">{</span><span class="n">sample_image</span><span class="p">[</span><span class="mi">225</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Image: (2, 427, 640, 3)
+Sample image: (427, 640, 3)
+Sample pixel: [219  78  60]
+</pre></div>
+</div>
+<img alt="../_images/720bd364acb48c5bfed1c89acc621c464a4b03e3bc8f68aa5cda697ff46b4869.png" src="../_images/720bd364acb48c5bfed1c89acc621c464a4b03e3bc8f68aa5cda697ff46b4869.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="preparing-data-for-training">
+<h2>Preparing data for training<a class="headerlink" href="#preparing-data-for-training" title="Permalink to this heading">#</a></h2>
 <section id="a-mandatory-step">
 <h3>A mandatory step<a class="headerlink" href="#a-mandatory-step" title="Permalink to this heading">#</a></h3>
 <p>In Machine Learning, the chosen dataset has to be carefully prepared before using it to train a model. This can have a major impact on the outcome of the training process.</p>
@@ -1028,25 +1790,6 @@ x_test: (8, 4). y_test: (8,)
 <p>A video can be represented as a 4D multidimensional array of dimensions <span class="math notranslate nohighlight">\(frames \times height \times width \times color\_channels\)</span>.</p>
 <p>They have to be <strong>reshaped</strong>, or more precisely <em>flattened</em> in that case, into a vector (1D tensor) before being fed to most ML algorithms.</p>
 <p><img alt="Reshaping an image" src="../_images/image2vector.jpeg" /></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a sample image provided by scikit-learn</span>
-<span class="n">sample_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">load_sample_images</span><span class="p">()</span><span class="o">.</span><span class="n">images</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Show image</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sample_image</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample image: </span><span class="si">{</span><span class="n">sample_image</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample image: (427, 640, 3)
-</pre></div>
-</div>
-<img alt="../_images/720bd364acb48c5bfed1c89acc621c464a4b03e3bc8f68aa5cda697ff46b4869.png" src="../_images/720bd364acb48c5bfed1c89acc621c464a4b03e3bc8f68aa5cda697ff46b4869.png" />
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flatten the image, which is a 3D tensor, into a vector (1D tensor)</span>
@@ -1359,7 +2102,7 @@ Test std: [0.94736355 0.84876086 0.95134111 0.84302027]
 <h3>Feature engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this heading">#</a></h3>
 <p><strong>Feature engineering</strong> is the process of preparing the proper input features, in order to facilitate the learning task. The problem is made easier by expressing it in a simpler way. This usually requires a good domain knowledge.</p>
 <p>The ability of deep neural networks to discover useful features by themselves has somewhat reduced the criticality of feature engineering. Nevertheless, it remains important in order to solve problems more elegantly and with fewer data.</p>
-<p>Example: the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.</p>
+<p>Example (taken from the book <a class="reference external" href="https://github.com/fchollet/deep-learning-with-python-notebooks">Deep Learning with Python</a>): the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.</p>
 <p><a class="reference external" href="https://www.manning.com/books/deep-learning-with-python"><img alt="Feature engineering" src="../_images/feature_engineering.png" /></a></p>
 </section>
 </section>
@@ -1453,8 +2196,14 @@ Test std: [0.94736355 0.84876086 0.95134111 0.84302027]
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-based-tensors">GPU-based tensors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data loading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-exploring-data">Loading and exploring data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-pandas">Introduction to pandas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-tabular-dataset">Loading a tabular dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-tabular-data">Exploring tabular data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-images">Loading images</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-for-training">Preparing data for training</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mandatory-step">A mandatory step</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">Data splitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-and-video-reshaping">Image and video reshaping</a></li>

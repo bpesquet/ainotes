@@ -161,8 +161,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/linear_algebra.html">Linear algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/calculus.html">Calculus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../foundations/proba_stats.html">Probability &amp; statistics</a></li>
 </ul>
 </li>
@@ -1465,9 +1463,11 @@ Name: count, dtype: int64
 </section>
 <section id="step-3-1-choose-an-evaluation-metric">
 <h3>Step 3.1: choose an evaluation metric<a class="headerlink" href="#step-3-1-choose-an-evaluation-metric" title="Permalink to this heading">#</a></h3>
-<p>Model performance is assessed through an <strong>evaluation metric</strong>.</p>
-<p>It quantifies the difference (often called <strong>error</strong>) between the expected results (<em>ground truth</em>) and the actual results computed by the model.</p>
-<p>A classic evaluation metric for regression tasks is the <strong>Root Mean Square Error (RMSE)</strong>. It gives an idea of how much error the model typically makes in its predictions.</p>
+<p>Model performance is assessed through an <strong>evaluation metric</strong>. Like the loss function, it depends on the problem type.</p>
+<p>A classic choice for regression tasks is the <strong>Root Mean Square Error (RMSE)</strong>. It gives an idea of how much error the trained model typically makes in its predictions. Of course, the smaller the better in that case.</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{RMSE}(\pmb{Y}, \pmb{Y'}) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\pmb{y'}^{(i)} - \pmb{y}^{(i)})^2}\]</div>
+<p><strong>Mean Absolute Error</strong> (less sensitive to outliers) and <strong>MSE</strong> may also be used.</p>
 </section>
 <section id="step-3-2-start-with-a-baseline-model">
 <h3>Step 3.2: start with a baseline model<a class="headerlink" href="#step-3-2-start-with-a-baseline-model" title="Permalink to this heading">#</a></h3>

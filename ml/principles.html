@@ -161,8 +161,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/linear_algebra.html">Linear algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../foundations/calculus.html">Calculus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../foundations/proba_stats.html">Probability &amp; statistics</a></li>
 </ul>
 </li>
@@ -666,8 +664,11 @@ document.write(`
 <p>This function, called the <strong>hypothesis function</strong>, is denoted <span class="math notranslate nohighlight">\(h_{\pmb{\omega}}\)</span> to show that it is parametrized by <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>. Its output (predicted result) is denoted  <span class="math notranslate nohighlight">\(\pmb{y'}\)</span> or <span class="math notranslate nohighlight">\(\hat{\pmb{y}}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{y'}^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)})\]</div>
+<div class="math notranslate nohighlight">
+\[\pmb{Y'} = h_{\pmb{\omega}}(\pmb{X})\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\pmb{y'}^{(i)}, i \in [1,m]\)</span>: predicted output for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{Y'}\)</span>: predictions matrix for the whole dataset.</p></li>
 </ul>
 </section>
 </section>
@@ -679,9 +680,9 @@ document.write(`
 <section id="loss-function-example">
 <h4>Loss function example<a class="headerlink" href="#loss-function-example" title="Permalink to this heading">#</a></h4>
 <p>The choice of the loss function depends on the problem type.</p>
-<p>For regression tasks, a popular choice is the <strong>Mean Squared Error</strong> or squared L2 norm.</p>
+<p>For regression tasks, a popular choice is the <strong>Mean Squared Error</strong> a.k.a. <em>squared L2 norm</em>.</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}_{MSE}(\pmb{\omega}) = \frac{1}{m}\sum_{i=1}^m (h_{\pmb{\omega}}(\pmb{x}^{(i)}) - \pmb{y}^{(i)})^2\]</div>
+\[\mathcal{L}_{\mathrm{MSE}}(\pmb{\omega}) = \frac{1}{m}\sum_{i=1}^m (h_{\pmb{\omega}}(\pmb{x}^{(i)}) - \pmb{y}^{(i)})^2 = \frac{1}{m}{{\lVert{h_{\pmb{\omega}}(\pmb{X}) - \pmb{Y}}\rVert}_2}^2\]</div>
 </section>
 </section>
 <section id="optimization-algorithm">
