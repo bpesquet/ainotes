@@ -15,8 +15,6 @@ parts:
       - file: foundations/programming
     - file: foundations/math
       sections:
-      - file: foundations/linear_algebra
-      - file: foundations/calculus
       - file: foundations/proba_stats
   - caption: Machine Learning
     chapters:
