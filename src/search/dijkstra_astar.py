@@ -14,13 +14,16 @@
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # # Dijkstra's and A* algorithms
+#
+# ```{warning}
+# This chapter is under construction.
+# ```
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
 # %%
 import platform
-
 from IPython.display import YouTubeVideo
 
 print(f"Python version: {platform.python_version()}")

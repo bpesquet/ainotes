@@ -16,6 +16,10 @@
 # # Probability & statistics
 #
 # > "Probability deals with knowing the model of our world and use it for deductions. Statistics deal with trying to identify this model based on observation of reality."
+#
+# ```{warning}
+# This chapter is under construction.
+# ```
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
