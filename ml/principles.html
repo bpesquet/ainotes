@@ -461,6 +461,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-phases-of-a-model-s-life">The two phases of a model’s life</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-and-hyperparameters">Model parameters and hyperparameters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-function">Hypothesis function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-matrix">Predictions matrix</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss function</a><ul class="nav section-nav flex-column">
@@ -592,18 +593,18 @@ document.write(`
 <section id="targets">
 <h4>Targets<a class="headerlink" href="#targets" title="Permalink to this heading">#</a></h4>
 <p><strong>Targets</strong> are the expected results (labels) associated to a data sample, often called the <em>ground truth</em>. They are denoted using the <span class="math notranslate nohighlight">\(\pmb{y}\)</span> variable.</p>
-<p>Some ML models have to predict more than one value for each sample (for example, in multiclass classification).</p>
+<p>Some ML models have to predict more than one value for each sample (for example, in multiclass classification). In that case, <span class="math notranslate nohighlight">\(K&gt;1\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\pmb{y}^{(i)} = \begin{pmatrix}
        \ y^{(i)}_1 \\
        \ y^{(i)}_2 \\
        \ \vdots \\
-       \ y^{(i)}_t
-     \end{pmatrix}\end{split}\]</div>
+       \ y^{(i)}_K
+     \end{pmatrix} \in \mathbb{R}^K\end{split}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(K\)</span>: number of labels associated to a data sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\pmb{y}^{(i)}, i \in [1,m]\)</span>: vector of <span class="math notranslate nohighlight">\(K\)</span> labels.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y^{(i)}_t, k \in [1,K]\)</span>: value of the <span class="math notranslate nohighlight">\(k\)</span>th label for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}^{(i)}, i \in [1,m]\)</span>: expected results for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k, k \in [1,K]\)</span>: actual value of the <span class="math notranslate nohighlight">\(k\)</span>th label for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
 </ul>
 </section>
 <section id="inputs-matrix">
@@ -634,11 +635,11 @@ document.write(`
        \ \pmb{y}^{(m)T} \\
      \end{bmatrix} =
 \begin{bmatrix}
-       \ y^{(1)}_1 &amp; y^{(1)}_2 &amp; \cdots &amp; y^{(1)}_t \\
-       \ y^{(2)}_1 &amp; y^{(2)}_2 &amp; \cdots &amp; y^{(2)}_t \\
+       \ y^{(1)}_1 &amp; y^{(1)}_2 &amp; \cdots &amp; y^{(1)}_K \\
+       \ y^{(2)}_1 &amp; y^{(2)}_2 &amp; \cdots &amp; y^{(2)}_K \\
        \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-       \ y^{(m)}_1 &amp; y^{(m)}_2 &amp; \cdots &amp; y^{(m)}_t
-     \end{bmatrix}\end{split}\]</div>
+       \ y^{(m)}_1 &amp; y^{(m)}_2 &amp; \cdots &amp; y^{(m)}_K
+     \end{bmatrix} \in \mathbb{R}^{m \times K}\end{split}\]</div>
 </section>
 </section>
 <section id="model">
@@ -660,16 +661,38 @@ document.write(`
 </section>
 <section id="hypothesis-function">
 <h4>Hypothesis function<a class="headerlink" href="#hypothesis-function" title="Permalink to this heading">#</a></h4>
-<p>Mathamatically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).</p>
+<p>Mathematically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).</p>
 <p>This function, called the <strong>hypothesis function</strong>, is denoted <span class="math notranslate nohighlight">\(h_{\pmb{\omega}}\)</span> to show that it is parametrized by <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>. Its output (predicted result) is denoted  <span class="math notranslate nohighlight">\(\pmb{y'}\)</span> or <span class="math notranslate nohighlight">\(\hat{\pmb{y}}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\pmb{y'}^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)})\]</div>
-<div class="math notranslate nohighlight">
-\[\pmb{Y'} = h_{\pmb{\omega}}(\pmb{X})\]</div>
+\[\begin{split}\pmb{y'}^{(i)} = \begin{pmatrix}
+       \ y'^{(i)}_1 \\
+       \ y'^{(i)}_2 \\
+       \ \vdots \\
+       \ y'^{(i)}_K
+     \end{pmatrix} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in \mathbb{R}^K\end{split}\]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\pmb{y'}^{(i)}, i \in [1,m]\)</span>: predicted output for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\pmb{Y'}\)</span>: predictions matrix for the whole dataset.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y'}^{(i)}, i \in [1,m]\)</span>: model prediction for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'^{(i)}_k, k \in [1,K]\)</span>: predicted output for the <span class="math notranslate nohighlight">\(k\)</span>th label of the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
 </ul>
+</section>
+<section id="predictions-matrix">
+<h4>Predictions matrix<a class="headerlink" href="#predictions-matrix" title="Permalink to this heading">#</a></h4>
+<p>Model predictions for the whole dataset can be stored in a <span class="math notranslate nohighlight">\(m \times K\)</span> matrix denoted <span class="math notranslate nohighlight">\(\pmb{Y'}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{Y'} =
+\begin{bmatrix}
+       \ \pmb{y'}^{(1)T} \\
+       \ \pmb{y'}^{(2)T} \\
+       \ \vdots \\
+       \ \pmb{y'}^{(m)T} \\
+     \end{bmatrix} =
+\begin{bmatrix}
+       \ y'^{(1)}_1 &amp; y'^{(1)}_2 &amp; \cdots &amp; y'^{(1)}_K \\
+       \ y'^{(2)}_1 &amp; y'^{(2)}_2 &amp; \cdots &amp; y'^{(2)}_K \\
+       \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+       \ y'^{(m)}_1 &amp; y'^{(m)}_2 &amp; \cdots &amp; y'^{(m)}_K
+     \end{bmatrix}
+= h_{\pmb{\omega}}(\pmb{X}) \in \mathbb{R}^{m \times K}\end{split}\]</div>
 </section>
 </section>
 <section id="loss-function">
@@ -945,6 +968,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-phases-of-a-model-s-life">The two phases of a model’s life</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-and-hyperparameters">Model parameters and hyperparameters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-function">Hypothesis function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-matrix">Predictions matrix</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss function</a><ul class="nav section-nav flex-column">
