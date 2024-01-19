@@ -90,18 +90,18 @@ print(f"Python version: {platform.python_version()}")
 #
 # **Targets** are the expected results (labels) associated to a data sample, often called the *ground truth*. They are denoted using the $\pmb{y}$ variable.
 #
-# Some ML models have to predict more than one value for each sample (for example, in multiclass classification).
+# Some ML models have to predict more than one value for each sample (for example, in multiclass classification). In that case, $K>1$.
 #
 # $$\pmb{y}^{(i)} = \begin{pmatrix}
 #        \ y^{(i)}_1 \\
 #        \ y^{(i)}_2 \\
 #        \ \vdots \\
-#        \ y^{(i)}_t
-#      \end{pmatrix}$$
+#        \ y^{(i)}_K
+#      \end{pmatrix} \in \mathbb{R}^K$$
 #
 # - $K$: number of labels associated to a data sample.
-# - $\pmb{y}^{(i)}, i \in [1,m]$: vector of $K$ labels.
-# - $y^{(i)}_t, k \in [1,K]$: value of the $k$th label for the $i$th sample.
+# - $\pmb{y}^{(i)}, i \in [1,m]$: expected results for the $i$th sample.
+# - $y^{(i)}_k, k \in [1,K]$: actual value of the $k$th label for the $i$th sample.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Inputs matrix
@@ -133,11 +133,11 @@ print(f"Python version: {platform.python_version()}")
 #        \ \pmb{y}^{(m)T} \\
 #      \end{bmatrix} =
 # \begin{bmatrix}
-#        \ y^{(1)}_1 & y^{(1)}_2 & \cdots & y^{(1)}_t \\
-#        \ y^{(2)}_1 & y^{(2)}_2 & \cdots & y^{(2)}_t \\
+#        \ y^{(1)}_1 & y^{(1)}_2 & \cdots & y^{(1)}_K \\
+#        \ y^{(2)}_1 & y^{(2)}_2 & \cdots & y^{(2)}_K \\
 #        \ \vdots & \vdots & \ddots & \vdots \\
-#        \ y^{(m)}_1 & y^{(m)}_2 & \cdots & y^{(m)}_t
-#      \end{bmatrix}$$
+#        \ y^{(m)}_1 & y^{(m)}_2 & \cdots & y^{(m)}_K
+#      \end{bmatrix} \in \mathbb{R}^{m \times K}$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Model
@@ -164,15 +164,39 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Hypothesis function
 #
-# Mathamatically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).
+# Mathematically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).
 #
 # This function, called the **hypothesis function**, is denoted $h_{\pmb{\omega}}$ to show that it is parametrized by $\pmb{\omega}$. Its output (predicted result) is denoted  $\pmb{y'}$ or $\hat{\pmb{y}}$.
 #
-# $$\pmb{y'}^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)})$$
-# $$\pmb{Y'} = h_{\pmb{\omega}}(\pmb{X})$$
+# $$\pmb{y'}^{(i)} = \begin{pmatrix}
+#        \ y'^{(i)}_1 \\
+#        \ y'^{(i)}_2 \\
+#        \ \vdots \\
+#        \ y'^{(i)}_K
+#      \end{pmatrix} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in \mathbb{R}^K$$
 #
-# - $\pmb{y'}^{(i)}, i \in [1,m]$: predicted output for the $i$th sample.
-# - $\pmb{Y'}$: predictions matrix for the whole dataset.
+# - $\pmb{y'}^{(i)}, i \in [1,m]$: model prediction for the $i$th sample.
+# - $y'^{(i)}_k, k \in [1,K]$: predicted output for the $k$th label of the $i$th sample.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Predictions matrix
+#
+# Model predictions for the whole dataset can be stored in a $m \times K$ matrix denoted $\pmb{Y'}$.
+#
+# $$\pmb{Y'} =
+# \begin{bmatrix}
+#        \ \pmb{y'}^{(1)T} \\
+#        \ \pmb{y'}^{(2)T} \\
+#        \ \vdots \\
+#        \ \pmb{y'}^{(m)T} \\
+#      \end{bmatrix} =
+# \begin{bmatrix}
+#        \ y'^{(1)}_1 & y'^{(1)}_2 & \cdots & y'^{(1)}_K \\
+#        \ y'^{(2)}_1 & y'^{(2)}_2 & \cdots & y'^{(2)}_K \\
+#        \ \vdots & \vdots & \ddots & \vdots \\
+#        \ y'^{(m)}_1 & y'^{(m)}_2 & \cdots & y'^{(m)}_K
+#      \end{bmatrix}
+# = h_{\pmb{\omega}}(\pmb{X}) \in \mathbb{R}^{m \times K}$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Loss function
