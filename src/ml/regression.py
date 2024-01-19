@@ -13,9 +13,9 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # End-to-end regression example: predict housing prices
+# # Regression example: predict housing prices
 #
-# > This chapter is heavily inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
+# > This chapter is heavily inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2) written by Aurélien Géron.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Learning objectives
