@@ -24,14 +24,15 @@ parts:
       sections:
       - file: ml/principles
         title: Principles
-      - file: ml/data_manipulation
+      - file: ml/data
       - file: ml/regression
-        title: Regression example
+        title: Regression
       - file: ml/classification
-        title: Classification example
+        title: Classification
   - caption: Search algorithms
     chapters:
     - file: search/dijkstra_astar
+      title: Dijkstra and A*
   - caption: Reference
     chapters:
     - file: reference/acknowledgments
