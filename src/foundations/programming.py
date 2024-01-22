@@ -20,6 +20,7 @@
 #
 # - Review the essential concepts of programming: variables, flow control, data structures, etc.
 # - Demonstrate their implementation in the [Python](https://www.python.org/) programming language.
+# - Discover what is a [Jupyter notebook](https://docs.jupyter.org/en/latest/).
 # - Learn about some good practices for Python-based software development.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -83,13 +84,21 @@ for friend in friends:
 # - rich ecosystem of dedicated open source libraries.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Gems from the ecosystem
+# ### The Jupyter Notebook format
 #
-# Essential tools from the vast Python ecosytem for AI and Data Science include:
+# The [Jupyter Notebook](https://jupyter.org/) is an open-source web application for creating and managing documents (called *notebooks*) that may contain executable code, equations, visualizations and text.
 #
-# - [Anaconda](https://www.anaconda.com/distribution/), a scientific distribution including Python and many (1500+) specialized packages. It is the easiest way to setup a work environment for AI and Data Science with Python.
-# - The [Jupyter Notebook](https://jupyter.org/), an open-source web application for creating and managing documents (_.ipynb_ files) that may contain live code, equations, visualizations and text. This format has become the *de facto* standard for sharing research results in numerical fields.
-# - [Google Colaboratory](https://colab.research.google.com), a cloud environment for executing Jupyter notebooks with access to specialized processors (GPU or TPU).
+# A notebook file has an _.ipynb_ extension. It contains blocks of text called *cells*, written in either code or [Markdown](https://www.markdownguide.org/). Notebooks have become a standard for experimenting and sharing results in many scientific fields.
+#
+# [![IPython](_images/jupyterpreview.jpg)](https://jupyter.org/)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Running Python code
+#
+# Python code can be run either:
+#
+# - **locally**, after installing a Python environment. [Anaconda](https://www.anaconda.com/download), a scientific distribution including many (1500+) specialized packages, is the easiest way to setup a work environment for AI with Python.
+# - **in the cloud**, using an online service for executing raw Python code or Jupyter notebooks. For example, [Google Colaboratory](https://colab.research.google.com) offers free access to specialized processors.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## (Yet another) Python cheatsheet
