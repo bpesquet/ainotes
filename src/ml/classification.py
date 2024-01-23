@@ -20,7 +20,7 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Learning objectives
 #
-# - Train a Machine Learning model on bitmap images.
+# - Discover how to train a Machine Learning model on bitmap images.
 # - Understand how loss and model performance are evaluated in classification tasks.
 # - Discover several performance metrics and how to choose between them.
 

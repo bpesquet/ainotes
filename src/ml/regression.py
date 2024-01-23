@@ -20,7 +20,7 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Learning objectives
 #
-# - Train a Machine Learning model to deduce prices from housing properties (number of rooms, median income, proximity to ocean, etc) in geographical areas.
+# - Discover how to train a Machine Learning model on tabular data.
 # - Get familiar with the general workflow of a supervised ML project.
 # - Learn how to leverage the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
 #
