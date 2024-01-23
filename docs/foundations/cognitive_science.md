@@ -9,13 +9,3 @@
 
 [![Links with other fields](_images/Cognitive_Science_Hexagon.png)](https://en.wikipedia.org/wiki/Cognitive_science)
 <!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Decision
-
-> "A decision is a deliberative process that results in the commitment to a categorical proposition." {cite}`goldNeuralBasisDecision2007`.
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Confidence
-<!-- #endregion -->

@@ -7,7 +7,7 @@ logo: logo.png
 copyright: 2023-present
 # Patterns to skip when building the book. Can be glob-style (e.g. "*skip.ipynb")
 exclude_patterns : [_build, "**.DS_Store", "**.ipynb_checkpoints", ".venv", "**/simple_*.ipynb", 
-  "**calculus.ipynb", "**linear_algebra.ipynb", "**cognitive_science.md", "**human_brain.md", "**neuroscience.md"]
+  "**calculus.ipynb", "**linear_algebra.ipynb", "**human_brain.md", "**neuroscience.md"]
 
 # Configure re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
