@@ -1,6 +1,6 @@
-# AI notes
+# Artificial Intelligence notes
 
-This repository contains the source and configuration files for my notes on Artificial Intelligence.
+This repository contains the source and configuration files for my notes related to AI.
 
 ## Dependencies and toolchain
 
@@ -28,6 +28,9 @@ The `.ipynb` files are still versioned in order to show their output online, and
 Here are some useful commands for running this project:
 
 ```bash
+# Reformat all Python files
+black src/
+
 # Check the code for mistakes
 pylint src/
 
@@ -39,4 +42,8 @@ jupytext --sync src/*/*.py
 # Output is in the docs/_build/ subfolder
 jupyter-book build docs/
 # Alternative command: jb build docs/
+
+# Generate a PDF version of a chapter
+# GIF files must be replaced by their static counterparts (PNG or JPG) in the notebook before launching this command
+jupyter nbconvert --to PDF {notebook_file_name}
 ```
