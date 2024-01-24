@@ -1,35 +1,7 @@
-<!-- #region slideshow={"slide_type": "slide"} -->
 # Neuroscience
-<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Cognitive neuroscience
-<!-- #endregion -->
+Neuroscience is the scientific study of the nervous system.
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Computational neuroscience
-<!-- #endregion -->
+At the dawn of the computer age, work on AI was inextricably intertwined with neuroscience and psychology. More recently, the interactions have become much less commonplace, as both fields have grown enormously in complexity and disciplinary boundaries have solidified. Still, neuroscience might very well be of critical importance for the next big steps forward in AI {cite}`hassabisNeuroscienceInspiredArtificialIntelligence2017`.
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-### Introduction
-
-> "The goal of Computational Neuroscience (CN) is to study relations between brain structures and functions by the means of information processing techniques." {cite}`alexandreWhenArtificialIntelligence2020`
-
-CN deals with three major topics:
-
-- Neuronal processing
-- Learning
-- Brain functions
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-### Relationships with other fields
-
-CN obviously overlaps with AI (especially machine learning) and cognitive science.
-
-A key difference is that CN is specifically interested in *understanding how these topics are implemented in real brains*, with possible effects in neuroscience and psychology.
-<!-- #endregion -->
-
-```python
-
-```
+The following chapters aim to present major topics of interest for neuroscience, with a focus on possible applications in AI.

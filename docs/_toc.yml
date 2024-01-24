@@ -16,7 +16,7 @@ parts:
     - file: foundations/math
       sections:
       - file: foundations/proba_stats
-    - file: foundations/cognitive_science
+    - file: foundations/neuroscience
       sections:
       - file: foundations/decision
   - caption: Machine Learning
