@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/principles';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data manipulation" href="data_manipulation.html" />
+    <link rel="next" title="Data manipulation" href="data.html" />
     <link rel="prev" title="Supervised Learning" href="supervised_learning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -164,21 +164,25 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../foundations/proba_stats.html">Probability &amp; statistics</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/neuroscience.html">Neuroscience</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/decision.html">Decision-making</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Principles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html">Data manipulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="regression.html">Regression example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification.html">Classification</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Search algorithms</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../search/dijkstra_astar.html">Dijkstra’s and A* algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../search/dijkstra_astar.html">Dijkstra and A*</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -472,9 +476,13 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-loss-via-gradient-descent">Reducing loss via gradient descent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-approach">An iterative approach</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gradient-descent-algorithm">The gradient descent algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-notion-of-gradient">The notion of gradient</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gradient-descent-algorithm">The gradient descent algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-approach">An iterative approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-gradient-of-loss-function">Step 1: compute gradient of loss function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-update-model-parameters">Step 2: update model parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">1D gradient descent (one parameter)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent-two-parameters">2D gradient descent (two parameters)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics-of-a-2d-gradient-descent">Dynamics of a 2D gradient descent</a></li>
@@ -486,8 +494,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-sgd">Mini-Batch SGD</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-update">Model parameters update</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">Learning rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-update">Parameters update</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-learning-rate">Impact of learning rate</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-local-minima-problem">The local minima problem</a></li>
 </ul>
@@ -717,24 +724,19 @@ document.write(`
 </section>
 <section id="reducing-loss-via-gradient-descent">
 <h2>Reducing loss via gradient descent<a class="headerlink" href="#reducing-loss-via-gradient-descent" title="Permalink to this heading">#</a></h2>
-<section id="an-iterative-approach">
-<h3>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Permalink to this heading">#</a></h3>
-<p>The model’s parameters are iteratively updated until an optimum is reached.</p>
-<p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss"><img alt="Iterative approach" src="../_images/GradientDescentDiagram.png" /></a></p>
-</section>
 <section id="the-gradient-descent-algorithm">
 <h3>The gradient descent algorithm<a class="headerlink" href="#the-gradient-descent-algorithm" title="Permalink to this heading">#</a></h3>
+<section id="an-iterative-approach">
+<h4>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Used in several ML models, including neural networks.</p></li>
-<li><p>General idea: converging to a loss function’s minimum by updating model parameters in small steps, in the <strong>opposite direction</strong> of the loss function <strong>gradient</strong>.</p></li>
+<li><p>The model’s parameters are iteratively updated until an optimum is reached.</p></li>
+<li><p>Each GD iteration combines two steps: computing the gradient of the loss function, then use it to update model parameters.</p></li>
 </ul>
+<p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss"><img alt="Iterative approach" src="../_images/GradientDescentDiagram.png" /></a></p>
 </section>
-<section id="the-notion-of-gradient">
-<h3>The notion of gradient<a class="headerlink" href="#the-notion-of-gradient" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Expresses the variation of a function relative to the variation of its parameters.</p></li>
-<li><p>Vector containing partial derivatives of the function <em>w.r.t.</em> each of its parameters.</p></li>
-</ul>
+<section id="step-1-compute-gradient-of-loss-function">
+<h4>Step 1: compute gradient of loss function<a class="headerlink" href="#step-1-compute-gradient-of-loss-function" title="Permalink to this heading">#</a></h4>
+<p>A <strong>gradient</strong> expresses the variation of a function relative to the variation of its parameters.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega}) = \begin{pmatrix}
        \ \frac{\partial}{\partial \omega_1} \mathcal{L}(\pmb{\omega}) \\
@@ -743,7 +745,23 @@ document.write(`
      \end{pmatrix}\end{split}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega})\)</span>: gradient of loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\pmb{\omega})\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial \omega_i} \mathcal{L}(\pmb{\omega})\)</span>: partial derivative of the loss function <em>w.r.t.</em> its <span class="math notranslate nohighlight">\(i\)</span>th parameter.</p></li>
 </ul>
+</section>
+<section id="step-2-update-model-parameters">
+<h4>Step 2: update model parameters<a class="headerlink" href="#step-2-update-model-parameters" title="Permalink to this heading">#</a></h4>
+<p>In order to reduce loss for the next iteration, parameters are updated in the <strong>opposite direction</strong> of the gradient.</p>
+<div class="math notranslate nohighlight">
+\[\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{\omega_{t}}\)</span>: set of parameters at step <span class="math notranslate nohighlight">\(t\)</span> of the gradient descent.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{\omega_{t+1}}\)</span>: set of parameters at step <span class="math notranslate nohighlight">\(t+1\)</span> (after update).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\eta\)</span> (sometimes denoted <span class="math notranslate nohighlight">\(\alpha\)</span> or <span class="math notranslate nohighlight">\(\lambda\)</span>): update factor for parameters, called the <strong><em>learning rate</em></strong>.</p></li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
 <section id="d-gradient-descent-one-parameter">
 <h4>1D gradient descent (one parameter)<a class="headerlink" href="#d-gradient-descent-one-parameter" title="Permalink to this heading">#</a></h4>
 <p><img alt="Gradient Descent" src="../_images/gradient_descent_1parameter.png" /></p>
@@ -795,19 +813,8 @@ document.write(`
 </ul>
 </section>
 </section>
-<section id="model-parameters-update">
-<h3>Model parameters update<a class="headerlink" href="#model-parameters-update" title="Permalink to this heading">#</a></h3>
-<section id="learning-rate">
-<h4>Learning rate<a class="headerlink" href="#learning-rate" title="Permalink to this heading">#</a></h4>
-<p><span class="math notranslate nohighlight">\(\eta\)</span> (sometimes denoted <span class="math notranslate nohighlight">\(\alpha\)</span> or <span class="math notranslate nohighlight">\(\lambda\)</span>) is the update factor for parameters once gradient is computed, called the <strong><em>learning rate</em></strong>.</p>
-<p>It has a direct impact on the “speed” of the gradient descent.</p>
-<div class="math notranslate nohighlight">
-\[\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\pmb{\omega_{t}}\)</span>: set of parameters at step <span class="math notranslate nohighlight">\(t\)</span> of the gradient descent.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\pmb{\omega_{t+1}}\)</span>: set of parameters at step <span class="math notranslate nohighlight">\(t+1\)</span> (after update).</p></li>
-</ul>
-</section>
+<section id="parameters-update">
+<h3>Parameters update<a class="headerlink" href="#parameters-update" title="Permalink to this heading">#</a></h3>
 <section id="impact-of-learning-rate">
 <h4>Impact of learning rate<a class="headerlink" href="#impact-of-learning-rate" title="Permalink to this heading">#</a></h4>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/fitter/graph"><img alt="Learning rate" src="../_images/learning_rate.png" /></a></p>
@@ -924,7 +931,7 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="data_manipulation.html"
+       href="data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -979,9 +986,13 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-loss-via-gradient-descent">Reducing loss via gradient descent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-approach">An iterative approach</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gradient-descent-algorithm">The gradient descent algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-notion-of-gradient">The notion of gradient</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gradient-descent-algorithm">The gradient descent algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-approach">An iterative approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-gradient-of-loss-function">Step 1: compute gradient of loss function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-update-model-parameters">Step 2: update model parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">1D gradient descent (one parameter)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent-two-parameters">2D gradient descent (two parameters)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics-of-a-2d-gradient-descent">Dynamics of a 2D gradient descent</a></li>
@@ -993,8 +1004,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-sgd">Mini-Batch SGD</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-update">Model parameters update</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">Learning rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-update">Parameters update</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-learning-rate">Impact of learning rate</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-local-minima-problem">The local minima problem</a></li>
 </ul>
