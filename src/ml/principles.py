@@ -229,23 +229,19 @@ print(f"Python version: {platform.python_version()}")
 # ## Reducing loss via gradient descent
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### An iterative approach
+# ### The gradient descent algorithm
 #
-# The model's parameters are iteratively updated until an optimum is reached.
+# #### An iterative approach
+#
+# - The model's parameters are iteratively updated until an optimum is reached.
+# - Each GD iteration combines two steps: computing the gradient of the loss function, then use it to update model parameters.
 #
 # [![Iterative approach](_images/GradientDescentDiagram.png)](https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### The gradient descent algorithm
+# #### Step 1: compute gradient of loss function
 #
-# - Used in several ML models, including neural networks.
-# - General idea: converging to a loss function's minimum by updating model parameters in small steps, in the **opposite direction** of the loss function **gradient**.
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### The notion of gradient
-#
-# - Expresses the variation of a function relative to the variation of its parameters.
-# - Vector containing partial derivatives of the function *w.r.t.* each of its parameters.
+# A **gradient** expresses the variation of a function relative to the variation of its parameters.
 #
 # $$\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega}) = \begin{pmatrix}
 #        \ \frac{\partial}{\partial \omega_1} \mathcal{L}(\pmb{\omega}) \\
@@ -254,8 +250,22 @@ print(f"Python version: {platform.python_version()}")
 #      \end{pmatrix}$$
 #
 # - $\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega})$: gradient of loss function $\mathcal{L}(\pmb{\omega})$.
+# - $\frac{\partial}{\partial \omega_i} \mathcal{L}(\pmb{\omega})$: partial derivative of the loss function *w.r.t.* its $i$th parameter.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# #### Step 2: update model parameters
+#
+# In order to reduce loss for the next iteration, parameters are updated in the **opposite direction** of the gradient.
+#
+# $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})$$
+#
+# - $\pmb{\omega_{t}}$: set of parameters at step $t$ of the gradient descent.
+# - $\pmb{\omega_{t+1}}$: set of parameters at step $t+1$ (after update).
+# - $\eta$ (sometimes denoted $\alpha$ or $\lambda$): update factor for parameters, called the **_learning rate_**.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Examples
+#
 # #### 1D gradient descent (one parameter)
 #
 # ![Gradient Descent](_images/gradient_descent_1parameter.png)
@@ -302,20 +312,8 @@ print(f"Python version: {platform.python_version()}")
 # - The mini-batch size varies between 10 and 1000 samples, depending of the dataset size.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Model parameters update
+# ### Parameters update
 #
-# #### Learning rate
-#
-# $\eta$ (sometimes denoted $\alpha$ or $\lambda$) is the update factor for parameters once gradient is computed, called the **_learning rate_**.
-#
-# It has a direct impact on the "speed" of the gradient descent.
-#
-# $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})$$
-#
-# - $\pmb{\omega_{t}}$: set of parameters at step $t$ of the gradient descent.
-# - $\pmb{\omega_{t+1}}$: set of parameters at step $t+1$ (after update).
-
-# %% [markdown] slideshow={"slide_type": "slide"}
 # #### Impact of learning rate
 #
 # [![Learning rate](_images/learning_rate.png)](https://developers.google.com/machine-learning/crash-course/fitter/graph)
