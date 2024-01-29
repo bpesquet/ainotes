@@ -15,7 +15,7 @@
 # %% [markdown]
 # # Classification example: recognize handwritten digits
 #
-# > This chapter is heavily inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2) written by Aurélien Géron.
+# > This chapter is inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2) written by Aurélien Géron.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Learning objectives
