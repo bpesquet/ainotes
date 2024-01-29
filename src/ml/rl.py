@@ -102,7 +102,7 @@ sns.set_theme()
 YouTubeVideo("WXuK6gekU1Y")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Problem formulation
+# ## Terminology
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### The exploration vs. exploitation dilemna
