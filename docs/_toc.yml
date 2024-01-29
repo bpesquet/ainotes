@@ -32,6 +32,10 @@ parts:
         title: Regression
       - file: ml/classification
         title: Classification
+    - file: ml/reinforcement_learning
+      sections:
+      - file: ml/rl
+        title: Introduction
   - caption: Search algorithms
     chapters:
     - file: search/dijkstra_astar
