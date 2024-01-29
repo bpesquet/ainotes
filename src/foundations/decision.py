@@ -14,10 +14,6 @@
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # # Decision-making
-#
-# ```{warning}
-# This chapter is under construction.
-# ```
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Terminology
@@ -35,7 +31,7 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Decision-making
 #
-# Decision-making designates the cognitive process resulting in a decision.
+# Decision-making designates the cognitive process(es) resulting in a decision.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### The sequential nature of decision-making
@@ -121,14 +117,14 @@
 # ![Sequential sampling for RDK](_images/eam_rdk.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### The sequential sampling model family
+# #### The sequential sampling model family
 #
 # ![Sequential Sampling model landscape](_images/sequential_sampling_models.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Accumulator models
 #
-# These models, also known as **race models**,  have independent accumulators (one per possible choice) and an **absolute** evidence response rule (two fixed thresholds, once for each accumulator). The process stops once one of the accumulators reaches its threshold.
+# These models, also known as **race models**,  have independent accumulators (typically one per possible choice) and an **absolute** evidence response rule (two fixed thresholds, once for each accumulator). The process stops once one of the accumulators reaches its threshold.
 #
 # ![Illustration of an accumulator model](_images/race_model.png)
 
@@ -147,7 +143,7 @@
 # This problem can be modelised as a random walk, with $p$ representing the **drift** of the process. Depending on the value of $p$, the process will drift towards one of the thresholds (gambler B’s bankruptcy if $p>0.5$).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Mathematical modeling
+# #### Mathematical formulation
 #
 # - $K$: number of possible states of the world. For binary choices, $K=2$.
 # - $h_k, k \in [1,K]$: hypothesis (state). Examples: dot movement type, presence of a stimulus, etc.
@@ -158,11 +154,11 @@
 # - $P(e_i|h_k)$: likelihood (values that $e_i$ can attain when $h_k$ is true).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Sequential Probability Ratio Test
+# #### Sequential Probability Ratio Test
 #
 # Particular form of **sequential analysis** for binary decisions ($K=2$) where the DV is constructed from multiple, independent pieces of evidence $e_1, e_2, \dots, e_n$ as the logarithm of the likelihood ratio between hypotheses $h_1$ and $h_2$.
 #
-# $$DV_n = \sum_{i=1}^n log \frac{P(e_i|h_1)}{P(e_i|h_2)} = \sum_{i=1}^n w_i$$
+# $$DV_n = \sum_{i=1}^n log_e \frac{P(e_i|h_1)}{P(e_i|h_2)} = \sum_{i=1}^n w_i$$
 #
 # - $w_i, i \in [1,n]$: weight of the $i$th evidence.
 #
@@ -177,34 +173,34 @@
 #
 # $$\forall i \in[1,n], w_i=
 #     \begin{cases}
-#       \log \frac{P(e_{heads}|h_1)}{P(e_{heads}|h_2)} = \log \frac{0.6}{0.5} = 0.182 & \text{if toss gives "heads"} \\
-#       \log \frac{P(e_{tails}|h_1)}{P(e_{tails}|h_2)} = \log \frac{0.4}{0.5} = -0.223 & \text{if toss gives "tails"}
+#       \log_e \frac{P(e_{heads}|h_1)}{P(e_{heads}|h_2)} = \log_e \frac{0.6}{0.5} = 0.182 & \text{if toss gives "heads"} \\
+#       \log_e \frac{P(e_{tails}|h_1)}{P(e_{tails}|h_2)} = \log_e \frac{0.4}{0.5} = -0.223 & \text{if toss gives "tails"}
 #     \end{cases}$$
 #
 # $$\text{If}\ DV_n \ge \frac{1-\alpha}{\alpha}, \text{answer "trick".}\ \text{If}\ DV_n \le \frac{\alpha}{1-\alpha}, \text{answer "fair".}$$
 #
 # With $\alpha = P(H_2|h_1) = P(H_1|h_2)$ the probability of misidentifying a coin.
 #
-# For $\alpha=0.05$, a decision happens when $|DV_n| \ge \log(19)$.
+# For $\alpha=0.05$, a decision happens when $|DV_n| \ge \log_e(19)$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Diffusion models
 #
-# When the evidence is continously sampled from a distribution in infinitesimal time steps, the process is termed **diffusion** with drift $\mu$. When $\mu$ is constant, this process is known as [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion) or Wiener diffusion process {cite}`goldNeuralBasisDecision2007`.
+# When the evidence is continously sampled from a distribution in infinitesimal time steps, the process is termed **diffusion** with drift $v$. When $v$ is constant, this process is known as [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion) or Wiener diffusion process {cite}`goldNeuralBasisDecision2007`.
 #
 # ![Diffusion model](_images/diffusion_model.png)
 #
 # > The diffusion models for decision-making are not to be confused with the [diffusion models of Machine Learning](https://en.wikipedia.org/wiki/Diffusion_model).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### The Diffusion Decision Model
+# #### The Diffusion Decision Model
 #
 # This model, also called **Drift Diffusion Model (DDM)**, is a sequential sampling model for binary choices in continuous environments {cite}`ratcliffDiffusionDecisionModel2008`.
 #
 # Originally designed in the 1970's {cite}`ratcliff1978theory`, it has recently experienced a surge in popularity. A growing body of literature is using the DDM to elucidate the cognitive processes of decision-making.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Parameters
+# ##### Parameters
 #
 # |Name|Description|Typical range|Implements|
 # |-|-|-|-|
@@ -216,7 +212,20 @@
 # ![DDM](_images/ddm.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Advantages
+# ##### Mathematical formulation
+#
+# The DDM assumes that evidence accumulation is governed by:
+#
+# $$dx = vdt + sW$$
+#
+# - $x$: accumulated evidence.
+# - $v$: drift rate (speed of evidence accumulation).
+# - $dt$: time unit. When $dt = 0$, the integration process is continuous in time.
+# - $W$: within-trial accumulation white noise.
+# - $s$: standard deviation of $W$.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ##### Advantages
 #
 # - Experimental validation has shown that:
 #   - DDM parameters do capture recognizable, and at least partly separable, cognitive processes.
@@ -224,9 +233,9 @@
 # - Several software packages like [HDDM](https://hddm.readthedocs.io/en/latest/) facilitate fitting the model to experimental data, or generating simulated data.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Applications
+# ##### Applications
 #
-# ##### Behavioral analysis
+# ###### Behavioral analysis
 #
 # - **Aging**: DDM-based studies showed that older adults had slower non-decision times and set wider boundaries, but their drift rates were not always lower than those of young adults.
 # - **IQ**: DDM-based analyses showed showed that drift rate varied with IQ, but boundary separation and nondecision time did not.
@@ -234,25 +243,32 @@
 # - ...
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ##### Low-level neuroscience
+# ###### Low-level neuroscience
 #
 # Studies {cite}`Gold2001-xr` uses DDM as inspiration to interpret neuron firing rates in monkeys as evidence accumulation until a threshold is reached.
 #
 # ![Firing rate in monkeys](_images/ddm_firing_rate.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ##### High-level neuroscience
+# ###### High-level neuroscience
 #
 # Studies correlate parameter estimates from DDM models to the blood-oxygen-level dependent signal obtained from fMRI experiments in perceptual decision-making.
 #
 # ![Brain activity & DDM](_images/ddm_brain_activity.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Extension to dynamic thresholds
+# ##### Extension to dynamic thresholds
 #
 # Collapsing-bound models translate the fact that in some cases, decisions are based on less and less evidence as time passes.
 #
 # ![DDM extension:dynamic thresholds](_images/ddm_dyn_thresholds.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Hybrid models
+#
+# #### The Leaky Competing Accumulator model
+#
+# This model {cite}`Usher2001-di` is based on gradual and stochastic accumulation of information in non-linear decision units with **leakage** (or decay of activation) and competition through **lateral inhibition**.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Relationships between models
@@ -262,6 +278,136 @@
 # ![DDM & cortical models](_images/ddm_cortical_models.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ## Multiple-choice decisions
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Multihypothesis Sequential Probability Ratio Test
+#
+# - Extension of SPRT to ternary choices in which the rate of integration depends on the fixation of the visual stimulus, as measured through eye-tracking {cite}`krajbichMultialternativeDriftdiffusionModel2011`.
+# - A DV is computed for each item based on the evidence accumulated for that item compared with the highest accumulated evidence for the other items (*best-vs-next* approach).
+#
+# ![MSPRT](_images/msprt.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Hick's law
+#
+# - Increasing the number of choices will increase the decision time *logarithmically*.
+# - Race models with one accumulator per possible choice produce the opposite trend (more accumulators $\Rightarrow$ faster RT).
+#
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### The Advantage Linear Ballistic Accumulator model
+#
+# In this model {cite}`vanravenzwaaijAccumulatingAdvantagesNew2020`, each of the $n$ possible choices is associated to $n-1$ accumulators, each of them driven by the difference ("advantage") in evidence versus another response.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### ALBA model for binary choice
+#
+# $$v_{1-2} = v_0 + w_d(S_1 - S_2) + w_s(S_1 + S_2)$$
+#
+# $$v_{2-1} = v_0 + w_d(S_2 - S_1) + w_s(S_1 + S_2)$$
+#
+# - $v_{i-j}$: drift rate for the accumulator associated with the advantage of stimulus $i$ over $j$.
+# - $S_i$: evidence for stimulus $i$.
+# - $v_0$: bias parameter.
+# - $w_d \in \mathbb{R}^+$: difference weight.
+# - $w_s \in \mathbb{R}^+$: sum weight.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### ALBA model for ternary choice
+#
+# *Win-all* strategy: all accumulators for a choice need to reach their threshold before commiting to a decision.
+#
+# ![ALBA model: win-all strategy](_images/alba_winall.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Learning and decision-making
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Intertwined cognitive processes
+#
+# - Learning processes refine the internal preferences and representations that inform decisions.
+# - The outcomes of decisions underpin feedback-driven learning.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Bridging the modeling gap
+
+# %% [markdown] slideshow={"slide_type": "fragment"}
+# - **Feedback-driven learning models**, typically using *softmax* to map action values to choices, do not provide a description of the cognitive processes that lead to a specific decision, and disregard RT.
+
+# %% [markdown] slideshow={"slide_type": "fragment"}
+# - **Evidence accumulation models** like the DDM are typically applied to tasks that minimize the influence of learning. Very few attempts have been made to adapt these models to situations in which decisions are followed by **rewards**, thereby producing **learning effects**.
+
+# %% [markdown] slideshow={"slide_type": "fragment"}
+# - Recent efforts are trying to combine [Reinforcement Learning](../ml/rl.ipynb) and EAM into joint models that should be able to:
+#   - predict choices and RT;
+#   - describe how learning affects the decision process.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Common choices
+#
+# #### Model design
+#
+# The RL-EAM model family has two components:
+# - a **learning** component, using RL to update options' value representations (the expected rewards for each choice), known as *Q-values*,  after each trial;
+# - a **decision** component, relying on a EAM to map value representations to the final choice for a trial.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Q-values update
+#
+# All models update the Q-values of possible choices according to the *delta update rule*:
+#
+# $$Q_{i,t+1} = Q_{i,t} + \alpha(r_t - Q_{i,t})$$
+#
+# - $Q_{i,t}$: value representation of choice $i$ on trial $t$.
+# - $r_t$: reward received on trial $t$.
+# - $\alpha \in [0,1]$: learning rate.
+#
+# The difference $r_t - Q_{i,t}$ between actual reward and value representation is called the *reward prediction error*.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### The RL-DDM model
+#
+# This model {cite}`fontanesiReinforcementLearningDiffusion2019` assumes that the drift rate depends linearly on the difference of value representations between the two possible choices.
+#
+# $$v_t = w(Q_{1,t}-Q_{2,t})$$
+#
+# $$dx = w(Q_1-Q_2)dt + sW$$
+#
+# - $v_t$: drift rate at time step $t$.
+# - $w$: weighting factor.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### The RL-Racing Diffusion model
+#
+# This model assumes that accumulators independently accrue evidence for one choice option each, both racing toward a common threshold (assuming no response bias).
+#
+# $$v_t = V_0 + wQ_i$$
+#
+# $$dx_i = (V_0 + wQ_i)dt +sW$$
+#
+# - $x_i$: accumulated evidence for choice $i$.
+# - $V_0$: drift rate in the absence of any evidence, identical accross accumulators (additive urgency signal).
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### The RL-Advantage Racing Diffusion model
+#
+# This model {cite}`mileticNewModelDecision2021` uses an ALBA architecture {cite}`vanravenzwaaijAccumulatingAdvantagesNew2020` as its decision component.
+#
+# $$dx_1 = \big(V_0 + w_d(Q_1 - Q_2) + w_s(Q_1 + Q_2)\big)dt + sW$$
+#
+# $$dx_2 = \big(V_0 + w_d(Q_2 - Q_1) + w_s(Q_1 + Q_2)\big)dt + sW$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Model comparison
+#
+# ![Three RL-EAM models](_images/rl-eam.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Multi-alternative RL-ARD
+#
+# Its ALBA decision model extends naturally to multi-alternative choice tasks.
+#
+# ![Multi RL-ARD](_images/rl-ard_multi.png)
 
 # %%
