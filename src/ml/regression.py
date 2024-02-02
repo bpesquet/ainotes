@@ -248,7 +248,7 @@ plot_correlation_matrix(df_housing)
 # %% slideshow={"slide_type": "slide"}
 # Separate inputs from targets
 
-# Target attribute is removed from dataset
+# Target attribute is removed to create inputs
 df_x = df_housing.drop("median_house_value", axis=1)
 
 # Targets are stored separately in a new variable
