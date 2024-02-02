@@ -183,6 +183,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="rl.html">Introduction</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="challenges/heart_disease.html">Heart disease</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Search algorithms</span></p>
 <ul class="nav bd-sidenav">
@@ -1145,7 +1149,7 @@ Name: median_house_value, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separate inputs from targets</span>
 
-<span class="c1"># Target attribute is removed from dataset</span>
+<span class="c1"># Target attribute is removed to create inputs</span>
 <span class="n">df_x</span> <span class="o">=</span> <span class="n">df_housing</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Targets are stored separately in a new variable</span>
