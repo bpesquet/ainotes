@@ -36,6 +36,9 @@ parts:
       sections:
       - file: ml/rl
         title: Introduction
+    - file: ml/challenges
+      sections:
+      - file: ml/challenges/heart_disease
   - caption: Search algorithms
     chapters:
     - file: search/dijkstra_astar

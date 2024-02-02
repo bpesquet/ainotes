@@ -36,7 +36,7 @@ pylint src/
 
 # Force resync of all notebook files (in docs/) with Python files (in src/)
 # Add the --execute flag to rerun all notebooks
-jupytext --sync src/*/*.py
+jupytext --sync src/**/*.py
 
 # Build the website locally from notebook files
 # Output is in the docs/_build/ subfolder
