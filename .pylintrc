@@ -9,7 +9,7 @@
 # can either give multiple identifier separated by comma (,) or put this option
 # multiple time (only on the command line, not in the configuration file where
 # it should appear only once).
-disable=missing-module-docstring,duplicate-code,line-too-long
+disable=missing-module-docstring,duplicate-code,line-too-long,invalid-name,not-callable
 
 # Good variable names which should always be accepted, separated by a comma
 good-names=i,j,k,x,y
