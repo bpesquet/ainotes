@@ -21,6 +21,7 @@ from sklearn.datasets import make_circles
 
 import torch
 from torch import nn
+from torch.utils.data import DataLoader
 
 # %% slideshow={"slide_type": "slide"}
 # Print environment info
@@ -71,11 +72,11 @@ def plot_dataset(x, y):
     plt.show()
 
 
-def plot_decision_boundary(model, x, y, figure=None):
+def plot_decision_boundary(model, x, y):
     """Plot a decision boundary"""
 
-    if figure is None:  # If no figure is given, create a new one
-        plt.figure()
+    plt.figure()
+
     # Set min and max values and give it some padding
     x_min, x_max = x[:, 0].min() - 0.1, x[:, 0].max() + 0.1
     y_min, y_max = x[:, 1].min() - 0.1, x[:, 1].max() + 0.1
@@ -94,10 +95,10 @@ def plot_decision_boundary(model, x, y, figure=None):
     plt.show()
 
 
-def plot_loss_acc(training_history):
+def plot_loss_acc(history):
     """Plot training loss and accuracy. Takes a Keras-like History object as parameter"""
 
-    loss_values = training_history["loss"]
+    loss_values = history["loss"]
     recorded_epochs = range(1, len(loss_values) + 1)
 
     fig, (ax1, ax2) = plt.subplots(2, 1)
@@ -105,22 +106,23 @@ def plot_loss_acc(training_history):
     ax1.set_ylabel("Loss")
     ax1.legend()
 
-    acc_values = training_history["acc"]
+    acc_values = history["acc"]
     ax2.plot(recorded_epochs, acc_values, ".--", label="Training accuracy")
-    ax2.set_xlabel("Recorded epochs")
+    ax2.set_xlabel("Epochs")
     ax2.set_ylabel("Accuracy")
     plt.legend()
 
     final_loss = loss_values[-1]
     final_acc = acc_values[-1]
-    fig.suptitle(f"Training loss: {final_loss:.5f}. Training accuracy: {final_acc:.4f}")
+    fig.suptitle(
+        f"Training loss: {final_loss:.5f}. Training accuracy: {final_acc*100:.2f}%"
+    )
     plt.show()
 
 
 # Generate 2D data (a large circle containing a smaller circle)
 inputs, targets = make_circles(n_samples=500, noise=0.1, factor=0.3)
 print(f"inputs: {inputs.shape}. targets: {targets.shape}")
-
 
 plot_dataset(inputs, targets)
 
@@ -136,9 +138,17 @@ print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
 
 # Hyperparameters
 learning_rate = 0.1
-num_epochs = 5000
-epoch_print_interval = 100
+n_epochs = 50
+batch_size = 5
 
+
+# Load data as randomized batches for training
+train_dataloader = DataLoader(
+    list(zip(x_train, y_train)), batch_size=batch_size, shuffle=True
+)
+
+n_samples = len(train_dataloader.dataset)
+n_batches = len(train_dataloader)
 
 # Create a MultiLayer Perceptron with 2 inputs and 1 output
 # (you may change the number of hidden neurons and layers)
@@ -151,47 +161,60 @@ print(mlp_clf)
 loss_fn = nn.BCELoss()
 
 # Object storing training history
-history = {"loss": [], "acc": []}
+train_history = {"loss": [], "acc": []}
 
-# Training loop
-for epoch in range(num_epochs):
+# Total number of gradient descent steps
+n_gd_steps = 0
+
+for epoch in range(n_epochs):
+    epoch_loss = 0
+
     # Reset number of correct predictions for the current epoch
-    nb_correct = 0
+    epoch_correct = 0
 
-    # Forward pass: compute model output with current weights
-    y_pred = mlp_clf(x_train)
+    # Training loop for one data batch (i.e. one gradient descent step)
+    for batch, (x_batch, y_batch) in enumerate(train_dataloader):
 
-    # Compute epoch loss (comparison between expected and actual results)
-    loss = loss_fn(y_pred, y_train)
+        # Forward pass: compute model output with current weights
+        y_pred_batch = mlp_clf(x_batch)
 
-    # Zero the gradients before running the backward pass
-    # Avoids accumulating gradients erroneously
-    mlp_clf.zero_grad()
+        # Compute batch loss (comparison between expected and actual results)
+        batch_loss = loss_fn(y_pred_batch, y_batch)
 
-    # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
-    loss.backward()
+        # Zero the gradients before running the backward pass
+        # Avoids accumulating gradients erroneously
+        mlp_clf.zero_grad()
 
-    # Gradient descent step: update the weights in the opposite direction of their gradient
-    # no_grad() avoids tracking operations history, which would be useless here
-    with torch.no_grad():
-        for param in mlp_clf.parameters():
-            param -= learning_rate * param.grad
+        # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
+        batch_loss.backward()
 
-    # Compute epoch metrics, using a test to reduce verbosity
-    if epoch == 0 or (epoch + 1) % epoch_print_interval == 0:
-        # Compute epoch metrics
-        epoch_loss = loss.item()
-        nb_correct += (torch.round(y_pred) == y_train).float().sum().item()
-        epoch_acc = nb_correct / len(y_train)
+        # Gradient descent step: update the weights in the opposite direction of their gradient
+        # no_grad() avoids tracking operations history, which would be useless here
+        with torch.no_grad():
+            for param in mlp_clf.parameters():
+                param -= learning_rate * param.grad
 
-        # Record epoch metrics for later plotting
-        history["loss"].append(epoch_loss)
-        history["acc"].append(epoch_acc)
+        # Accumulate data for epoch metrics
+        epoch_loss += batch_loss.item()
+        epoch_correct += (torch.round(mlp_clf(x_batch)) == y_batch).float().sum().item()
 
-        print(
-            f"Epoch [{(epoch + 1):4}/{num_epochs:4}]. Loss: {epoch_loss:.5f}. Accuracy: {epoch_acc:.4f}"
-        )
+        n_gd_steps += 1
 
+    # Compute epoch metrics
+    epoch_loss /= n_batches
+    epoch_acc = epoch_correct / n_samples
+
+    print(
+        f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc*100:.2f}%"
+    )
+
+    # Record epoch metrics for later plotting
+    train_history["loss"].append(epoch_loss)
+    train_history["acc"].append(epoch_acc)
+
+
+print("Training complete!")
+print(f"Total gradient descent steps: {n_gd_steps}.")
 
 plot_decision_boundary(mlp_clf, inputs, targets)
-plot_loss_acc(history)
+plot_loss_acc(train_history)
