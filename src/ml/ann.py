@@ -97,29 +97,23 @@ def plot_decision_boundary(model, x, y, figure=None):
 def plot_loss_acc(training_history):
     """Plot training loss and accuracy. Takes a Keras-like History object as parameter"""
 
-    plt.figure()  # figsize=(10, 10))
-
     loss_values = training_history["loss"]
     recorded_epochs = range(1, len(loss_values) + 1)
 
-    plt.subplot(2, 1, 1)
-    plt.plot(recorded_epochs, loss_values, ".--", label="Training loss")
-    final_loss = loss_values[-1]
-    title = f"Training loss: {final_loss:.5f}"
-    plt.ylabel("Loss")
-    plt.title(title)
-    plt.legend()
+    fig, (ax1, ax2) = plt.subplots(2, 1)
+    ax1.plot(recorded_epochs, loss_values, ".--", label="Training loss")
+    ax1.set_ylabel("Loss")
+    ax1.legend()
 
     acc_values = training_history["acc"]
-    plt.subplot(2, 1, 2)
-    plt.plot(recorded_epochs, acc_values, ".--", label="Training accuracy")
-    final_acc = acc_values[-1]
-    title = f"Training accuracy: {final_acc:.4f}"
-    plt.xlabel("Recorded epochs")
-    plt.ylabel("Accuracy")
-    plt.title(title)
+    ax2.plot(recorded_epochs, acc_values, ".--", label="Training accuracy")
+    ax2.set_xlabel("Recorded epochs")
+    ax2.set_ylabel("Accuracy")
     plt.legend()
 
+    final_loss = loss_values[-1]
+    final_acc = acc_values[-1]
+    fig.suptitle(f"Training loss: {final_loss:.5f}. Training accuracy: {final_acc:.4f}")
     plt.show()
 
 
@@ -143,7 +137,7 @@ print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
 # Hyperparameters
 learning_rate = 0.1
 num_epochs = 5000
-print_interval = 100
+epoch_print_interval = 100
 
 
 # Create a MultiLayer Perceptron with 2 inputs and 1 output
@@ -161,9 +155,10 @@ history = {"loss": [], "acc": []}
 
 # Training loop
 for epoch in range(num_epochs):
+    # Reset number of correct predictions for the current epoch
     nb_correct = 0
 
-    # Forward pass: compute model output with current parameters
+    # Forward pass: compute model output with current weights
     y_pred = mlp_clf(x_train)
 
     # Compute epoch loss (comparison between expected and actual results)
@@ -173,7 +168,7 @@ for epoch in range(num_epochs):
     # Avoids accumulating gradients erroneously
     mlp_clf.zero_grad()
 
-    # Backward pass (backprop): compute gradient of the loss w.r.t all model weights
+    # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
     loss.backward()
 
     # Gradient descent step: update the weights in the opposite direction of their gradient
@@ -182,20 +177,20 @@ for epoch in range(num_epochs):
         for param in mlp_clf.parameters():
             param -= learning_rate * param.grad
 
-        # Compute epoch metrics, using a test to reduce verbosity
-        if epoch == 0 or (epoch + 1) % print_interval == 0:
-            # Compute epoch metrics
-            epoch_loss = loss.item()
-            nb_correct += (torch.round(y_pred) == y_train).float().sum().item()
-            epoch_acc = nb_correct / len(y_train)
+    # Compute epoch metrics, using a test to reduce verbosity
+    if epoch == 0 or (epoch + 1) % epoch_print_interval == 0:
+        # Compute epoch metrics
+        epoch_loss = loss.item()
+        nb_correct += (torch.round(y_pred) == y_train).float().sum().item()
+        epoch_acc = nb_correct / len(y_train)
 
-            # Record epoch metrics for later plotting
-            history["loss"].append(epoch_loss)
-            history["acc"].append(epoch_acc)
+        # Record epoch metrics for later plotting
+        history["loss"].append(epoch_loss)
+        history["acc"].append(epoch_acc)
 
-            print(
-                f"Epoch [{(epoch + 1):4}/{num_epochs:4}]. Loss: {epoch_loss:.5f}. Accuracy: {epoch_acc:.4f}"
-            )
+        print(
+            f"Epoch [{(epoch + 1):4}/{num_epochs:4}]. Loss: {epoch_loss:.5f}. Accuracy: {epoch_acc:.4f}"
+        )
 
 
 plot_decision_boundary(mlp_clf, inputs, targets)
