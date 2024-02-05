@@ -94,10 +94,34 @@ def plot_decision_boundary(model, x, y, figure=None):
     plt.show()
 
 
-# Hyperparameters
-learning_rate = 0.1
-num_epochs = 5000
-print_interval = 100
+def plot_loss_acc(training_history):
+    """Plot training loss and accuracy. Takes a Keras-like History object as parameter"""
+
+    plt.figure()  # figsize=(10, 10))
+
+    loss_values = training_history["loss"]
+    recorded_epochs = range(1, len(loss_values) + 1)
+
+    plt.subplot(2, 1, 1)
+    plt.plot(recorded_epochs, loss_values, ".--", label="Training loss")
+    final_loss = loss_values[-1]
+    title = f"Training loss: {final_loss:.5f}"
+    plt.ylabel("Loss")
+    plt.title(title)
+    plt.legend()
+
+    acc_values = training_history["acc"]
+    plt.subplot(2, 1, 2)
+    plt.plot(recorded_epochs, acc_values, ".--", label="Training accuracy")
+    final_acc = acc_values[-1]
+    title = f"Training accuracy: {final_acc:.4f}"
+    plt.xlabel("Recorded epochs")
+    plt.ylabel("Accuracy")
+    plt.title(title)
+    plt.legend()
+
+    plt.show()
+
 
 # Generate 2D data (a large circle containing a smaller circle)
 inputs, targets = make_circles(n_samples=500, noise=0.1, factor=0.3)
@@ -116,6 +140,11 @@ y_train = torch.from_numpy(targets[:, np.newaxis]).float().to(device)
 
 print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
 
+# Hyperparameters
+learning_rate = 0.1
+num_epochs = 5000
+print_interval = 100
+
 
 # Create a MultiLayer Perceptron with 2 inputs and 1 output
 # (you may change the number of hidden neurons and layers)
@@ -124,34 +153,50 @@ mlp_clf = nn.Sequential(nn.Linear(2, 3), nn.Tanh(), nn.Linear(3, 1), nn.Sigmoid(
 )
 print(mlp_clf)
 
-# Combination of a sigmoid layer and a Binary Cross Entropy loss function
-# https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html
+# Binary Cross Entropy loss function
 loss_fn = nn.BCELoss()
+
+# Object storing training history
+history = {"loss": [], "acc": []}
 
 # Training loop
 for epoch in range(num_epochs):
+    nb_correct = 0
+
     # Forward pass: compute model output with current parameters
     y_pred = mlp_clf(x_train)
 
-    # Compute the loss value (difference between expected and actual results)
+    # Compute epoch loss (comparison between expected and actual results)
     loss = loss_fn(y_pred, y_train)
-
-    # Reduce the number of prints
-    if epoch == 0 or (epoch + 1) % print_interval == 0:
-        # Print value of loss for current epoch
-        print(f"Epoch [{(epoch + 1):4}/{num_epochs:4}]. Loss: {loss.item():.5f}")
 
     # Zero the gradients before running the backward pass
     # Avoids accumulating gradients erroneously
     mlp_clf.zero_grad()
 
-    # Backward pass (backprop): compute gradients of the loss w.r.t all model weights
+    # Backward pass (backprop): compute gradient of the loss w.r.t all model weights
     loss.backward()
 
-    # Gradient descent step: update the weights in the opposite direction of their gradients
-    # no_grad() avoids tracking operations history here
+    # Gradient descent step: update the weights in the opposite direction of their gradient
+    # no_grad() avoids tracking operations history, which would be useless here
     with torch.no_grad():
         for param in mlp_clf.parameters():
             param -= learning_rate * param.grad
 
+        # Compute epoch metrics, using a test to reduce verbosity
+        if epoch == 0 or (epoch + 1) % print_interval == 0:
+            # Compute epoch metrics
+            epoch_loss = loss.item()
+            nb_correct += (torch.round(y_pred) == y_train).float().sum().item()
+            epoch_acc = nb_correct / len(y_train)
+
+            # Record epoch metrics for later plotting
+            history["loss"].append(epoch_loss)
+            history["acc"].append(epoch_acc)
+
+            print(
+                f"Epoch [{(epoch + 1):4}/{num_epochs:4}]. Loss: {epoch_loss:.5f}. Accuracy: {epoch_acc:.4f}"
+            )
+
+
 plot_decision_boundary(mlp_clf, inputs, targets)
+plot_loss_acc(history)
