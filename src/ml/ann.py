@@ -1,5 +1,9 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # # Artificial neural networks
+#
+# ```{warning}
+# This chapter is under construction.
+# ```
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
@@ -12,16 +16,28 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import seaborn as sns
 
-
-# %% slideshow={"slide_type": "slide"}
-# sklearn does not automatically import its subpackages
-# https://stackoverflow.com/a/9049246/2380880
 import sklearn
 from sklearn.datasets import make_circles
 
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
+
+
+# %% slideshow={"slide_type": "slide"}
+# Setup plots
+
+# Include matplotlib graphs into the notebook, next to the code
+# https://stackoverflow.com/a/43028034/2380880
+# %matplotlib inline
+
+# Improve plot quality
+# %config InlineBackend.figure_format = "retina"
+
+# Setup seaborn default theme
+# http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme
+sns.set_theme()
+
 
 # %% slideshow={"slide_type": "slide"}
 # Print environment info
@@ -44,27 +60,12 @@ else:
     print("No GPU found, using CPU instead")
 
 
-# %% slideshow={"slide_type": "slide"}
-# Setup plots
-
-# Include matplotlib graphs into the notebook, next to the code
-# https://stackoverflow.com/a/43028034/2380880
-# %matplotlib inline
-
-# Improve plot quality
-# %config InlineBackend.figure_format = "retina"
-
-# Setup seaborn default theme
-# http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme
-sns.set_theme()
-
-
-# %% slideshow={"slide_type": "slide"}
+# %% slideshow={"slide_type": "skip"}
 # Utility functions
 
 
 def plot_dataset(x, y):
-    """Plot 2D data"""
+    """Plot a 2-dimensional dataset with associated classes"""
 
     plt.figure()
     plt.plot(x[y == 0, 0], x[y == 0, 1], "or", label=0)
@@ -74,7 +75,7 @@ def plot_dataset(x, y):
 
 
 def plot_decision_boundary(model, x, y):
-    """Plot a decision boundary"""
+    """Plot the frontier between classes for a 2-dimensional dataset"""
 
     plt.figure()
 
@@ -121,12 +122,54 @@ def plot_loss_acc(history):
     plt.show()
 
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Fundamentals
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Online playground
+#
+# [![TensorFlow playground](_images/tf_playground.png)](http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.1&regularizationRate=0&noise=0&networkShape=2&seed=0.59857&showTestData=false&discretize=false&percTrainData=30&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=false&problem_hide=true&regularization_hide=true&regularizationRate_hide=true&percTrainData_hide=false)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Activation functions
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Training process
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## BInary classification
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Data generation
+
+# %% slideshow={"slide_type": "-"}
 # Generate 2D data (a large circle containing a smaller circle)
 inputs, targets = make_circles(n_samples=500, noise=0.1, factor=0.3)
 print(f"inputs: {inputs.shape}. targets: {targets.shape}")
 
 plot_dataset(inputs, targets)
 
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Hyperparameters
+
+# %% slideshow={"slide_type": "-"}
+# Rate of parameter change during gradient descent
+learning_rate = 0.1
+
+# An epoch is finished when all data samples have been presented to the model during training
+n_epochs = 50
+
+# Number of samples used for one gradient descent step during training
+batch_size = 5
+
+# Number of neurons on the hidden layer of the MLP
+hidden_layer_size = 2
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Data preparation
+
+# %% slideshow={"slide_type": "-"}
 # Create PyTorch tensors from NumPy tensors
 
 x_train = torch.from_numpy(inputs).float().to(device)
@@ -137,12 +180,7 @@ y_train = torch.from_numpy(targets[:, np.newaxis]).float().to(device)
 
 print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
 
-# Hyperparameters
-learning_rate = 0.1
-n_epochs = 50
-batch_size = 5
-
-
+# %% slideshow={"slide_type": "slide"}
 # Load data as randomized batches for training
 train_dataloader = DataLoader(
     list(zip(x_train, y_train)), batch_size=batch_size, shuffle=True
@@ -154,19 +192,39 @@ n_samples = len(train_dataloader.dataset)
 # Number of batches in an epoch (= n_samples / batch_size, rounded up)
 n_batches = len(train_dataloader)
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Model definition
+
+# %% slideshow={"slide_type": "-"}
 # Create a MultiLayer Perceptron with 2 inputs and 1 output
-# (you may change the number of hidden neurons and layers)
-mlp_clf = nn.Sequential(nn.Linear(2, 3), nn.Tanh(), nn.Linear(3, 1), nn.Sigmoid()).to(
-    device
-)
+# You may change its internal architecture:
+# for example, try adding one neuron on the hidden layer and check training results
+mlp_clf = nn.Sequential(
+    nn.Linear(2, hidden_layer_size),
+    nn.Tanh(),
+    nn.Linear(hidden_layer_size, 1),
+    nn.Sigmoid(),
+).to(device)
 print(mlp_clf)
 
+n_parameters = sum(p.numel() for p in mlp_clf.parameters() if p.requires_grad)
+print(f"Number of trainable parameters: {n_parameters}")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Loss function
+
+# %%
 # Binary Cross Entropy loss function
 loss_fn = nn.BCELoss()
 
 # Object storing training history
 train_history = {"loss": [], "acc": []}
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Model training
+
+# %% slideshow={"slide_type": "-"}
+# Main training loop
 for epoch in range(n_epochs):
     epoch_loss = 0
 
@@ -174,19 +232,19 @@ for epoch in range(n_epochs):
     epoch_correct = 0
 
     # Training loop for one data batch (i.e. one gradient descent step)
-    for batch, (x_batch, y_batch) in enumerate(train_dataloader):
+    for x_batch, y_batch in train_dataloader:
         # Forward pass: compute model output with current weights
         y_pred_batch = mlp_clf(x_batch)
 
-        # Compute batch loss (comparison between expected and actual results)
-        batch_loss = loss_fn(y_pred_batch, y_batch)
+        # Compute loss (comparison between expected and actual results)
+        loss = loss_fn(y_pred_batch, y_batch)
 
         # Zero the gradients before running the backward pass
         # Avoids accumulating gradients erroneously
         mlp_clf.zero_grad()
 
         # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
-        batch_loss.backward()
+        loss.backward()
 
         # Gradient descent step: update the weights in the opposite direction of their gradient
         # no_grad() avoids tracking operations history, which would be useless here
@@ -195,7 +253,7 @@ for epoch in range(n_epochs):
                 param -= learning_rate * param.grad
 
         # Accumulate data for epoch metrics: loss and number of correct predictions
-        epoch_loss += batch_loss.item()
+        epoch_loss += loss.item()
         epoch_correct += (torch.round(mlp_clf(x_batch)) == y_batch).float().sum().item()
 
     # Compute epoch metrics
@@ -203,7 +261,7 @@ for epoch in range(n_epochs):
     epoch_acc = epoch_correct / n_samples
 
     print(
-        f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc*100:.2f}%"
+        f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
     )
 
     # Record epoch metrics for later plotting
@@ -214,5 +272,19 @@ for epoch in range(n_epochs):
 print("Training complete!")
 print(f"Total gradient descent steps: {n_epochs * n_batches}.")
 
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Training results
+
+# %% slideshow={"slide_type": "-"}
+plot_loss_acc(train_history)
+
+# %% slideshow={"slide_type": "slide"}
 plot_decision_boundary(mlp_clf, inputs, targets)
-plot_loss_acc(history=train_history)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Multiclass classification
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Regression
+
+# %%
