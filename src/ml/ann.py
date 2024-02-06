@@ -35,12 +35,13 @@ print(f"PyTorch version: {torch.__version__}")
 if torch.cuda.is_available():
     device = torch.device("cuda")
     print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
-elif torch.backends.mps.is_available():
-    device = torch.device("mps")
-    print("Metal GPU found :)")
+# Performance issues exist with MPS backend
+# elif torch.backends.mps.is_available():
+#     device = torch.device("mps")
+#     print("Metal GPU found :)")
 else:
     device = torch.device("cpu")
-    print("No GPU found, failing back to CPU :/")
+    print("No GPU found, using CPU instead")
 
 
 # %% slideshow={"slide_type": "slide"}
@@ -147,7 +148,10 @@ train_dataloader = DataLoader(
     list(zip(x_train, y_train)), batch_size=batch_size, shuffle=True
 )
 
+# Number of samples
 n_samples = len(train_dataloader.dataset)
+
+# Number of batches in an epoch (= n_samples / batch_size, rounded up)
 n_batches = len(train_dataloader)
 
 # Create a MultiLayer Perceptron with 2 inputs and 1 output
@@ -163,9 +167,6 @@ loss_fn = nn.BCELoss()
 # Object storing training history
 train_history = {"loss": [], "acc": []}
 
-# Total number of gradient descent steps
-n_gd_steps = 0
-
 for epoch in range(n_epochs):
     epoch_loss = 0
 
@@ -174,7 +175,6 @@ for epoch in range(n_epochs):
 
     # Training loop for one data batch (i.e. one gradient descent step)
     for batch, (x_batch, y_batch) in enumerate(train_dataloader):
-
         # Forward pass: compute model output with current weights
         y_pred_batch = mlp_clf(x_batch)
 
@@ -194,11 +194,9 @@ for epoch in range(n_epochs):
             for param in mlp_clf.parameters():
                 param -= learning_rate * param.grad
 
-        # Accumulate data for epoch metrics
+        # Accumulate data for epoch metrics: loss and number of correct predictions
         epoch_loss += batch_loss.item()
         epoch_correct += (torch.round(mlp_clf(x_batch)) == y_batch).float().sum().item()
-
-        n_gd_steps += 1
 
     # Compute epoch metrics
     epoch_loss /= n_batches
@@ -214,7 +212,7 @@ for epoch in range(n_epochs):
 
 
 print("Training complete!")
-print(f"Total gradient descent steps: {n_gd_steps}.")
+print(f"Total gradient descent steps: {n_epochs * n_batches}.")
 
 plot_decision_boundary(mlp_clf, inputs, targets)
-plot_loss_acc(train_history)
+plot_loss_acc(history=train_history)
