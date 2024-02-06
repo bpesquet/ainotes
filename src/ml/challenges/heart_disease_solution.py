@@ -104,9 +104,7 @@ print(f"scikit-learn version: {sklearn.__version__}")
 # ## Data loading and exploring
 
 # %%
-DATASET_URL = (
-    "https://raw.githubusercontent.com/bpesquet/ainotes/master/data/heart.csv"
-)
+DATASET_URL = "https://raw.githubusercontent.com/bpesquet/ainotes/master/data/heart.csv"
 
 df_heart = pd.read_csv(DATASET_URL)
 
