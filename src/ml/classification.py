@@ -36,21 +36,15 @@ import platform
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 import sklearn
-
-print(f"Python version: {platform.python_version()}")
-print(f"NumPy version: {np.__version__}")
-print(f"scikit-learn version: {sklearn.__version__}")
-
-# %% slideshow={"slide_type": "slide"}
-# sklearn does not automatically import its subpackages
-# https://stackoverflow.com/a/9049246/2380880
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import (
     ConfusionMatrixDisplay,
     classification_report,
     RocCurveDisplay,
+    log_loss,
 )
 from sklearn.linear_model import SGDClassifier
 
@@ -67,6 +61,12 @@ from sklearn.linear_model import SGDClassifier
 # Setup seaborn default theme
 # http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme
 sns.set_theme()
+
+# %% slideshow={"slide_type": "slide"}
+# Print environment info
+print(f"Python version: {platform.python_version()}")
+print(f"NumPy version: {np.__version__}")
+print(f"scikit-learn version: {sklearn.__version__}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Context and data preparation
@@ -85,7 +85,11 @@ images, targets = fetch_openml(
 )
 
 print(f"Images: {images.shape}. Targets: {targets.shape}")
-print(f"First 10 digits: {targets[:10]}")
+print(f"First 10 labels: {targets[:10]}")
+
+# %% slideshow={"slide_type": "slide"}
+# Show raw data for the first digit image
+print(images[0])
 
 # %% slideshow={"slide_type": "slide"}
 # Plot the first 10 digits
@@ -146,15 +150,15 @@ print(y_train_5[:10])
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Choosing a loss function
 #
-# This choice depends on the problem type. For binary classification tasks where expected results are either 1 (*True*) or 0 (*False*), a popular choice is the **Binary CrossEntropy**, a.k.a **logistic loss** or **log loss**.
+# This choice depends on the problem type. For binary classification tasks where expected results are either 1 (*True*) or 0 (*False*), a popular choice is the **Binary Cross Entropy loss**, a.k.a. **log(istic regression) loss**. It is implemented in the scikit-learn [log_loss](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) function.
 #
 # $$\mathcal{L}_{\mathrm{BCE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)$$
 #
 # - $y^{(i)} \in \{0,1\}$: expected result for the $i$th sample.
-# - $y'^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in [0,1]$: model output for the $i$th sample.
+# - $y'^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in [0,1]$: model output for the $i$th sample, i.e. probability that the $i$th sample belongs to the positive class.
 
 # %% slideshow={"slide_type": "slide"}
-# Plot logistic loss for one output
+# Plot BCE loss for one output
 x = np.linspace(0.01, 0.99, 200)
 plt.plot(x, -np.log(1 - x), label="Target = 0")
 plt.plot(x, -np.log(x), "r--", label="Target = 1")
@@ -162,6 +166,29 @@ plt.xlabel("Model output")
 plt.ylabel("Loss value")
 plt.legend(fontsize=12)
 plt.show()
+
+# %% slideshow={"slide_type": "slide"}
+# Compute BCE losses for pseudo-predictions
+
+y_true = [0, 0, 1, 1]
+
+# Good prediction
+y_pred = [0.1, 0.2, 0.7, 0.99]
+bce = log_loss(y_true, y_pred)
+print(f"BCE loss (good prediction): {bce:.05f}")
+
+# Compare theorical and computed values
+np.testing.assert_almost_equal(
+    -(np.log(0.9) + np.log(0.8) + np.log(0.7) + np.log(0.99)) / 4, bce, decimal=5
+)
+
+# Perfect prediction
+y_pred = [0.0, 0.0, 1.0, 1.0]
+print(f"BCE loss (perfect prediction): {log_loss(y_true, y_pred):.05f}")
+
+# Awful prediction
+y_pred = [0.9, 0.85, 0.17, 0.05]
+print(f"BCE loss (awful prediction): {log_loss(y_true, y_pred):.05f}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Training a binary classifier
@@ -352,13 +379,31 @@ plt.show()
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Choosing a loss function
 #
-# The **Categorical Cross-Entropy** is the loss function of choice for multiclass classfication. When $K=2$, it is equivalent to binary cross-entropy.
+# The log loss extends naturally to the multiclass case. It is also called **Negative Log-Likelihood** or **Cross Entropy**, and is also implemented in the scikit-learn [log_loss](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) function.
 #
-# $$\mathcal{L}_{\mathrm{CCE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k))$$
+# $$\mathcal{L}_{\mathrm{CE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k))$$
 #
-# - $y^{(i)}_k \in \{0,1\}$: expected value for the $k$th label of the $i$th sample.
-# - $y'^{(i)}_k \in [0,1]$: model output for the $k$th label of the $i$th sample.
+# - $\pmb{y^{(i)}} \in \{0,1\}^K$: binary vector of $K$ elements.
+# - $y^{(i)}_k \in \{0,1\}$: expected value for the $k$th label of the $i$th sample. $y^{(i)}_k = 1$ iff the $i$th sample has label $k \in [1,K]$.
+# - $y'^{(i)}_k \in [0,1]$: model output for the $k$th label of the $i$th sample, i.e. probability that the $i$th sample has label $k$.
 
+
+# %% slideshow={"slide_type": "slide"}
+# Compute cross entropy losses for pseudo-predictions
+
+# 2 samples with 3 possibles labels. Sample 1 has label 2, sample 2 has label 3
+y_true = [[0, 1, 0], [0, 0, 1]]
+
+# Probability distribution vector
+# 95% proba that sample 1 has label 2, 70% proba that sample 2 has label 3
+y_pred = [[0.05, 0.95, 0], [0.1, 0.2, 0.7]]
+
+# Compute cross entropy loss
+ce = log_loss(y_true, y_pred)
+print(f"Cross entropy loss: {ce:.05f}")
+
+# Compare theorical and computed loss values
+np.testing.assert_almost_equal(-(np.log(0.95) + np.log(0.7)) / 2, ce)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Training a multiclass classifier
