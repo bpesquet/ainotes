@@ -20,8 +20,10 @@ import sklearn
 from sklearn.datasets import make_circles
 
 import torch
-from torch import nn
+from torch import nn, optim
 from torch.utils.data import DataLoader
+from torchvision import datasets
+from torchvision.transforms import ToTensor
 
 
 # %% slideshow={"slide_type": "slide"}
@@ -122,6 +124,31 @@ def plot_loss_acc(history):
     plt.show()
 
 
+def count_parameters(model, trainable=True):
+    """Return the total number of (trainable) parameters for a model"""
+
+    return (
+        sum(p.numel() for p in model.parameters() if p.requires_grad)
+        if trainable
+        else sum(p.numel() for p in model.parameters())
+    )
+
+
+def plot_fashion_images(data, labels):
+    """Plot some images with their associated labels"""
+
+    figure = plt.figure(figsize=(10, 5))
+    cols, rows = 5, 2
+    for i in range(1, cols * rows + 1):
+        sample_idx = torch.randint(len(data), size=(1,)).item()
+        img, label = data[sample_idx]
+        figure.add_subplot(rows, cols, i)
+        plt.title(labels[label])
+        plt.axis("off")
+        plt.imshow(img.squeeze(), cmap="gray")
+    plt.show()
+
+
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Fundamentals
 
@@ -140,18 +167,26 @@ def plot_loss_acc(history):
 # ## BInary classification
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Data generation
+# ### Data generation and visualization
+#
+# A [scikit-learn function](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html) is used to easily generate 2-dimensional data with two classes.
 
 # %% slideshow={"slide_type": "-"}
 # Generate 2D data (a large circle containing a smaller circle)
-inputs, targets = make_circles(n_samples=500, noise=0.1, factor=0.3)
-print(f"inputs: {inputs.shape}. targets: {targets.shape}")
+planar_data, planar_targets = make_circles(n_samples=500, noise=0.1, factor=0.3)
 
-plot_dataset(inputs, targets)
+print(f"Data: {planar_data.shape}. targets: {planar_targets.shape}")
+print(planar_data[:10])
+print(planar_targets[:10])
 
+
+# %% slideshow={"slide_type": "slide"}
+plot_dataset(planar_data, planar_targets)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Hyperparameters
+#
+# Hyperparameters ($\neq$ model parameters) are adjustable configuration values that let you control the model training process.
 
 # %% slideshow={"slide_type": "-"}
 # Rate of parameter change during gradient descent
@@ -168,121 +203,391 @@ hidden_layer_size = 2
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Data preparation
+#
+# Generated data (NumPy tensors) needs to be converted to PyTorch tensors before training a PyTorch-based model. These new tensors are stored in the memory of the available device (GPU ou CPU).
 
 # %% slideshow={"slide_type": "-"}
 # Create PyTorch tensors from NumPy tensors
 
-x_train = torch.from_numpy(inputs).float().to(device)
+x_train = torch.from_numpy(planar_data).float().to(device)
 
 # PyTorch loss function expects float results of shape (batch_size, 1) instead of (batch_size,)
 # So we add a new axis and convert them to floats
-y_train = torch.from_numpy(targets[:, np.newaxis]).float().to(device)
+y_train = torch.from_numpy(planar_targets[:, np.newaxis]).float().to(device)
 
 print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
 
-# %% slideshow={"slide_type": "slide"}
+# %% [markdown] slideshow={"slide_type": "slide"}
+# In order to use [mini-batch SGD](principles.ipynb#mini-batch-sgd), data needs to be passed to the model as small, randomized batches during training. The Pytorch [DataLoader](https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader) class abstracts this complexity for us.
+
+# %% slideshow={"slide_type": "-"}
 # Load data as randomized batches for training
-train_dataloader = DataLoader(
+planar_dataloader = DataLoader(
     list(zip(x_train, y_train)), batch_size=batch_size, shuffle=True
 )
 
-# Number of samples
-n_samples = len(train_dataloader.dataset)
-
-# Number of batches in an epoch (= n_samples / batch_size, rounded up)
-n_batches = len(train_dataloader)
-
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Model definition
+#
+# A PyTorch model is defined by combining elementary blocks, known as *modules*.
+#
+# Our neural network uses the following ones:
+# - [Sequential](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html): an ordered container of modules.
+# - [Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html): a linear transformation of its entries, a.k.a. *dense* or *fully connected* layer.
+# - [Tanh](https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html) and [Sigmoid](https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html): the corresponding activation functions.
 
-# %% slideshow={"slide_type": "-"}
+# %% slideshow={"slide_type": "slide"}
 # Create a MultiLayer Perceptron with 2 inputs and 1 output
 # You may change its internal architecture:
 # for example, try adding one neuron on the hidden layer and check training results
-mlp_clf = nn.Sequential(
+planar_model = nn.Sequential(
     nn.Linear(2, hidden_layer_size),
     nn.Tanh(),
     nn.Linear(hidden_layer_size, 1),
     nn.Sigmoid(),
 ).to(device)
-print(mlp_clf)
+print(planar_model)
 
-n_parameters = sum(p.numel() for p in mlp_clf.parameters() if p.requires_grad)
-print(f"Number of trainable parameters: {n_parameters}")
+# Count the total number of trainable model parameters (weights)
+print(f"Number of trainable parameters: {count_parameters(planar_model)}.")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Loss function
+#
+# For binary classification tasks, the standard choice is the [binary cross entropy loss](classification.ipynb#choosing-a-loss-function), conveniently provided by a [PyTorch class](https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html).
+#
+# For each sample of the batch, it will compare the output of the model (a value $\in [0,1]$ provided by the sigmoid function) with the expected binary value $\in \{0,1\}$.
 
 # %%
-# Binary Cross Entropy loss function
-loss_fn = nn.BCELoss()
+# Binary cross entropy loss function
+planar_loss_fn = nn.BCELoss()
 
-# Object storing training history
-train_history = {"loss": [], "acc": []}
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Model training
-
-# %% slideshow={"slide_type": "-"}
-# Main training loop
-for epoch in range(n_epochs):
-    epoch_loss = 0
-
-    # Reset number of correct predictions for the current epoch
-    epoch_correct = 0
-
-    # Training loop for one data batch (i.e. one gradient descent step)
-    for x_batch, y_batch in train_dataloader:
-        # Forward pass: compute model output with current weights
-        y_pred_batch = mlp_clf(x_batch)
-
-        # Compute loss (comparison between expected and actual results)
-        loss = loss_fn(y_pred_batch, y_batch)
-
-        # Zero the gradients before running the backward pass
-        # Avoids accumulating gradients erroneously
-        mlp_clf.zero_grad()
-
-        # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
-        loss.backward()
-
-        # Gradient descent step: update the weights in the opposite direction of their gradient
-        # no_grad() avoids tracking operations history, which would be useless here
-        with torch.no_grad():
-            for param in mlp_clf.parameters():
-                param -= learning_rate * param.grad
-
-        # Accumulate data for epoch metrics: loss and number of correct predictions
-        epoch_loss += loss.item()
-        epoch_correct += (torch.round(mlp_clf(x_batch)) == y_batch).float().sum().item()
-
-    # Compute epoch metrics
-    epoch_loss /= n_batches
-    epoch_acc = epoch_correct / n_samples
-
-    print(
-        f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
-    )
-
-    # Record epoch metrics for later plotting
-    train_history["loss"].append(epoch_loss)
-    train_history["acc"].append(epoch_acc)
+#
+# The training algorithm is as follows:
+# - On each iteration on the whole dataset (known as an *epoch*) and for each data batch inside an epoch, the model output is computed on the current batch.
+# - This output is used alongside expected results by the loss function to obtain the mean loss for the current batch.
+# - The gradient of the loss w.r.t. each model parameter is computed (backpropagation).
+# - The model parameters are updated in the opposite direction of their gradient (one GD step).
+#
 
 
-print("Training complete!")
-print(f"Total gradient descent steps: {n_epochs * n_batches}.")
+# %% slideshow={"slide_type": "slide"}
+def train_planar(dataloader, model, loss_fn):
+    """Main training loop"""
+
+    # Object storing training history
+    history = {"loss": [], "acc": []}
+
+    # Number of samples
+    n_samples = len(dataloader.dataset)
+
+    # Number of batches in an epoch (= n_samples / batch_size, rounded up)
+    n_batches = len(dataloader)
+
+    print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
+
+    for epoch in range(n_epochs):
+        # Reset total loss for the current epoch
+        total_loss = 0
+
+        # Reset number of correct predictions for the current epoch
+        n_correct = 0
+
+        # Training loop for one data batch (i.e. one gradient descent step)
+        for x_batch, y_batch in dataloader:
+            # Zero the gradients before running the backward pass
+            # Avoids accumulating gradients erroneously
+            model.zero_grad()
+
+            # Forward pass: compute model output with current weights
+            output = model(x_batch)
+
+            # Compute loss (comparison between expected and actual results)
+            loss = loss_fn(output, y_batch)
+
+            # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
+            loss.backward()
+
+            # Gradient descent step: update the weights in the opposite direction of their gradient
+            # no_grad() avoids tracking operations history, which would be useless here
+            with torch.no_grad():
+                for param in model.parameters():
+                    param -= learning_rate * param.grad
+
+                # Accumulate data for epoch metrics: loss and number of correct predictions
+                total_loss += loss.item()
+                n_correct += (
+                    (torch.round(model(x_batch)) == y_batch).float().sum().item()
+                )
+
+        # Compute epoch metrics
+        epoch_loss = total_loss / n_batches
+        epoch_acc = n_correct / n_samples
+
+        print(
+            f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+        )
+
+        # Record epoch metrics for later plotting
+        history["loss"].append(epoch_loss)
+        history["acc"].append(epoch_acc)
+
+    print(f"Training complete! Total gradient descent steps: {n_epochs * n_batches}")
+
+    return history
+
+
+# %% slideshow={"slide_type": "slide"}
+planar_history = train_planar(planar_dataloader, planar_model, planar_loss_fn)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Training results
 
 # %% slideshow={"slide_type": "-"}
-plot_loss_acc(train_history)
+plot_loss_acc(planar_history)
 
 # %% slideshow={"slide_type": "slide"}
-plot_decision_boundary(mlp_clf, inputs, targets)
+plot_decision_boundary(planar_model, planar_data, planar_targets)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Multiclass classification
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Data loading and visualization
+#
+# We use the [Fashion-MNIST](https://github.com/zalandoresearch/fashion-mnist) dataset, analogous to the famous MNIST handwritten digits dataset. It consists of:
+# - a training set containing 60,000 28x28 grayscale images, each of them associated with a label (fashion category) from 10 classes;
+# - a test set of 10,000 images with the same properties.
+#
+# A [PyTorch class](https://pytorch.org/vision/stable/generated/torchvision.datasets.FashionMNIST.html) simplifies the loading process of this dataset.
+
+# %% slideshow={"slide_type": "slide"}
+fashion_train_data = datasets.FashionMNIST(
+    root="data", train=True, download=True, transform=ToTensor()
+)
+
+fashion_test_data = datasets.FashionMNIST(
+    root="data", train=False, download=True, transform=ToTensor()
+)
+
+# %% slideshow={"slide_type": "-"}
+# Show info about the first training image
+fashion_img, fashion_label = fashion_train_data[0]
+
+print(f"First image: {fashion_img.shape}. Label: {fashion_label}")
+
+# %% slideshow={"slide_type": "slide"}
+# Show raw data for the first image
+# Pixel values have already been normalized into the [0,1] range
+print(fashion_img)
+
+# %% slideshow={"slide_type": "slide"}
+# Labels, i.e. fashion categories associated to images (one category per image)
+fashion_labels = {
+    0: "T-Shirt",
+    1: "Trouser",
+    2: "Pullover",
+    3: "Dress",
+    4: "Coat",
+    5: "Sandal",
+    6: "Shirt",
+    7: "Sneaker",
+    8: "Bag",
+    9: "Ankle Boot",
+}
+
+
+# %%
+plot_fashion_images(fashion_train_data, fashion_labels)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Hyperparameters
+
+# %%
+# Try to change the learning rate to 1e-2 ans check training results
+learning_rate = 1e-3
+n_epochs = 10
+batch_size = 64
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Data preparation
+#
+# As always, data will be passed to the model as small, randomized batches during training.
+
+# %%
+fashion_train_dataloader = DataLoader(fashion_train_data, batch_size=batch_size)
+fashion_test_dataloader = DataLoader(fashion_test_data, batch_size=batch_size)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Model definition
+#
+# Most PyTorch models are defined as subclasses of the [Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) class. Their constructor creates the layer architecture and their `forward` method defines the forward pass of the model.
+#
+# In this model, we use the [Flatten](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html) module that transforms an input tensor of any shape into a vector (hence its name).
+
+
+# %% slideshow={"slide_type": "slide"}
+class NeuralNetwork(nn.Module):
+    """Neural network for fashion articles classification"""
+
+    def __init__(self):
+        super().__init__()
+
+        # Flatten the input image of shape (1, 28, 28) into a vector of shape (28*28,)
+        self.flatten = nn.Flatten()
+
+        # Define a sequential stack of linear layers and activation functions
+        self.layer_stack = nn.Sequential(
+            nn.Linear(28 * 28, 64),
+            nn.ReLU(),
+            nn.Linear(64, 64),
+            nn.ReLU(),
+            nn.Linear(64, 10),
+        )
+
+    def forward(self, x):
+        """Define the forward pass of the model"""
+
+        # Apply flattening to input
+        x = self.flatten(x)
+
+        # Compute output of layer stack
+        logits = self.layer_stack(x)
+
+        # Logits are a vector of raw (non-normalized) predictions
+        # This vector contains 10 values, one for each possible class
+        return logits
+
+
+# %% slideshow={"slide_type": "slide"}
+fashion_model = NeuralNetwork().to(device)
+print(fashion_model)
+
+# Try to guess the total number of parameters for this model before running this code!
+print(f"Number of trainable parameters: {count_parameters(fashion_model)}")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Loss function
+#
+# The standard choice for multiclass classification tasks is the [cross entropy loss](classification.ipynb#1) a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named [CrossEntropyLoss](https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html).
+#
+# > PyTorch also offers the [NLLLoss](https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss) class implementing the negative log-likelihood loss. A key difference is that `CrossEntropyLoss` expects *logits*  (raw, unnormalized predictions) as inputs, and uses [LogSoftmax](https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html#torch.nn.LogSoftmax) to transform them into probabilities before computing its output. Using `CrossEntropyLoss` is equivalent to applying `LogSoftmax` followed by `NLLLoss` ([more details](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81)).
+
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Softmax
+#
+# The softmax function turns a vector $\pmb{v} = \{v_1, v_2, \dots, v_K \} \in \mathbb{R}^K$ of raws values (called a *logits vector* when it's the output of a ML model) into a probability distribution. It is a multiclass generalization of the sigmoid function.
+#
+# $$\sigma(\pmb{v})_k = \frac{e^{v_k}}{\sum_{k=1}^K {e^{v_k}}}\;\;\;\;
+# \sum_{k=1}^K \sigma(\pmb{v})_k = 1$$
+#
+# - $K$: number of labels.
+# - $\pmb{v}$: logits vector, i.e. raw predictions for each class.
+# - $\sigma(\pmb{v})_k \in [0,1]$: probability associated to label $k \in [1,K]$.
+
+
+# %% slideshow={"slide_type": "slide"}
+def softmax(x):
+    """Softmax function"""
+
+    return np.exp(x) / sum(np.exp(x))
+
+
+# Raw values (logits)
+raw_predictions = [3.0, 1.0, 0.2]
+
+probas = softmax(raw_predictions)
+print(probas)
+
+# Sum of all probabilities is equal to 1
+print(sum(probas))
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Optimization algorithm
+#
+# PyTorch provides out-of-the-box implementations for many gradient descent optimization algorithms ([Adam](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html), [RMSProp](https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html), etc).
+#
+# We'll stick with vanilla mini-batch SGD for now.
+
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Model training
+
+
+# %%
+def epoch_loop(dataloader, model, loss_fn, optimizer):
+    """Training algorithm for one epoch"""
+
+    total_loss = 0
+    n_correct = 0
+
+    for x_batch, y_batch in dataloader:
+        # Load data and targets on device memory
+        x_batch, y_batch = x_batch.to(device), y_batch.to(device)
+
+        # Reset gradients
+        optimizer.zero_grad()
+
+        # Forward pass
+        output = model(x_batch)
+        loss = loss_fn(output, y_batch)
+
+        # Backward pass: backprop and GD step
+        loss.backward()
+        optimizer.step()
+
+        with torch.no_grad():
+            # Accumulate data for epoch metrics: loss and number of correct predictions
+            total_loss += loss.item()
+            n_correct += (model(x_batch).argmax(dim=1) == y_batch).float().sum().item()
+
+    return total_loss, n_correct
+
+
+# %% slideshow={"slide_type": "slide"}
+def train_fashion(dataloader, model, loss_fn, optimizer):
+    """Main training loop"""
+
+    history = {"loss": [], "acc": []}
+    n_samples = len(dataloader.dataset)
+    n_batches = len(dataloader)
+
+    print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
+
+    for epoch in range(n_epochs):
+        total_loss, n_correct = epoch_loop(dataloader, model, loss_fn, optimizer)
+
+        # Compute epoch metrics
+        epoch_loss = total_loss / n_batches
+        epoch_acc = n_correct / n_samples
+
+        print(
+            f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+        )
+
+        # Record epoch metrics for later plotting
+        history["loss"].append(epoch_loss)
+        history["acc"].append(epoch_acc)
+
+    print(f"Training complete! Total gradient descent steps: {n_epochs * n_batches}")
+
+    return history
+
+
+# %% slideshow={"slide_type": "slide"}
+fashion_history = train_fashion(
+    fashion_train_dataloader,
+    fashion_model,
+    nn.CrossEntropyLoss(),
+    optim.SGD(fashion_model.parameters(), lr=learning_rate),
+)
+
+# %% slideshow={"slide_type": "slide"}
+plot_loss_acc(fashion_history)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Regression

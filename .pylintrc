@@ -14,6 +14,9 @@ disable=missing-module-docstring,duplicate-code,line-too-long,invalid-name,not-c
 # Good variable names which should always be accepted, separated by a comma
 good-names=i,j,k,x,y
 
+[DESIGN]
+max-locals = 16
+
 [TYPECHECK]
 
 # List of members which are set dynamically and missed by Pylint inference
