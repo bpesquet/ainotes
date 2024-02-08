@@ -1,6 +1,10 @@
 # macOS folder files
 .DS_Store
 
+# Datasets downloaded by code
+data/*/**
+docs/**/data
+
 # Notebook execution output
 simple_output.ipynb
 *.pkl
