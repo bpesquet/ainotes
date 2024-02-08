@@ -30,25 +30,14 @@
 # ## Environment setup
 
 # %% slideshow={"slide_type": "slide"}
-# Relax some linting rules not needed here
-# pylint: disable=invalid-name, wrong-import-position
-
 import platform
 
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+
 import sklearn
-
-print(f"Python version: {platform.python_version()}")
-print(f"NumPy version: {np.__version__}")
-print(f"scikit-learn version: {sklearn.__version__}")
-
-
-# %% slideshow={"slide_type": "slide"}
-# sklearn does not automatically import its subpackages
-# https://stackoverflow.com/a/9049246/2380880
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -62,6 +51,7 @@ from sklearn.ensemble import RandomForestRegressor
 # For saving models and pipelines to disk
 import joblib
 
+
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
 
@@ -69,16 +59,20 @@ import joblib
 # https://stackoverflow.com/a/43028034/2380880
 # %matplotlib inline
 
-# Increase default plot size
-# https://matplotlib.org/stable/users/explain/customizing.html#matplotlibrc-sample
-plt.rcParams["figure.figsize"] = 10, 7.5
-
 # Improve plot quality
 # %config InlineBackend.figure_format = "retina"
 
 # Setup seaborn default theme
 # http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme
 sns.set_theme()
+
+
+# %% slideshow={"slide_type": "slide"}
+# Print environment info
+print(f"Python version: {platform.python_version()}")
+print(f"NumPy version: {np.__version__}")
+print(f"scikit-learn version: {sklearn.__version__}")
+
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## The Machine Learning project workflow
@@ -144,6 +138,7 @@ sns.set_theme()
 #
 # - Based on data from the 1990 California census.
 # - Slightly modified for teaching purposes by Aurélien Géron ([original version](https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html)).
+# - Raw CSV file is available [here](https://raw.githubusercontent.com/bpesquet/ainotes/master/data/california_housing.csv).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 2.1: discover data
@@ -183,10 +178,14 @@ df_housing.describe()
 
 # %% slideshow={"slide_type": "slide"}
 # Plot histograms for all numerical attributes
-df_housing.hist(bins=50, figsize=(12, 8))
+df_housing.hist(bins=50, figsize=(10, 8))
 plt.show()
 
+
 # %% slideshow={"slide_type": "slide"}
+def plot_geo_data(df):
+    """Plot a geographical representation correlation matrix for a DataFrame"""
+
 # This dataset has the particularity of including geographical coordinates
 # Visualise prices relative to them
 df_housing.plot(
@@ -196,7 +195,7 @@ df_housing.plot(
     alpha=0.4,
     s=df_housing["population"] / 100,
     label="population",
-    figsize=(12, 9),
+    figsize=(11, 8),
     c="median_house_value",
     cmap=plt.get_cmap("jet"),
     colorbar=True,
@@ -204,6 +203,9 @@ df_housing.plot(
 )
 plt.legend()
 plt.show()
+
+# %%
+plot_geo_data(df_housing)
 
 # %% slideshow={"slide_type": "slide"}
 # Compute pairwise correlations of attributes
@@ -228,7 +230,7 @@ def plot_correlation_matrix(df):
         annot=True,
         linecolor="white",
         xticklabels=df_numerical.columns,
-        annot_kws={"size": 13},
+        annot_kws={"size": 10},
         yticklabels=df_numerical.columns,
     )
 
@@ -269,33 +271,26 @@ print(f"df_x_test: {df_x_test.shape}. df_y_test: {df_y_test.shape}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Step 2.4: data preprocessing
 #
-# This task typically involves:
+# For this dataset, this task involves:
 #
-# - Removing of superflous features (if any).
-# - Adding missing values.
+# - Handling missing values.
 # - Scaling data.
-# - Transforming values into numeric form.
-# - Labelling (if needed).
+# - Transforming categorical values into numeric form.
 
 # %% slideshow={"slide_type": "slide"}
-# Compute number and percent of missing values among features
-total = df_x_train.isnull().sum().sort_values(ascending=False)
-percent = (df_x_train.isnull().sum() * 100 / df_x_train.isnull().count()).sort_values(
-    ascending=False
-)
-df_missing_data = pd.concat([total, percent], axis=1, keys=["Total", "Percent"])
-df_missing_data.head()
+# Compute percent of missing values among features
+print(df_x_train.isnull().sum() * 100 / df_x_train.isnull().count())
 
 # %% slideshow={"slide_type": "slide"}
-# Show the first samples with missing values
-df_x_train[df_x_train.isnull().any(axis=1)].head()
+# Show random samples with missing values
+df_x_train[df_x_train.isnull().any(axis=1)].sample(n=5)
 
 # %% slideshow={"slide_type": "slide"}
-# Print numerical features
+# Get numerical features
 num_features = df_x_train.select_dtypes(include=[np.number]).columns
 print(num_features)
 
-# Print categorical features
+# Get categorical features
 cat_features = df_x_train.select_dtypes(include=[object]).columns
 print(cat_features)
 

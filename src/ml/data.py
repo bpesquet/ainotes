@@ -26,42 +26,19 @@
 # ## Environment setup
 
 # %% slideshow={"slide_type": "slide"}
-# Relax some linting rules not needed here
-# pylint: disable=invalid-name,wrong-import-position
-
 import platform
 
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+
 import sklearn
-import torch
-
-print(f"Python version: {platform.python_version()}")
-print(f"NumPy version: {np.__version__}")
-print(f"scikit-learn version: {sklearn.__version__}")
-print(f"PyTorch version: {torch.__version__}")
-
-# %% slideshow={"slide_type": "slide"}
-# sklearn does not automatically import its subpackages
-# https://stackoverflow.com/a/9049246/2380880
 from sklearn.datasets import load_sample_images
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, OneHotEncoder
 
-
-# %% slideshow={"slide_type": "slide"}
-# PyTorch device configuration
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
-elif torch.backends.mps.is_available():
-    device = torch.device("mps")
-    print("Metal GPU found :)")
-else:
-    device = torch.device("cpu")
-    print("No available GPU :/")
+import torch
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
@@ -70,12 +47,28 @@ else:
 # https://stackoverflow.com/a/43028034/2380880
 # %matplotlib inline
 
-# Increase default plot size
-# https://matplotlib.org/stable/users/explain/customizing.html#matplotlibrc-sample
-plt.rcParams["figure.figsize"] = 10, 7.5
-
 # Improve plot quality
 # %config InlineBackend.figure_format = "retina"
+
+# %% slideshow={"slide_type": "slide"}
+# Print environment info
+print(f"Python version: {platform.python_version()}")
+print(f"NumPy version: {np.__version__}")
+print(f"scikit-learn version: {sklearn.__version__}")
+print(f"PyTorch version: {torch.__version__}")
+
+
+# PyTorch device configuration
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
+# Performance issues exist with MPS backend
+# elif torch.backends.mps.is_available():
+#     device = torch.device("mps")
+#     print("Metal GPU found :)")
+else:
+    device = torch.device("cpu")
+    print("No GPU found, using CPU instead")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Working with tensors
@@ -256,10 +249,12 @@ print(x.sum(axis=1))
 
 # %%
 # Element-wise product between two matrices (shapes must be identical)
-x = np.array([[1, 2, 3], [3, 2, 1]])
+x = np.array([[1, 2, 3], [3, 2, -2]])
 y = np.array([[3, 0, 2], [1, 4, -2]])
 z = x * y
 
+print(x)
+print(y)
 print_tensor_info(z)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -269,13 +264,13 @@ print_tensor_info(z)
 
 # %%
 # Dot product between two matrices (shapes must be compatible)
-
-# x has shape (2, 3), y has shape (3, 2): operation is possible
 x = np.array([[1, 2, 3], [3, 2, 1]])
 y = np.array([[3, 0], [2, 1], [4, -2]])
 # alternative syntax: z = x.dot(y)
 z = np.dot(x, y)
 
+print(x)
+print(y)
 print_tensor_info(z)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -423,7 +418,7 @@ sample_image = images[-1]
 # Show image
 plt.imshow(sample_image)
 
-print(f"Image: {images.shape}")
+print(f"Images: {images.shape}")
 print(f"Sample image: {sample_image.shape}")
 print(f"Sample pixel: {sample_image[225, 300]}")
 
@@ -512,9 +507,13 @@ print(f"Flattened image: {flattened_image.shape}")
 # %% slideshow={"slide_type": "slide"}
 # Demonstrate the use of scikit-learn's SimpleImputer for handling missing values
 
+# Create a tensor with missing values
+x = np.array([[7, 2, np.nan], [4, np.nan, 6], [10, 5, 9]])
+print(x)
+
 # Replace missing values with column-wise mean
 imputer = SimpleImputer(strategy="mean")
-print(imputer.fit_transform([[7, 2, np.nan], [4, np.nan, 6], [10, 5, 9]]))
+print(imputer.fit_transform(x))
 
 # Replace missing values with "Unknown"
 imputer = SimpleImputer(strategy="constant", missing_values=None, fill_value="Unknown")
