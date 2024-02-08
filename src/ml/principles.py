@@ -155,9 +155,9 @@ print(f"Python version: {platform.python_version()}")
 # - **Inference**: the trained model is used to make predictions on unlabeled samples (new data unseen during training).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Model parameters and hyperparameters
+# #### Model parameters Vs hyperparameters
 #
-# **Parameters**, sometimes called **weights**, are the internal values that affect the computed output of a model. During the training phase, they are algorithmically adjusted for optimal performance w.r.t the loss function. The set of parameters for a model is denoted $\pmb{\omega}$ or $\pmb{\theta}$.
+# **Parameters**, sometimes called **weights**, are the internal values that affect the computed output of a model. During the training phase, they are algorithmically adjusted for optimal performance w.r.t the loss function. The set of parameters for a model is often denoted $\pmb{\omega}$ or $\pmb{\theta}$.
 #
 # They are not to be confused with **hyperparameters**, which are configuration properties that constrain the model: the maximum depth of a decision tree, the number of layers in a neural networks, etc. Hyperparameters are statically defined before training by the user or by a dedicated tool.
 
@@ -205,7 +205,9 @@ print(f"Python version: {platform.python_version()}")
 #
 # By convention, loss functions are usually defined so that lower is better, hence their name. If the model's prediction is perfect, the loss value is zero.
 #
-# The loss function is generally denoted $\mathcal{L}$ or $\mathcal{J}$. Mathematically, it depends on the inputs $\pmb{X}$, the expected results $\pmb{Y}$ and the model parameters $\pmb{\omega}$. However, during model training, $\pmb{X}$ and $\pmb{Y}$ can be treated as constants. Thus, the loss function depends solely on $\pmb{\omega}$ and will be denoted $\mathcal{L(\pmb{\omega})}$.
+# The loss function is generally denoted $\mathcal{L}$ or $\mathcal{J}$.
+#
+# > Mathematically, it depends on the inputs $\pmb{X}$, the expected results $\pmb{Y}$ and the model parameters $\pmb{\omega}$. However, during model training, $\pmb{X}$ and $\pmb{Y}$ can be treated as constants. Thus, the loss function depends solely on $\pmb{\omega}$ and will be denoted $\mathcal{L(\pmb{\omega})}$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Loss function example
