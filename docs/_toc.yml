@@ -32,8 +32,6 @@ parts:
         title: Regression
       - file: ml/classification
         title: Classification
-    - file: ml/deep_learning
-      sections:
       - file: ml/ann
     - file: ml/reinforcement_learning
       sections:
