@@ -530,62 +530,19 @@ document.write(`
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Relax some linting rules not needed here</span>
-<span class="c1"># pylint: disable=invalid-name,wrong-import-position</span>
-
-<span class="kn">import</span> <span class="nn">platform</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
-<span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
-NumPy version: 1.26.3
-scikit-learn version: 1.3.2
-PyTorch version: 2.0.1
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sklearn does not automatically import its subpackages</span>
-<span class="c1"># https://stackoverflow.com/a/9049246/2380880</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_sample_images</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PyTorch device configuration</span>
-<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA GPU </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> found :)&quot;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;mps&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metal GPU found :)&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No available GPU :/&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metal GPU found :)
+
+<span class="kn">import</span> <span class="nn">torch</span>
 </pre></div>
 </div>
 </div>
@@ -598,12 +555,41 @@ PyTorch version: 2.0.1
 <span class="c1"># https://stackoverflow.com/a/43028034/2380880</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="c1"># Increase default plot size</span>
-<span class="c1"># https://matplotlib.org/stable/users/explain/customizing.html#matplotlibrc-sample</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">7.5</span>
-
 <span class="c1"># Improve plot quality</span>
 <span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;retina&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print environment info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># PyTorch device configuration</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA GPU </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> found :)&quot;</span><span class="p">)</span>
+<span class="c1"># Performance issues exist with MPS backend</span>
+<span class="c1"># elif torch.backends.mps.is_available():</span>
+<span class="c1">#     device = torch.device(&quot;mps&quot;)</span>
+<span class="c1">#     print(&quot;Metal GPU found :)&quot;)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No GPU found, using CPU instead&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.26.3
+scikit-learn version: 1.3.2
+PyTorch version: 2.0.1
+No GPU found, using CPU instead
 </pre></div>
 </div>
 </div>
@@ -726,9 +712,9 @@ Shape: (3,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.73190816 0.12104948 0.43203815 0.45990366]
- [0.48705977 0.80257121 0.05561829 0.39349113]
- [0.95655632 0.25370994 0.58680165 0.69616428]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.1875555  0.62188322 0.37111724 0.27371191]
+ [0.69765446 0.1594089  0.59248199 0.46596804]
+ [0.7432791  0.0282667  0.13099192 0.2987171 ]]
 Dimensions: 2
 Shape: (3, 4)
 </pre></div>
@@ -745,14 +731,14 @@ Shape: (3, 4)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[34 46 17 50 20]
-  [34 14 29 97 90]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[65 19 45 38 68]
+  [ 4 46 99 57 89]]
 
- [[82  3 39 39 21]
-  [ 9 40 58 23 60]]
+ [[55 43 63 17 86]
+  [92 44 35 76 11]]
 
- [[55  2  3 88 14]
-  [ 4  0 87 85 81]]]
+ [[35 53 23 70 74]
+  [77 59 75 26 70]]]
 Dimensions: 3
 Shape: (3, 2, 5)
 </pre></div>
@@ -879,17 +865,23 @@ Shape: (6,)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Element-wise product between two matrices (shapes must be identical)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">print_tensor_info</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 3  0  6]
- [ 3  8 -2]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1  2  3]
+ [ 3  2 -2]]
+[[ 3  0  2]
+ [ 1  4 -2]]
+[[3 0 6]
+ [3 8 4]]
 Dimensions: 2
 Shape: (2, 3)
 </pre></div>
@@ -903,19 +895,24 @@ Shape: (2, 3)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dot product between two matrices (shapes must be compatible)</span>
-
-<span class="c1"># x has shape (2, 3), y has shape (3, 2): operation is possible</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
 <span class="c1"># alternative syntax: z = x.dot(y)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">print_tensor_info</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[19 -4]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 2 3]
+ [3 2 1]]
+[[ 3  0]
+ [ 2  1]
+ [ 4 -2]]
+[[19 -4]
  [17  0]]
 Dimensions: 2
 Shape: (2, 2)
@@ -978,8 +975,8 @@ Shape: (2, 3)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0830, 0.5344],
-        [0.8013, 0.5799]], device=&#39;mps:0&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8458, 0.0136],
+        [0.3408, 0.2046]])
 </pre></div>
 </div>
 </div>
@@ -1362,94 +1359,94 @@ memory usage: 31.0+ MB
   </thead>
   <tbody>
     <tr>
-      <th>248569</th>
-      <td>124434</td>
-      <td>Adrianus Aloysius Jacobus "Adrie" van der Poel</td>
-      <td>M</td>
-      <td>21.0</td>
-      <td>181.0</td>
-      <td>70.0</td>
-      <td>Netherlands</td>
-      <td>NED</td>
-      <td>1980 Summer</td>
-      <td>1980</td>
-      <td>Summer</td>
-      <td>Moskva</td>
-      <td>Cycling</td>
-      <td>Cycling Men's 100 kilometres Team Time Trial</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>230038</th>
-      <td>115485</td>
-      <td>Hestrie Storbeck-Cloete (-Els)</td>
+      <th>36009</th>
+      <td>18500</td>
+      <td>Cecilia Carranza Saroli</td>
       <td>F</td>
-      <td>25.0</td>
-      <td>185.0</td>
-      <td>68.0</td>
-      <td>South Africa</td>
-      <td>RSA</td>
-      <td>2004 Summer</td>
-      <td>2004</td>
+      <td>21.0</td>
+      <td>164.0</td>
+      <td>63.0</td>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>2008 Summer</td>
+      <td>2008</td>
       <td>Summer</td>
-      <td>Athina</td>
+      <td>Beijing</td>
+      <td>Sailing</td>
+      <td>Sailing Women's One Person Dinghy</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>209419</th>
+      <td>105154</td>
+      <td>Heraclio Eder Snchez Tern</td>
+      <td>M</td>
+      <td>22.0</td>
+      <td>176.0</td>
+      <td>67.0</td>
+      <td>Mexico</td>
+      <td>MEX</td>
+      <td>2008 Summer</td>
+      <td>2008</td>
+      <td>Summer</td>
+      <td>Beijing</td>
       <td>Athletics</td>
-      <td>Athletics Women's High Jump</td>
-      <td>Silver</td>
-    </tr>
-    <tr>
-      <th>28864</th>
-      <td>14942</td>
-      <td>Joo Carlos Brenha Alves Pereira</td>
-      <td>M</td>
-      <td>34.0</td>
-      <td>193.0</td>
-      <td>88.0</td>
-      <td>Portugal</td>
-      <td>POR</td>
-      <td>2004 Summer</td>
-      <td>2004</td>
-      <td>Summer</td>
-      <td>Athina</td>
-      <td>Beach Volleyball</td>
-      <td>Beach Volleyball Men's Beach Volleyball</td>
+      <td>Athletics Men's 20 kilometres Walk</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>56603</th>
-      <td>28995</td>
-      <td>Ren Dobrinovitz</td>
-      <td>M</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Belgium</td>
-      <td>BEL</td>
-      <td>1906 Summer</td>
-      <td>1906</td>
-      <td>Summer</td>
-      <td>Athina</td>
-      <td>Wrestling</td>
-      <td>Wrestling Men's Lightweight, Greco-Roman</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>194136</th>
-      <td>97452</td>
-      <td>Jari Markus Puikkonen</td>
-      <td>M</td>
+      <th>90811</th>
+      <td>46010</td>
+      <td>Amanda Jane Hardy</td>
+      <td>F</td>
       <td>28.0</td>
+      <td>163.0</td>
+      <td>58.0</td>
+      <td>Australia-1</td>
+      <td>AUS</td>
+      <td>2000 Summer</td>
+      <td>2000</td>
+      <td>Summer</td>
+      <td>Sydney</td>
+      <td>Badminton</td>
+      <td>Badminton Mixed Doubles</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>82539</th>
+      <td>41929</td>
+      <td>Ale Gorza</td>
+      <td>M</td>
+      <td>29.0</td>
       <td>180.0</td>
-      <td>68.0</td>
-      <td>Finland</td>
-      <td>FIN</td>
-      <td>1988 Winter</td>
-      <td>1988</td>
+      <td>83.0</td>
+      <td>Slovenia</td>
+      <td>SLO</td>
+      <td>2010 Winter</td>
+      <td>2010</td>
       <td>Winter</td>
-      <td>Calgary</td>
-      <td>Ski Jumping</td>
-      <td>Ski Jumping Men's Large Hill, Team</td>
-      <td>Gold</td>
+      <td>Vancouver</td>
+      <td>Alpine Skiing</td>
+      <td>Alpine Skiing Men's Super G</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>85857</th>
+      <td>43536</td>
+      <td>Maurice Gueissaz</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Switzerland</td>
+      <td>SUI</td>
+      <td>1948 Summer</td>
+      <td>1948</td>
+      <td>Summer</td>
+      <td>London</td>
+      <td>Rowing</td>
+      <td>Rowing Men's Double Sculls</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -1729,19 +1726,19 @@ Athletes from GER: 3.63%
 <span class="c1"># Show image</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sample_image</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image: </span><span class="si">{</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample image: </span><span class="si">{</span><span class="n">sample_image</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample pixel: </span><span class="si">{</span><span class="n">sample_image</span><span class="p">[</span><span class="mi">225</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Image: (2, 427, 640, 3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: (2, 427, 640, 3)
 Sample image: (427, 640, 3)
 Sample pixel: [219  78  60]
 </pre></div>
 </div>
-<img alt="../_images/720bd364acb48c5bfed1c89acc621c464a4b03e3bc8f68aa5cda697ff46b4869.png" src="../_images/720bd364acb48c5bfed1c89acc621c464a4b03e3bc8f68aa5cda697ff46b4869.png" />
+<img alt="../_images/9ae94a94651b7683c17e4b0714723267913794ea18dfce6d28ecc457e857f291.png" src="../_images/9ae94a94651b7683c17e4b0714723267913794ea18dfce6d28ecc457e857f291.png" />
 </div>
 </div>
 </section>
@@ -1843,9 +1840,13 @@ x_test: (8, 4). y_test: (8,)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstrate the use of scikit-learn&#39;s SimpleImputer for handling missing values</span>
 
+<span class="c1"># Create a tensor with missing values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
 <span class="c1"># Replace missing values with column-wise mean</span>
 <span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 <span class="c1"># Replace missing values with &quot;Unknown&quot;</span>
 <span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">missing_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;Unknown&quot;</span><span class="p">)</span>
@@ -1854,7 +1855,10 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 7.   2.   7.5]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 7.  2. nan]
+ [ 4. nan  6.]
+ [10.  5.  9.]]
+[[ 7.   2.   7.5]
  [ 4.   3.5  6. ]
  [10.   5.   9. ]]
 [[&#39;M&#39;]
@@ -1891,12 +1895,12 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[7 9 9 3]
- [5 5 4 8]
- [8 1 1 7]]
-[[0.66666667 1.         1.         0.        ]
- [0.         0.5        0.375      1.        ]
- [1.         0.         0.         0.8       ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[6 5 8 3]
+ [1 4 6 2]
+ [3 8 5 6]]
+[[1.         0.25       1.         0.25      ]
+ [0.         0.         0.33333333 0.        ]
+ [0.4        1.         0.         1.        ]]
 Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
 </pre></div>
 </div>
@@ -1923,14 +1927,14 @@ Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 4 7 6]
- [9 7 2 8]
- [7 7 2 3]]
-[5.66666667 6.         3.66666667 5.66666667]
-[[-1.37281295 -1.41421356  1.41421356  0.16222142]
- [ 0.98058068  0.70710678 -0.70710678  1.13554995]
- [ 0.39223227  0.70710678 -0.70710678 -1.29777137]]
-Mean: -3.700743415417188e-17. Std: 0.9999999999999999
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2 1 3 2]
+ [2 7 7 8]
+ [3 2 6 2]]
+[2.33333333 3.33333333 5.33333333 4.        ]
+[[-0.70710678 -0.88900089 -1.37281295 -0.70710678]
+ [-0.70710678  1.3970014   0.98058068  1.41421356]
+ [ 1.41421356 -0.50800051  0.39223227 -0.70710678]]
+Mean: 0.0. Std: 1.0
 </pre></div>
 </div>
 </div>
@@ -1955,10 +1959,10 @@ Mean: -3.700743415417188e-17. Std: 0.9999999999999999
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train mean: [ 3.58299249e-16  9.58828976e-17  2.01858732e-17 -5.14739766e-16]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train mean: [ 4.03717464e-17  8.07434927e-17  1.51394049e-17 -2.29614307e-16]
 Train std: [1. 1. 1. 1.]
-Test mean: [-0.28466719  0.90100926  0.24707349 -0.11696319]
-Test std: [0.94736355 0.84876086 0.95134111 0.84302027]
+Test mean: [-0.44110575 -0.65141874 -0.34561108 -0.12502486]
+Test std: [0.85591862 0.81516664 1.0212625  1.31886361]
 </pre></div>
 </div>
 </div>
@@ -2032,16 +2036,16 @@ Test std: [0.94736355 0.84876086 0.95134111 0.84302027]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[8]
- [8]
- [7]
- [0]
- [2]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5]
+ [2]
+ [3]
+ [2]
+ [0]]
 [[0. 0. 0. 1.]
- [0. 0. 0. 1.]
+ [0. 1. 0. 0.]
  [0. 0. 1. 0.]
- [1. 0. 0. 0.]
- [0. 1. 0. 0.]]
+ [0. 1. 0. 0.]
+ [1. 0. 0. 0.]]
 </pre></div>
 </div>
 </div>

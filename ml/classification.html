@@ -533,32 +533,15 @@ document.write(`
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
-NumPy version: 1.26.3
-scikit-learn version: 1.3.2
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sklearn does not automatically import its subpackages</span>
-<span class="c1"># https://stackoverflow.com/a/9049246/2380880</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_openml</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span>
     <span class="n">classification_report</span><span class="p">,</span>
     <span class="n">RocCurveDisplay</span><span class="p">,</span>
+    <span class="n">log_loss</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
 </pre></div>
@@ -583,6 +566,23 @@ scikit-learn version: 1.3.2
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print environment info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.26.3
+scikit-learn version: 1.3.2
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="context-and-data-preparation">
 <h2>Context and data preparation<a class="headerlink" href="#context-and-data-preparation" title="Permalink to this heading">#</a></h2>
@@ -598,13 +598,69 @@ scikit-learn version: 1.3.2
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. Targets: </span><span class="si">{</span><span class="n">targets</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 digits: </span><span class="si">{</span><span class="n">targets</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 labels: </span><span class="si">{</span><span class="n">targets</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: (70000, 784). Targets: (70000,)
-First 10 digits: [&#39;5&#39; &#39;0&#39; &#39;4&#39; &#39;1&#39; &#39;9&#39; &#39;2&#39; &#39;1&#39; &#39;3&#39; &#39;1&#39; &#39;4&#39;]
+First 10 labels: [&#39;5&#39; &#39;0&#39; &#39;4&#39; &#39;1&#39; &#39;9&#39; &#39;2&#39; &#39;1&#39; &#39;3&#39; &#39;1&#39; &#39;4&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show raw data for the first digit image</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   3  18  18  18 126 136 175  26 166 255
+ 247 127   0   0   0   0   0   0   0   0   0   0   0   0  30  36  94 154
+ 170 253 253 253 253 253 225 172 253 242 195  64   0   0   0   0   0   0
+   0   0   0   0   0  49 238 253 253 253 253 253 253 253 253 251  93  82
+  82  56  39   0   0   0   0   0   0   0   0   0   0   0   0  18 219 253
+ 253 253 253 253 198 182 247 241   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0  80 156 107 253 253 205  11   0  43 154
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0  14   1 154 253  90   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0 139 253 190   2   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0  11 190 253  70   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  35 241
+ 225 160 108   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0  81 240 253 253 119  25   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0  45 186 253 253 150  27   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0  16  93 252 253 187
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0 249 253 249  64   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0  46 130 183 253
+ 253 207   2   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0  39 148 229 253 253 253 250 182   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0  24 114 221 253 253 253
+ 253 201  78   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0  23  66 213 253 253 253 253 198  81   2   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0  18 171 219 253 253 253 253 195
+  80   9   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+  55 172 226 253 253 253 253 244 133  11   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0 136 253 253 253 212 135 132  16
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0]
 </pre></div>
 </div>
 </div>
@@ -692,8 +748,8 @@ x_test: (60000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;8&#39; &#39;8&#39; &#39;2&#39; &#39;6&#39; &#39;3&#39; &#39;0&#39; &#39;8&#39; &#39;3&#39; &#39;2&#39; &#39;9&#39;]
-[False False False False False False False False False False]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;2&#39; &#39;7&#39; &#39;8&#39; &#39;5&#39; &#39;3&#39; &#39;9&#39; &#39;5&#39; &#39;7&#39; &#39;2&#39; &#39;8&#39;]
+[False False False  True False False  True False False False]
 </pre></div>
 </div>
 </div>
@@ -701,16 +757,16 @@ x_test: (60000, 784)
 </section>
 <section id="choosing-a-loss-function">
 <h3>Choosing a loss function<a class="headerlink" href="#choosing-a-loss-function" title="Permalink to this heading">#</a></h3>
-<p>This choice depends on the problem type. For binary classification tasks where expected results are either 1 (<em>True</em>) or 0 (<em>False</em>), a popular choice is the <strong>Binary CrossEntropy</strong>, a.k.a <strong>logistic loss</strong> or <strong>log loss</strong>.</p>
+<p>This choice depends on the problem type. For binary classification tasks where expected results are either 1 (<em>True</em>) or 0 (<em>False</em>), a popular choice is the <strong>Binary Cross Entropy loss</strong>, a.k.a. <strong>log(istic regression) loss</strong>. It is implemented in the scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html">log_loss</a> function.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{\mathrm{BCE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y^{(i)} \in \{0,1\}\)</span>: expected result for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y'^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in [0,1]\)</span>: model output for the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in [0,1]\)</span>: model output for the <span class="math notranslate nohighlight">\(i\)</span>th sample, i.e. probability that the <span class="math notranslate nohighlight">\(i\)</span>th sample belongs to the positive class.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot logistic loss for one output</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot BCE loss for one output</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Target = 0&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s2">&quot;r--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Target = 1&quot;</span><span class="p">)</span>
@@ -723,6 +779,40 @@ x_test: (60000, 784)
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/ad3c4bc5eb3e7a450f21d060be721fcb601d69d88e8853c68d9200987ec8e865.png" src="../_images/ad3c4bc5eb3e7a450f21d060be721fcb601d69d88e8853c68d9200987ec8e865.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute BCE losses for pseudo-predictions</span>
+
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Good prediction</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">]</span>
+<span class="n">bce</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BCE loss (good prediction): </span><span class="si">{</span><span class="n">bce</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare theorical and computed values</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span>
+    <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.99</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bce</span><span class="p">,</span> <span class="n">decimal</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+
+<span class="c1"># Perfect prediction</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BCE loss (perfect prediction): </span><span class="si">{</span><span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Awful prediction</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BCE loss (awful prediction): </span><span class="si">{</span><span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCE loss (good prediction): 0.17381
+BCE loss (perfect prediction): 0.00000
+BCE loss (awful prediction): 2.24185
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -739,7 +829,7 @@ x_test: (60000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre></div></div></div></div></div></div></div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre></div></div></div></div></div></div></div>
 </div>
 </section>
 <section id="assesing-performance">
@@ -762,18 +852,18 @@ x_test: (60000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[False False False False  True False False False False False]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[False False False  True False False  True False False False]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.747, 0.253],
-       [0.926, 0.074],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.   , 0.   ],
+       [0.996, 0.004],
+       [0.985, 0.015],
+       [0.229, 0.771],
+       [0.951, 0.049],
        [1.   , 0.   ],
-       [0.997, 0.003],
-       [0.343, 0.657],
-       [0.859, 0.141],
-       [0.971, 0.029],
-       [0.849, 0.151],
-       [1.   , 0.   ],
+       [0.008, 0.992],
+       [0.976, 0.024],
+       [0.995, 0.005],
        [1.   , 0.   ]])
 </pre></div>
 </div>
@@ -818,8 +908,8 @@ x_test: (60000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97383
-Cross-validation accuracy: [0.9734  0.9719  0.97255]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97468
+Cross-validation accuracy: [0.9703  0.97135 0.9726 ]
 </pre></div>
 </div>
 </div>
@@ -841,8 +931,8 @@ Cross-validation accuracy: [0.9734  0.9719  0.97255]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 54598 digits other than 5 in the training set
-Dumb classifier accuracy: 0.90997
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 54601 digits other than 5 in the training set
+Dumb classifier accuracy: 0.91002
 </pre></div>
 </div>
 </div>
@@ -881,7 +971,7 @@ Dumb classifier accuracy: 0.90997
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2e4032b94fd1f1583a736045dd7f08d00a17571090f1099c876a19a9a790dc4c.png" src="../_images/2e4032b94fd1f1583a736045dd7f08d00a17571090f1099c876a19a9a790dc4c.png" />
+<img alt="../_images/721109fceac1e132e24cb64246393e1e52370cd36ab5141e189f4ed27f62c88b.png" src="../_images/721109fceac1e132e24cb64246393e1e52370cd36ab5141e189f4ed27f62c88b.png" />
 </div>
 </div>
 </section>
@@ -969,11 +1059,11 @@ Recall = \frac{1}{1 + 8} = 11\%\]</div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-       False       0.99      0.98      0.99     54598
-        True       0.84      0.87      0.86      5402
+       False       0.98      0.99      0.99     54601
+        True       0.92      0.79      0.85      5399
 
     accuracy                           0.97     60000
-   macro avg       0.92      0.93      0.92     60000
+   macro avg       0.95      0.89      0.92     60000
 weighted avg       0.97      0.97      0.97     60000
 </pre></div>
 </div>
@@ -1001,7 +1091,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/977c9f7b9d328d6b2a3c70e52e9869d7158dbb43cd18fdd9f7bee153c12363ae.png" src="../_images/977c9f7b9d328d6b2a3c70e52e9869d7158dbb43cd18fdd9f7bee153c12363ae.png" />
+<img alt="../_images/becaccdaa95bb16e587b6d823e1e3dd25604de2e318c7e3e25ea5f1219eb0ff2.png" src="../_images/becaccdaa95bb16e587b6d823e1e3dd25604de2e318c7e3e25ea5f1219eb0ff2.png" />
 </div>
 </div>
 </section>
@@ -1011,13 +1101,42 @@ weighted avg       0.97      0.97      0.97     60000
 <h2>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this heading">#</a></h2>
 <section id="id1">
 <h3>Choosing a loss function<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p>The <strong>Categorical Cross-Entropy</strong> is the loss function of choice for multiclass classfication. When <span class="math notranslate nohighlight">\(K=2\)</span>, it is equivalent to binary cross-entropy.</p>
+<p>The log loss extends naturally to the multiclass case. It is also called <strong>Negative Log-Likelihood</strong> or <strong>Cross Entropy</strong>, and is also implemented in the scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html">log_loss</a> function.</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}_{\mathrm{CCE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k))\]</div>
+\[\mathcal{L}_{\mathrm{CE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k))\]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k \in \{0,1\}\)</span>: expected value for the <span class="math notranslate nohighlight">\(k\)</span>th label of the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y'^{(i)}_k \in [0,1]\)</span>: model output for the <span class="math notranslate nohighlight">\(k\)</span>th label of the <span class="math notranslate nohighlight">\(i\)</span>th sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y^{(i)}} \in \{0,1\}^K\)</span>: binary vector of <span class="math notranslate nohighlight">\(K\)</span> elements.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k \in \{0,1\}\)</span>: expected value for the <span class="math notranslate nohighlight">\(k\)</span>th label of the <span class="math notranslate nohighlight">\(i\)</span>th sample. <span class="math notranslate nohighlight">\(y^{(i)}_k = 1\)</span> iff the <span class="math notranslate nohighlight">\(i\)</span>th sample has label <span class="math notranslate nohighlight">\(k \in [1,K]\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'^{(i)}_k \in [0,1]\)</span>: model output for the <span class="math notranslate nohighlight">\(k\)</span>th label of the <span class="math notranslate nohighlight">\(i\)</span>th sample, i.e. probability that the <span class="math notranslate nohighlight">\(i\)</span>th sample has label <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute cross entropy losses for pseudo-predictions</span>
+
+<span class="c1"># 2 samples with 3 possibles labels. Sample 1 has label 2, sample 2 has label 3</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="c1"># Probability distribution vector</span>
+<span class="c1"># 95% proba that sample 1 has label 2, 70% proba that sample 2 has label 3</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]]</span>
+
+<span class="c1"># Compute cross entropy loss</span>
+<span class="n">ce</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cross entropy loss: </span><span class="si">{</span><span class="n">ce</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare theorical and computed loss values</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span>
+    <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.7</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ce</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cross entropy loss: 0.20398
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="training-a-multiclass-classifier">
 <h3>Training a multiclass classifier<a class="headerlink" href="#training-a-multiclass-classifier" title="Permalink to this heading">#</a></h3>
@@ -1034,7 +1153,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-3 {color: black;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre></div></div></div></div></div></div></div>
+<div class="output text_html"><style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre></div></div></div></div></div></div></div>
 </div>
 </section>
 <section id="assessing-performance">
@@ -1048,8 +1167,8 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.92108
-Test accuracy: 0.91410
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.91978
+Test accuracy: 0.91040
 </pre></div>
 </div>
 </div>
@@ -1062,7 +1181,7 @@ Test accuracy: 0.91410
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/52711661b154e8baa414d01ba1bb77ad9825388767e9e338099d7771aebc9664.png" src="../_images/52711661b154e8baa414d01ba1bb77ad9825388767e9e338099d7771aebc9664.png" />
+<img alt="../_images/db3c1761e3c820938b341c29214fb289a726218d72c14c39b9a9aa0d95de95e5.png" src="../_images/db3c1761e3c820938b341c29214fb289a726218d72c14c39b9a9aa0d95de95e5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1075,16 +1194,16 @@ Test accuracy: 0.91410
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.95      0.98      0.96      5879
-           1       0.95      0.98      0.96      6795
-           2       0.94      0.89      0.91      5983
-           3       0.90      0.90      0.90      6119
-           4       0.95      0.90      0.92      5848
-           5       0.89      0.87      0.88      5402
-           6       0.94      0.96      0.95      5896
-           7       0.92      0.95      0.93      6255
-           8       0.90      0.85      0.87      5842
-           9       0.86      0.90      0.88      5981
+           0       0.96      0.98      0.97      5897
+           1       0.96      0.97      0.96      6761
+           2       0.92      0.91      0.91      5941
+           3       0.87      0.91      0.89      6164
+           4       0.89      0.95      0.92      5868
+           5       0.89      0.87      0.88      5399
+           6       0.96      0.94      0.95      5868
+           7       0.95      0.92      0.93      6256
+           8       0.90      0.85      0.87      5828
+           9       0.89      0.89      0.89      6018
 
     accuracy                           0.92     60000
    macro avg       0.92      0.92      0.92     60000

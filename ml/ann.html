@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/ann';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -465,7 +467,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">BInary classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">Data generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation-and-visualization">Data generation and visualization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model definition</a></li>
@@ -474,7 +476,19 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-results">Training results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification">Multiclass classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification">Multiclass classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-visualization">Data loading and visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Model definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Loss function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">Softmax</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithm">Optimization algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Model training</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
 </ul>
             </nav>
@@ -508,8 +522,10 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_circles</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">ToTensor</span>
 </pre></div>
 </div>
 </div>
@@ -626,6 +642,31 @@ No GPU found, using CPU instead
         <span class="sa">f</span><span class="s2">&quot;Training loss: </span><span class="si">{</span><span class="n">final_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Training accuracy: </span><span class="si">{</span><span class="n">final_acc</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
     <span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the total number of (trainable) parameters for a model&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">trainable</span>
+        <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot some images with their associated labels&quot;&quot;&quot;</span>
+
+    <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">rows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">sample_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span>
+        <span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -646,28 +687,51 @@ No GPU found, using CPU instead
 </section>
 <section id="binary-classification">
 <h2>BInary classification<a class="headerlink" href="#binary-classification" title="Permalink to this heading">#</a></h2>
-<section id="data-generation">
-<h3>Data generation<a class="headerlink" href="#data-generation" title="Permalink to this heading">#</a></h3>
+<section id="data-generation-and-visualization">
+<h3>Data generation and visualization<a class="headerlink" href="#data-generation-and-visualization" title="Permalink to this heading">#</a></h3>
+<p>A <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">scikit-learn function</a> is used to easily generate 2-dimensional data with two classes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate 2D data (a large circle containing a smaller circle)</span>
-<span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inputs: </span><span class="si">{</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. targets: </span><span class="si">{</span><span class="n">targets</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">planar_data</span><span class="p">,</span> <span class="n">planar_targets</span> <span class="o">=</span> <span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
-<span class="n">plot_dataset</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data: </span><span class="si">{</span><span class="n">planar_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. targets: </span><span class="si">{</span><span class="n">planar_targets</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">planar_data</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">planar_targets</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inputs: (500, 2). targets: (500,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: (500, 2). targets: (500,)
+[[ 0.90106611 -0.25258337]
+ [-0.27468474  0.88729518]
+ [-0.5564609  -0.83746071]
+ [ 0.84564529 -0.63083246]
+ [ 0.2088026   0.94550546]
+ [ 0.00191874 -0.38928221]
+ [ 0.37143695  1.04242435]
+ [ 0.14304732 -1.06105996]
+ [ 0.15525134  0.10404377]
+ [-0.03995685  0.24036449]]
+[0 0 0 0 0 1 0 0 1 1]
 </pre></div>
 </div>
-<img alt="../_images/89c1736454e2fc396c5408b20f5385390f05d66e3ebb8446f11f0de170ff295e.png" src="../_images/89c1736454e2fc396c5408b20f5385390f05d66e3ebb8446f11f0de170ff295e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_dataset</span><span class="p">(</span><span class="n">planar_data</span><span class="p">,</span> <span class="n">planar_targets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/37d79bbe1e072f25bc516245a26426c93d4ff777e31e6b0c484b224bdf286805.png" src="../_images/37d79bbe1e072f25bc516245a26426c93d4ff777e31e6b0c484b224bdf286805.png" />
 </div>
 </div>
 </section>
 <section id="hyperparameters">
 <h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h3>
+<p>Hyperparameters (<span class="math notranslate nohighlight">\(\neq\)</span> model parameters) are adjustable configuration values that let you control the model training process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rate of parameter change during gradient descent</span>
@@ -688,15 +752,16 @@ No GPU found, using CPU instead
 </section>
 <section id="data-preparation">
 <h3>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this heading">#</a></h3>
+<p>Generated data (NumPy tensors) needs to be converted to PyTorch tensors before training a PyTorch-based model. These new tensors are stored in the memory of the available device (GPU ou CPU).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create PyTorch tensors from NumPy tensors</span>
 
-<span class="n">x_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">planar_data</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
 <span class="c1"># PyTorch loss function expects float results of shape (batch_size, 1) instead of (batch_size,)</span>
 <span class="c1"># So we add a new axis and convert them to floats</span>
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">targets</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">planar_targets</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_train: </span><span class="si">{</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. y_train: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -708,18 +773,13 @@ No GPU found, using CPU instead
 </div>
 </div>
 </div>
+<p>In order to use <span class="xref myst">mini-batch SGD</span>, data needs to be passed to the model as small, randomized batches during training. The Pytorch <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">DataLoader</a> class abstracts this complexity for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data as randomized batches for training</span>
-<span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+<span class="n">planar_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
     <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)),</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
-
-<span class="c1"># Number of samples</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-
-<span class="c1"># Number of batches in an epoch (= n_samples / batch_size, rounded up)</span>
-<span class="n">n_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -727,21 +787,28 @@ No GPU found, using CPU instead
 </section>
 <section id="model-definition">
 <h3>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this heading">#</a></h3>
+<p>A PyTorch model is defined by combining elementary blocks, known as <em>modules</em>.</p>
+<p>Our neural network uses the following ones:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html">Sequential</a>: an ordered container of modules.</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html">Linear</a>: a linear transformation of its entries, a.k.a. <em>dense</em> or <em>fully connected</em> layer.</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html">Tanh</a> and <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html">Sigmoid</a>: the corresponding activation functions.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a MultiLayer Perceptron with 2 inputs and 1 output</span>
 <span class="c1"># You may change its internal architecture:</span>
 <span class="c1"># for example, try adding one neuron on the hidden layer and check training results</span>
-<span class="n">mlp_clf</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+<span class="n">planar_model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="p">),</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_layer_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
 <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">mlp_clf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">planar_model</span><span class="p">)</span>
 
-<span class="n">n_parameters</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mlp_clf</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of trainable parameters: </span><span class="si">{</span><span class="n">n_parameters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Count the total number of trainable model parameters (weights)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of trainable parameters: </span><span class="si">{</span><span class="n">count_parameters</span><span class="p">(</span><span class="n">planar_model</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -752,7 +819,7 @@ No GPU found, using CPU instead
   (2): Linear(in_features=2, out_features=1, bias=True)
   (3): Sigmoid()
 )
-Number of trainable parameters: 9
+Number of trainable parameters: 9.
 </pre></div>
 </div>
 </div>
@@ -760,13 +827,12 @@ Number of trainable parameters: 9
 </section>
 <section id="loss-function">
 <h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
+<p>For binary classification tasks, the standard choice is the <span class="xref myst">binary cross entropy loss</span>, conveniently provided by a <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">PyTorch class</a>.</p>
+<p>For each sample of the batch, it will compare the output of the model (a value <span class="math notranslate nohighlight">\(\in [0,1]\)</span> provided by the sigmoid function) with the expected binary value <span class="math notranslate nohighlight">\(\in \{0,1\}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binary Cross Entropy loss function</span>
-<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
-
-<span class="c1"># Object storing training history</span>
-<span class="n">train_history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binary cross entropy loss function</span>
+<span class="n">planar_loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -774,111 +840,141 @@ Number of trainable parameters: 9
 </section>
 <section id="model-training">
 <h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this heading">#</a></h3>
+<p>The training algorithm is as follows:</p>
+<ul class="simple">
+<li><p>On each iteration on the whole dataset (known as an <em>epoch</em>) and for each data batch inside an epoch, the model output is computed on the current batch.</p></li>
+<li><p>This output is used alongside expected results by the loss function to obtain the mean loss for the current batch.</p></li>
+<li><p>The gradient of the loss w.r.t. each model parameter is computed (backpropagation).</p></li>
+<li><p>The model parameters are updated in the opposite direction of their gradient (one GD step).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Main training loop</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
-    <span class="n">epoch_loss</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_planar</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training loop&quot;&quot;&quot;</span>
 
-    <span class="c1"># Reset number of correct predictions for the current epoch</span>
-    <span class="n">epoch_correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Object storing training history</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
 
-    <span class="c1"># Training loop for one data batch (i.e. one gradient descent step)</span>
-    <span class="k">for</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">train_dataloader</span><span class="p">:</span>
-        <span class="c1"># Forward pass: compute model output with current weights</span>
-        <span class="n">y_pred_batch</span> <span class="o">=</span> <span class="n">mlp_clf</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
+    <span class="c1"># Number of samples</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
 
-        <span class="c1"># Compute loss (comparison between expected and actual results)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+    <span class="c1"># Number of batches in an epoch (= n_samples / batch_size, rounded up)</span>
+    <span class="n">n_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
 
-        <span class="c1"># Zero the gradients before running the backward pass</span>
-        <span class="c1"># Avoids accumulating gradients erroneously</span>
-        <span class="n">mlp_clf</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Backward pass (backprop): compute gradient of the loss w.r.t each model weight</span>
-        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+        <span class="c1"># Reset total loss for the current epoch</span>
+        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="c1"># Gradient descent step: update the weights in the opposite direction of their gradient</span>
-        <span class="c1"># no_grad() avoids tracking operations history, which would be useless here</span>
-        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">mlp_clf</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
-                <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+        <span class="c1"># Reset number of correct predictions for the current epoch</span>
+        <span class="n">n_correct</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="c1"># Accumulate data for epoch metrics: loss and number of correct predictions</span>
-        <span class="n">epoch_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">epoch_correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mlp_clf</span><span class="p">(</span><span class="n">x_batch</span><span class="p">))</span> <span class="o">==</span> <span class="n">y_batch</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="c1"># Training loop for one data batch (i.e. one gradient descent step)</span>
+        <span class="k">for</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="c1"># Zero the gradients before running the backward pass</span>
+            <span class="c1"># Avoids accumulating gradients erroneously</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
 
-    <span class="c1"># Compute epoch metrics</span>
-    <span class="n">epoch_loss</span> <span class="o">/=</span> <span class="n">n_batches</span>
-    <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">epoch_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
+            <span class="c1"># Forward pass: compute model output with current weights</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
-    <span class="p">)</span>
+            <span class="c1"># Compute loss (comparison between expected and actual results)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
 
-    <span class="c1"># Record epoch metrics for later plotting</span>
-    <span class="n">train_history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
-    <span class="n">train_history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
+            <span class="c1"># Backward pass (backprop): compute gradient of the loss w.r.t each model weight</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 
+            <span class="c1"># Gradient descent step: update the weights in the opposite direction of their gradient</span>
+            <span class="c1"># no_grad() avoids tracking operations history, which would be useless here</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+                    <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training complete!&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total gradient descent steps: </span><span class="si">{</span><span class="n">n_epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="c1"># Accumulate data for epoch metrics: loss and number of correct predictions</span>
+                <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="n">n_correct</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">))</span> <span class="o">==</span> <span class="n">y_batch</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Compute epoch metrics</span>
+        <span class="n">epoch_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="n">n_batches</span>
+        <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Record epoch metrics for later plotting</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">n_epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planar_history</span> <span class="o">=</span> <span class="n">train_planar</span><span class="p">(</span><span class="n">planar_dataloader</span><span class="p">,</span> <span class="n">planar_model</span><span class="p">,</span> <span class="n">planar_loss_fn</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  1/ 50]. Mean loss: 0.70334. Accuracy: 58.60%
-Epoch [  2/ 50]. Mean loss: 0.69329. Accuracy: 55.60%
-Epoch [  3/ 50]. Mean loss: 0.69090. Accuracy: 60.60%
-Epoch [  4/ 50]. Mean loss: 0.68698. Accuracy: 61.00%
-Epoch [  5/ 50]. Mean loss: 0.67962. Accuracy: 65.40%
-Epoch [  6/ 50]. Mean loss: 0.66668. Accuracy: 65.00%
-Epoch [  7/ 50]. Mean loss: 0.65045. Accuracy: 68.20%
-Epoch [  8/ 50]. Mean loss: 0.62199. Accuracy: 76.80%
-Epoch [  9/ 50]. Mean loss: 0.58244. Accuracy: 81.60%
-Epoch [ 10/ 50]. Mean loss: 0.54336. Accuracy: 85.60%
-Epoch [ 11/ 50]. Mean loss: 0.50302. Accuracy: 84.80%
-Epoch [ 12/ 50]. Mean loss: 0.47359. Accuracy: 85.20%
-Epoch [ 13/ 50]. Mean loss: 0.45086. Accuracy: 84.20%
-Epoch [ 14/ 50]. Mean loss: 0.43572. Accuracy: 83.80%
-Epoch [ 15/ 50]. Mean loss: 0.42522. Accuracy: 84.40%
-Epoch [ 16/ 50]. Mean loss: 0.41733. Accuracy: 84.60%
-Epoch [ 17/ 50]. Mean loss: 0.41048. Accuracy: 84.40%
-Epoch [ 18/ 50]. Mean loss: 0.40564. Accuracy: 85.60%
-Epoch [ 19/ 50]. Mean loss: 0.40289. Accuracy: 85.00%
-Epoch [ 20/ 50]. Mean loss: 0.39787. Accuracy: 85.60%
-Epoch [ 21/ 50]. Mean loss: 0.39458. Accuracy: 85.60%
-Epoch [ 22/ 50]. Mean loss: 0.39302. Accuracy: 85.80%
-Epoch [ 23/ 50]. Mean loss: 0.38777. Accuracy: 85.20%
-Epoch [ 24/ 50]. Mean loss: 0.38930. Accuracy: 86.20%
-Epoch [ 25/ 50]. Mean loss: 0.38757. Accuracy: 85.80%
-Epoch [ 26/ 50]. Mean loss: 0.38472. Accuracy: 86.20%
-Epoch [ 27/ 50]. Mean loss: 0.38254. Accuracy: 85.60%
-Epoch [ 28/ 50]. Mean loss: 0.38263. Accuracy: 86.20%
-Epoch [ 29/ 50]. Mean loss: 0.37868. Accuracy: 86.20%
-Epoch [ 30/ 50]. Mean loss: 0.37558. Accuracy: 86.00%
-Epoch [ 31/ 50]. Mean loss: 0.37868. Accuracy: 86.00%
-Epoch [ 32/ 50]. Mean loss: 0.37574. Accuracy: 86.60%
-Epoch [ 33/ 50]. Mean loss: 0.37600. Accuracy: 86.60%
-Epoch [ 34/ 50]. Mean loss: 0.37188. Accuracy: 87.20%
-Epoch [ 35/ 50]. Mean loss: 0.37142. Accuracy: 86.40%
-Epoch [ 36/ 50]. Mean loss: 0.37101. Accuracy: 86.20%
-Epoch [ 37/ 50]. Mean loss: 0.36997. Accuracy: 86.00%
-Epoch [ 38/ 50]. Mean loss: 0.37003. Accuracy: 86.40%
-Epoch [ 39/ 50]. Mean loss: 0.37070. Accuracy: 86.40%
-Epoch [ 40/ 50]. Mean loss: 0.36967. Accuracy: 86.60%
-Epoch [ 41/ 50]. Mean loss: 0.36936. Accuracy: 86.20%
-Epoch [ 42/ 50]. Mean loss: 0.36788. Accuracy: 85.80%
-Epoch [ 43/ 50]. Mean loss: 0.36735. Accuracy: 86.40%
-Epoch [ 44/ 50]. Mean loss: 0.36684. Accuracy: 86.40%
-Epoch [ 45/ 50]. Mean loss: 0.36592. Accuracy: 86.00%
-Epoch [ 46/ 50]. Mean loss: 0.36660. Accuracy: 85.80%
-Epoch [ 47/ 50]. Mean loss: 0.36606. Accuracy: 86.60%
-Epoch [ 48/ 50]. Mean loss: 0.36634. Accuracy: 86.60%
-Epoch [ 49/ 50]. Mean loss: 0.36312. Accuracy: 86.40%
-Epoch [ 50/ 50]. Mean loss: 0.36384. Accuracy: 86.40%
-Training complete!
-Total gradient descent steps: 5000.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 500 samples. 100 batches per epoch.
+Epoch [  1/ 50]. Mean loss: 0.70286. Accuracy: 63.40%
+Epoch [  2/ 50]. Mean loss: 0.68491. Accuracy: 60.20%
+Epoch [  3/ 50]. Mean loss: 0.68003. Accuracy: 63.00%
+Epoch [  4/ 50]. Mean loss: 0.66773. Accuracy: 62.00%
+Epoch [  5/ 50]. Mean loss: 0.65166. Accuracy: 66.20%
+Epoch [  6/ 50]. Mean loss: 0.62921. Accuracy: 73.00%
+Epoch [  7/ 50]. Mean loss: 0.60231. Accuracy: 78.40%
+Epoch [  8/ 50]. Mean loss: 0.56625. Accuracy: 82.40%
+Epoch [  9/ 50]. Mean loss: 0.52801. Accuracy: 84.40%
+Epoch [ 10/ 50]. Mean loss: 0.49383. Accuracy: 85.80%
+Epoch [ 11/ 50]. Mean loss: 0.46734. Accuracy: 86.20%
+Epoch [ 12/ 50]. Mean loss: 0.44817. Accuracy: 85.00%
+Epoch [ 13/ 50]. Mean loss: 0.43410. Accuracy: 85.40%
+Epoch [ 14/ 50]. Mean loss: 0.42021. Accuracy: 85.00%
+Epoch [ 15/ 50]. Mean loss: 0.41632. Accuracy: 83.80%
+Epoch [ 16/ 50]. Mean loss: 0.41390. Accuracy: 85.00%
+Epoch [ 17/ 50]. Mean loss: 0.40843. Accuracy: 84.80%
+Epoch [ 18/ 50]. Mean loss: 0.40477. Accuracy: 85.00%
+Epoch [ 19/ 50]. Mean loss: 0.40207. Accuracy: 84.20%
+Epoch [ 20/ 50]. Mean loss: 0.40098. Accuracy: 84.60%
+Epoch [ 21/ 50]. Mean loss: 0.39788. Accuracy: 85.00%
+Epoch [ 22/ 50]. Mean loss: 0.39562. Accuracy: 84.80%
+Epoch [ 23/ 50]. Mean loss: 0.39617. Accuracy: 84.60%
+Epoch [ 24/ 50]. Mean loss: 0.39390. Accuracy: 84.80%
+Epoch [ 25/ 50]. Mean loss: 0.39289. Accuracy: 85.00%
+Epoch [ 26/ 50]. Mean loss: 0.39194. Accuracy: 85.20%
+Epoch [ 27/ 50]. Mean loss: 0.39080. Accuracy: 85.00%
+Epoch [ 28/ 50]. Mean loss: 0.38854. Accuracy: 84.20%
+Epoch [ 29/ 50]. Mean loss: 0.38890. Accuracy: 84.60%
+Epoch [ 30/ 50]. Mean loss: 0.38809. Accuracy: 84.20%
+Epoch [ 31/ 50]. Mean loss: 0.38698. Accuracy: 84.00%
+Epoch [ 32/ 50]. Mean loss: 0.38480. Accuracy: 84.80%
+Epoch [ 33/ 50]. Mean loss: 0.38464. Accuracy: 84.60%
+Epoch [ 34/ 50]. Mean loss: 0.38547. Accuracy: 84.60%
+Epoch [ 35/ 50]. Mean loss: 0.38448. Accuracy: 85.20%
+Epoch [ 36/ 50]. Mean loss: 0.38386. Accuracy: 84.20%
+Epoch [ 37/ 50]. Mean loss: 0.38384. Accuracy: 84.60%
+Epoch [ 38/ 50]. Mean loss: 0.38045. Accuracy: 85.20%
+Epoch [ 39/ 50]. Mean loss: 0.38103. Accuracy: 84.80%
+Epoch [ 40/ 50]. Mean loss: 0.38213. Accuracy: 84.80%
+Epoch [ 41/ 50]. Mean loss: 0.37950. Accuracy: 85.00%
+Epoch [ 42/ 50]. Mean loss: 0.37936. Accuracy: 85.20%
+Epoch [ 43/ 50]. Mean loss: 0.38017. Accuracy: 85.40%
+Epoch [ 44/ 50]. Mean loss: 0.37918. Accuracy: 85.40%
+Epoch [ 45/ 50]. Mean loss: 0.37744. Accuracy: 85.00%
+Epoch [ 46/ 50]. Mean loss: 0.37798. Accuracy: 85.60%
+Epoch [ 47/ 50]. Mean loss: 0.38020. Accuracy: 84.40%
+Epoch [ 48/ 50]. Mean loss: 0.37639. Accuracy: 85.00%
+Epoch [ 49/ 50]. Mean loss: 0.37555. Accuracy: 85.60%
+Epoch [ 50/ 50]. Mean loss: 0.37831. Accuracy: 84.60%
+Training complete! Total gradient descent steps: 5000.
 </pre></div>
 </div>
 </div>
@@ -888,28 +984,465 @@ Total gradient descent steps: 5000.
 <h3>Training results<a class="headerlink" href="#training-results" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">train_history</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">planar_history</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/671b32c277ccd7e3e6e67c285429949535739d17ca5770ad4ab87f4c6304ce34.png" src="../_images/671b32c277ccd7e3e6e67c285429949535739d17ca5770ad4ab87f4c6304ce34.png" />
+<img alt="../_images/ab17334909cb4ee3c4cbe079518012ad6d743c23574298c927b3d8bd194f2c0d.png" src="../_images/ab17334909cb4ee3c4cbe079518012ad6d743c23574298c927b3d8bd194f2c0d.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_decision_boundary</span><span class="p">(</span><span class="n">mlp_clf</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_decision_boundary</span><span class="p">(</span><span class="n">planar_model</span><span class="p">,</span> <span class="n">planar_data</span><span class="p">,</span> <span class="n">planar_targets</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/23b8f201195fde197cd8225fddcdd849cfb90e44a51d06bbff8337a51257fa7f.png" src="../_images/23b8f201195fde197cd8225fddcdd849cfb90e44a51d06bbff8337a51257fa7f.png" />
+<img alt="../_images/9ef2b746fab34422021643d3c852469e10d1a8f26253240ce7fd6ac0cc57be4b.png" src="../_images/9ef2b746fab34422021643d3c852469e10d1a8f26253240ce7fd6ac0cc57be4b.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="multiclass-classification">
 <h2>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this heading">#</a></h2>
+<section id="data-loading-and-visualization">
+<h3>Data loading and visualization<a class="headerlink" href="#data-loading-and-visualization" title="Permalink to this heading">#</a></h3>
+<p>We use the <a class="reference external" href="https://github.com/zalandoresearch/fashion-mnist">Fashion-MNIST</a> dataset, analogous to the famous MNIST handwritten digits dataset. It consists of:</p>
+<ul class="simple">
+<li><p>a training set containing 60,000 28x28 grayscale images, each of them associated with a label (fashion category) from 10 classes;</p></li>
+<li><p>a test set of 10,000 images with the same properties.</p></li>
+</ul>
+<p>A <a class="reference external" href="https://pytorch.org/vision/stable/generated/torchvision.datasets.FashionMNIST.html">PyTorch class</a> simplifies the loading process of this dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_train_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">fashion_test_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show info about the first training image</span>
+<span class="n">fashion_img</span><span class="p">,</span> <span class="n">fashion_label</span> <span class="o">=</span> <span class="n">fashion_train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First image: </span><span class="si">{</span><span class="n">fashion_img</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. Label: </span><span class="si">{</span><span class="n">fashion_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First image: torch.Size([1, 28, 28]). Label: 9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show raw data for the first image</span>
+<span class="c1"># Pixel values have already been normalized into the [0,1] range</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fashion_img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0039, 0.0000, 0.0000, 0.0510,
+          0.2863, 0.0000, 0.0000, 0.0039, 0.0157, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0039, 0.0039, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0118, 0.0000, 0.1412, 0.5333,
+          0.4980, 0.2431, 0.2118, 0.0000, 0.0000, 0.0000, 0.0039, 0.0118,
+          0.0157, 0.0000, 0.0000, 0.0118],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0235, 0.0000, 0.4000, 0.8000,
+          0.6902, 0.5255, 0.5647, 0.4824, 0.0902, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0471, 0.0392, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.6078, 0.9255,
+          0.8118, 0.6980, 0.4196, 0.6118, 0.6314, 0.4275, 0.2510, 0.0902,
+          0.3020, 0.5098, 0.2824, 0.0588],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0039, 0.0000, 0.2706, 0.8118, 0.8745,
+          0.8549, 0.8471, 0.8471, 0.6392, 0.4980, 0.4745, 0.4784, 0.5725,
+          0.5529, 0.3451, 0.6745, 0.2588],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0039, 0.0039, 0.0039, 0.0000, 0.7843, 0.9098, 0.9098,
+          0.9137, 0.8980, 0.8745, 0.8745, 0.8431, 0.8353, 0.6431, 0.4980,
+          0.4824, 0.7686, 0.8980, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.7176, 0.8824, 0.8471,
+          0.8745, 0.8941, 0.9216, 0.8902, 0.8784, 0.8706, 0.8784, 0.8667,
+          0.8745, 0.9608, 0.6784, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.7569, 0.8941, 0.8549,
+          0.8353, 0.7765, 0.7059, 0.8314, 0.8235, 0.8275, 0.8353, 0.8745,
+          0.8627, 0.9529, 0.7922, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0039, 0.0118, 0.0000, 0.0471, 0.8588, 0.8627, 0.8314,
+          0.8549, 0.7529, 0.6627, 0.8902, 0.8157, 0.8549, 0.8784, 0.8314,
+          0.8863, 0.7725, 0.8196, 0.2039],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0235, 0.0000, 0.3882, 0.9569, 0.8706, 0.8627,
+          0.8549, 0.7961, 0.7765, 0.8667, 0.8431, 0.8353, 0.8706, 0.8627,
+          0.9608, 0.4667, 0.6549, 0.2196],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0157, 0.0000, 0.0000, 0.2157, 0.9255, 0.8941, 0.9020,
+          0.8941, 0.9412, 0.9098, 0.8353, 0.8549, 0.8745, 0.9176, 0.8510,
+          0.8510, 0.8196, 0.3608, 0.0000],
+         [0.0000, 0.0000, 0.0039, 0.0157, 0.0235, 0.0275, 0.0078, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.9294, 0.8863, 0.8510, 0.8745,
+          0.8706, 0.8588, 0.8706, 0.8667, 0.8471, 0.8745, 0.8980, 0.8431,
+          0.8549, 1.0000, 0.3020, 0.0000],
+         [0.0000, 0.0118, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.2431, 0.5686, 0.8000, 0.8941, 0.8118, 0.8353, 0.8667,
+          0.8549, 0.8157, 0.8275, 0.8549, 0.8784, 0.8745, 0.8588, 0.8431,
+          0.8784, 0.9569, 0.6235, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0706, 0.1725, 0.3216, 0.4196,
+          0.7412, 0.8941, 0.8627, 0.8706, 0.8510, 0.8863, 0.7843, 0.8039,
+          0.8275, 0.9020, 0.8784, 0.9176, 0.6902, 0.7373, 0.9804, 0.9725,
+          0.9137, 0.9333, 0.8431, 0.0000],
+         [0.0000, 0.2235, 0.7333, 0.8157, 0.8784, 0.8667, 0.8784, 0.8157,
+          0.8000, 0.8392, 0.8157, 0.8196, 0.7843, 0.6235, 0.9608, 0.7569,
+          0.8078, 0.8745, 1.0000, 1.0000, 0.8667, 0.9176, 0.8667, 0.8275,
+          0.8627, 0.9098, 0.9647, 0.0000],
+         [0.0118, 0.7922, 0.8941, 0.8784, 0.8667, 0.8275, 0.8275, 0.8392,
+          0.8039, 0.8039, 0.8039, 0.8627, 0.9412, 0.3137, 0.5882, 1.0000,
+          0.8980, 0.8667, 0.7373, 0.6039, 0.7490, 0.8235, 0.8000, 0.8196,
+          0.8706, 0.8941, 0.8824, 0.0000],
+         [0.3843, 0.9137, 0.7765, 0.8235, 0.8706, 0.8980, 0.8980, 0.9176,
+          0.9765, 0.8627, 0.7608, 0.8431, 0.8510, 0.9451, 0.2549, 0.2863,
+          0.4157, 0.4588, 0.6588, 0.8588, 0.8667, 0.8431, 0.8510, 0.8745,
+          0.8745, 0.8784, 0.8980, 0.1137],
+         [0.2941, 0.8000, 0.8314, 0.8000, 0.7569, 0.8039, 0.8275, 0.8824,
+          0.8471, 0.7255, 0.7725, 0.8078, 0.7765, 0.8353, 0.9412, 0.7647,
+          0.8902, 0.9608, 0.9373, 0.8745, 0.8549, 0.8314, 0.8196, 0.8706,
+          0.8627, 0.8667, 0.9020, 0.2627],
+         [0.1882, 0.7961, 0.7176, 0.7608, 0.8353, 0.7725, 0.7255, 0.7451,
+          0.7608, 0.7529, 0.7922, 0.8392, 0.8588, 0.8667, 0.8627, 0.9255,
+          0.8824, 0.8471, 0.7804, 0.8078, 0.7294, 0.7098, 0.6941, 0.6745,
+          0.7098, 0.8039, 0.8078, 0.4510],
+         [0.0000, 0.4784, 0.8588, 0.7569, 0.7020, 0.6706, 0.7176, 0.7686,
+          0.8000, 0.8235, 0.8353, 0.8118, 0.8275, 0.8235, 0.7843, 0.7686,
+          0.7608, 0.7490, 0.7647, 0.7490, 0.7765, 0.7529, 0.6902, 0.6118,
+          0.6549, 0.6941, 0.8235, 0.3608],
+         [0.0000, 0.0000, 0.2902, 0.7412, 0.8314, 0.7490, 0.6863, 0.6745,
+          0.6863, 0.7098, 0.7255, 0.7373, 0.7412, 0.7373, 0.7569, 0.7765,
+          0.8000, 0.8196, 0.8235, 0.8235, 0.8275, 0.7373, 0.7373, 0.7608,
+          0.7529, 0.8471, 0.6667, 0.0000],
+         [0.0078, 0.0000, 0.0000, 0.0000, 0.2588, 0.7843, 0.8706, 0.9294,
+          0.9373, 0.9490, 0.9647, 0.9529, 0.9569, 0.8667, 0.8627, 0.7569,
+          0.7490, 0.7020, 0.7137, 0.7137, 0.7098, 0.6902, 0.6510, 0.6588,
+          0.3882, 0.2275, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.1569,
+          0.2392, 0.1725, 0.2824, 0.1608, 0.1373, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Labels, i.e. fashion categories associated to images (one category per image)</span>
+<span class="n">fashion_labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;T-Shirt&quot;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Trouser&quot;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Pullover&quot;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Dress&quot;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Coat&quot;</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Sandal&quot;</span><span class="p">,</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Shirt&quot;</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;Sneaker&quot;</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Bag&quot;</span><span class="p">,</span>
+    <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;Ankle Boot&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fashion_images</span><span class="p">(</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">fashion_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Hyperparameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to change the learning rate to 1e-2 ans check training results</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Data preparation<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>As always, data will be passed to the model as small, randomized batches during training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">fashion_test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">fashion_test_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Model definition<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>Most PyTorch models are defined as subclasses of the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html">Module</a> class. Their constructor creates the layer architecture and their <code class="docutils literal notranslate"><span class="pre">forward</span></code> method defines the forward pass of the model.</p>
+<p>In this model, we use the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html">Flatten</a> module that transforms an input tensor of any shape into a vector (hence its name).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Neural network for fashion articles classification&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Flatten the input image of shape (1, 28, 28) into a vector of shape (28*28,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()</span>
+
+        <span class="c1"># Define a sequential stack of linear layers and activation functions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the forward pass of the model&quot;&quot;&quot;</span>
+
+        <span class="c1"># Apply flattening to input</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Compute output of layer stack</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_stack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Logits are a vector of raw (non-normalized) predictions</span>
+        <span class="c1"># This vector contains 10 values, one for each possible class</span>
+        <span class="k">return</span> <span class="n">logits</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fashion_model</span><span class="p">)</span>
+
+<span class="c1"># Try to guess the total number of parameters for this model before running this code!</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of trainable parameters: </span><span class="si">{</span><span class="n">count_parameters</span><span class="p">(</span><span class="n">fashion_model</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NeuralNetwork(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (layer_stack): Sequential(
+    (0): Linear(in_features=784, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=10, bias=True)
+  )
+)
+Number of trainable parameters: 55050.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Loss function<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>The standard choice for multiclass classification tasks is the <span class="xref myst">cross entropy loss</span> a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">CrossEntropyLoss</a>.</p>
+<blockquote>
+<div><p>PyTorch also offers the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss">NLLLoss</a> class implementing the negative log-likelihood loss. A key difference is that <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> expects <em>logits</em>  (raw, unnormalized predictions) as inputs, and uses <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html#torch.nn.LogSoftmax">LogSoftmax</a> to transform them into probabilities before computing its output. Using <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> is equivalent to applying <code class="docutils literal notranslate"><span class="pre">LogSoftmax</span></code> followed by <code class="docutils literal notranslate"><span class="pre">NLLLoss</span></code> (<a class="reference external" href="https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81">more details</a>).</p>
+</div></blockquote>
+<section id="softmax">
+<h4>Softmax<a class="headerlink" href="#softmax" title="Permalink to this heading">#</a></h4>
+<p>The softmax function turns a vector <span class="math notranslate nohighlight">\(\pmb{v} = \{v_1, v_2, \dots, v_K \} \in \mathbb{R}^K\)</span> of raws values (called a <em>logits vector</em> when it’s the output of a ML model) into a probability distribution. It is a multiclass generalization of the sigmoid function.</p>
+<div class="math notranslate nohighlight">
+\[\sigma(\pmb{v})_k = \frac{e^{v_k}}{\sum_{k=1}^K {e^{v_k}}}\;\;\;\;
+\sum_{k=1}^K \sigma(\pmb{v})_k = 1\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: number of labels.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{v}\)</span>: logits vector, i.e. raw predictions for each class.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma(\pmb{v})_k \in [0,1]\)</span>: probability associated to label <span class="math notranslate nohighlight">\(k \in [1,K]\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Softmax function&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+
+<span class="c1"># Raw values (logits)</span>
+<span class="n">raw_predictions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+
+<span class="n">probas</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">raw_predictions</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probas</span><span class="p">)</span>
+
+<span class="c1"># Sum of all probabilities is equal to 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">probas</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8360188  0.11314284 0.05083836]
+0.9999999999999999
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="optimization-algorithm">
+<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this heading">#</a></h3>
+<p>PyTorch provides out-of-the-box implementations for many gradient descent optimization algorithms (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.Adam.html">Adam</a>, <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html">RMSProp</a>, etc).</p>
+<p>We’ll stick with vanilla mini-batch SGD for now.</p>
+</section>
+<section id="id5">
+<h3>Model training<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">epoch_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Training algorithm for one epoch&quot;&quot;&quot;</span>
+
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_correct</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+        <span class="c1"># Load data and targets on device memory</span>
+        <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="o">=</span> <span class="n">x_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># Reset gradients</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># Forward pass</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+
+        <span class="c1"># Backward pass: backprop and GD step</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="c1"># Accumulate data for epoch metrics: loss and number of correct predictions</span>
+            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">n_correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_batch</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">total_loss</span><span class="p">,</span> <span class="n">n_correct</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_fashion</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training loop&quot;&quot;&quot;</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">n_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+        <span class="n">total_loss</span><span class="p">,</span> <span class="n">n_correct</span> <span class="o">=</span> <span class="n">epoch_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
+
+        <span class="c1"># Compute epoch metrics</span>
+        <span class="n">epoch_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="n">n_batches</span>
+        <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Record epoch metrics for later plotting</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">n_epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_history</span> <span class="o">=</span> <span class="n">train_fashion</span><span class="p">(</span>
+    <span class="n">fashion_train_dataloader</span><span class="p">,</span>
+    <span class="n">fashion_model</span><span class="p">,</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
+    <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">fashion_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch.
+Epoch [  1/ 10]. Mean loss: 2.27071. Accuracy: 21.52%
+Epoch [  2/ 10]. Mean loss: 2.17931. Accuracy: 32.20%
+Epoch [  3/ 10]. Mean loss: 1.99145. Accuracy: 33.75%
+Epoch [  4/ 10]. Mean loss: 1.68938. Accuracy: 45.18%
+Epoch [  5/ 10]. Mean loss: 1.40169. Accuracy: 59.76%
+Epoch [  6/ 10]. Mean loss: 1.20665. Accuracy: 61.44%
+Epoch [  7/ 10]. Mean loss: 1.07746. Accuracy: 63.22%
+Epoch [  8/ 10]. Mean loss: 0.98776. Accuracy: 65.36%
+Epoch [  9/ 10]. Mean loss: 0.92201. Accuracy: 67.28%
+Epoch [ 10/ 10]. Mean loss: 0.87160. Accuracy: 68.80%
+Training complete! Total gradient descent steps: 9380.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">fashion_history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/86ea4eace42fe73c1e705a963233fc27a0922f33f40514cd5e71fbbdb8cdf640.png" src="../_images/86ea4eace42fe73c1e705a963233fc27a0922f33f40514cd5e71fbbdb8cdf640.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="regression">
 <h2>Regression<a class="headerlink" href="#regression" title="Permalink to this heading">#</a></h2>
@@ -991,7 +1524,7 @@ Total gradient descent steps: 5000.
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">BInary classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">Data generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation-and-visualization">Data generation and visualization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model definition</a></li>
@@ -1000,7 +1533,19 @@ Total gradient descent steps: 5000.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-results">Training results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification">Multiclass classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification">Multiclass classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-visualization">Data loading and visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Model definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Loss function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax">Softmax</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithm">Optimization algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Model training</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
 </ul>
   </nav></div>

@@ -475,7 +475,7 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-phases-of-a-model-s-life">The two phases of a model’s life</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-and-hyperparameters">Model parameters and hyperparameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-vs-hyperparameters">Model parameters Vs hyperparameters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-function">Hypothesis function</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-matrix">Predictions matrix</a></li>
 </ul>
@@ -673,9 +673,9 @@ document.write(`
 <li><p><strong>Inference</strong>: the trained model is used to make predictions on unlabeled samples (new data unseen during training).</p></li>
 </ul>
 </section>
-<section id="model-parameters-and-hyperparameters">
-<h4>Model parameters and hyperparameters<a class="headerlink" href="#model-parameters-and-hyperparameters" title="Permalink to this heading">#</a></h4>
-<p><strong>Parameters</strong>, sometimes called <strong>weights</strong>, are the internal values that affect the computed output of a model. During the training phase, they are algorithmically adjusted for optimal performance w.r.t the loss function. The set of parameters for a model is denoted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span> or <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>.</p>
+<section id="model-parameters-vs-hyperparameters">
+<h4>Model parameters Vs hyperparameters<a class="headerlink" href="#model-parameters-vs-hyperparameters" title="Permalink to this heading">#</a></h4>
+<p><strong>Parameters</strong>, sometimes called <strong>weights</strong>, are the internal values that affect the computed output of a model. During the training phase, they are algorithmically adjusted for optimal performance w.r.t the loss function. The set of parameters for a model is often denoted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span> or <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>.</p>
 <p>They are not to be confused with <strong>hyperparameters</strong>, which are configuration properties that constrain the model: the maximum depth of a decision tree, the number of layers in a neural networks, etc. Hyperparameters are statically defined before training by the user or by a dedicated tool.</p>
 </section>
 <section id="hypothesis-function">
@@ -718,7 +718,10 @@ document.write(`
 <h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
 <p>The <strong>loss function</strong>, also called <strong>cost function</strong> or <strong>objective function</strong>, quantifies the difference, often called <strong>error</strong>, between targets (expected results) and actual results computed by the model. Its value at any given time is a scalar called the <strong>loss value</strong>, or simply <strong>loss</strong>.</p>
 <p>By convention, loss functions are usually defined so that lower is better, hence their name. If the model’s prediction is perfect, the loss value is zero.</p>
-<p>The loss function is generally denoted <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> or <span class="math notranslate nohighlight">\(\mathcal{J}\)</span>. Mathematically, it depends on the inputs <span class="math notranslate nohighlight">\(\pmb{X}\)</span>, the expected results <span class="math notranslate nohighlight">\(\pmb{Y}\)</span> and the model parameters <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>. However, during model training, <span class="math notranslate nohighlight">\(\pmb{X}\)</span> and <span class="math notranslate nohighlight">\(\pmb{Y}\)</span> can be treated as constants. Thus, the loss function depends solely on <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span> and will be denoted <span class="math notranslate nohighlight">\(\mathcal{L(\pmb{\omega})}\)</span>.</p>
+<p>The loss function is generally denoted <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> or <span class="math notranslate nohighlight">\(\mathcal{J}\)</span>.</p>
+<blockquote>
+<div><p>Mathematically, it depends on the inputs <span class="math notranslate nohighlight">\(\pmb{X}\)</span>, the expected results <span class="math notranslate nohighlight">\(\pmb{Y}\)</span> and the model parameters <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>. However, during model training, <span class="math notranslate nohighlight">\(\pmb{X}\)</span> and <span class="math notranslate nohighlight">\(\pmb{Y}\)</span> can be treated as constants. Thus, the loss function depends solely on <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span> and will be denoted <span class="math notranslate nohighlight">\(\mathcal{L(\pmb{\omega})}\)</span>.</p>
+</div></blockquote>
 <section id="loss-function-example">
 <h4>Loss function example<a class="headerlink" href="#loss-function-example" title="Permalink to this heading">#</a></h4>
 <p>The choice of the loss function depends on the problem type.</p>
@@ -985,7 +988,7 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-phases-of-a-model-s-life">The two phases of a model’s life</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-and-hyperparameters">Model parameters and hyperparameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-vs-hyperparameters">Model parameters Vs hyperparameters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-function">Hypothesis function</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-matrix">Predictions matrix</a></li>
 </ul>

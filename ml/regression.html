@@ -537,35 +537,14 @@ document.write(`
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Relax some linting rules not needed here</span>
-<span class="c1"># pylint: disable=invalid-name, wrong-import-position</span>
-
-<span class="kn">import</span> <span class="nn">platform</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">sklearn</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
-NumPy version: 1.26.3
-scikit-learn version: 1.3.2
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sklearn does not automatically import its subpackages</span>
-<span class="c1"># https://stackoverflow.com/a/9049246/2380880</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
@@ -590,16 +569,29 @@ scikit-learn version: 1.3.2
 <span class="c1"># https://stackoverflow.com/a/43028034/2380880</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="c1"># Increase default plot size</span>
-<span class="c1"># https://matplotlib.org/stable/users/explain/customizing.html#matplotlibrc-sample</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">7.5</span>
-
 <span class="c1"># Improve plot quality</span>
 <span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;retina&quot;
 
 <span class="c1"># Setup seaborn default theme</span>
 <span class="c1"># http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print environment info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.26.3
+scikit-learn version: 1.3.2
 </pre></div>
 </div>
 </div>
@@ -670,6 +662,7 @@ scikit-learn version: 1.3.2
 <ul class="simple">
 <li><p>Based on data from the 1990 California census.</p></li>
 <li><p>Slightly modified for teaching purposes by Aurélien Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
+<li><p>Raw CSV file is available <a class="reference external" href="https://raw.githubusercontent.com/bpesquet/ainotes/master/data/california_housing.csv">here</a>.</p></li>
 </ul>
 </section>
 <section id="step-2-1-discover-data">
@@ -766,133 +759,133 @@ memory usage: 1.6+ MB
   </thead>
   <tbody>
     <tr>
-      <th>6584</th>
-      <td>-118.22</td>
+      <th>9277</th>
+      <td>-122.58</td>
+      <td>38.12</td>
+      <td>13.0</td>
+      <td>5027.0</td>
+      <td>871.0</td>
+      <td>1912.0</td>
+      <td>770.0</td>
+      <td>4.9286</td>
+      <td>309500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>3606</th>
+      <td>-118.48</td>
       <td>34.23</td>
-      <td>34.0</td>
-      <td>3296.0</td>
-      <td>483.0</td>
-      <td>1268.0</td>
-      <td>478.0</td>
-      <td>8.4802</td>
-      <td>500001.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>8286</th>
-      <td>-118.15</td>
-      <td>33.77</td>
-      <td>52.0</td>
-      <td>2204.0</td>
-      <td>498.0</td>
-      <td>899.0</td>
-      <td>445.0</td>
-      <td>4.1765</td>
-      <td>393900.0</td>
-      <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>3995</th>
-      <td>-118.58</td>
-      <td>34.17</td>
       <td>29.0</td>
-      <td>3393.0</td>
-      <td>574.0</td>
-      <td>1471.0</td>
-      <td>587.0</td>
-      <td>6.2064</td>
-      <td>334900.0</td>
+      <td>3354.0</td>
+      <td>707.0</td>
+      <td>1752.0</td>
+      <td>650.0</td>
+      <td>4.5484</td>
+      <td>239900.0</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>3393</th>
-      <td>-118.31</td>
-      <td>34.27</td>
-      <td>35.0</td>
-      <td>1446.0</td>
-      <td>274.0</td>
-      <td>759.0</td>
-      <td>291.0</td>
-      <td>6.0808</td>
-      <td>215600.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>17794</th>
-      <td>-121.82</td>
-      <td>37.37</td>
-      <td>42.0</td>
-      <td>2913.0</td>
-      <td>577.0</td>
-      <td>1873.0</td>
-      <td>580.0</td>
-      <td>3.7214</td>
-      <td>167900.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>17776</th>
-      <td>-121.84</td>
-      <td>37.38</td>
+      <th>13765</th>
+      <td>-117.13</td>
+      <td>34.07</td>
       <td>34.0</td>
-      <td>762.0</td>
-      <td>182.0</td>
-      <td>611.0</td>
-      <td>193.0</td>
-      <td>3.5625</td>
-      <td>201800.0</td>
+      <td>2405.0</td>
+      <td>541.0</td>
+      <td>1342.0</td>
+      <td>514.0</td>
+      <td>2.8031</td>
+      <td>86900.0</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>9152</th>
+      <td>-118.53</td>
+      <td>34.45</td>
+      <td>26.0</td>
+      <td>828.0</td>
+      <td>149.0</td>
+      <td>508.0</td>
+      <td>158.0</td>
+      <td>5.2374</td>
+      <td>185500.0</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>12516</th>
-      <td>-121.47</td>
-      <td>38.56</td>
-      <td>52.0</td>
-      <td>889.0</td>
-      <td>162.0</td>
-      <td>273.0</td>
-      <td>145.0</td>
-      <td>3.1250</td>
-      <td>85600.0</td>
+      <th>9162</th>
+      <td>-118.48</td>
+      <td>34.42</td>
+      <td>21.0</td>
+      <td>1375.0</td>
+      <td>259.0</td>
+      <td>728.0</td>
+      <td>258.0</td>
+      <td>5.0166</td>
+      <td>229000.0</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>2413</th>
+      <td>-119.44</td>
+      <td>36.61</td>
+      <td>17.0</td>
+      <td>1531.0</td>
+      <td>280.0</td>
+      <td>775.0</td>
+      <td>246.0</td>
+      <td>3.9073</td>
+      <td>91600.0</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>9574</th>
-      <td>-120.59</td>
-      <td>37.35</td>
-      <td>15.0</td>
-      <td>3249.0</td>
-      <td>613.0</td>
-      <td>1569.0</td>
-      <td>595.0</td>
-      <td>3.5393</td>
-      <td>88000.0</td>
+      <th>510</th>
+      <td>-122.22</td>
+      <td>37.82</td>
+      <td>39.0</td>
+      <td>2492.0</td>
+      <td>310.0</td>
+      <td>808.0</td>
+      <td>315.0</td>
+      <td>11.8603</td>
+      <td>500001.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>2475</th>
+      <td>-119.97</td>
+      <td>36.44</td>
+      <td>18.0</td>
+      <td>1128.0</td>
+      <td>237.0</td>
+      <td>772.0</td>
+      <td>220.0</td>
+      <td>2.1771</td>
+      <td>39200.0</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>9057</th>
-      <td>-118.14</td>
-      <td>34.68</td>
-      <td>31.0</td>
-      <td>2666.0</td>
-      <td>662.0</td>
-      <td>1337.0</td>
-      <td>602.0</td>
-      <td>2.4432</td>
-      <td>101100.0</td>
+      <th>1274</th>
+      <td>-121.74</td>
+      <td>37.95</td>
+      <td>5.0</td>
+      <td>4980.0</td>
+      <td>774.0</td>
+      <td>2399.0</td>
+      <td>763.0</td>
+      <td>5.7104</td>
+      <td>186300.0</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>13111</th>
-      <td>-121.37</td>
-      <td>38.39</td>
-      <td>15.0</td>
-      <td>1883.0</td>
-      <td>254.0</td>
-      <td>893.0</td>
-      <td>256.0</td>
-      <td>6.2575</td>
-      <td>143500.0</td>
+      <th>1940</th>
+      <td>-120.96</td>
+      <td>38.66</td>
+      <td>11.0</td>
+      <td>2339.0</td>
+      <td>436.0</td>
+      <td>1062.0</td>
+      <td>380.0</td>
+      <td>3.9036</td>
+      <td>180800.0</td>
       <td>INLAND</td>
     </tr>
   </tbody>
@@ -1044,39 +1037,49 @@ memory usage: 1.6+ MB
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histograms for all numerical attributes</span>
-<span class="n">df_housing</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f7e7c6c932a3772cc43d3ec377fedcaf495b791c9d00fbe5b4d330664e9b8eba.png" src="../_images/f7e7c6c932a3772cc43d3ec377fedcaf495b791c9d00fbe5b4d330664e9b8eba.png" />
+<img alt="../_images/06ae97e4fc1ec0aa0aa25d989b894636ea8ff14c067ef81ea7e7768932673516.png" src="../_images/06ae97e4fc1ec0aa0aa25d989b894636ea8ff14c067ef81ea7e7768932673516.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This dataset has the particularity of including geographical coordinates</span>
-<span class="c1"># Visualise prices relative to them</span>
-<span class="n">df_housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
-    <span class="n">s</span><span class="o">=</span><span class="n">df_housing</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;population&quot;</span><span class="p">,</span>
-    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
-    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span>
-    <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_geo_data</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a geographical representation of the data&quot;&quot;&quot;</span>
+
+    <span class="c1"># This dataset has the particularity of including geographical coordinates</span>
+    <span class="c1"># Visualise prices relative to them</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="n">df_housing</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;population&quot;</span><span class="p">,</span>
+        <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span>
+        <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_geo_data</span><span class="p">(</span><span class="n">df_housing</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/14f5ef28b648a7c7eec2c3f46e559075a8a094c7fc0b488235254af67716682a.png" src="../_images/14f5ef28b648a7c7eec2c3f46e559075a8a094c7fc0b488235254af67716682a.png" />
+<img alt="../_images/c10bf1e586f1e7fd6e4e1c3692791d9ae8847210b77dc7c263063e2656d73753.png" src="../_images/c10bf1e586f1e7fd6e4e1c3692791d9ae8847210b77dc7c263063e2656d73753.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1125,7 +1128,7 @@ Name: median_house_value, dtype: float64
         <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
         <span class="n">xticklabels</span><span class="o">=</span><span class="n">df_numerical</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-        <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">},</span>
+        <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
         <span class="n">yticklabels</span><span class="o">=</span><span class="n">df_numerical</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
@@ -1140,7 +1143,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ecbb456e70bcf61ae1dd060486c52557c2b30517ae3226946d0afadcc8af21cc.png" src="../_images/ecbb456e70bcf61ae1dd060486c52557c2b30517ae3226946d0afadcc8af21cc.png" />
+<img alt="../_images/fe9041e50d01de90f514709dd1533f9cef058181555fe14985f4569702282f9f.png" src="../_images/fe9041e50d01de90f514709dd1533f9cef058181555fe14985f4569702282f9f.png" />
 </div>
 </div>
 </section>
@@ -1192,83 +1195,38 @@ df_x_test: (4128, 9). df_y_test: (4128,)
 </section>
 <section id="step-2-4-data-preprocessing">
 <h3>Step 2.4: data preprocessing<a class="headerlink" href="#step-2-4-data-preprocessing" title="Permalink to this heading">#</a></h3>
-<p>This task typically involves:</p>
+<p>For this dataset, this task involves:</p>
 <ul class="simple">
-<li><p>Removing of superflous features (if any).</p></li>
-<li><p>Adding missing values.</p></li>
+<li><p>Handling missing values.</p></li>
 <li><p>Scaling data.</p></li>
-<li><p>Transforming values into numeric form.</p></li>
-<li><p>Labelling (if needed).</p></li>
+<li><p>Transforming categorical values into numeric form.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute number and percent of missing values among features</span>
-<span class="n">total</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
-    <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
-<span class="n">df_missing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">total</span><span class="p">,</span> <span class="n">percent</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="s2">&quot;Percent&quot;</span><span class="p">])</span>
-<span class="n">df_missing_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute percent of missing values among features</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Total</th>
-      <th>Percent</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>total_bedrooms</th>
-      <td>167</td>
-      <td>1.011386</td>
-    </tr>
-    <tr>
-      <th>longitude</th>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>latitude</th>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>housing_median_age</th>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>total_rooms</th>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>longitude             0.000000
+latitude              0.000000
+housing_median_age    0.000000
+total_rooms           0.000000
+total_bedrooms        1.005329
+population            0.000000
+households            0.000000
+median_income         0.000000
+ocean_proximity       0.000000
+dtype: float64
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show the first samples with missing values</span>
-<span class="n">df_x_train</span><span class="p">[</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show random samples with missing values</span>
+<span class="n">df_x_train</span><span class="p">[</span><span class="n">df_x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1304,64 +1262,64 @@ df_x_test: (4128, 9). df_y_test: (4128,)
   </thead>
   <tbody>
     <tr>
-      <th>19932</th>
-      <td>-119.33</td>
-      <td>36.30</td>
-      <td>11.0</td>
-      <td>3045.0</td>
+      <th>11441</th>
+      <td>-117.98</td>
+      <td>33.73</td>
+      <td>18.0</td>
+      <td>3833.0</td>
       <td>NaN</td>
-      <td>1563.0</td>
-      <td>516.0</td>
-      <td>5.4337</td>
+      <td>2192.0</td>
+      <td>996.0</td>
+      <td>3.4679</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>6814</th>
+      <td>-118.07</td>
+      <td>34.10</td>
+      <td>32.0</td>
+      <td>4275.0</td>
+      <td>NaN</td>
+      <td>2812.0</td>
+      <td>1012.0</td>
+      <td>3.3512</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>18786</th>
+      <td>-122.42</td>
+      <td>40.44</td>
+      <td>16.0</td>
+      <td>994.0</td>
+      <td>NaN</td>
+      <td>495.0</td>
+      <td>181.0</td>
+      <td>2.1875</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>3912</th>
-      <td>-118.55</td>
-      <td>34.19</td>
+      <th>3529</th>
+      <td>-118.53</td>
+      <td>34.26</td>
       <td>18.0</td>
-      <td>5862.0</td>
+      <td>3674.0</td>
       <td>NaN</td>
-      <td>3161.0</td>
-      <td>1280.0</td>
-      <td>3.1106</td>
+      <td>1590.0</td>
+      <td>550.0</td>
+      <td>8.1760</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>5665</th>
-      <td>-118.29</td>
-      <td>33.73</td>
-      <td>30.0</td>
-      <td>3161.0</td>
+      <th>14152</th>
+      <td>-117.09</td>
+      <td>32.77</td>
+      <td>31.0</td>
+      <td>3062.0</td>
       <td>NaN</td>
-      <td>1865.0</td>
-      <td>771.0</td>
-      <td>2.7139</td>
+      <td>1263.0</td>
+      <td>539.0</td>
+      <td>3.0875</td>
       <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>7806</th>
-      <td>-118.09</td>
-      <td>33.89</td>
-      <td>42.0</td>
-      <td>991.0</td>
-      <td>NaN</td>
-      <td>717.0</td>
-      <td>219.0</td>
-      <td>4.0926</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>563</th>
-      <td>-122.24</td>
-      <td>37.75</td>
-      <td>45.0</td>
-      <td>891.0</td>
-      <td>NaN</td>
-      <td>384.0</td>
-      <td>146.0</td>
-      <td>4.9489</td>
-      <td>NEAR BAY</td>
     </tr>
   </tbody>
 </table>
@@ -1369,11 +1327,11 @@ df_x_test: (4128, 9). df_y_test: (4128,)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print numerical features</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get numerical features</span>
 <span class="n">num_features</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">num_features</span><span class="p">)</span>
 
-<span class="c1"># Print categorical features</span>
+<span class="c1"># Get categorical features</span>
 <span class="n">cat_features</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cat_features</span><span class="p">)</span>
 
@@ -1390,11 +1348,11 @@ Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ocean_proximity
-&lt;1H OCEAN     7316
-INLAND        5274
-NEAR OCEAN    2098
-NEAR BAY      1820
-ISLAND           4
+&lt;1H OCEAN     7322
+INLAND        5265
+NEAR OCEAN    2147
+NEAR BAY      1775
+ISLAND           3
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -1447,8 +1405,8 @@ Name: count, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
-[-1.03768377  0.49043989 -1.79989368  3.66316378  4.63799098  5.17841074
-  4.88351236 -0.04404863  1.          0.          0.          0.
+[-1.55092751  1.2253484   1.86076772 -0.41362019 -0.45526295 -0.64135714
+ -0.41111617 -0.36647325  1.          0.          0.          0.
   0.        ]
 </pre></div>
 </div>
@@ -1513,7 +1471,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68017.66
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68591.25
 </pre></div>
 </div>
 </div>
@@ -1567,8 +1525,8 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean cross-validation error for linear regression: 68229.35
-Mean cross-validation error for decision tree: 69617.45
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean cross-validation error for linear regression: 68682.71
+Mean cross-validation error for decision tree: 68877.86
 </pre></div>
 </div>
 </div>
@@ -1588,8 +1546,8 @@ Mean cross-validation error for decision tree: 69617.45
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19480.35
-Mean cross-validation error for random forest: 50195.21
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 20043.24
+Mean cross-validation error for random forest: 50230.38
 </pre></div>
 </div>
 </div>
@@ -1654,13 +1612,13 @@ Mean cross-validation error for random forest: 50195.21
 <span class="c1"># Transform the targets DataFrame into a plain tensor</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">df_y_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
-<span class="n">test_rmse</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">final_model</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test error for final model: </span><span class="si">{</span><span class="n">test_rmse</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">test_error</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">final_model</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test error for final model: </span><span class="si">{</span><span class="n">test_error</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test error for final model: 50306.57
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test error for final model: 47424.21
 </pre></div>
 </div>
 </div>
@@ -1740,7 +1698,7 @@ Mean cross-validation error for random forest: 50195.21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted median price: 265950.05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted median price: 278012.03
 </pre></div>
 </div>
 </div>
