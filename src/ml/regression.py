@@ -184,25 +184,26 @@ plt.show()
 
 # %% slideshow={"slide_type": "slide"}
 def plot_geo_data(df):
-    """Plot a geographical representation correlation matrix for a DataFrame"""
+    """Plot a geographical representation of the data"""
 
-# This dataset has the particularity of including geographical coordinates
-# Visualise prices relative to them
-df_housing.plot(
-    kind="scatter",
-    x="longitude",
-    y="latitude",
-    alpha=0.4,
-    s=df_housing["population"] / 100,
-    label="population",
-    figsize=(11, 8),
-    c="median_house_value",
-    cmap=plt.get_cmap("jet"),
-    colorbar=True,
-    sharex=False,
-)
-plt.legend()
-plt.show()
+    # This dataset has the particularity of including geographical coordinates
+    # Visualise prices relative to them
+    df.plot(
+        kind="scatter",
+        x="longitude",
+        y="latitude",
+        alpha=0.4,
+        s=df_housing["population"] / 100,
+        label="population",
+        figsize=(11, 8),
+        c="median_house_value",
+        cmap=plt.get_cmap("jet"),
+        colorbar=True,
+        sharex=False,
+    )
+    plt.legend()
+    plt.show()
+
 
 # %%
 plot_geo_data(df_housing)
@@ -509,8 +510,8 @@ x_test = full_pipeline.transform(df_x_test)
 # Transform the targets DataFrame into a plain tensor
 y_test = df_y_test.to_numpy()
 
-test_rmse = compute_error(final_model, x_test, y_test)
-print(f"Test error for final model: {test_rmse:.02f}")
+test_error = compute_error(final_model, x_test, y_test)
+print(f"Test error for final model: {test_error:.02f}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Using the model to make predictions on new data
