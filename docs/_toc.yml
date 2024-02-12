@@ -34,6 +34,9 @@ parts:
         title: Classification
       - file: ml/ann
         title: Neural networks
+    - file: ml/deep_learning
+      sections:
+      - file: ml/cnn
     - file: ml/reinforcement_learning
       sections:
       - file: ml/rl
