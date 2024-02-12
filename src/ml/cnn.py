@@ -16,6 +16,13 @@
 # # Convolutional Neural Networks
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ## Learning objectives
+#
+# - Discover the general architecture of convolutional neural networks.
+# - Understand why they perform better than a plain ANN for image-related tasks.
+# - Learn how to build convnets with [PyTorch](https://pytorch.org/).
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
 # %%
@@ -85,7 +92,7 @@ def count_parameters(model, trainable=True):
     )
 
 
-def plot_fashion_images(data, labels):
+def plot_fashion_images(data, labels, model=None):
     """Plot some images with their associated labels"""
 
     figure = plt.figure(figsize=(10, 5))
@@ -94,9 +101,21 @@ def plot_fashion_images(data, labels):
         sample_idx = torch.randint(len(data), size=(1,)).item()
         img, label = data[sample_idx]
         figure.add_subplot(rows, cols, i)
-        plt.title(labels[label])
+
+        # Title is either true or predicted label
+        if model is None:
+            title = labels[label]
+        else:
+            # Add a dimension (to match expected shape with batch size) and store image on device memory
+            x_img = img[None, :].to(device)
+            # Compute predicted label for image
+            # Even if the model outputs unormalized logits, argmax gives the predicted label
+            pred_label = model(x_img).argmax(dim=1).item()
+            title = f"{labels[pred_label]}?"
+        plt.title(title)
+
         plt.axis("off")
-        plt.imshow(img.squeeze(), cmap="gray")
+        plt.imshow(img.cpu().detach().numpy().squeeze(), cmap="gray")
     plt.show()
 
 
@@ -111,10 +130,9 @@ print(f"PyTorch version: {torch.__version__}")
 if torch.cuda.is_available():
     device = torch.device("cuda")
     print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
-# Performance issues exist with MPS backend
 elif torch.backends.mps.is_available():
     device = torch.device("mps")
-    print("Metal GPU found :)")
+    print("MPS GPU found :)")
 else:
     device = torch.device("cpu")
     print("No GPU found, using CPU instead")
@@ -516,6 +534,9 @@ fashion_history = train_fashion(
 # %% slideshow={"slide_type": "-"}
 # Plot training history
 plot_loss_acc(fashion_history)
+
+# %% slideshow={"slide_type": "slide"}
+plot_fashion_images(fashion_train_data, fashion_labels, fashion_convnet)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Using a pretrained convnet
