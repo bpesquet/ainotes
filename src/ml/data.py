@@ -65,7 +65,7 @@ if torch.cuda.is_available():
 # Performance issues exist with MPS backend
 # elif torch.backends.mps.is_available():
 #     device = torch.device("mps")
-#     print("Metal GPU found :)")
+#     print("MPS GPU found :)")
 else:
     device = torch.device("cpu")
     print("No GPU found, using CPU instead")

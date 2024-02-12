@@ -38,10 +38,10 @@ if torch.cuda.is_available():
     print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
 elif torch.backends.mps.is_available():
     device = torch.device("mps")
-    print("Metal GPU found :)")
+    print("MPS GPU found :)")
 else:
     device = torch.device("cpu")
-    print("No available GPU :/")
+    print("No GPU found, using CPU instead")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Probability
