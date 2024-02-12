@@ -367,12 +367,12 @@ plot_activation_function(relu, relu_prime, "ReLU", axis=(-6, 6, -1.1, 6.1))
 # [![Backprop explained visually](_images/visual_backprop_demo.png)](https://developers-dot-devsite-v2-prod.appspot.com/machine-learning/crash-course/backprop-scroll)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## BInary classification
+# ## BInary classification example
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Data generation and visualization
 #
-# A scikit-learn [function](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html) is used to easily generate 2-dimensional data with two classes.
+# A scikit-learn [function](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html) is used to easily generate two-dimensional data with two classes.
 
 # %% slideshow={"slide_type": "-"}
 # Generate 2D data (a large circle containing a smaller circle)
@@ -421,7 +421,7 @@ y_train = torch.from_numpy(planar_targets[:, np.newaxis]).float().to(device)
 print(f"x_train: {x_train.shape}. y_train: {y_train.shape}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# In order to use [mini-batch SGD](principles.ipynb#mini-batch-sgd), data needs to be passed to the model as small, randomized batches during training. The Pytorch [DataLoader](https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader) class abstracts this complexity for us.
+# In order to use [mini-batch SGD](principles.ipynb), data needs to be passed to the model as small, randomized batches during training. The Pytorch [DataLoader](https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader) class abstracts this complexity for us.
 
 # %% slideshow={"slide_type": "-"}
 # Load data as randomized batches for training
@@ -444,9 +444,11 @@ planar_dataloader = DataLoader(
 # You may change its internal architecture:
 # for example, try adding one neuron on the hidden layer and check training results
 planar_model = nn.Sequential(
-    nn.Linear(2, hidden_layer_size),
+    # Hidden layer with 2 inputs
+    nn.Linear(in_features=2, out_features=hidden_layer_size),
     nn.Tanh(),
-    nn.Linear(hidden_layer_size, 1),
+    # Output layer
+    nn.Linear(in_features=hidden_layer_size, out_features=1),
     nn.Sigmoid(),
 ).to(device)
 print(planar_model)
@@ -457,7 +459,7 @@ print(f"Number of trainable parameters: {count_parameters(planar_model)}.")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Loss function
 #
-# For binary classification tasks, the standard choice is the [binary cross entropy loss](classification.ipynb#choosing-a-loss-function), conveniently provided by a [PyTorch class](https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html).
+# For binary classification tasks, the standard choice is the [binary cross entropy loss](classification.ipynb), conveniently provided by a [PyTorch class](https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html).
 #
 # For each sample of the batch, it will compare the output of the model (a value $\in [0,1]$ provided by the sigmoid function) with the expected binary value $\in \{0,1\}$.
 
@@ -556,7 +558,7 @@ plot_loss_acc(planar_history)
 plot_decision_boundary(planar_model, planar_data, planar_targets)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Multiclass classification
+# ## Multiclass classification example
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Data loading and visualization
@@ -644,11 +646,14 @@ class NeuralNetwork(nn.Module):
 
         # Define a sequential stack of linear layers and activation functions
         self.layer_stack = nn.Sequential(
-            nn.Linear(28 * 28, 64),
+            # First hidden layer with 784 inputs
+            nn.Linear(in_features=28 * 28, out_features=64),
             nn.ReLU(),
-            nn.Linear(64, 64),
+            # Second hidden layer
+            nn.Linear(in_features=64, out_features=64),
             nn.ReLU(),
-            nn.Linear(64, 10),
+            # Output layer
+            nn.Linear(in_features=64, out_features=10),
         )
 
     def forward(self, x):
@@ -675,7 +680,7 @@ print(f"Number of trainable parameters: {count_parameters(fashion_model)}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Loss function
 #
-# The standard choice for multiclass classification tasks is the [cross entropy loss](classification.ipynb#1) a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named [CrossEntropyLoss](https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html).
+# The standard choice for multiclass classification tasks is the [cross entropy loss](classification.ipynb) a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named [CrossEntropyLoss](https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html).
 #
 # > PyTorch also offers the [NLLLoss](https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss) class implementing the negative log-likelihood loss. A key difference is that `CrossEntropyLoss` expects *logits*  (raw, unnormalized predictions) as inputs, and uses [LogSoftmax](https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html#torch.nn.LogSoftmax) to transform them into probabilities before computing its output. Using `CrossEntropyLoss` is equivalent to applying `LogSoftmax` followed by `NLLLoss` ([more details](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81)).
 
@@ -789,10 +794,10 @@ fashion_history = train_fashion(
     optim.SGD(fashion_model.parameters(), lr=learning_rate),
 )
 
-# %% slideshow={"slide_type": "slide"}
-plot_loss_acc(fashion_history)
-
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Regression
+# ### Training results
+
+# %% slideshow={"slide_type": "-"}
+plot_loss_acc(fashion_history)
 
 # %%
