@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/ann';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Reinforcement Learning" href="reinforcement_learning.html" />
+    <link rel="next" title="Deep Learning" href="deep_learning.html" />
     <link rel="prev" title="Classification example: recognize handwritten digits" href="classification.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -180,11 +180,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Neural networks</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning.html">Reinforcement Learning</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="deep_learning.html">Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="cnn.html">Convolutional Neural Networks</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning.html">Reinforcement Learning</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="rl.html">Introduction</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="challenges/heart_disease.html">Heart disease</a></li>
 </ul>
 </li>
@@ -490,7 +494,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">BInary classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-example">BInary classification example</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation-and-visualization">Data generation and visualization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a></li>
@@ -500,7 +504,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-results">Training results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification">Multiclass classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification-example">Multiclass classification example</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-visualization">Data loading and visualization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Hyperparameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data preparation</a></li>
@@ -511,9 +515,9 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithm">Optimization algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Model training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Training results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
 </ul>
             </nav>
         </div>
@@ -929,11 +933,11 @@ No GPU found, using CPU instead
 </section>
 </section>
 </section>
-<section id="binary-classification">
-<h2>BInary classification<a class="headerlink" href="#binary-classification" title="Permalink to this heading">#</a></h2>
+<section id="binary-classification-example">
+<h2>BInary classification example<a class="headerlink" href="#binary-classification-example" title="Permalink to this heading">#</a></h2>
 <section id="data-generation-and-visualization">
 <h3>Data generation and visualization<a class="headerlink" href="#data-generation-and-visualization" title="Permalink to this heading">#</a></h3>
-<p>A scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">function</a> is used to easily generate 2-dimensional data with two classes.</p>
+<p>A scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">function</a> is used to easily generate two-dimensional data with two classes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate 2D data (a large circle containing a smaller circle)</span>
@@ -1017,7 +1021,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 </div>
-<p>In order to use <span class="xref myst">mini-batch SGD</span>, data needs to be passed to the model as small, randomized batches during training. The Pytorch <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">DataLoader</a> class abstracts this complexity for us.</p>
+<p>In order to use <a class="reference internal" href="principles.html"><span class="doc std std-doc">mini-batch SGD</span></a>, data needs to be passed to the model as small, randomized batches during training. The Pytorch <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">DataLoader</a> class abstracts this complexity for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data as randomized batches for training</span>
@@ -1044,9 +1048,11 @@ No GPU found, using CPU instead
 <span class="c1"># You may change its internal architecture:</span>
 <span class="c1"># for example, try adding one neuron on the hidden layer and check training results</span>
 <span class="n">planar_model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="p">),</span>
+    <span class="c1"># Hidden layer with 2 inputs</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">hidden_layer_size</span><span class="p">),</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
-    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_layer_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="c1"># Output layer</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">hidden_layer_size</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
 <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">planar_model</span><span class="p">)</span>
@@ -1071,7 +1077,7 @@ Number of trainable parameters: 9.
 </section>
 <section id="loss-function">
 <h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
-<p>For binary classification tasks, the standard choice is the <span class="xref myst">binary cross entropy loss</span>, conveniently provided by a <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">PyTorch class</a>.</p>
+<p>For binary classification tasks, the standard choice is the <a class="reference internal" href="classification.html"><span class="doc std std-doc">binary cross entropy loss</span></a>, conveniently provided by a <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">PyTorch class</a>.</p>
 <p>For each sample of the batch, it will compare the output of the model (a value <span class="math notranslate nohighlight">\(\in [0,1]\)</span> provided by the sigmoid function) with the expected binary value <span class="math notranslate nohighlight">\(\in \{0,1\}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1248,8 +1254,8 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </section>
 </section>
-<section id="multiclass-classification">
-<h2>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this heading">#</a></h2>
+<section id="multiclass-classification-example">
+<h2>Multiclass classification example<a class="headerlink" href="#multiclass-classification-example" title="Permalink to this heading">#</a></h2>
 <section id="data-loading-and-visualization">
 <h3>Data loading and visualization<a class="headerlink" href="#data-loading-and-visualization" title="Permalink to this heading">#</a></h3>
 <p>We use the <a class="reference external" href="https://github.com/zalandoresearch/fashion-mnist">Fashion-MNIST</a> dataset, analogous to the famous MNIST handwritten digits dataset. It consists of:</p>
@@ -1483,11 +1489,14 @@ Training complete! Total gradient descent steps: 5000
 
         <span class="c1"># Define a sequential stack of linear layers and activation functions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layer_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="c1"># First hidden layer with 784 inputs</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">64</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="c1"># Second hidden layer</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">64</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+            <span class="c1"># Output layer</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -1535,7 +1544,7 @@ Number of trainable parameters: 55050
 </section>
 <section id="id4">
 <h3>Loss function<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>The standard choice for multiclass classification tasks is the <span class="xref myst">cross entropy loss</span> a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">CrossEntropyLoss</a>.</p>
+<p>The standard choice for multiclass classification tasks is the <a class="reference internal" href="classification.html"><span class="doc std std-doc">cross entropy loss</span></a> a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">CrossEntropyLoss</a>.</p>
 <blockquote>
 <div><p>PyTorch also offers the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss">NLLLoss</a> class implementing the negative log-likelihood loss. A key difference is that <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> expects <em>logits</em>  (raw, unnormalized predictions) as inputs, and uses <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html#torch.nn.LogSoftmax">LogSoftmax</a> to transform them into probabilities before computing its output. Using <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> is equivalent to applying <code class="docutils literal notranslate"><span class="pre">LogSoftmax</span></code> followed by <code class="docutils literal notranslate"><span class="pre">NLLLoss</span></code> (<a class="reference external" href="https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81">more details</a>).</p>
 </div></blockquote>
@@ -1679,6 +1688,9 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 </div>
+</section>
+<section id="id6">
+<h3>Training results<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">fashion_history</span><span class="p">)</span>
@@ -1690,9 +1702,6 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 </section>
-</section>
-<section id="regression">
-<h2>Regression<a class="headerlink" href="#regression" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -1737,11 +1746,11 @@ Training complete! Total gradient descent steps: 9380
       </div>
     </a>
     <a class="right-next"
-       href="reinforcement_learning.html"
+       href="deep_learning.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Reinforcement Learning</p>
+        <p class="prev-next-title">Deep Learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1797,7 +1806,7 @@ Training complete! Total gradient descent steps: 9380
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">BInary classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-example">BInary classification example</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation-and-visualization">Data generation and visualization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data preparation</a></li>
@@ -1807,7 +1816,7 @@ Training complete! Total gradient descent steps: 9380
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-results">Training results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification">Multiclass classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classification-example">Multiclass classification example</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-visualization">Data loading and visualization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Hyperparameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data preparation</a></li>
@@ -1818,9 +1827,9 @@ Training complete! Total gradient descent steps: 9380
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithm">Optimization algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Model training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Training results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
 </ul>
   </nav></div>
 
