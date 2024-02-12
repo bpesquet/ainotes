@@ -460,6 +460,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-playground">Online playground</a></li>
@@ -531,10 +532,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="artificial-neural-networks">
 <h1>Artificial neural networks<a class="headerlink" href="#artificial-neural-networks" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This chapter is under construction.</p>
-</div>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Know the possibilities, architecture and key components of an artificial neural network.</p></li>
+<li><p>Understand how neural networks are trained.</p></li>
+<li><p>Learn how to build neural networks with <a class="reference external" href="https://pytorch.org/">PyTorch</a>.</p></li>
+</ul>
+</section>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -664,7 +669,7 @@ document.write(`
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot some images with their associated labels&quot;&quot;&quot;</span>
 
     <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -673,9 +678,21 @@ document.write(`
         <span class="n">sample_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
         <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span>
         <span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+
+        <span class="c1"># Title is either true or predicted label</span>
+        <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Add a dimension (to match expected shape with batch size) and store image on device memory</span>
+            <span class="n">x_img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="c1"># Compute predicted label for image</span>
+            <span class="c1"># Even if the model outputs unormalized logits, argmax gives the predicted label</span>
+            <span class="n">pred_label</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_img</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="n">pred_label</span><span class="p">]</span><span class="si">}</span><span class="s2">?&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
         <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -697,7 +714,7 @@ document.write(`
 <span class="c1"># Performance issues exist with MPS backend</span>
 <span class="c1"># elif torch.backends.mps.is_available():</span>
 <span class="c1">#     device = torch.device(&quot;mps&quot;)</span>
-<span class="c1">#     print(&quot;Metal GPU found :)&quot;)</span>
+<span class="c1">#     print(&quot;MPS GPU found :)&quot;)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No GPU found, using CPU instead&quot;</span><span class="p">)</span>
@@ -951,17 +968,17 @@ No GPU found, using CPU instead
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: (500, 2). targets: (500,)
-[[ 0.20827224 -0.0962744 ]
- [-0.48928903  0.05341333]
- [ 0.04980576  0.37314127]
- [ 0.01615881 -0.34399103]
- [ 0.20449125  0.18332038]
- [-0.65055667  0.736595  ]
- [ 0.10073905  1.14224778]
- [-0.28527656 -0.07671382]
- [-0.12882674 -0.20353465]
- [ 0.59401054  0.79809209]]
-[1 1 1 1 1 0 0 1 1 0]
+[[-0.0739105   0.25302834]
+ [ 0.87404377  0.18771619]
+ [-0.93467162  0.58074306]
+ [ 0.31479903 -0.27538854]
+ [-0.0732489  -1.24988327]
+ [ 0.04686256  0.25851479]
+ [-0.5170042   0.76732769]
+ [ 0.1209917   1.00883722]
+ [-0.24393717 -0.24586808]
+ [-0.26632676  0.03991449]]
+[1 0 0 1 0 1 0 0 1 1]
 </pre></div>
 </div>
 </div>
@@ -973,7 +990,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e92e53b59ea7e34a7fef9636a37682a3f53af4d46fe84b93114c95b3fe738f91.png" src="../_images/e92e53b59ea7e34a7fef9636a37682a3f53af4d46fe84b93114c95b3fe738f91.png" />
+<img alt="../_images/f28984e889f39547faf3f043b8f39a337ede6c24ab240906f7656f3f620bf0ed.png" src="../_images/f28984e889f39547faf3f043b8f39a337ede6c24ab240906f7656f3f620bf0ed.png" />
 </div>
 </div>
 </section>
@@ -1174,56 +1191,56 @@ Number of trainable parameters: 9.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 500 samples. 100 batches per epoch
-Epoch [  1/ 50]. Mean loss: 0.69469. Accuracy: 50.60%
-Epoch [  2/ 50]. Mean loss: 0.68065. Accuracy: 60.80%
-Epoch [  3/ 50]. Mean loss: 0.67216. Accuracy: 57.00%
-Epoch [  4/ 50]. Mean loss: 0.66125. Accuracy: 64.00%
-Epoch [  5/ 50]. Mean loss: 0.65041. Accuracy: 65.80%
-Epoch [  6/ 50]. Mean loss: 0.63921. Accuracy: 64.60%
-Epoch [  7/ 50]. Mean loss: 0.62612. Accuracy: 64.40%
-Epoch [  8/ 50]. Mean loss: 0.62018. Accuracy: 65.80%
-Epoch [  9/ 50]. Mean loss: 0.60803. Accuracy: 68.00%
-Epoch [ 10/ 50]. Mean loss: 0.58910. Accuracy: 70.00%
-Epoch [ 11/ 50]. Mean loss: 0.56016. Accuracy: 82.40%
-Epoch [ 12/ 50]. Mean loss: 0.51819. Accuracy: 85.80%
-Epoch [ 13/ 50]. Mean loss: 0.48058. Accuracy: 87.20%
-Epoch [ 14/ 50]. Mean loss: 0.45717. Accuracy: 86.20%
-Epoch [ 15/ 50]. Mean loss: 0.44045. Accuracy: 86.20%
-Epoch [ 16/ 50]. Mean loss: 0.42890. Accuracy: 85.40%
-Epoch [ 17/ 50]. Mean loss: 0.42422. Accuracy: 85.80%
-Epoch [ 18/ 50]. Mean loss: 0.41282. Accuracy: 84.60%
-Epoch [ 19/ 50]. Mean loss: 0.41219. Accuracy: 84.40%
-Epoch [ 20/ 50]. Mean loss: 0.40761. Accuracy: 85.40%
-Epoch [ 21/ 50]. Mean loss: 0.40482. Accuracy: 85.00%
-Epoch [ 22/ 50]. Mean loss: 0.40207. Accuracy: 84.40%
-Epoch [ 23/ 50]. Mean loss: 0.39971. Accuracy: 84.80%
-Epoch [ 24/ 50]. Mean loss: 0.39908. Accuracy: 85.20%
-Epoch [ 25/ 50]. Mean loss: 0.39630. Accuracy: 85.00%
-Epoch [ 26/ 50]. Mean loss: 0.39311. Accuracy: 84.20%
-Epoch [ 27/ 50]. Mean loss: 0.39431. Accuracy: 85.00%
-Epoch [ 28/ 50]. Mean loss: 0.39334. Accuracy: 84.80%
-Epoch [ 29/ 50]. Mean loss: 0.39205. Accuracy: 84.60%
-Epoch [ 30/ 50]. Mean loss: 0.39113. Accuracy: 84.20%
-Epoch [ 31/ 50]. Mean loss: 0.38947. Accuracy: 84.80%
-Epoch [ 32/ 50]. Mean loss: 0.38985. Accuracy: 84.40%
-Epoch [ 33/ 50]. Mean loss: 0.39041. Accuracy: 84.80%
-Epoch [ 34/ 50]. Mean loss: 0.38679. Accuracy: 84.20%
-Epoch [ 35/ 50]. Mean loss: 0.38801. Accuracy: 84.20%
-Epoch [ 36/ 50]. Mean loss: 0.38780. Accuracy: 84.80%
-Epoch [ 37/ 50]. Mean loss: 0.38653. Accuracy: 85.00%
-Epoch [ 38/ 50]. Mean loss: 0.38538. Accuracy: 84.00%
-Epoch [ 39/ 50]. Mean loss: 0.38709. Accuracy: 84.20%
-Epoch [ 40/ 50]. Mean loss: 0.38204. Accuracy: 84.80%
-Epoch [ 41/ 50]. Mean loss: 0.38295. Accuracy: 84.80%
-Epoch [ 42/ 50]. Mean loss: 0.38193. Accuracy: 84.60%
-Epoch [ 43/ 50]. Mean loss: 0.38232. Accuracy: 84.60%
-Epoch [ 44/ 50]. Mean loss: 0.38241. Accuracy: 85.00%
-Epoch [ 45/ 50]. Mean loss: 0.38128. Accuracy: 85.00%
-Epoch [ 46/ 50]. Mean loss: 0.38203. Accuracy: 84.60%
-Epoch [ 47/ 50]. Mean loss: 0.38034. Accuracy: 84.40%
-Epoch [ 48/ 50]. Mean loss: 0.37974. Accuracy: 85.00%
-Epoch [ 49/ 50]. Mean loss: 0.37782. Accuracy: 84.80%
-Epoch [ 50/ 50]. Mean loss: 0.37394. Accuracy: 84.80%
+Epoch [  1/ 50]. Mean loss: 0.70542. Accuracy: 53.40%
+Epoch [  2/ 50]. Mean loss: 0.69783. Accuracy: 56.00%
+Epoch [  3/ 50]. Mean loss: 0.69624. Accuracy: 51.20%
+Epoch [  4/ 50]. Mean loss: 0.69597. Accuracy: 54.80%
+Epoch [  5/ 50]. Mean loss: 0.69702. Accuracy: 55.40%
+Epoch [  6/ 50]. Mean loss: 0.69662. Accuracy: 56.40%
+Epoch [  7/ 50]. Mean loss: 0.69587. Accuracy: 52.20%
+Epoch [  8/ 50]. Mean loss: 0.69581. Accuracy: 54.00%
+Epoch [  9/ 50]. Mean loss: 0.69597. Accuracy: 56.80%
+Epoch [ 10/ 50]. Mean loss: 0.69578. Accuracy: 52.80%
+Epoch [ 11/ 50]. Mean loss: 0.69628. Accuracy: 56.20%
+Epoch [ 12/ 50]. Mean loss: 0.69522. Accuracy: 56.20%
+Epoch [ 13/ 50]. Mean loss: 0.69627. Accuracy: 54.60%
+Epoch [ 14/ 50]. Mean loss: 0.69488. Accuracy: 54.20%
+Epoch [ 15/ 50]. Mean loss: 0.69588. Accuracy: 55.60%
+Epoch [ 16/ 50]. Mean loss: 0.69572. Accuracy: 55.00%
+Epoch [ 17/ 50]. Mean loss: 0.69519. Accuracy: 54.80%
+Epoch [ 18/ 50]. Mean loss: 0.69511. Accuracy: 55.60%
+Epoch [ 19/ 50]. Mean loss: 0.69539. Accuracy: 54.80%
+Epoch [ 20/ 50]. Mean loss: 0.69479. Accuracy: 54.20%
+Epoch [ 21/ 50]. Mean loss: 0.69495. Accuracy: 55.80%
+Epoch [ 22/ 50]. Mean loss: 0.69431. Accuracy: 60.80%
+Epoch [ 23/ 50]. Mean loss: 0.69380. Accuracy: 57.60%
+Epoch [ 24/ 50]. Mean loss: 0.69243. Accuracy: 61.00%
+Epoch [ 25/ 50]. Mean loss: 0.69127. Accuracy: 54.40%
+Epoch [ 26/ 50]. Mean loss: 0.68666. Accuracy: 54.20%
+Epoch [ 27/ 50]. Mean loss: 0.68125. Accuracy: 63.60%
+Epoch [ 28/ 50]. Mean loss: 0.67222. Accuracy: 60.60%
+Epoch [ 29/ 50]. Mean loss: 0.66044. Accuracy: 62.00%
+Epoch [ 30/ 50]. Mean loss: 0.64677. Accuracy: 64.40%
+Epoch [ 31/ 50]. Mean loss: 0.63115. Accuracy: 65.60%
+Epoch [ 32/ 50]. Mean loss: 0.61421. Accuracy: 65.60%
+Epoch [ 33/ 50]. Mean loss: 0.58887. Accuracy: 72.40%
+Epoch [ 34/ 50]. Mean loss: 0.55712. Accuracy: 78.20%
+Epoch [ 35/ 50]. Mean loss: 0.52007. Accuracy: 83.60%
+Epoch [ 36/ 50]. Mean loss: 0.48723. Accuracy: 84.20%
+Epoch [ 37/ 50]. Mean loss: 0.46466. Accuracy: 85.00%
+Epoch [ 38/ 50]. Mean loss: 0.44869. Accuracy: 84.40%
+Epoch [ 39/ 50]. Mean loss: 0.43578. Accuracy: 84.80%
+Epoch [ 40/ 50]. Mean loss: 0.42997. Accuracy: 84.20%
+Epoch [ 41/ 50]. Mean loss: 0.42103. Accuracy: 84.80%
+Epoch [ 42/ 50]. Mean loss: 0.41275. Accuracy: 85.60%
+Epoch [ 43/ 50]. Mean loss: 0.40538. Accuracy: 85.40%
+Epoch [ 44/ 50]. Mean loss: 0.40580. Accuracy: 84.40%
+Epoch [ 45/ 50]. Mean loss: 0.40100. Accuracy: 84.80%
+Epoch [ 46/ 50]. Mean loss: 0.39930. Accuracy: 85.80%
+Epoch [ 47/ 50]. Mean loss: 0.39332. Accuracy: 85.00%
+Epoch [ 48/ 50]. Mean loss: 0.39295. Accuracy: 85.40%
+Epoch [ 49/ 50]. Mean loss: 0.39116. Accuracy: 85.20%
+Epoch [ 50/ 50]. Mean loss: 0.39040. Accuracy: 85.00%
 Training complete! Total gradient descent steps: 5000
 </pre></div>
 </div>
@@ -1239,7 +1256,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c155af3182c47e1593bc159cdab40d72d98e9825c01240a65ad0139f449f9d91.png" src="../_images/c155af3182c47e1593bc159cdab40d72d98e9825c01240a65ad0139f449f9d91.png" />
+<img alt="../_images/6741e8a4ac96053e1fa3a2ce80f51fd6f26f26d7a593bc98268ce1c74c0f6476.png" src="../_images/6741e8a4ac96053e1fa3a2ce80f51fd6f26f26d7a593bc98268ce1c74c0f6476.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1249,7 +1266,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e0d78fff847236b4fd4a409c00e063614acca734b82e9d9830a131071871ab44.png" src="../_images/e0d78fff847236b4fd4a409c00e063614acca734b82e9d9830a131071871ab44.png" />
+<img alt="../_images/d7822b1dd85aeb632ca4c689f59524a21d74bbe22be9380e3142a31ef286c155.png" src="../_images/d7822b1dd85aeb632ca4c689f59524a21d74bbe22be9380e3142a31ef286c155.png" />
 </div>
 </div>
 </section>
@@ -1443,7 +1460,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4febb13d6aa3d4e5c7943f5eb9aff7091b965a199f6f81980026181efeae329c.png" src="../_images/4febb13d6aa3d4e5c7943f5eb9aff7091b965a199f6f81980026181efeae329c.png" />
+<img alt="../_images/c319782d41728fed3c6cea85a93263b54923763dd1893b37e74dcacee311823e.png" src="../_images/c319782d41728fed3c6cea85a93263b54923763dd1893b37e74dcacee311823e.png" />
 </div>
 </div>
 </section>
@@ -1673,16 +1690,16 @@ Number of trainable parameters: 55050
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
-Epoch [  1/ 10]. Mean loss: 2.25618. Accuracy: 18.18%
-Epoch [  2/ 10]. Mean loss: 2.12631. Accuracy: 28.51%
-Epoch [  3/ 10]. Mean loss: 1.89018. Accuracy: 41.46%
-Epoch [  4/ 10]. Mean loss: 1.58128. Accuracy: 49.60%
-Epoch [  5/ 10]. Mean loss: 1.33338. Accuracy: 57.93%
-Epoch [  6/ 10]. Mean loss: 1.16357. Accuracy: 63.94%
-Epoch [  7/ 10]. Mean loss: 1.04168. Accuracy: 65.80%
-Epoch [  8/ 10]. Mean loss: 0.95131. Accuracy: 67.28%
-Epoch [  9/ 10]. Mean loss: 0.88446. Accuracy: 68.52%
-Epoch [ 10/ 10]. Mean loss: 0.83537. Accuracy: 69.63%
+Epoch [  1/ 10]. Mean loss: 2.26733. Accuracy: 20.24%
+Epoch [  2/ 10]. Mean loss: 2.15598. Accuracy: 38.52%
+Epoch [  3/ 10]. Mean loss: 1.91052. Accuracy: 45.42%
+Epoch [  4/ 10]. Mean loss: 1.58591. Accuracy: 51.72%
+Epoch [  5/ 10]. Mean loss: 1.32168. Accuracy: 61.79%
+Epoch [  6/ 10]. Mean loss: 1.13993. Accuracy: 64.63%
+Epoch [  7/ 10]. Mean loss: 1.01586. Accuracy: 66.11%
+Epoch [  8/ 10]. Mean loss: 0.92993. Accuracy: 67.43%
+Epoch [  9/ 10]. Mean loss: 0.86944. Accuracy: 68.65%
+Epoch [ 10/ 10]. Mean loss: 0.82544. Accuracy: 69.80%
 Training complete! Total gradient descent steps: 9380
 </pre></div>
 </div>
@@ -1698,7 +1715,17 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a4ce272f266941d04f3ef40a41edbc100a26498cbaabf3ea27e59d1590476c5c.png" src="../_images/a4ce272f266941d04f3ef40a41edbc100a26498cbaabf3ea27e59d1590476c5c.png" />
+<img alt="../_images/63009fb0b7be36f1ac9f19e9db3e03faaf269ce871ff3d5c6f0338d1b2ace8d8.png" src="../_images/63009fb0b7be36f1ac9f19e9db3e03faaf269ce871ff3d5c6f0338d1b2ace8d8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fashion_images</span><span class="p">(</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">fashion_labels</span><span class="p">,</span> <span class="n">fashion_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c8242fd529d6a5886c4c3eadc63ef191fc1f103f8f6fb33ca9ace9a7f902ad68.png" src="../_images/c8242fd529d6a5886c4c3eadc63ef191fc1f103f8f6fb33ca9ace9a7f902ad68.png" />
 </div>
 </div>
 </section>
@@ -1772,6 +1799,7 @@ Training complete! Total gradient descent steps: 9380
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-playground">Online playground</a></li>
