@@ -28,9 +28,6 @@
 # ## Environment setup
 
 # %% slideshow={"slide_type": "slide"}
-# Relax some linting rules not needed here
-# pylint: disable=invalid-name,wrong-import-position,redefined-outer-name
-
 import platform
 
 import numpy as np
@@ -157,15 +154,22 @@ print(y_train_5[:10])
 # - $y^{(i)} \in \{0,1\}$: expected result for the $i$th sample.
 # - $y'^{(i)} = h_{\pmb{\omega}}(\pmb{x}^{(i)}) \in [0,1]$: model output for the $i$th sample, i.e. probability that the $i$th sample belongs to the positive class.
 
+
 # %% slideshow={"slide_type": "slide"}
-# Plot BCE loss for one output
-x = np.linspace(0.01, 0.99, 200)
-plt.plot(x, -np.log(1 - x), label="Target = 0")
-plt.plot(x, -np.log(x), "r--", label="Target = 1")
-plt.xlabel("Model output")
-plt.ylabel("Loss value")
-plt.legend(fontsize=12)
-plt.show()
+def plot_bce():
+    """Plot BCE loss for one output"""
+
+    x = np.linspace(0.01, 0.99, 200)
+    plt.plot(x, -np.log(1 - x), label="Target = 0")
+    plt.plot(x, -np.log(x), "r--", label="Target = 1")
+    plt.xlabel("Model output")
+    plt.ylabel("Loss value")
+    plt.legend(fontsize=12)
+    plt.show()
+
+
+# %% slideshow={"slide_type": "slide"}
+plot_bce()
 
 # %% slideshow={"slide_type": "slide"}
 # Compute BCE losses for pseudo-predictions
