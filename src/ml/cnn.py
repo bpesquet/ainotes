@@ -13,13 +13,13 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Convolutional Neural Networks
+# # Convolutional neural networks
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Learning objectives
 #
 # - Discover the general architecture of convolutional neural networks.
-# - Understand why they perform better than a plain ANN for image-related tasks.
+# - Understand why they perform better than plain neural networks for image-related tasks.
 # - Learn how to build convnets with [PyTorch](https://pytorch.org/).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -421,18 +421,18 @@ class Convnet(nn.Module):
 
         # Define a sequential stack
         self.layer_stack = nn.Sequential(
-            # Feature extraction with convolutional and pooling layers
+            # Feature extraction part, with convolutional and pooling layers
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2),
             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2),
-            # Classification with fully connected layers
+            # Classification part, with fully connected layers
             nn.Flatten(),
-            nn.Linear(1600, 128),
+            nn.Linear(in_features=1600, out_features=128),
             nn.ReLU(),
-            nn.Linear(128, 10),
+            nn.Linear(in_features=128, out_features=10),
         )
 
     def forward(self, x):
