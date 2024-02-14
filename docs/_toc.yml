@@ -19,6 +19,7 @@ parts:
     - file: foundations/neuroscience
       sections:
       - file: foundations/decision
+      - file: foundations/confidence
   - caption: Machine Learning
     chapters:
     - file: ml/introduction
