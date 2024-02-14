@@ -19,7 +19,7 @@
 # ## Terminology
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Decision
+# ### Decision and decision-making
 #
 # A **decision** is "a deliberative process that results in the commitment to a categorical proposition." {cite}`goldNeuralBasisDecision2007`
 #
@@ -27,11 +27,8 @@
 # - Choosing what pair of socks to wear.
 # - Deciding on a TV series to watch.
 # - Choosing one's next car/bike.
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Decision-making
 #
-# Decision-making designates the cognitive process(es) resulting in a decision.
+# **Decision-making** designates the cognitive process(es) resulting in a decision.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### The sequential nature of decision-making
@@ -65,13 +62,6 @@
 # Ideally, what is needed is a way to evaluate data that considers not only accuracy and speed, but the interaction between them {cite}`myersPracticalIntroductionUsing2022`.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### The cognitive processes of decision-making
-#
-# ![Cognitive processes of decision-making](_images/decision-making_processes.png)
-#
-# {cite}`bogaczOptimalDecisionmakingTheories2007`
-
-# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Modeling speeded decision-making
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -99,6 +89,13 @@
 # - Response times (RTs) for correct responses and for error responses.
 # - Distributions of RTs across trials.
 # - Proportion of correct responses (accuracy).
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### The cognitive processes of decision-making
+#
+# ![Cognitive processes of decision-making](_images/decision-making_processes.png)
+#
+# {cite}`bogaczOptimalDecisionmakingTheories2007`
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Sequential sampling
@@ -278,10 +275,10 @@
 # ![DDM & cortical models](_images/ddm_cortical_models.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Multiple-choice decisions
+# ### Multiple-choice decisions
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Multihypothesis Sequential Probability Ratio Test
+# #### Multihypothesis Sequential Probability Ratio Test
 #
 # - Extension of SPRT to ternary choices in which the rate of integration depends on the fixation of the visual stimulus, as measured through eye-tracking {cite}`krajbichMultialternativeDriftdiffusionModel2011`.
 # - A DV is computed for each item based on the evidence accumulated for that item compared with the highest accumulated evidence for the other items (*best-vs-next* approach).
@@ -289,19 +286,19 @@
 # ![MSPRT](_images/msprt.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Hick's law
+# #### Hick's law
 #
 # - Increasing the number of choices will increase the decision time *logarithmically*.
 # - Race models with one accumulator per possible choice produce the opposite trend (more accumulators $\Rightarrow$ faster RT).
 #
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### The Advantage Linear Ballistic Accumulator model
+# #### The Advantage Linear Ballistic Accumulator model
 #
 # In this model {cite}`vanravenzwaaijAccumulatingAdvantagesNew2020`, each of the $n$ possible choices is associated to $n-1$ accumulators, each of them driven by the difference ("advantage") in evidence versus another response.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### ALBA model for binary choice
+# ##### ALBA model for binary choice
 #
 # $$v_{1-2} = v_0 + w_d(S_1 - S_2) + w_s(S_1 + S_2)$$
 #
@@ -314,7 +311,7 @@
 # - $w_s \in \mathbb{R}^+$: sum weight.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### ALBA model for ternary choice
+# ##### ALBA model for ternary choice
 #
 # *Win-all* strategy: all accumulators for a choice need to reach their threshold before commiting to a decision.
 #
