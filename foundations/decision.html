@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/decision';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to Machine Learning" href="../ml/introduction.html" />
+    <link rel="next" title="Decision confidence" href="confidence.html" />
     <link rel="prev" title="Neuroscience" href="neuroscience.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="neuroscience.html">Neuroscience</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Decision-making</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confidence.html">Decision confidence</a></li>
 </ul>
 </li>
 </ul>
@@ -461,12 +462,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision">Decision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Decision-making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-and-decision-making">Decision and decision-making</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sequential-nature-of-decision-making">The sequential nature of decision-making</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-stimulus-to-response">From stimulus to response</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speed-accuracy-tradeoff">Speed/accuracy tradeoff</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cognitive-processes-of-decision-making">The cognitive processes of decision-making</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-speeded-decision-making">Modeling speeded decision-making</a><ul class="nav section-nav flex-column">
@@ -475,6 +474,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-of-interest">Measures of interest</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cognitive-processes-of-decision-making">The cognitive processes of decision-making</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-sampling">Sequential sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-sequential-sampling-for-rdk">Example: sequential sampling for RDK</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sequential-sampling-model-family">The sequential sampling model family</a></li>
@@ -491,7 +491,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-models">Diffusion models</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-diffusion-decision-model">The Diffusion Decision Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Mathematical formulation</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Mathematical formulation</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a><ul class="nav section-nav flex-column">
 <li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#behavioral-analysis">Behavioral analysis</a></li>
@@ -509,14 +509,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-models">Relationships between models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-choice-decisions">Multiple-choice decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multihypothesis-sequential-probability-ratio-test">Multihypothesis Sequential Probability Ratio Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hick-s-law">Hick’s law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-advantage-linear-ballistic-accumulator-model">The Advantage Linear Ballistic Accumulator model</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-binary-choice">ALBA model for binary choice</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-ternary-choice">ALBA model for ternary choice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-choice-decisions">Multiple-choice decisions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multihypothesis-sequential-probability-ratio-test">Multihypothesis Sequential Probability Ratio Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hick-s-law">Hick’s law</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-advantage-linear-ballistic-accumulator-model">The Advantage Linear Ballistic Accumulator model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-binary-choice">ALBA model for binary choice</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-ternary-choice">ALBA model for ternary choice</a></li>
 </ul>
 </li>
 </ul>
@@ -551,8 +551,8 @@ document.write(`
 <h1>Decision-making<a class="headerlink" href="#decision-making" title="Permalink to this heading">#</a></h1>
 <section id="terminology">
 <h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h2>
-<section id="decision">
-<h3>Decision<a class="headerlink" href="#decision" title="Permalink to this heading">#</a></h3>
+<section id="decision-and-decision-making">
+<h3>Decision and decision-making<a class="headerlink" href="#decision-and-decision-making" title="Permalink to this heading">#</a></h3>
 <p>A <strong>decision</strong> is “a deliberative process that results in the commitment to a categorical proposition.” <span id="id1">[<a class="reference internal" href="../reference/bibliography.html#id3" title="Joshua I. Gold and Michael N. Shadlen. The Neural Basis of Decision Making. Annual Review of Neuroscience, 30(1):535–574, July 2007. doi:10.1146/annurev.neuro.29.051605.113038.">Gold and Shadlen, 2007</a>]</span></p>
 <p>People make thousands of (big and small) decisions everyday. A few examples:</p>
 <ul class="simple">
@@ -560,10 +560,7 @@ document.write(`
 <li><p>Deciding on a TV series to watch.</p></li>
 <li><p>Choosing one’s next car/bike.</p></li>
 </ul>
-</section>
-<section id="id2">
-<h3>Decision-making<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<p>Decision-making designates the cognitive process(es) resulting in a decision.</p>
+<p><strong>Decision-making</strong> designates the cognitive process(es) resulting in a decision.</p>
 </section>
 <section id="the-sequential-nature-of-decision-making">
 <h3>The sequential nature of decision-making<a class="headerlink" href="#the-sequential-nature-of-decision-making" title="Permalink to this heading">#</a></h3>
@@ -574,7 +571,7 @@ document.write(`
 <section id="from-stimulus-to-response">
 <h3>From stimulus to response<a class="headerlink" href="#from-stimulus-to-response" title="Permalink to this heading">#</a></h3>
 <p><strong>Decision-making</strong> can be formalized as the mapping from a stimulus to a response.</p>
-<p>Time between stimulus and response execution is called <strong>Reaction Time</strong> or <strong>Response Time</strong> (RT) <span id="id3">[<a class="reference internal" href="../reference/bibliography.html#id2" title="B.U. Forstmann, R. Ratcliff, and E.-J. Wagenmakers. Sequential Sampling Models in Cognitive Neuroscience: Advantages, Applications, and Extensions. Annual Review of Psychology, 67(1):641–666, January 2016. doi:10.1146/annurev-psych-122414-033645.">Forstmann <em>et al.</em>, 2016</a>]</span>, <span id="id4">[<a class="reference internal" href="../reference/bibliography.html#id4" title="Catherine E. Myers, Alejandro Interian, and Ahmed A. Moustafa. A practical introduction to using the drift diffusion model of decision-making in cognitive psychology, neuroscience, and health sciences. Frontiers in Psychology, 13:1039172, December 2022. doi:10.3389/fpsyg.2022.1039172.">Myers <em>et al.</em>, 2022</a>]</span>.</p>
+<p>Time between stimulus and response execution is called <strong>Reaction Time</strong> or <strong>Response Time</strong> (RT) <span id="id2">[<a class="reference internal" href="../reference/bibliography.html#id2" title="B.U. Forstmann, R. Ratcliff, and E.-J. Wagenmakers. Sequential Sampling Models in Cognitive Neuroscience: Advantages, Applications, and Extensions. Annual Review of Psychology, 67(1):641–666, January 2016. doi:10.1146/annurev-psych-122414-033645.">Forstmann <em>et al.</em>, 2016</a>]</span>, <span id="id3">[<a class="reference internal" href="../reference/bibliography.html#id4" title="Catherine E. Myers, Alejandro Interian, and Ahmed A. Moustafa. A practical introduction to using the drift diffusion model of decision-making in cognitive psychology, neuroscience, and health sciences. Frontiers in Psychology, 13:1039172, December 2022. doi:10.3389/fpsyg.2022.1039172.">Myers <em>et al.</em>, 2022</a>]</span>.</p>
 <div class="math notranslate nohighlight">
 \[RT = T_e+T_d+T_r\]</div>
 <p><span class="math notranslate nohighlight">\(T_{er}= T_e+T_r\)</span> is called <strong>non-decision time</strong>.</p>
@@ -582,14 +579,9 @@ document.write(`
 </section>
 <section id="speed-accuracy-tradeoff">
 <h3>Speed/accuracy tradeoff<a class="headerlink" href="#speed-accuracy-tradeoff" title="Permalink to this heading">#</a></h3>
-<p>All decisions are made under time pressure <span id="id5">[<a class="reference internal" href="../reference/bibliography.html#id2" title="B.U. Forstmann, R. Ratcliff, and E.-J. Wagenmakers. Sequential Sampling Models in Cognitive Neuroscience: Advantages, Applications, and Extensions. Annual Review of Psychology, 67(1):641–666, January 2016. doi:10.1146/annurev-psych-122414-033645.">Forstmann <em>et al.</em>, 2016</a>]</span>. The balance between response time and accuracy is called the <strong>speed/accuracy trade-off</strong>.</p>
-<p>It is at least partially under conscious control: decision-makers can decide to make faster decisions at the expense of an higher error rate, or slower, more accurate decisions <span id="id6">[<a class="reference internal" href="../reference/bibliography.html#id5" title="Roger Ratcliff, Philip L. Smith, Scott D. Brown, and Gail McKoon. Diffusion Decision Model: Current Issues and History. Trends in Cognitive Sciences, 20(4):260–281, April 2016. doi:10.1016/j.tics.2016.01.007.">Ratcliff <em>et al.</em>, 2016</a>]</span>. This complicates the interpretation of behavioral data.</p>
-<p>Ideally, what is needed is a way to evaluate data that considers not only accuracy and speed, but the interaction between them <span id="id7">[<a class="reference internal" href="../reference/bibliography.html#id4" title="Catherine E. Myers, Alejandro Interian, and Ahmed A. Moustafa. A practical introduction to using the drift diffusion model of decision-making in cognitive psychology, neuroscience, and health sciences. Frontiers in Psychology, 13:1039172, December 2022. doi:10.3389/fpsyg.2022.1039172.">Myers <em>et al.</em>, 2022</a>]</span>.</p>
-</section>
-<section id="the-cognitive-processes-of-decision-making">
-<h3>The cognitive processes of decision-making<a class="headerlink" href="#the-cognitive-processes-of-decision-making" title="Permalink to this heading">#</a></h3>
-<p><img alt="Cognitive processes of decision-making" src="../_images/decision-making_processes.png" /></p>
-<p><span id="id8">[<a class="reference internal" href="../reference/bibliography.html#id13" title="Rafal Bogacz. Optimal decision-making theories: linking neurobiology with behaviour. Trends in Cognitive Sciences, 11(3):118–125, March 2007. doi:10.1016/j.tics.2006.12.006.">Bogacz, 2007</a>]</span></p>
+<p>All decisions are made under time pressure <span id="id4">[<a class="reference internal" href="../reference/bibliography.html#id2" title="B.U. Forstmann, R. Ratcliff, and E.-J. Wagenmakers. Sequential Sampling Models in Cognitive Neuroscience: Advantages, Applications, and Extensions. Annual Review of Psychology, 67(1):641–666, January 2016. doi:10.1146/annurev-psych-122414-033645.">Forstmann <em>et al.</em>, 2016</a>]</span>. The balance between response time and accuracy is called the <strong>speed/accuracy trade-off</strong>.</p>
+<p>It is at least partially under conscious control: decision-makers can decide to make faster decisions at the expense of an higher error rate, or slower, more accurate decisions <span id="id5">[<a class="reference internal" href="../reference/bibliography.html#id5" title="Roger Ratcliff, Philip L. Smith, Scott D. Brown, and Gail McKoon. Diffusion Decision Model: Current Issues and History. Trends in Cognitive Sciences, 20(4):260–281, April 2016. doi:10.1016/j.tics.2016.01.007.">Ratcliff <em>et al.</em>, 2016</a>]</span>. This complicates the interpretation of behavioral data.</p>
+<p>Ideally, what is needed is a way to evaluate data that considers not only accuracy and speed, but the interaction between them <span id="id6">[<a class="reference internal" href="../reference/bibliography.html#id4" title="Catherine E. Myers, Alejandro Interian, and Ahmed A. Moustafa. A practical introduction to using the drift diffusion model of decision-making in cognitive psychology, neuroscience, and health sciences. Frontiers in Psychology, 13:1039172, December 2022. doi:10.3389/fpsyg.2022.1039172.">Myers <em>et al.</em>, 2022</a>]</span>.</p>
 </section>
 </section>
 <section id="modeling-speeded-decision-making">
@@ -617,6 +609,11 @@ document.write(`
 <li><p>Proportion of correct responses (accuracy).</p></li>
 </ul>
 </section>
+</section>
+<section id="the-cognitive-processes-of-decision-making">
+<h3>The cognitive processes of decision-making<a class="headerlink" href="#the-cognitive-processes-of-decision-making" title="Permalink to this heading">#</a></h3>
+<p><img alt="Cognitive processes of decision-making" src="../_images/decision-making_processes.png" /></p>
+<p><span id="id7">[<a class="reference internal" href="../reference/bibliography.html#id13" title="Rafal Bogacz. Optimal decision-making theories: linking neurobiology with behaviour. Trends in Cognitive Sciences, 11(3):118–125, March 2007. doi:10.1016/j.tics.2006.12.006.">Bogacz, 2007</a>]</span></p>
 </section>
 <section id="sequential-sampling">
 <h3>Sequential sampling<a class="headerlink" href="#sequential-sampling" title="Permalink to this heading">#</a></h3>
@@ -668,7 +665,7 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(w_i, i \in [1,n]\)</span>: weight of the <span class="math notranslate nohighlight">\(i\)</span>th evidence.</p></li>
 </ul>
 <p>The DV is updated with new pieces of evidence until reaching a criterion.</p>
-<p>SPRT is the most efficient statistical test for deciding between two hypotheses on this kind of problem: it achieves a desired error rate with the smallest number of samples, on average <span id="id9">[<a class="reference internal" href="../reference/bibliography.html#id7" title="Abraham Wald and Jacob Wolfowitz. Optimum character of the Sequential Probability Ratio Test. 1948.">Wald and Wolfowitz, 1948</a>]</span>.</p>
+<p>SPRT is the most efficient statistical test for deciding between two hypotheses on this kind of problem: it achieves a desired error rate with the smallest number of samples, on average <span id="id8">[<a class="reference internal" href="../reference/bibliography.html#id7" title="Abraham Wald and Jacob Wolfowitz. Optimum character of the Sequential Probability Ratio Test. 1948.">Wald and Wolfowitz, 1948</a>]</span>.</p>
 </section>
 <section id="problem-example-trick-or-fair-coin">
 <h4>Problem example: trick or fair coin<a class="headerlink" href="#problem-example-trick-or-fair-coin" title="Permalink to this heading">#</a></h4>
@@ -687,15 +684,15 @@ document.write(`
 </section>
 <section id="diffusion-models">
 <h3>Diffusion models<a class="headerlink" href="#diffusion-models" title="Permalink to this heading">#</a></h3>
-<p>When the evidence is continously sampled from a distribution in infinitesimal time steps, the process is termed <strong>diffusion</strong> with drift <span class="math notranslate nohighlight">\(v\)</span>. When <span class="math notranslate nohighlight">\(v\)</span> is constant, this process is known as <a class="reference external" href="https://en.wikipedia.org/wiki/Brownian_motion">Brownian motion</a> or Wiener diffusion process <span id="id10">[<a class="reference internal" href="../reference/bibliography.html#id3" title="Joshua I. Gold and Michael N. Shadlen. The Neural Basis of Decision Making. Annual Review of Neuroscience, 30(1):535–574, July 2007. doi:10.1146/annurev.neuro.29.051605.113038.">Gold and Shadlen, 2007</a>]</span>.</p>
+<p>When the evidence is continously sampled from a distribution in infinitesimal time steps, the process is termed <strong>diffusion</strong> with drift <span class="math notranslate nohighlight">\(v\)</span>. When <span class="math notranslate nohighlight">\(v\)</span> is constant, this process is known as <a class="reference external" href="https://en.wikipedia.org/wiki/Brownian_motion">Brownian motion</a> or Wiener diffusion process <span id="id9">[<a class="reference internal" href="../reference/bibliography.html#id3" title="Joshua I. Gold and Michael N. Shadlen. The Neural Basis of Decision Making. Annual Review of Neuroscience, 30(1):535–574, July 2007. doi:10.1146/annurev.neuro.29.051605.113038.">Gold and Shadlen, 2007</a>]</span>.</p>
 <p><img alt="Diffusion model" src="../_images/diffusion_model.png" /></p>
 <blockquote>
 <div><p>The diffusion models for decision-making are not to be confused with the <a class="reference external" href="https://en.wikipedia.org/wiki/Diffusion_model">diffusion models of Machine Learning</a>.</p>
 </div></blockquote>
 <section id="the-diffusion-decision-model">
 <h4>The Diffusion Decision Model<a class="headerlink" href="#the-diffusion-decision-model" title="Permalink to this heading">#</a></h4>
-<p>This model, also called <strong>Drift Diffusion Model (DDM)</strong>, is a sequential sampling model for binary choices in continuous environments <span id="id11">[<a class="reference internal" href="../reference/bibliography.html#id10" title="Roger Ratcliff and Gail McKoon. The Diffusion Decision Model: Theory and Data for Two-Choice Decision Tasks. Neural Computation, 20(4):873–922, April 2008. doi:10.1162/neco.2008.12-06-420.">Ratcliff and McKoon, 2008</a>]</span>.</p>
-<p>Originally designed in the 1970’s <span id="id12">[<a class="reference internal" href="../reference/bibliography.html#id9" title="Roger Ratcliff. A theory of memory retrieval. Psychological review, 85(2):59, 1978.">Ratcliff, 1978</a>]</span>, it has recently experienced a surge in popularity. A growing body of literature is using the DDM to elucidate the cognitive processes of decision-making.</p>
+<p>This model, also called <strong>Drift Diffusion Model (DDM)</strong>, is a sequential sampling model for binary choices in continuous environments <span id="id10">[<a class="reference internal" href="../reference/bibliography.html#id10" title="Roger Ratcliff and Gail McKoon. The Diffusion Decision Model: Theory and Data for Two-Choice Decision Tasks. Neural Computation, 20(4):873–922, April 2008. doi:10.1162/neco.2008.12-06-420.">Ratcliff and McKoon, 2008</a>]</span>.</p>
+<p>Originally designed in the 1970’s <span id="id11">[<a class="reference internal" href="../reference/bibliography.html#id9" title="Roger Ratcliff. A theory of memory retrieval. Psychological review, 85(2):59, 1978.">Ratcliff, 1978</a>]</span>, it has recently experienced a surge in popularity. A growing body of literature is using the DDM to elucidate the cognitive processes of decision-making.</p>
 <section id="parameters">
 <h5>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h5>
 <table class="table">
@@ -731,8 +728,8 @@ document.write(`
 </table>
 <p><img alt="DDM" src="../_images/ddm.png" /></p>
 </section>
-<section id="id13">
-<h5>Mathematical formulation<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h5>
+<section id="id12">
+<h5>Mathematical formulation<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h5>
 <p>The DDM assumes that evidence accumulation is governed by:</p>
 <div class="math notranslate nohighlight">
 \[dx = vdt + sW\]</div>
@@ -769,7 +766,7 @@ document.write(`
 </section>
 <section id="low-level-neuroscience">
 <h6>Low-level neuroscience<a class="headerlink" href="#low-level-neuroscience" title="Permalink to this heading">#</a></h6>
-<p>Studies <span id="id14">[<a class="reference internal" href="../reference/bibliography.html#id11" title="J I Gold and M N Shadlen. Neural computations that underlie decisions about sensory stimuli. Trends Cogn Sci, 5(1):10–16, January 2001.">Gold and Shadlen, 2001</a>]</span> uses DDM as inspiration to interpret neuron firing rates in monkeys as evidence accumulation until a threshold is reached.</p>
+<p>Studies <span id="id13">[<a class="reference internal" href="../reference/bibliography.html#id11" title="J I Gold and M N Shadlen. Neural computations that underlie decisions about sensory stimuli. Trends Cogn Sci, 5(1):10–16, January 2001.">Gold and Shadlen, 2001</a>]</span> uses DDM as inspiration to interpret neuron firing rates in monkeys as evidence accumulation until a threshold is reached.</p>
 <p><img alt="Firing rate in monkeys" src="../_images/ddm_firing_rate.png" /></p>
 </section>
 <section id="high-level-neuroscience">
@@ -789,37 +786,36 @@ document.write(`
 <h3>Hybrid models<a class="headerlink" href="#hybrid-models" title="Permalink to this heading">#</a></h3>
 <section id="the-leaky-competing-accumulator-model">
 <h4>The Leaky Competing Accumulator model<a class="headerlink" href="#the-leaky-competing-accumulator-model" title="Permalink to this heading">#</a></h4>
-<p>This model <span id="id15">[<a class="reference internal" href="../reference/bibliography.html#id15" title="M Usher and J L McClelland. The time course of perceptual choice: the leaky, competing accumulator model. Psychol Rev, 108(3):550–592, July 2001.">Usher and McClelland, 2001</a>]</span> is based on gradual and stochastic accumulation of information in non-linear decision units with <strong>leakage</strong> (or decay of activation) and competition through <strong>lateral inhibition</strong>.</p>
+<p>This model <span id="id14">[<a class="reference internal" href="../reference/bibliography.html#id15" title="M Usher and J L McClelland. The time course of perceptual choice: the leaky, competing accumulator model. Psychol Rev, 108(3):550–592, July 2001.">Usher and McClelland, 2001</a>]</span> is based on gradual and stochastic accumulation of information in non-linear decision units with <strong>leakage</strong> (or decay of activation) and competition through <strong>lateral inhibition</strong>.</p>
 </section>
 </section>
 <section id="relationships-between-models">
 <h3>Relationships between models<a class="headerlink" href="#relationships-between-models" title="Permalink to this heading">#</a></h3>
-<p>Cortical models (<span id="id16">[<a class="reference internal" href="../reference/bibliography.html#id16" title="M N Shadlen and W T Newsome. Neural basis of a perceptual decision in the parietal cortex (area LIP) of the rhesus monkey. J Neurophysiol, 86(4):1916–1936, October 2001.">Shadlen and Newsome, 2001</a>]</span>, <span id="id17">[<a class="reference internal" href="../reference/bibliography.html#id15" title="M Usher and J L McClelland. The time course of perceptual choice: the leaky, competing accumulator model. Psychol Rev, 108(3):550–592, July 2001.">Usher and McClelland, 2001</a>]</span>, <span id="id18">[<a class="reference internal" href="../reference/bibliography.html#id14" title="Xiao-Jing Wang. Probabilistic decision making by slow reverberation in cortical circuits. Neuron, 36(5):955–968, December 2002.">Wang, 2002</a>]</span>) can be reduced to the diffusion model for parameter values that optimize their performance <span id="id19">[<a class="reference internal" href="../reference/bibliography.html#id13" title="Rafal Bogacz. Optimal decision-making theories: linking neurobiology with behaviour. Trends in Cognitive Sciences, 11(3):118–125, March 2007. doi:10.1016/j.tics.2006.12.006.">Bogacz, 2007</a>]</span>.</p>
+<p>Cortical models (<span id="id15">[<a class="reference internal" href="../reference/bibliography.html#id16" title="M N Shadlen and W T Newsome. Neural basis of a perceptual decision in the parietal cortex (area LIP) of the rhesus monkey. J Neurophysiol, 86(4):1916–1936, October 2001.">Shadlen and Newsome, 2001</a>]</span>, <span id="id16">[<a class="reference internal" href="../reference/bibliography.html#id15" title="M Usher and J L McClelland. The time course of perceptual choice: the leaky, competing accumulator model. Psychol Rev, 108(3):550–592, July 2001.">Usher and McClelland, 2001</a>]</span>, <span id="id17">[<a class="reference internal" href="../reference/bibliography.html#id14" title="Xiao-Jing Wang. Probabilistic decision making by slow reverberation in cortical circuits. Neuron, 36(5):955–968, December 2002.">Wang, 2002</a>]</span>) can be reduced to the diffusion model for parameter values that optimize their performance <span id="id18">[<a class="reference internal" href="../reference/bibliography.html#id13" title="Rafal Bogacz. Optimal decision-making theories: linking neurobiology with behaviour. Trends in Cognitive Sciences, 11(3):118–125, March 2007. doi:10.1016/j.tics.2006.12.006.">Bogacz, 2007</a>]</span>.</p>
 <p><img alt="DDM &amp; cortical models" src="../_images/ddm_cortical_models.png" /></p>
 </section>
-</section>
 <section id="multiple-choice-decisions">
-<h2>Multiple-choice decisions<a class="headerlink" href="#multiple-choice-decisions" title="Permalink to this heading">#</a></h2>
+<h3>Multiple-choice decisions<a class="headerlink" href="#multiple-choice-decisions" title="Permalink to this heading">#</a></h3>
 <section id="multihypothesis-sequential-probability-ratio-test">
-<h3>Multihypothesis Sequential Probability Ratio Test<a class="headerlink" href="#multihypothesis-sequential-probability-ratio-test" title="Permalink to this heading">#</a></h3>
+<h4>Multihypothesis Sequential Probability Ratio Test<a class="headerlink" href="#multihypothesis-sequential-probability-ratio-test" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Extension of SPRT to ternary choices in which the rate of integration depends on the fixation of the visual stimulus, as measured through eye-tracking <span id="id20">[<a class="reference internal" href="../reference/bibliography.html#id18" title="Ian Krajbich and Antonio Rangel. Multialternative drift-diffusion model predicts the relationship between visual fixations and choice in value-based decisions. Proceedings of the National Academy of Sciences, 108(33):13852–13857, August 2011. doi:10.1073/pnas.1101328108.">Krajbich and Rangel, 2011</a>]</span>.</p></li>
+<li><p>Extension of SPRT to ternary choices in which the rate of integration depends on the fixation of the visual stimulus, as measured through eye-tracking <span id="id19">[<a class="reference internal" href="../reference/bibliography.html#id18" title="Ian Krajbich and Antonio Rangel. Multialternative drift-diffusion model predicts the relationship between visual fixations and choice in value-based decisions. Proceedings of the National Academy of Sciences, 108(33):13852–13857, August 2011. doi:10.1073/pnas.1101328108.">Krajbich and Rangel, 2011</a>]</span>.</p></li>
 <li><p>A DV is computed for each item based on the evidence accumulated for that item compared with the highest accumulated evidence for the other items (<em>best-vs-next</em> approach).</p></li>
 </ul>
 <p><img alt="MSPRT" src="../_images/msprt.png" /></p>
 </section>
 <section id="hick-s-law">
-<h3>Hick’s law<a class="headerlink" href="#hick-s-law" title="Permalink to this heading">#</a></h3>
+<h4>Hick’s law<a class="headerlink" href="#hick-s-law" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Increasing the number of choices will increase the decision time <em>logarithmically</em>.</p></li>
 <li><p>Race models with one accumulator per possible choice produce the opposite trend (more accumulators <span class="math notranslate nohighlight">\(\Rightarrow\)</span> faster RT).</p></li>
 </ul>
 </section>
 <section id="the-advantage-linear-ballistic-accumulator-model">
-<h3>The Advantage Linear Ballistic Accumulator model<a class="headerlink" href="#the-advantage-linear-ballistic-accumulator-model" title="Permalink to this heading">#</a></h3>
-<p>In this model <span id="id21">[<a class="reference internal" href="../reference/bibliography.html#id17" title="Don Van Ravenzwaaij, Scott D. Brown, A. A. J. Marley, and Andrew Heathcote. Accumulating advantages: A new conceptualization of rapid multiple choice. Psychological Review, 127(2):186–215, March 2020. doi:10.1037/rev0000166.">Van Ravenzwaaij <em>et al.</em>, 2020</a>]</span>, each of the <span class="math notranslate nohighlight">\(n\)</span> possible choices is associated to <span class="math notranslate nohighlight">\(n-1\)</span> accumulators, each of them driven by the difference (“advantage”) in evidence versus another response.</p>
+<h4>The Advantage Linear Ballistic Accumulator model<a class="headerlink" href="#the-advantage-linear-ballistic-accumulator-model" title="Permalink to this heading">#</a></h4>
+<p>In this model <span id="id20">[<a class="reference internal" href="../reference/bibliography.html#id17" title="Don Van Ravenzwaaij, Scott D. Brown, A. A. J. Marley, and Andrew Heathcote. Accumulating advantages: A new conceptualization of rapid multiple choice. Psychological Review, 127(2):186–215, March 2020. doi:10.1037/rev0000166.">Van Ravenzwaaij <em>et al.</em>, 2020</a>]</span>, each of the <span class="math notranslate nohighlight">\(n\)</span> possible choices is associated to <span class="math notranslate nohighlight">\(n-1\)</span> accumulators, each of them driven by the difference (“advantage”) in evidence versus another response.</p>
 <section id="alba-model-for-binary-choice">
-<h4>ALBA model for binary choice<a class="headerlink" href="#alba-model-for-binary-choice" title="Permalink to this heading">#</a></h4>
+<h5>ALBA model for binary choice<a class="headerlink" href="#alba-model-for-binary-choice" title="Permalink to this heading">#</a></h5>
 <div class="math notranslate nohighlight">
 \[v_{1-2} = v_0 + w_d(S_1 - S_2) + w_s(S_1 + S_2)\]</div>
 <div class="math notranslate nohighlight">
@@ -833,9 +829,10 @@ document.write(`
 </ul>
 </section>
 <section id="alba-model-for-ternary-choice">
-<h4>ALBA model for ternary choice<a class="headerlink" href="#alba-model-for-ternary-choice" title="Permalink to this heading">#</a></h4>
+<h5>ALBA model for ternary choice<a class="headerlink" href="#alba-model-for-ternary-choice" title="Permalink to this heading">#</a></h5>
 <p><em>Win-all</em> strategy: all accumulators for a choice need to reach their threshold before commiting to a decision.</p>
 <p><img alt="ALBA model: win-all strategy" src="../_images/alba_winall.png" /></p>
+</section>
 </section>
 </section>
 </section>
@@ -890,7 +887,7 @@ document.write(`
 </section>
 <section id="the-rl-ddm-model">
 <h3>The RL-DDM model<a class="headerlink" href="#the-rl-ddm-model" title="Permalink to this heading">#</a></h3>
-<p>This model <span id="id22">[<a class="reference internal" href="../reference/bibliography.html#id19" title="Laura Fontanesi, Sebastian Gluth, Mikhail S. Spektor, and Jörg Rieskamp. A reinforcement learning diffusion decision model for value-based decisions. Psychonomic Bulletin &amp; Review, 26(4):1099–1121, August 2019. doi:10.3758/s13423-018-1554-2.">Fontanesi <em>et al.</em>, 2019</a>]</span> assumes that the drift rate depends linearly on the difference of value representations between the two possible choices.</p>
+<p>This model <span id="id21">[<a class="reference internal" href="../reference/bibliography.html#id19" title="Laura Fontanesi, Sebastian Gluth, Mikhail S. Spektor, and Jörg Rieskamp. A reinforcement learning diffusion decision model for value-based decisions. Psychonomic Bulletin &amp; Review, 26(4):1099–1121, August 2019. doi:10.3758/s13423-018-1554-2.">Fontanesi <em>et al.</em>, 2019</a>]</span> assumes that the drift rate depends linearly on the difference of value representations between the two possible choices.</p>
 <div class="math notranslate nohighlight">
 \[v_t = w(Q_{1,t}-Q_{2,t})\]</div>
 <div class="math notranslate nohighlight">
@@ -914,7 +911,7 @@ document.write(`
 </section>
 <section id="the-rl-advantage-racing-diffusion-model">
 <h3>The RL-Advantage Racing Diffusion model<a class="headerlink" href="#the-rl-advantage-racing-diffusion-model" title="Permalink to this heading">#</a></h3>
-<p>This model <span id="id23">[<a class="reference internal" href="../reference/bibliography.html#id20" title="Steven Miletić, Russell J Boag, Anne C Trutti, Niek Stevenson, Birte U Forstmann, and Andrew Heathcote. A new model of decision processing in instrumental learning tasks. eLife, 10:e63055, January 2021. doi:10.7554/eLife.63055.">Miletić <em>et al.</em>, 2021</a>]</span> uses an ALBA architecture <span id="id24">[<a class="reference internal" href="../reference/bibliography.html#id17" title="Don Van Ravenzwaaij, Scott D. Brown, A. A. J. Marley, and Andrew Heathcote. Accumulating advantages: A new conceptualization of rapid multiple choice. Psychological Review, 127(2):186–215, March 2020. doi:10.1037/rev0000166.">Van Ravenzwaaij <em>et al.</em>, 2020</a>]</span> as its decision component.</p>
+<p>This model <span id="id22">[<a class="reference internal" href="../reference/bibliography.html#id20" title="Steven Miletić, Russell J Boag, Anne C Trutti, Niek Stevenson, Birte U Forstmann, and Andrew Heathcote. A new model of decision processing in instrumental learning tasks. eLife, 10:e63055, January 2021. doi:10.7554/eLife.63055.">Miletić <em>et al.</em>, 2021</a>]</span> uses an ALBA architecture <span id="id23">[<a class="reference internal" href="../reference/bibliography.html#id17" title="Don Van Ravenzwaaij, Scott D. Brown, A. A. J. Marley, and Andrew Heathcote. Accumulating advantages: A new conceptualization of rapid multiple choice. Psychological Review, 127(2):186–215, March 2020. doi:10.1037/rev0000166.">Van Ravenzwaaij <em>et al.</em>, 2020</a>]</span> as its decision component.</p>
 <div class="math notranslate nohighlight">
 \[dx_1 = \big(V_0 + w_d(Q_1 - Q_2) + w_s(Q_1 + Q_2)\big)dt + sW\]</div>
 <div class="math notranslate nohighlight">
@@ -973,11 +970,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../ml/introduction.html"
+       href="confidence.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Machine Learning</p>
+        <p class="prev-next-title">Decision confidence</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1000,12 +997,10 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision">Decision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Decision-making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-and-decision-making">Decision and decision-making</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sequential-nature-of-decision-making">The sequential nature of decision-making</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-stimulus-to-response">From stimulus to response</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speed-accuracy-tradeoff">Speed/accuracy tradeoff</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cognitive-processes-of-decision-making">The cognitive processes of decision-making</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-speeded-decision-making">Modeling speeded decision-making</a><ul class="nav section-nav flex-column">
@@ -1014,6 +1009,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-of-interest">Measures of interest</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cognitive-processes-of-decision-making">The cognitive processes of decision-making</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-sampling">Sequential sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-sequential-sampling-for-rdk">Example: sequential sampling for RDK</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sequential-sampling-model-family">The sequential sampling model family</a></li>
@@ -1030,7 +1026,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-models">Diffusion models</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-diffusion-decision-model">The Diffusion Decision Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Mathematical formulation</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Mathematical formulation</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a><ul class="nav section-nav flex-column">
 <li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#behavioral-analysis">Behavioral analysis</a></li>
@@ -1048,14 +1044,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-models">Relationships between models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-choice-decisions">Multiple-choice decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multihypothesis-sequential-probability-ratio-test">Multihypothesis Sequential Probability Ratio Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hick-s-law">Hick’s law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-advantage-linear-ballistic-accumulator-model">The Advantage Linear Ballistic Accumulator model</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-binary-choice">ALBA model for binary choice</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-ternary-choice">ALBA model for ternary choice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-choice-decisions">Multiple-choice decisions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multihypothesis-sequential-probability-ratio-test">Multihypothesis Sequential Probability Ratio Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hick-s-law">Hick’s law</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-advantage-linear-ballistic-accumulator-model">The Advantage Linear Ballistic Accumulator model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-binary-choice">ALBA model for binary choice</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alba-model-for-ternary-choice">ALBA model for ternary choice</a></li>
 </ul>
 </li>
 </ul>
