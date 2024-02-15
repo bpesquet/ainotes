@@ -21,7 +21,7 @@
 #
 # ## Context
 #
-# The dataset is provided by the Cleveland Clinic Foundation for Heart Disease ([more information](https://archive.ics.uci.edu/ml/datasets/heart+Disease)). Each row describes a patient. Below is a description of each column.
+# The dataset is provided by the Cleveland Clinic Foundation for Heart Disease ([more information](https://archive.ics.uci.edu/ml/datasets/heart+Disease)). The dataset file to use is available [here](https://raw.githubusercontent.com/bpesquet/ainotes/main/data/heart.csv). Each row describes a patient. Below is a description of each column.
 #
 # |  Column  |                           Description                          |  Feature Type  | Data Type |
 # |:--------:|:--------------------------------------------------------------:|:--------------:|:---------:|
