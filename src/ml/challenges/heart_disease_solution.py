@@ -67,7 +67,6 @@ import sklearn
 # sklearn does not automatically import its subpackages
 # https://stackoverflow.com/a/9049246/2380880
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import SGDClassifier
