@@ -176,18 +176,11 @@ df_x_train["thal"].value_counts()
 # %%
 # Preprocess data to have similar scales and only numerical values
 
-# This pipeline handles missing values and standardizes features
-num_pipeline = Pipeline(
-    [
-        ("std_scaler", StandardScaler()),
-    ]
-)
-
-# This pipeline applies the previous one on numerical features
+# This pipeline standardizes numerical features
 # It also one-hot encodes the categorical features
 full_pipeline = ColumnTransformer(
     [
-        ("num", num_pipeline, num_features),
+        ("num", StandardScaler(), num_features),
         ("cat", OneHotEncoder(), cat_features),
     ]
 )
