@@ -252,7 +252,7 @@ plot_correlation_matrix(df_housing)
 # Separate inputs from targets
 
 # Target attribute is removed to create inputs
-df_x = df_housing.drop("median_house_value", axis=1)
+df_x = df_housing.drop("median_house_value", axis="columns")
 
 # Targets are stored separately in a new variable
 df_y = df_housing["median_house_value"]

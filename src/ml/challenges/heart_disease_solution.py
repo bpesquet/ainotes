@@ -138,7 +138,7 @@ df_heart["target"].value_counts()
 # Separate inputs from targets
 
 # Target attribute is removed to create inputs
-df_x = df_heart.drop("target", axis=1)
+df_x = df_heart.drop("target", axis="columns")
 
 # Targets are stored separately in a new variable
 df_y = df_heart["target"]
