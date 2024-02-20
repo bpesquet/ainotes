@@ -134,8 +134,8 @@ def count_parameters(model, trainable=True):
 def plot_fashion_images(data, labels, model=None):
     """Plot some images with their associated labels"""
 
-    figure = plt.figure(figsize=(10, 5))
-    cols, rows = 5, 2
+    figure = plt.figure(figsize=(10, 6))
+    cols, rows = 7, 4
     for i in range(1, cols * rows + 1):
         sample_idx = torch.randint(len(data), size=(1,)).item()
         img, label = data[sample_idx]
@@ -233,7 +233,6 @@ else:
 #
 # - 1974: backpropagation theory (P. Werbos).
 # - 1986: learning through backpropagation (Rumelhart, Hinton, Williams).
-# - 1991: universal approximation theorem (Hornik, Stinchcombe, White).
 # - 1989: first researchs on deep neural nets (LeCun, Bengio).
 # - 1991: Universal approximation theorem. Given appropriate complexity and appropriate learning, a network can theorically approximate any continuous function.
 
