@@ -673,8 +673,8 @@ document.write(`
 <span class="k">def</span> <span class="nf">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot some images with their associated labels&quot;&quot;&quot;</span>
 
-    <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-    <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">rows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">sample_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
         <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span>
@@ -783,7 +783,6 @@ No GPU found, using CPU instead
 <ul class="simple">
 <li><p>1974: backpropagation theory (P. Werbos).</p></li>
 <li><p>1986: learning through backpropagation (Rumelhart, Hinton, Williams).</p></li>
-<li><p>1991: universal approximation theorem (Hornik, Stinchcombe, White).</p></li>
 <li><p>1989: first researchs on deep neural nets (LeCun, Bengio).</p></li>
 <li><p>1991: Universal approximation theorem. Given appropriate complexity and appropriate learning, a network can theorically approximate any continuous function.</p></li>
 </ul>
@@ -969,17 +968,17 @@ No GPU found, using CPU instead
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: (500, 2). targets: (500,)
-[[-0.0739105   0.25302834]
- [ 0.87404377  0.18771619]
- [-0.93467162  0.58074306]
- [ 0.31479903 -0.27538854]
- [-0.0732489  -1.24988327]
- [ 0.04686256  0.25851479]
- [-0.5170042   0.76732769]
- [ 0.1209917   1.00883722]
- [-0.24393717 -0.24586808]
- [-0.26632676  0.03991449]]
-[1 0 0 1 0 1 0 0 1 1]
+[[-0.32467672 -0.29603112]
+ [ 0.40003061  0.00660986]
+ [ 0.08621761 -0.40238069]
+ [-0.00974224  0.18402813]
+ [ 0.74864346 -0.79439671]
+ [ 0.55674722  0.68585686]
+ [ 0.35345507  0.10892971]
+ [ 0.16709313 -0.80245418]
+ [-0.38029537 -0.27048706]
+ [-0.4123724  -0.95964059]]
+[1 1 1 1 0 0 1 0 1 0]
 </pre></div>
 </div>
 </div>
@@ -991,7 +990,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f28984e889f39547faf3f043b8f39a337ede6c24ab240906f7656f3f620bf0ed.png" src="../_images/f28984e889f39547faf3f043b8f39a337ede6c24ab240906f7656f3f620bf0ed.png" />
+<img alt="../_images/126e161ae875d812d43caced9325fed514d8e7022c23db54c0a2458e0c60fe3c.png" src="../_images/126e161ae875d812d43caced9325fed514d8e7022c23db54c0a2458e0c60fe3c.png" />
 </div>
 </div>
 </section>
@@ -1192,56 +1191,56 @@ Number of trainable parameters: 9.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 500 samples. 100 batches per epoch
-Epoch [  1/ 50]. Mean loss: 0.70542. Accuracy: 53.40%
-Epoch [  2/ 50]. Mean loss: 0.69783. Accuracy: 56.00%
-Epoch [  3/ 50]. Mean loss: 0.69624. Accuracy: 51.20%
-Epoch [  4/ 50]. Mean loss: 0.69597. Accuracy: 54.80%
-Epoch [  5/ 50]. Mean loss: 0.69702. Accuracy: 55.40%
-Epoch [  6/ 50]. Mean loss: 0.69662. Accuracy: 56.40%
-Epoch [  7/ 50]. Mean loss: 0.69587. Accuracy: 52.20%
-Epoch [  8/ 50]. Mean loss: 0.69581. Accuracy: 54.00%
-Epoch [  9/ 50]. Mean loss: 0.69597. Accuracy: 56.80%
-Epoch [ 10/ 50]. Mean loss: 0.69578. Accuracy: 52.80%
-Epoch [ 11/ 50]. Mean loss: 0.69628. Accuracy: 56.20%
-Epoch [ 12/ 50]. Mean loss: 0.69522. Accuracy: 56.20%
-Epoch [ 13/ 50]. Mean loss: 0.69627. Accuracy: 54.60%
-Epoch [ 14/ 50]. Mean loss: 0.69488. Accuracy: 54.20%
-Epoch [ 15/ 50]. Mean loss: 0.69588. Accuracy: 55.60%
-Epoch [ 16/ 50]. Mean loss: 0.69572. Accuracy: 55.00%
-Epoch [ 17/ 50]. Mean loss: 0.69519. Accuracy: 54.80%
-Epoch [ 18/ 50]. Mean loss: 0.69511. Accuracy: 55.60%
-Epoch [ 19/ 50]. Mean loss: 0.69539. Accuracy: 54.80%
-Epoch [ 20/ 50]. Mean loss: 0.69479. Accuracy: 54.20%
-Epoch [ 21/ 50]. Mean loss: 0.69495. Accuracy: 55.80%
-Epoch [ 22/ 50]. Mean loss: 0.69431. Accuracy: 60.80%
-Epoch [ 23/ 50]. Mean loss: 0.69380. Accuracy: 57.60%
-Epoch [ 24/ 50]. Mean loss: 0.69243. Accuracy: 61.00%
-Epoch [ 25/ 50]. Mean loss: 0.69127. Accuracy: 54.40%
-Epoch [ 26/ 50]. Mean loss: 0.68666. Accuracy: 54.20%
-Epoch [ 27/ 50]. Mean loss: 0.68125. Accuracy: 63.60%
-Epoch [ 28/ 50]. Mean loss: 0.67222. Accuracy: 60.60%
-Epoch [ 29/ 50]. Mean loss: 0.66044. Accuracy: 62.00%
-Epoch [ 30/ 50]. Mean loss: 0.64677. Accuracy: 64.40%
-Epoch [ 31/ 50]. Mean loss: 0.63115. Accuracy: 65.60%
-Epoch [ 32/ 50]. Mean loss: 0.61421. Accuracy: 65.60%
-Epoch [ 33/ 50]. Mean loss: 0.58887. Accuracy: 72.40%
-Epoch [ 34/ 50]. Mean loss: 0.55712. Accuracy: 78.20%
-Epoch [ 35/ 50]. Mean loss: 0.52007. Accuracy: 83.60%
-Epoch [ 36/ 50]. Mean loss: 0.48723. Accuracy: 84.20%
-Epoch [ 37/ 50]. Mean loss: 0.46466. Accuracy: 85.00%
-Epoch [ 38/ 50]. Mean loss: 0.44869. Accuracy: 84.40%
-Epoch [ 39/ 50]. Mean loss: 0.43578. Accuracy: 84.80%
-Epoch [ 40/ 50]. Mean loss: 0.42997. Accuracy: 84.20%
-Epoch [ 41/ 50]. Mean loss: 0.42103. Accuracy: 84.80%
-Epoch [ 42/ 50]. Mean loss: 0.41275. Accuracy: 85.60%
-Epoch [ 43/ 50]. Mean loss: 0.40538. Accuracy: 85.40%
-Epoch [ 44/ 50]. Mean loss: 0.40580. Accuracy: 84.40%
-Epoch [ 45/ 50]. Mean loss: 0.40100. Accuracy: 84.80%
-Epoch [ 46/ 50]. Mean loss: 0.39930. Accuracy: 85.80%
-Epoch [ 47/ 50]. Mean loss: 0.39332. Accuracy: 85.00%
-Epoch [ 48/ 50]. Mean loss: 0.39295. Accuracy: 85.40%
-Epoch [ 49/ 50]. Mean loss: 0.39116. Accuracy: 85.20%
-Epoch [ 50/ 50]. Mean loss: 0.39040. Accuracy: 85.00%
+Epoch [  1/ 50]. Mean loss: 0.70262. Accuracy: 53.00%
+Epoch [  2/ 50]. Mean loss: 0.69675. Accuracy: 51.60%
+Epoch [  3/ 50]. Mean loss: 0.69314. Accuracy: 61.60%
+Epoch [  4/ 50]. Mean loss: 0.68770. Accuracy: 59.40%
+Epoch [  5/ 50]. Mean loss: 0.68144. Accuracy: 59.80%
+Epoch [  6/ 50]. Mean loss: 0.67122. Accuracy: 59.40%
+Epoch [  7/ 50]. Mean loss: 0.65305. Accuracy: 58.20%
+Epoch [  8/ 50]. Mean loss: 0.63543. Accuracy: 63.00%
+Epoch [  9/ 50]. Mean loss: 0.61463. Accuracy: 67.40%
+Epoch [ 10/ 50]. Mean loss: 0.58134. Accuracy: 75.40%
+Epoch [ 11/ 50]. Mean loss: 0.53992. Accuracy: 82.20%
+Epoch [ 12/ 50]. Mean loss: 0.49717. Accuracy: 83.40%
+Epoch [ 13/ 50]. Mean loss: 0.46294. Accuracy: 85.40%
+Epoch [ 14/ 50]. Mean loss: 0.44274. Accuracy: 84.60%
+Epoch [ 15/ 50]. Mean loss: 0.42935. Accuracy: 85.40%
+Epoch [ 16/ 50]. Mean loss: 0.41580. Accuracy: 85.40%
+Epoch [ 17/ 50]. Mean loss: 0.41020. Accuracy: 85.60%
+Epoch [ 18/ 50]. Mean loss: 0.40576. Accuracy: 84.60%
+Epoch [ 19/ 50]. Mean loss: 0.39901. Accuracy: 85.00%
+Epoch [ 20/ 50]. Mean loss: 0.40043. Accuracy: 84.80%
+Epoch [ 21/ 50]. Mean loss: 0.39271. Accuracy: 85.40%
+Epoch [ 22/ 50]. Mean loss: 0.39377. Accuracy: 85.60%
+Epoch [ 23/ 50]. Mean loss: 0.39023. Accuracy: 85.00%
+Epoch [ 24/ 50]. Mean loss: 0.38722. Accuracy: 85.00%
+Epoch [ 25/ 50]. Mean loss: 0.38693. Accuracy: 86.00%
+Epoch [ 26/ 50]. Mean loss: 0.38385. Accuracy: 85.40%
+Epoch [ 27/ 50]. Mean loss: 0.38378. Accuracy: 85.40%
+Epoch [ 28/ 50]. Mean loss: 0.38171. Accuracy: 84.80%
+Epoch [ 29/ 50]. Mean loss: 0.37918. Accuracy: 85.40%
+Epoch [ 30/ 50]. Mean loss: 0.38222. Accuracy: 84.80%
+Epoch [ 31/ 50]. Mean loss: 0.38052. Accuracy: 85.60%
+Epoch [ 32/ 50]. Mean loss: 0.37954. Accuracy: 85.40%
+Epoch [ 33/ 50]. Mean loss: 0.37514. Accuracy: 85.20%
+Epoch [ 34/ 50]. Mean loss: 0.37813. Accuracy: 85.60%
+Epoch [ 35/ 50]. Mean loss: 0.37574. Accuracy: 84.60%
+Epoch [ 36/ 50]. Mean loss: 0.37466. Accuracy: 85.40%
+Epoch [ 37/ 50]. Mean loss: 0.37679. Accuracy: 85.60%
+Epoch [ 38/ 50]. Mean loss: 0.37439. Accuracy: 85.00%
+Epoch [ 39/ 50]. Mean loss: 0.37387. Accuracy: 85.20%
+Epoch [ 40/ 50]. Mean loss: 0.37079. Accuracy: 84.80%
+Epoch [ 41/ 50]. Mean loss: 0.37035. Accuracy: 85.80%
+Epoch [ 42/ 50]. Mean loss: 0.37122. Accuracy: 85.20%
+Epoch [ 43/ 50]. Mean loss: 0.37228. Accuracy: 85.40%
+Epoch [ 44/ 50]. Mean loss: 0.37338. Accuracy: 85.20%
+Epoch [ 45/ 50]. Mean loss: 0.37170. Accuracy: 85.60%
+Epoch [ 46/ 50]. Mean loss: 0.37078. Accuracy: 84.80%
+Epoch [ 47/ 50]. Mean loss: 0.37189. Accuracy: 85.40%
+Epoch [ 48/ 50]. Mean loss: 0.37002. Accuracy: 84.40%
+Epoch [ 49/ 50]. Mean loss: 0.36965. Accuracy: 85.40%
+Epoch [ 50/ 50]. Mean loss: 0.36996. Accuracy: 85.40%
 Training complete! Total gradient descent steps: 5000
 </pre></div>
 </div>
@@ -1257,7 +1256,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6741e8a4ac96053e1fa3a2ce80f51fd6f26f26d7a593bc98268ce1c74c0f6476.png" src="../_images/6741e8a4ac96053e1fa3a2ce80f51fd6f26f26d7a593bc98268ce1c74c0f6476.png" />
+<img alt="../_images/9d8995e577f9a3f335a6e7f4107b86ac6b7d9671018669e96bbbb6bdc746103d.png" src="../_images/9d8995e577f9a3f335a6e7f4107b86ac6b7d9671018669e96bbbb6bdc746103d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1267,7 +1266,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d7822b1dd85aeb632ca4c689f59524a21d74bbe22be9380e3142a31ef286c155.png" src="../_images/d7822b1dd85aeb632ca4c689f59524a21d74bbe22be9380e3142a31ef286c155.png" />
+<img alt="../_images/93601e68ba84819cefd91e649362615dece2b09ee13d96c9852601abd5888add.png" src="../_images/93601e68ba84819cefd91e649362615dece2b09ee13d96c9852601abd5888add.png" />
 </div>
 </div>
 </section>
@@ -1461,7 +1460,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c319782d41728fed3c6cea85a93263b54923763dd1893b37e74dcacee311823e.png" src="../_images/c319782d41728fed3c6cea85a93263b54923763dd1893b37e74dcacee311823e.png" />
+<img alt="../_images/716bd5cc2367835ef3f316653b9dca9120c08be2bc4c2d4d0da2b40d06d86b1b.png" src="../_images/716bd5cc2367835ef3f316653b9dca9120c08be2bc4c2d4d0da2b40d06d86b1b.png" />
 </div>
 </div>
 </section>
@@ -1691,16 +1690,16 @@ Number of trainable parameters: 55050
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
-Epoch [  1/ 10]. Mean loss: 2.26733. Accuracy: 20.24%
-Epoch [  2/ 10]. Mean loss: 2.15598. Accuracy: 38.52%
-Epoch [  3/ 10]. Mean loss: 1.91052. Accuracy: 45.42%
-Epoch [  4/ 10]. Mean loss: 1.58591. Accuracy: 51.72%
-Epoch [  5/ 10]. Mean loss: 1.32168. Accuracy: 61.79%
-Epoch [  6/ 10]. Mean loss: 1.13993. Accuracy: 64.63%
-Epoch [  7/ 10]. Mean loss: 1.01586. Accuracy: 66.11%
-Epoch [  8/ 10]. Mean loss: 0.92993. Accuracy: 67.43%
-Epoch [  9/ 10]. Mean loss: 0.86944. Accuracy: 68.65%
-Epoch [ 10/ 10]. Mean loss: 0.82544. Accuracy: 69.80%
+Epoch [  1/ 10]. Mean loss: 2.27095. Accuracy: 17.39%
+Epoch [  2/ 10]. Mean loss: 2.14185. Accuracy: 39.14%
+Epoch [  3/ 10]. Mean loss: 1.88409. Accuracy: 42.12%
+Epoch [  4/ 10]. Mean loss: 1.57735. Accuracy: 50.45%
+Epoch [  5/ 10]. Mean loss: 1.33551. Accuracy: 60.20%
+Epoch [  6/ 10]. Mean loss: 1.16612. Accuracy: 63.36%
+Epoch [  7/ 10]. Mean loss: 1.04686. Accuracy: 65.08%
+Epoch [  8/ 10]. Mean loss: 0.96125. Accuracy: 66.36%
+Epoch [  9/ 10]. Mean loss: 0.89909. Accuracy: 67.62%
+Epoch [ 10/ 10]. Mean loss: 0.85267. Accuracy: 68.94%
 Training complete! Total gradient descent steps: 9380
 </pre></div>
 </div>
@@ -1716,7 +1715,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/63009fb0b7be36f1ac9f19e9db3e03faaf269ce871ff3d5c6f0338d1b2ace8d8.png" src="../_images/63009fb0b7be36f1ac9f19e9db3e03faaf269ce871ff3d5c6f0338d1b2ace8d8.png" />
+<img alt="../_images/895703911de1518b57e9dc9d0c74b04630c84f6ab98fbc3977e571297f9f86bb.png" src="../_images/895703911de1518b57e9dc9d0c74b04630c84f6ab98fbc3977e571297f9f86bb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1726,7 +1725,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c8242fd529d6a5886c4c3eadc63ef191fc1f103f8f6fb33ca9ace9a7f902ad68.png" src="../_images/c8242fd529d6a5886c4c3eadc63ef191fc1f103f8f6fb33ca9ace9a7f902ad68.png" />
+<img alt="../_images/e69a6953bc9a500e45a4f8ccec83ba04566f82f171a86987790bb74785c65d93.png" src="../_images/e69a6953bc9a500e45a4f8ccec83ba04566f82f171a86987790bb74785c65d93.png" />
 </div>
 </div>
 </section>
