@@ -2,7 +2,7 @@
 .DS_Store
 
 # Datasets downloaded by code
-data/*/**
+data/**/**
 docs/**/data
 
 # Notebook execution output

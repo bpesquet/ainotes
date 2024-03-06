@@ -46,6 +46,7 @@ parts:
     - file: ml/challenges
       sections:
       - file: ml/challenges/heart_disease
+      - file: ml/challenges/cifar10
   - caption: Search algorithms
     chapters:
     - file: search/dijkstra_astar
