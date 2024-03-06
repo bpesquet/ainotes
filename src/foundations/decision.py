@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# # Decision-making
+# # Introduction to the theory of decision-making
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Terminology
