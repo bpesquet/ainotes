@@ -189,6 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="challenges/heart_disease.html">Heart disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="challenges/cifar10.html">CIFAR10</a></li>
 </ul>
 </li>
 </ul>
@@ -616,8 +617,8 @@ document.write(`
 <span class="k">def</span> <span class="nf">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot some images with their associated labels&quot;&quot;&quot;</span>
 
-    <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-    <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">rows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">sample_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
         <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span>
@@ -885,18 +886,18 @@ MPS GPU found :)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Labels, i.e. fashion categories associated to images (one category per image)</span>
-<span class="n">fashion_labels</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;T-Shirt&quot;</span><span class="p">,</span>
-    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Trouser&quot;</span><span class="p">,</span>
-    <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Pullover&quot;</span><span class="p">,</span>
-    <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Dress&quot;</span><span class="p">,</span>
-    <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Coat&quot;</span><span class="p">,</span>
-    <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Sandal&quot;</span><span class="p">,</span>
-    <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Shirt&quot;</span><span class="p">,</span>
-    <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;Sneaker&quot;</span><span class="p">,</span>
-    <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Bag&quot;</span><span class="p">,</span>
-    <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;Ankle Boot&quot;</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="n">fashion_labels</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;T-Shirt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Trouser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pullover&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Dress&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Coat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sandal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Shirt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sneaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Bag&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Ankle Boot&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -908,7 +909,7 @@ MPS GPU found :)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bd2323596bbb56b80dcf6195e594710ca49deee7a344929f0ac29a09b3ce2db3.png" src="../_images/bd2323596bbb56b80dcf6195e594710ca49deee7a344929f0ac29a09b3ce2db3.png" />
+<img alt="../_images/e265b21d681d718abaca9e9b8fcf5db79a2cf817b9fad42982b80d3a22686333.png" src="../_images/e265b21d681d718abaca9e9b8fcf5db79a2cf817b9fad42982b80d3a22686333.png" />
 </div>
 </div>
 </section>
@@ -962,18 +963,18 @@ MPS GPU found :)
 
         <span class="c1"># Define a sequential stack</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layer_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-            <span class="c1"># Feature extraction with convolutional and pooling layers</span>
+            <span class="c1"># Feature extraction part, with convolutional and pooling layers</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-            <span class="c1"># Classification with fully connected layers</span>
+            <span class="c1"># Classification part, with fully connected layers</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1600</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">128</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -1058,8 +1059,8 @@ Number of trainable parameters: 225034
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_fashion</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training loop&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training code&quot;&quot;&quot;</span>
 
     <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
     <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
@@ -1067,7 +1068,7 @@ Number of trainable parameters: 225034
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
         <span class="n">total_loss</span><span class="p">,</span> <span class="n">n_correct</span> <span class="o">=</span> <span class="n">epoch_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
 
         <span class="c1"># Compute epoch metrics</span>
@@ -1075,14 +1076,14 @@ Number of trainable parameters: 225034
         <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
 
         <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
         <span class="p">)</span>
 
         <span class="c1"># Record epoch metrics for later plotting</span>
         <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
         <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">n_epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">history</span>
 </pre></div>
@@ -1091,29 +1092,30 @@ Number of trainable parameters: 225034
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_history</span> <span class="o">=</span> <span class="n">train_fashion</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_history</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span>
     <span class="n">fashion_train_dataloader</span><span class="p">,</span>
     <span class="n">fashion_convnet</span><span class="p">,</span>
     <span class="c1"># Standard loss for multiclass classification</span>
     <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
     <span class="c1"># Adam optimizer for GD</span>
     <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">fashion_convnet</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
-Epoch [  1/ 10]. Mean loss: 0.53162. Accuracy: 81.41%
-Epoch [  2/ 10]. Mean loss: 0.34415. Accuracy: 88.03%
-Epoch [  3/ 10]. Mean loss: 0.29621. Accuracy: 89.66%
-Epoch [  4/ 10]. Mean loss: 0.26504. Accuracy: 90.81%
-Epoch [  5/ 10]. Mean loss: 0.24021. Accuracy: 91.76%
-Epoch [  6/ 10]. Mean loss: 0.21783. Accuracy: 92.63%
-Epoch [  7/ 10]. Mean loss: 0.19805. Accuracy: 93.40%
-Epoch [  8/ 10]. Mean loss: 0.17979. Accuracy: 94.10%
-Epoch [  9/ 10]. Mean loss: 0.16245. Accuracy: 94.78%
-Epoch [ 10/ 10]. Mean loss: 0.14810. Accuracy: 95.38%
+Epoch [  1/ 10]. Mean loss: 0.53403. Accuracy: 81.28%
+Epoch [  2/ 10]. Mean loss: 0.34656. Accuracy: 88.00%
+Epoch [  3/ 10]. Mean loss: 0.29757. Accuracy: 89.64%
+Epoch [  4/ 10]. Mean loss: 0.26517. Accuracy: 90.77%
+Epoch [  5/ 10]. Mean loss: 0.23982. Accuracy: 91.76%
+Epoch [  6/ 10]. Mean loss: 0.21816. Accuracy: 92.59%
+Epoch [  7/ 10]. Mean loss: 0.19833. Accuracy: 93.35%
+Epoch [  8/ 10]. Mean loss: 0.17987. Accuracy: 94.07%
+Epoch [  9/ 10]. Mean loss: 0.16326. Accuracy: 94.75%
+Epoch [ 10/ 10]. Mean loss: 0.14786. Accuracy: 95.32%
 Training complete! Total gradient descent steps: 9380
 </pre></div>
 </div>
@@ -1130,7 +1132,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/220623601c1512bd95568bb31d8ee02bb062784b0579a2192e0697b6a87faaba.png" src="../_images/220623601c1512bd95568bb31d8ee02bb062784b0579a2192e0697b6a87faaba.png" />
+<img alt="../_images/0ca2fe30cf576977cfc7a8645b0ec92300b25a9e598c1272b3199aee0725095f.png" src="../_images/0ca2fe30cf576977cfc7a8645b0ec92300b25a9e598c1272b3199aee0725095f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1140,7 +1142,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c31a64ea0525681a6d9d44b62d278f5cb01fe1a6e25499f2bc38798561dbeb4f.png" src="../_images/c31a64ea0525681a6d9d44b62d278f5cb01fe1a6e25499f2bc38798561dbeb4f.png" />
+<img alt="../_images/915de74277e9c1a3644e4bd7529acf3d9a8e09ffe0d8d5889f2a5812a94a1992.png" src="../_images/915de74277e9c1a3644e4bd7529acf3d9a8e09ffe0d8d5889f2a5812a94a1992.png" />
 </div>
 </div>
 </section>

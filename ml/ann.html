@@ -191,6 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="challenges/heart_disease.html">Heart disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="challenges/cifar10.html">CIFAR10</a></li>
 </ul>
 </li>
 </ul>
@@ -1116,8 +1117,8 @@ Number of trainable parameters: 9.
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_planar</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training loop&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_planar</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training code&quot;&quot;&quot;</span>
 
     <span class="c1"># Object storing training history</span>
     <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
@@ -1130,7 +1131,7 @@ Number of trainable parameters: 9.
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
         <span class="c1"># Reset total loss for the current epoch</span>
         <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -1169,14 +1170,14 @@ Number of trainable parameters: 9.
         <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
 
         <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
         <span class="p">)</span>
 
         <span class="c1"># Record epoch metrics for later plotting</span>
         <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
         <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">n_epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">history</span>
 </pre></div>
@@ -1185,7 +1186,12 @@ Number of trainable parameters: 9.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planar_history</span> <span class="o">=</span> <span class="n">train_planar</span><span class="p">(</span><span class="n">planar_dataloader</span><span class="p">,</span> <span class="n">planar_model</span><span class="p">,</span> <span class="n">planar_loss_fn</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planar_history</span> <span class="o">=</span> <span class="n">train_planar</span><span class="p">(</span>
+    <span class="n">dataloader</span><span class="o">=</span><span class="n">planar_dataloader</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">planar_model</span><span class="p">,</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">planar_loss_fn</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1437,18 +1443,18 @@ Training complete! Total gradient descent steps: 5000
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Labels, i.e. fashion categories associated to images (one category per image)</span>
-<span class="n">fashion_labels</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;T-Shirt&quot;</span><span class="p">,</span>
-    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Trouser&quot;</span><span class="p">,</span>
-    <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Pullover&quot;</span><span class="p">,</span>
-    <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Dress&quot;</span><span class="p">,</span>
-    <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Coat&quot;</span><span class="p">,</span>
-    <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Sandal&quot;</span><span class="p">,</span>
-    <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Shirt&quot;</span><span class="p">,</span>
-    <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;Sneaker&quot;</span><span class="p">,</span>
-    <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Bag&quot;</span><span class="p">,</span>
-    <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;Ankle Boot&quot;</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="n">fashion_labels</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;T-Shirt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Trouser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pullover&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Dress&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Coat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sandal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Shirt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sneaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Bag&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Ankle Boot&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1646,8 +1652,8 @@ Number of trainable parameters: 55050
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_fashion</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training loop&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training code&quot;&quot;&quot;</span>
 
     <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
     <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
@@ -1655,7 +1661,7 @@ Number of trainable parameters: 55050
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
         <span class="n">total_loss</span><span class="p">,</span> <span class="n">n_correct</span> <span class="o">=</span> <span class="n">epoch_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
 
         <span class="c1"># Compute epoch metrics</span>
@@ -1663,14 +1669,14 @@ Number of trainable parameters: 55050
         <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
 
         <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
         <span class="p">)</span>
 
         <span class="c1"># Record epoch metrics for later plotting</span>
         <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
         <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">n_epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">history</span>
 </pre></div>
@@ -1679,11 +1685,12 @@ Number of trainable parameters: 55050
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_history</span> <span class="o">=</span> <span class="n">train_fashion</span><span class="p">(</span>
-    <span class="n">fashion_train_dataloader</span><span class="p">,</span>
-    <span class="n">fashion_model</span><span class="p">,</span>
-    <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
-    <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">fashion_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_history</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataloader</span><span class="o">=</span><span class="n">fashion_train_dataloader</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">fashion_model</span><span class="p">,</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">fashion_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
