@@ -1,3 +1,6 @@
+[MASTER]
+# ignore-patterns=docs/**
+
 [MESSAGES CONTROL]
 
 # Enable the message, report, category or checker with the given id(s). You can
@@ -15,7 +18,7 @@ disable=missing-module-docstring,duplicate-code,line-too-long,invalid-name,not-c
 good-names=i,j,k,x,y
 
 [DESIGN]
-max-locals = 16
+max-locals = 17
 
 [TYPECHECK]
 

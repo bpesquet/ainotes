@@ -209,7 +209,7 @@ sgd_model = SGDClassifier(loss="log_loss")
 sgd_model.fit(x_train, y_train)
 
 # %% [markdown]
-# ## Model evaluation
+# ## Performance assessment
 
 # %% [markdown]
 # ### Cross-validation accuracy
@@ -256,8 +256,6 @@ sgd_disp = RocCurveDisplay.from_estimator(sgd_model, x_train, y_train)
 plt.show()
 
 # %% [markdown]
-# ## Performance assessment
-#
 # ### Computing metrics on test data
 
 # %%

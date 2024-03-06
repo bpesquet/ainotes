@@ -95,8 +95,8 @@ def count_parameters(model, trainable=True):
 def plot_fashion_images(data, labels, model=None):
     """Plot some images with their associated labels"""
 
-    figure = plt.figure(figsize=(10, 5))
-    cols, rows = 5, 2
+    figure = plt.figure(figsize=(10, 6))
+    cols, rows = 7, 4
     for i in range(1, cols * rows + 1):
         sample_idx = torch.randint(len(data), size=(1,)).item()
         img, label = data[sample_idx]
@@ -360,18 +360,18 @@ fashion_test_data = datasets.FashionMNIST(
 
 # %% slideshow={"slide_type": "slide"}
 # Labels, i.e. fashion categories associated to images (one category per image)
-fashion_labels = {
-    0: "T-Shirt",
-    1: "Trouser",
-    2: "Pullover",
-    3: "Dress",
-    4: "Coat",
-    5: "Sandal",
-    6: "Shirt",
-    7: "Sneaker",
-    8: "Bag",
-    9: "Ankle Boot",
-}
+fashion_labels = (
+    "T-Shirt",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle Boot",
+)
 
 # %% slideshow={"slide_type": "-"}
 plot_fashion_images(fashion_train_data, fashion_labels)
@@ -489,8 +489,8 @@ def epoch_loop(dataloader, model, loss_fn, optimizer):
 
 
 # %% slideshow={"slide_type": "slide"}
-def train_fashion(dataloader, model, loss_fn, optimizer):
-    """Main training loop"""
+def fit(dataloader, model, loss_fn, optimizer, epochs):
+    """Main training code"""
 
     history = {"loss": [], "acc": []}
     n_samples = len(dataloader.dataset)
@@ -498,7 +498,7 @@ def train_fashion(dataloader, model, loss_fn, optimizer):
 
     print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
 
-    for epoch in range(n_epochs):
+    for epoch in range(epochs):
         total_loss, n_correct = epoch_loop(dataloader, model, loss_fn, optimizer)
 
         # Compute epoch metrics
@@ -506,26 +506,27 @@ def train_fashion(dataloader, model, loss_fn, optimizer):
         epoch_acc = n_correct / n_samples
 
         print(
-            f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
         )
 
         # Record epoch metrics for later plotting
         history["loss"].append(epoch_loss)
         history["acc"].append(epoch_acc)
 
-    print(f"Training complete! Total gradient descent steps: {n_epochs * n_batches}")
+    print(f"Training complete! Total gradient descent steps: {epochs * n_batches}")
 
     return history
 
 
 # %% slideshow={"slide_type": "slide"}
-fashion_history = train_fashion(
+fashion_history = fit(
     fashion_train_dataloader,
     fashion_convnet,
     # Standard loss for multiclass classification
     nn.CrossEntropyLoss(),
     # Adam optimizer for GD
     optim.Adam(fashion_convnet.parameters(), lr=learning_rate),
+    epochs=n_epochs,
 )
 
 # %% [markdown] slideshow={"slide_type": "slide"}

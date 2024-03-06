@@ -494,8 +494,8 @@ planar_loss_fn = nn.BCELoss()
 
 
 # %% slideshow={"slide_type": "slide"}
-def train_planar(dataloader, model, loss_fn):
-    """Main training loop"""
+def train_planar(dataloader, model, loss_fn, epochs):
+    """Main training code"""
 
     # Object storing training history
     history = {"loss": [], "acc": []}
@@ -508,7 +508,7 @@ def train_planar(dataloader, model, loss_fn):
 
     print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
 
-    for epoch in range(n_epochs):
+    for epoch in range(epochs):
         # Reset total loss for the current epoch
         total_loss = 0
 
@@ -547,20 +547,25 @@ def train_planar(dataloader, model, loss_fn):
         epoch_acc = n_correct / n_samples
 
         print(
-            f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
         )
 
         # Record epoch metrics for later plotting
         history["loss"].append(epoch_loss)
         history["acc"].append(epoch_acc)
 
-    print(f"Training complete! Total gradient descent steps: {n_epochs * n_batches}")
+    print(f"Training complete! Total gradient descent steps: {epochs * n_batches}")
 
     return history
 
 
 # %% slideshow={"slide_type": "slide"}
-planar_history = train_planar(planar_dataloader, planar_model, planar_loss_fn)
+planar_history = train_planar(
+    dataloader=planar_dataloader,
+    model=planar_model,
+    loss_fn=planar_loss_fn,
+    epochs=n_epochs,
+)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Training results
@@ -605,18 +610,18 @@ print(fashion_img)
 
 # %% slideshow={"slide_type": "slide"}
 # Labels, i.e. fashion categories associated to images (one category per image)
-fashion_labels = {
-    0: "T-Shirt",
-    1: "Trouser",
-    2: "Pullover",
-    3: "Dress",
-    4: "Coat",
-    5: "Sandal",
-    6: "Shirt",
-    7: "Sneaker",
-    8: "Bag",
-    9: "Ankle Boot",
-}
+fashion_labels = (
+    "T-Shirt",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle Boot",
+)
 
 
 # %%
@@ -771,8 +776,8 @@ def epoch_loop(dataloader, model, loss_fn, optimizer):
 
 
 # %% slideshow={"slide_type": "slide"}
-def train_fashion(dataloader, model, loss_fn, optimizer):
-    """Main training loop"""
+def fit(dataloader, model, loss_fn, optimizer, epochs):
+    """Main training code"""
 
     history = {"loss": [], "acc": []}
     n_samples = len(dataloader.dataset)
@@ -780,7 +785,7 @@ def train_fashion(dataloader, model, loss_fn, optimizer):
 
     print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
 
-    for epoch in range(n_epochs):
+    for epoch in range(epochs):
         total_loss, n_correct = epoch_loop(dataloader, model, loss_fn, optimizer)
 
         # Compute epoch metrics
@@ -788,24 +793,25 @@ def train_fashion(dataloader, model, loss_fn, optimizer):
         epoch_acc = n_correct / n_samples
 
         print(
-            f"Epoch [{(epoch + 1):3}/{n_epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
         )
 
         # Record epoch metrics for later plotting
         history["loss"].append(epoch_loss)
         history["acc"].append(epoch_acc)
 
-    print(f"Training complete! Total gradient descent steps: {n_epochs * n_batches}")
+    print(f"Training complete! Total gradient descent steps: {epochs * n_batches}")
 
     return history
 
 
 # %% slideshow={"slide_type": "slide"}
-fashion_history = train_fashion(
-    fashion_train_dataloader,
-    fashion_model,
-    nn.CrossEntropyLoss(),
-    optim.SGD(fashion_model.parameters(), lr=learning_rate),
+fashion_history = fit(
+    dataloader=fashion_train_dataloader,
+    model=fashion_model,
+    loss_fn=nn.CrossEntropyLoss(),
+    optimizer=optim.SGD(fashion_model.parameters(), lr=learning_rate),
+    epochs=n_epochs,
 )
 
 # %% [markdown] slideshow={"slide_type": "slide"}
