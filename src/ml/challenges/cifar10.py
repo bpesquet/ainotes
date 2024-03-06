@@ -34,7 +34,10 @@
 # - You may train and evaluate a standard MultiLayer Perceptron, using [this chapter](../ann.ipynb) as a blueprint. Warning: you will have to adapt the inputs of your network to the color images of the CIFAR10 dataset.
 # - **Bonus**: train a convolutional neural network using [this chapter](../cnn.ipynb) as a blueprint. After training, compare its performance with the MLP results.
 
+
 # %%
+# pylint: disable=undefined-variable
+
 # Utility functions
 
 
