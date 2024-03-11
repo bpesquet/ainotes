@@ -30,7 +30,7 @@
 # - Follow the main steps of a supervised ML project: data loading and exploring, data preparation, model training and evaluation.
 # - Use the [PyTorch](https://pytorch.org) library for data loading and model training. If you are new to it, consider following its [official tutorial](https://pytorch.org/tutorials/beginner/basics/intro.html).
 # - Don't forget to setup your environment by importing the necessary Python packages. Several helper functions (see below) have already been defined for you.
-# - Regarding data preparation, bitmap images should be normalized. You can find an example [here](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#load-and-normalize-cifar10).
+# - Regarding data loading and preparation, bitmap images should be normalized. You can find an example using the CIFAR10 dataset [here](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#load-and-normalize-cifar10).
 # - You may train and evaluate a standard MultiLayer Perceptron, using [this chapter](../ann.ipynb) as a blueprint. Warning: you will have to adapt the inputs of your network to the color images of the CIFAR10 dataset.
 # - **Bonus**: train a convolutional neural network using [this chapter](../cnn.ipynb) as a blueprint. After training, compare its performance with the MLP results.
 
