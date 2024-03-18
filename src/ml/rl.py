@@ -28,9 +28,6 @@
 # ## Environnement setup
 
 # %% slideshow={"slide_type": "slide"}
-# Relax some linting rules not needed here
-# pylint: disable=invalid-name,wrong-import-position,redefined-outer-name
-
 import platform
 from IPython.display import YouTubeVideo
 
@@ -38,10 +35,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-print(f"Python version: {platform.python_version()}")
-print(f"NumPy version: {np.__version__}")
-
-# %% slideshow={"slide_type": "slide"}
+# %% slideshow={"slide_type": "-"}
 # Setup plots
 
 # Include matplotlib graphs into the notebook, next to the code
@@ -55,15 +49,20 @@ print(f"NumPy version: {np.__version__}")
 # http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme
 sns.set_theme()
 
+# %% slideshow={"slide_type": "slide"}
+# Print environment info
+print(f"Python version: {platform.python_version()}")
+print(f"NumPy version: {np.__version__}")
+
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## What is Reinforcement Learning?
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### RL in a nutshell
 #
-# Reinforcement Learning is about **learning how to act in a dynamic system**.
+# Reinforcement Learning is about **learning how to evolve in a dynamic system**, often called the *environment*.
 #
-# The learner (often called an *agent*) is not told explicitly which **actions** to take, but instead must discover which actions yield the most **reward** over time by trying them.
+# The learner and decision maker (often called an *agent*) is not told explicitly which **actions** to take, but instead must discover which actions yield the most **reward** over time by trying them.
 #
 # Actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.
 #
@@ -98,122 +97,235 @@ sns.set_theme()
 # - [OpenAI Five](https://openai.com/blog/openai-five/) demonstrated expert level play against other competitive Dota 2 teams in 2019;
 # - [AlphaStar](https://deepmind.com/blog/article/alphastar-mastering-real-time-strategy-game-starcraft-ii) reached StarCraft 2 Grandmaster level (top 0.2% of human players) also in 2019.
 
-# %% slideshow={"slide_type": "slide"}
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### AlphaGo
+
+# %% slideshow={"slide_type": "-"}
 YouTubeVideo("WXuK6gekU1Y")
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### OpenAI's Hide and Seek
+
+# %%
+YouTubeVideo("kopoLzvh5jY")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Terminology
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ### Elements of a RL system
+#
+# - An **agent** that learns what to do.
+# - The **environment** that characterizes the dynamic system in which the agent evolves.
+# - The agent's **policy** that defines its way of behaving at a given time.
+# - **Reward signals** (or simply rewards) provided by the environment as results of the agent's actions.
+# - Optionally, a **model** of its environment built by the agent and used to predict future evolutions of the dynamic system.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ![Representation of a RL system](_images/rl_agent_env.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### State
+#
+# **State** represents the information available to the agent about its environment.
+#
+# It is used as input to the agent's policy and value functions, and (optionally) as both input to and output from the agent's model.
+#
+# > The issues of constructing, changing, or learning the state signal are out of the scope of this chapter, which concentrates on the decision-making aspects.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Value functions
+#
+# Whereas the reward indicates what is good in an immediate sense, a **value function** specifies what is good in the long run.
+#
+# The value of a state is the total amount of reward an agent can expect to accumulate over the future, starting from that state.
+#
+# Action choices should be made based on value judgments, seeking actions that bring about states of highest value, not highest reward.
+#
+# Unfortunately, unlike rewards that are directly given by the environment, values are generally hard to obtain. They must be **estimated** and re-estimated from the sequences of observations an agent makes over its entire lifetime.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ### The exploration vs. exploitation dilemna
 #
-# The learner has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.
+# The agent has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.
 #
 # ![Exploration VS exploitation](_images/exploration_exploitation.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### General abstraction
+# ### Model-free Vs model-based RL
 #
-# - $s_t$: observed state of the dynamic system at step $t$.
-# - $a_t$: action taken by the agent at step $t$ in order to (try to) control the system.
-# - $r_t$: reward received by the agent at step $t$ (result of $a_{t-1}$).
+# **Model-free** algorithms learn solely from experience, through trial-and-error.
 #
-# ![](_images/rl_schema.png)
+# On the contrary, algorithms that, during learning or acting, exploit predictions of the environment's response are said to be **model-based**. This class of algorithms is able to use *planning*, i.e. taking into account possible future situations before they are actually experienced ([more details](https://ai.stackexchange.com/a/6733)).
+#
+# ```{warning}
+# The term "model" has a different meaning in [supervised Machine Learning](principles.ipynb).
+# ```
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Policy
-#
-# The algorithm used by the learner to determine its actions is called its **policy**. Policies may be *deterministic* or *stochastic* (involving some randomness).
-#
-# Formally, a policy $\pi$ is a mapping from states to probabilities of selecting each possible action.
-#
-# $\pi(a|s)$: probability that the agent will choose the action $a$ when in state $s$.
+# ## Markov Decision Processes
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Reward
+# ### Definition
 #
-# A **reward signal** defines the goal in a RL problem. The learner’s sole objective is to maximize the total reward it receives in the long run. Rewards are its only guidance it gets.
+# **Markov Decision Processes** {cite}`bellman1957` provide a mathematical framework for modeling decision making in discrete-time situations where, through its actions, outcomes are partly under the control of a decision maker.
 #
-# $R_t=r(s,a,s')$: reward received at step $t$ when system goes from state $s$ to state $s'$, given a chosen action $a$.
+# They are an extension of **Markov chains** in which what happens next depends only on the current state.
+#
+# MDPs are a classical formalization of sequential decision making.
+#
+# Many RL problems with discrete actions can be modeled as MDPs.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Return
+# ### General formulation
 #
-# It is common to evaluate actions based on the sum of all the rewards that came after them, usually applying a *discount factor* $\gamma \in [0,1]$.
+# ![Agent-environment interface](_images/rl_mdp.png)
 #
-# $G_t$: sum of discounted rewards, called **return**.
-#
-# $$G_t = R_{t+1} + \gamma R_{t+2} +\gamma^2 R_{t+3} + · · · = \sum\limits_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}$$
-#
-# Usually $0.9<\gamma<0.99$.
+# - $\mathcal{S}$: set of all valid states.
+# - $S_t \in \mathcal{S}$: observed **state** of the dynamic system at step $t$.
+# - $\mathcal{A}(S_t)$: set of all valid actions for state $S_t$ (or simply $\mathcal{A}$ when the action set is the same in all states).
+# - $A_t \in \mathcal{A}(S_t)$: **action** taken by the agent at step $t$ in order to (try to) control the system.
+# - $\mathcal{R} \subset \mathbb{R}$: set of all rewards.
+# - $R_t \in \mathcal{R}$: numerical **reward** received by the agent at step $t$. Both $S_t$ and $R_t$ result from the previous action $A_{t-1}$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Markov Decision Processes
+# ### Finite Markov Decision Processes
 #
-# **Markov Decision Processes** (MDP) provide a mathematical framework for modeling decision making in discrete-time situations where outcomes are partly under the control of a decision maker. They were first described in the 1950s by Richard Bellman as an extension of (Andrey) **Markov chains**.
+# In a finite MDP, the states, actions, and rewards spaces ($\mathcal{S}$, $\mathcal{A}$, and $\mathcal{R}$) all have a finite number of elements.
 #
-# The dynamics of a MDP is defined as the transition probability $p(s',r | s,a)$ of getting state $s'$ and reward $r$ after having selected action $a$ in state $s$.
+# $\forall t \in \mathbb{N}, R_t$ and $S_t$ are random variables with discrete probability distributions dependent only on $S_{t-1}$ and $A_{t-1}$. The dynamics of a finite MDP are entirely defined by these distributions.
 #
-# Many RL problems with discrete actions can be modeled as Markov Decision Processes.
+# $$p(s',r|s,a) \equiv P(S_t=s′, R_t=r | S_{t−1}=s, A_{t−1}=a)$$
+#
+# $$\forall s \in \mathcal{S}, a \in \mathcal{A}(s), \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s',r|s,a) = 1$$
+#
+# - $s, s' \in \mathcal{S}$: values of state before and after action $a$.
+# - $a \in \mathcal{A}(s)$: chosen action.
+# - $r \in \mathcal{R}$: value of reward received after action $a$.
+# - $p(s',r|s,a)$: probability of getting state $s'$ and reward $r$ after having selected action $a$ in state $s$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ![](_images/mdp_example.png)
+# ### Markov property
+#
+# This [property](https://en.wikipedia.org/wiki/Markov_property) refers to processes in which the probability of each possible value for $S_t$ and $R_t$ depends only on the immediately preceding state and action, $S_{t−1}$ and $A_{t−1}$, and not at all on earlier states and actions. Said differently: transitions only depend on the most recent state and action, not on prior history.
+#
+# The state must include information about all aspects of the past agent–environment interactions.
+#
+# A process with this property is said to be *markovian*.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Additional formulations
+#
+# $$p(s'|s,a) \equiv P(S_t=s′ | S_{t−1}=s, A_{t−1}=a) = \sum_{r \in \mathcal{R}} p(s',r|s,a)$$
+#
+# $$r(s,a) \equiv \mathbb{E} \left[ R_t | S_{t−1}=s, A_{t−1}=a \right] = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s',r|s,a)$$
+#
+# $$r(s,a,s') \equiv \mathbb{E} \left[ R_t | S_{t−1}=s, A_{t−1}=a,  S_t=s' \right] = \sum_{r \in \mathcal{R}} r \frac {p(s',r|s,a)}{p(s'|s,a)}$$
+#
+# - $p(s'|s,a)$: probability of getting state 𝑠′ after having selected action $a$ in state $s$.
+# - $r(s,a)$: expected reward after having selected $a$ in $s$.
+# - $r(s,a,s')$: expected reward after transitioning from $s$ to $s'$ through $a$.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Example
+#
+# The following MDP ([source](https://github.com/ageron/handson-ml2/blob/master/18_reinforcement_learning.ipynb)) has three states $s_0, s_1, s_2$ and up to three possible discrete actions $a_0,a_1,a_2$ for each state, some of them yielding positive of negative rewards.
+#
+# ![Example of a Markov decision process](_images/mdp_example.png)
+#
+# Here, if action $a_0$ is chosen in state $s_0$, then with probability 0.7 we will go to state $s_0$ with reward +10, with probability 0.3 we will go to state $s_1$ with no reward, and we cannot go to state $s_2$.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Dynamics table
+#
+# |$s$|$a$|$s'$|$p(s'|s,a)$|$r(s,a,s')$|
+# |-|-|-|-|-|
+# |$s_0$|$a_0$|$s_0$|$0.7$|$+10$|
+# |$s_0$|$a_0$|$s_1$|$0.3$||
+# |$s_0$|$a_1$|$s_0$|$1.0$||
+# |$s_0$|$a_2$|$s_0$|$0.8$||
+# |$s_0$|$a_2$|$s_1$|$0.2$||
+# |$s_1$|$a_0$|$s_1$|$1.0$||
+# |$s_1$|$a_2$|$s_2$|$1.0$|$-50$|
+# |$s_2$|$a_1$|$s_0$|$0.8$|$+40$|
+# |$s_2$|$a_1$|$s_1$|$0.1$||
+# |$s_2$|$a_1$|$s_2$|$0.1$||
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Modelisation
+#
+# The previous MDP can be computationally modelised as a set of arrays. States and actions are represented by their 0-based index.
 
 # %% slideshow={"slide_type": "-"}
-transition_probabilities = [  # shape=[s, a, s']
+# For each state, store the possible actions
+possible_actions = [[0, 1, 2], [0, 2], [1]]
+
+# For each state and possible action, store the transition probas p(s'|s,a)
+transition_probabilities = [
     [[0.7, 0.3, 0.0], [1.0, 0.0, 0.0], [0.8, 0.2, 0.0]],
     [[0.0, 1.0, 0.0], None, [0.0, 0.0, 1.0]],
     [None, [0.8, 0.1, 0.1], None],
 ]
-rewards = [  # shape=[s, a, s']
+
+# For each state and possible action, store the rewards r(s,a,s')
+rewards = [
     [[+10, 0, 0], [0, 0, 0], [0, 0, 0]],
     [[0, 0, 0], [0, 0, 0], [0, 0, -50]],
     [[0, 0, 0], [+40, 0, 0], [0, 0, 0]],
 ]
-possible_actions = [[0, 1, 2], [0, 2], [1]]
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Value function
+# ### Return
 #
-# Whereas the reward signal indicates what is good in an immediate sense, a **value function** specifies what is good in the long run.
+# It is common to evaluate actions based on the sum of all the rewards that came after them, usually applying a *discount factor* to account for the present value of future rewards.
 #
-# Action choices should be made based on value judgments, seeking actions that bring about states of highest value, not highest reward.
+# $$G_t = R_{t+1} + \gamma R_{t+2} +\gamma^2 R_{t+3} + · · · = \sum\limits_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}$$
 #
-# Unfortunately, rewards are basically given directly by the environment, whereas values must be **estimated** and re-estimated from the sequences of observations an agent makes over its entire lifetime.
+# - $G_t$: sum of discounted rewards received after step $t$, called **return**.
+# - $\gamma \in [0,1]$: discount factor. A lower value motivates the decision maker to favor taking actions early. Usually, $0.9<\gamma<0.99$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### State value function
+# ### Policy
 #
-# $G^\pi(s)$: long-term gain obtained by applying the actions from policy $\pi$, starting in state $s$.
+# The algorithm used by the agent to determine its actions is called its **policy**. Policies may be *deterministic* or *stochastic* (involving some randomness).
 #
-# $$G^\pi(s) = \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1}$$
+# Formally, a policy $\pi$ is a potentially probabilistic mapping from state space $\mathcal{S}$ to action space $\mathcal{A}(s), \forall s \in \mathcal{S}$.
 #
-# $V^\pi(s)$: averaged sum of the returns $G^\pi(s)$ that the agent will get by starting from state $s$ and following $\pi$ thereafter.
+# $$\pi(a|s) \equiv P(A_t=a|S_t=s)$$
 #
-# $$V^\pi(s) = \mathbb{E} \left[ G^\pi(s) \right] = \mathbb{E}\left( \sum\limits_{t = 0}^\infty \gamma^t R_t \bigg| S_0 = s, \pi \right) = \sum\limits_{a} \pi(a|s) \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^{\pi}(s')\right]$$
+# - $\pi(a|s)$: probability of selecting action $a$ in state $s$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Action-state value function
+# ### State-value function
 #
-# $Q^\pi(s,a)$ (also called **Q-Value**): expected return starting from state $s$, taking the action $a$, and thereafter following policy $\pi$.
+# The relationship. between the value function of a state $v_\pi(s)$ and the value functions of its successor states is called the *Bellman equation*.
 #
-# $$Q^\pi(s,a) = \mathbb{E}\left( \sum\limits_{t=0}^\infty \gamma^t R_t \bigg| S_0 = s, A_0=a, \pi \right)$$
+# $$v_\pi(s) = \mathbb{E}_\pi \left[ G_t | S_t=s \right] = \mathbb{E}_\pi\left[ \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1} \bigg| S_t = s \right] \forall s \in \mathcal{S}$$
 #
-# $$Q^\pi(s,a) = \sum\limits_{s', r} p(s',r | s,a) \left[r + \gamma V^{\pi}(s')\right]$$
+# $$v_\pi(s) = \sum_{a \in \mathcal{A}(s)} \pi(a|s) \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s',r | s,a)\left[r + \gamma v_\pi(s')\right]$$
+#
+# - $v_\pi(s)$: expected return that the agent will get by starting in state $s$ and following policy $\pi$.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Action-value function
+#
+# The function $q_\pi(s,a)$ expressing the value of taking a specific action is also called the *q-value* function.
+#
+# $$q_\pi(s,a) = \mathbb{E}_\pi \left[ G_t | S_t=s, A_t=a \right] = \mathbb{E}_\pi\left[ \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1} \bigg| S_t = s, A_t=a \right]$$
+#
+# $$q_\pi(s,a) = \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s',r | s,a) \left[r + \gamma v_\pi(s')\right]$$
+#
+# - $q_\pi(s,a)$: expected return when starting in state $s$ and taking  action $a$, following policy $\pi$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Optimality
 #
-# The optimal policy $\pi^*$ is the one that achieves the biggest reward over the long run.
+# The optimal policy $\pi^*$ is the one that achieves the biggest return over the long run. The *Bellman optimality equations* defines the values of state and action under an optimal policy.
 #
-# $$V^{\pi^*}(s) = V^*(s) = \underset{a}{max} \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^*(s')\right]= \underset{a}{max}\;Q^*(s,a)$$
+# $$v_{\pi^*}(s) = v_*(s) = \underset{a \in \mathcal{A}(s)}{max}\;q_*(s,a) = \underset{a}{max} \sum_{s', r}p(s',r | s,a)\left[r + \gamma v_*(s')\right]$$
 #
-# $$Q^{\pi^*}(s,a) = Q^*(s,a) = \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma \cdot \underset{a'}{max} \;Q^*(s',a')\right]$$
-#
-# When the agent is in state $s$, it should choose the action with the highest Q-value for that state.
-#
-# $$\pi^*(s) = \underset{a}{argmax} \;Q^*(s,a)$$
+# $$q_{\pi^*}(s,a) = q_*(s,a) = \sum_{s',r} p(s',r | s,a) \left[r + \gamma \underset{a'}{max} \;q_*(s',a')\right]$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Tabular methods
@@ -225,7 +337,7 @@ possible_actions = [[0, 1, 2], [0, 2], [1]]
 #
 # In this case, basic algorithms can often find exact solutions, i.e. the optimal value function and the optimal policy.
 #
-# These **tabular methods** implement the core ideas of RL and form the building blocks of more powerful ones, used when the state and action spaces are too large.
+# These **tabular methods** implement the core ideas of RL and form the building blocks of more powerful ones, used when the state and action spaces become too large.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Value Iteration
@@ -392,7 +504,7 @@ for ax, width, history in zip(
 # ## Approximate methods
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Context
+# ### Context
 #
 # The previous methods become intractable for problems with arbitrarily large state spaces. In such cases, it is hopeless to find an optimal policy or the optimal value function, even in the limit of infinite time and data. The goal instead is to discover a good approximate solution, using functions with a manageable number of parameters.
 #
