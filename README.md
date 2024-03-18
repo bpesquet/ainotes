@@ -21,7 +21,7 @@ When teaching, I run the notebooks in a local Jupyter server and use [RISE](http
 
 ## Development notes
 
-Once a new `.ipynb` is created in the `docs/` folder, it is automagically paired with a `.py` file by the same name in the `src/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file.
+Once a new `.ipynb` is created in the `docs/` folder, it is automagically paired with a `.py` file by the same name in the `ainotes/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file.
 
 The `.ipynb` files are still versioned in order to show their output online, and access them from cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
 
@@ -29,14 +29,14 @@ Here are some useful commands for running this project:
 
 ```bash
 # Reformat all Python files
-black src/
+black ainotes/
 
 # Check the code for mistakes
-pylint src/
+pylint ainotes/
 
-# Force resync of all notebook files (in docs/) with Python files (in src/)
+# Force resync of all notebook files (in docs/) with Python files (in ainotes/)
 # Add the --execute flag to rerun all notebooks
-jupytext --sync src/**/*.py
+jupytext --sync ainotes/**/*.py
 
 # Build the website locally from notebook files
 # Output is in the docs/_build/ subfolder

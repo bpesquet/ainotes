@@ -27,9 +27,9 @@ jupyter-contrib-nbextensions = "^0.7.0"
 
 [tool.jupytext]
 # Associate every .ipynb notebook with a .py file with explicit cell delimiters (# %%)
-# Notebooks are located in docs/, Python files in src/
+# Notebooks are located in docs/, Python files in ainotes/
 # https://jupytext.readthedocs.io/en/latest/config.html
-formats = "docs///ipynb,src///py:percent"
+formats = "docs///ipynb,ainotes///py:percent"
 
 [build-system]
 requires = ["poetry-core"]
