@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/confidence';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'decision/confidence';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to Machine Learning" href="../ml/introduction.html" />
-    <link rel="prev" title="Introduction to the theory of decision-making" href="decision.html" />
+    <link rel="next" title="Dijkstra’s and A* algorithms" href="../search/dijkstra_astar.html" />
+    <link rel="prev" title="Introduction to the theory of decision-making" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,25 +153,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../about_ai.html">About Artificial Intelligence</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="computer_science.html">Computer science</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="programming.html">Programming</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/computer_science.html">Computer science</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/programming.html">Programming</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="proba_stats.html">Probability &amp; statistics</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="neuroscience.html">Neuroscience</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="decision.html">Decision-making</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Decision confidence</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../foundations/math.html">Mathematics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../foundations/proba_stats.html">Probability &amp; statistics</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/supervised_learning.html">Supervised Learning</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/supervised_learning.html">Supervised Learning</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ml/principles.html">Principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ml/data.html">Data manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ml/regression.html">Regression</a></li>
@@ -179,19 +174,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ml/ann.html">Neural networks</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/deep_learning.html">Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/deep_learning.html">Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ml/cnn.html">Convolutional neural networks</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/reinforcement_learning.html">Reinforcement Learning</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/reinforcement_learning.html">Reinforcement Learning</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ml/rl.html">Introduction</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ml/challenges.html">Challenges</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ml/challenges/heart_disease.html">Heart disease</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ml/challenges/cifar10.html">CIFAR10</a></li>
 </ul>
 </li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Decision-making</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Confidence</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Search algorithms</span></p>
 <ul class="nav bd-sidenav">
@@ -255,7 +255,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/bpesquet/ainotes/main?urlpath=tree/docs/foundations/confidence.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/ainotes/main?urlpath=tree/docs/decision/confidence.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -273,7 +273,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/bpesquet/ainotes/blob/main/docs/foundations/confidence.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/bpesquet/ainotes/blob/main/docs/decision/confidence.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +321,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/bpesquet/ainotes/edit/main/docs/foundations/confidence.ipynb" target="_blank"
+      <li><a href="https://github.com/bpesquet/ainotes/edit/main/docs/decision/confidence.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -338,7 +338,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/bpesquet/ainotes/issues/new?title=Issue%20on%20page%20%2Ffoundations/confidence.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/bpesquet/ainotes/issues/new?title=Issue%20on%20page%20%2Fdecision/confidence.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +368,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/foundations/confidence.ipynb" target="_blank"
+      <li><a href="../_sources/decision/confidence.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -465,9 +465,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#belief">Belief</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usefulness-of-confidence-in-decision-making">Usefulness of confidence in decision-making</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -504,12 +512,39 @@ document.write(`
 </section>
 <section id="metacognition">
 <h3>Metacognition<a class="headerlink" href="#metacognition" title="Permalink to this heading">#</a></h3>
-<p>Confidence judgments and error monitoring are two related aspects of <strong>metacognition</strong>, the awareness of one’s own cognitive processes (<em>high order thinking</em>).</p>
-<p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Metacognition.jpg"><img alt="Metacognition" src="foundations/_images/metacognition.jpg" /></a></p>
+<p>Confidence judgments and error monitoring are two related aspects of <strong>metacognition</strong>, the self-monitoring and self-control of one’s own cognition (sometimes called <em>high order thinking</em>).</p>
+<p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Metacognition.jpg"><img alt="Metacognition" src="../_images/metacognition.jpg" /></a></p>
 </section>
+<section id="sensitivity">
+<h3>Sensitivity<a class="headerlink" href="#sensitivity" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="bias">
+<h3>Bias<a class="headerlink" href="#bias" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="uncertainty">
+<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="belief">
+<h3>Belief<a class="headerlink" href="#belief" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+<section id="usefulness-of-confidence-in-decision-making">
+<h2>Usefulness of confidence in decision-making<a class="headerlink" href="#usefulness-of-confidence-in-decision-making" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="modeling-decision-confidence">
 <h2>Modeling decision confidence<a class="headerlink" href="#modeling-decision-confidence" title="Permalink to this heading">#</a></h2>
+<section id="measuring-confidence">
+<h3>Measuring confidence<a class="headerlink" href="#measuring-confidence" title="Permalink to this heading">#</a></h3>
+<p>Two dominant methodologies:</p>
+<ul class="simple">
+<li><p>Confidence ratings: after a decision, evaluate its correctness.</p></li>
+<li><p>Confidence forced choice: after two decisions, choose which one is more likely to be correct.</p>
+<ul>
+<li><p>Disregards confidence biases to focus on confidence sensitivity.</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -526,7 +561,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./foundations"
+            path: "./decision"
         },
         predefinedOutput: true
     }
@@ -545,7 +580,7 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="decision.html"
+       href="introduction.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -554,11 +589,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../ml/introduction.html"
+       href="../search/dijkstra_astar.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Machine Learning</p>
+        <p class="prev-next-title">Dijkstra’s and A* algorithms</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -585,9 +620,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#belief">Belief</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usefulness-of-confidence-in-decision-making">Usefulness of confidence in decision-making</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
