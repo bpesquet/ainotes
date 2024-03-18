@@ -16,11 +16,6 @@ parts:
     - file: foundations/math
       sections:
       - file: foundations/proba_stats
-    - file: foundations/neuroscience
-      sections:
-      - file: foundations/decision
-        title: Decision-making
-      - file: foundations/confidence
   - caption: Machine Learning
     chapters:
     - file: ml/introduction
@@ -47,6 +42,12 @@ parts:
       sections:
       - file: ml/challenges/heart_disease
       - file: ml/challenges/cifar10
+  - caption: Decision-making
+    chapters:
+    - file: decision/introduction
+      title: Introduction
+    - file: decision/confidence
+      title: Confidence
   - caption: Search algorithms
     chapters:
     - file: search/dijkstra_astar
