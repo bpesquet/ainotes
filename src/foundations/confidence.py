@@ -46,11 +46,35 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Metacognition
 #
-# Confidence judgments and error monitoring are two related aspects of **metacognition**, the awareness of one's own cognitive processes (*high order thinking*).
+# Confidence judgments and error monitoring are two related aspects of **metacognition**, the self-monitoring and self-control of one's own cognition (sometimes called *high order thinking*).
 #
 # [![Metacognition](_images/metacognition.jpg)](https://commons.wikimedia.org/wiki/File:Metacognition.jpg)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ### Sensitivity
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Bias
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Uncertainty
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Belief
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Usefulness of confidence in decision-making
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Modeling decision confidence
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Measuring confidence
+#
+# Two dominant methodologies:
+#
+# - Confidence ratings: after a decision, evaluate its correctness.
+# - Confidence forced choice: after two decisions, choose which one is more likely to be correct.
+#   - Disregards confidence biases to focus on confidence sensitivity.
 
 # %%
