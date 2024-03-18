@@ -362,41 +362,50 @@ rewards = [
 def init_q_values():
     """Init action-state values to 0 for all possible actions in all states"""
 
-    Q_values = np.full((3, 3), -np.inf)  # -np.inf for impossible actions
+    q_values = np.full((3, 3), -np.inf)  # -np.inf for impossible actions
     for state, actions in enumerate(possible_actions):
-        Q_values[state, actions] = 0.0  # for all possible actions
-    return Q_values
+        q_values[state, actions] = 0.0  # for all possible actions
+    return q_values
 
 
-init_q_values()
+print(init_q_values())
+
 
 # %% slideshow={"slide_type": "slide"}
-Q_values = init_q_values()
+def q_value_iteration(n_iterations):
+    """Implement the Q-Value iteration algorithm"""
 
-gamma = 0.9  # Discount factor - try changing it to 0.95
+    q_values = init_q_values()
+
+    gamma = 0.9  # Discount factor - try changing it to 0.95
+    n_states = len(possible_actions)
+
+    history = []  # Store training history for plotting (later)
+    for _ in range(n_iterations):
+        Q_prev = q_values.copy()
+        history.append(Q_prev)
+        # Compute Q_k+1 for all states and actions
+        for s in range(n_states):
+            for a in possible_actions[s]:
+                q_values[s, a] = np.sum(
+                    [
+                        transition_probabilities[s][a][sp]
+                        * (rewards[s][a][sp] + gamma * np.max(Q_prev[sp]))
+                        for sp in range(n_states)
+                    ]
+                )
+
+    history = np.array(history)
+
+    return q_values, history
+
+
+# %% slideshow={"slide_type": "slide"}
 n_iterations_q_value = 50
-n_states = len(possible_actions)
+final_q_values, history_q_vi = q_value_iteration(n_iterations_q_value)
 
-history_q_value = []  # Store training history for plotting (later)
-for iteration in range(n_iterations_q_value):
-    Q_prev = Q_values.copy()
-    history_q_value.append(Q_prev)
-    # Compute Q_k+1 for all states and actions
-    for s in range(n_states):
-        for a in possible_actions[s]:
-            Q_values[s, a] = np.sum(
-                [
-                    transition_probabilities[s][a][sp]
-                    * (rewards[s][a][sp] + gamma * np.max(Q_prev[sp]))
-                    for sp in range(n_states)
-                ]
-            )
-
-history_q_value = np.array(history_q_value)
-
-# %% slideshow={"slide_type": "slide"}
 # Show final action-state values
-print(Q_values)
+print(final_q_values)
 
 
 # %%
@@ -406,11 +415,12 @@ def print_optimal_actions(q_values):
     # Find action with maximum Q-value for each state
     optimal_actions = np.argmax(q_values, axis=1)
 
+    n_states = len(possible_actions)
     for s in range(n_states):
         print(f"Optimal action for state {s} is a{optimal_actions[s]}")
 
 
-print_optimal_actions(Q_values)
+print_optimal_actions(final_q_values)
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -441,6 +451,8 @@ print_optimal_actions(Q_values)
 def step(state, action):
     """Perform an action and receive next state and reward"""
 
+    n_states = len(possible_actions)
+
     probas = transition_probabilities[state][action]
     next_state = np.random.choice(range(n_states), p=probas)
     reward = rewards[state][action][next_state]
@@ -455,50 +467,68 @@ def exploration_policy(state):
 
 
 # %% slideshow={"slide_type": "slide"}
-Q_values = init_q_values()
+def q_learning(n_iterations):
+    """Implement the Q-learning algorithm"""
 
-alpha0 = 0.05  # initial learning rate
-decay = 0.005  # learning rate decay
-gamma = 0.9  # discount factor
-n_iterations_q_learning = 10000
-state = 0  # initial state
-history_q_learning = []  # Training history
+    q_values = init_q_values()
 
-for iteration in range(n_iterations_q_learning):
-    history_q_learning.append(Q_values.copy())
-    action = exploration_policy(state)
-    next_state, reward = step(state, action)
-    next_q_value = np.max(Q_values[next_state])  # greedy policy at the next step
-    alpha = alpha0 / (1 + iteration * decay)  # learning rate decay
-    Q_values[state, action] *= 1 - alpha
-    Q_values[state, action] += alpha * (reward + gamma * next_q_value)
-    state = next_state
+    alpha0 = 0.05  # initial learning rate
+    decay = 0.005  # learning rate decay
+    gamma = 0.9  # discount factor
+    state = 0  # initial state
+    history = []  # Training history
 
-history_q_learning = np.array(history_q_learning)
+    for iteration in range(n_iterations):
+        history.append(q_values.copy())
+        action = exploration_policy(state)
+        next_state, reward = step(state, action)
+        next_q_value = np.max(q_values[next_state])  # greedy policy at the next step
+        alpha = alpha0 / (1 + iteration * decay)  # learning rate decay
+        q_values[state, action] *= 1 - alpha
+        q_values[state, action] += alpha * (reward + gamma * next_q_value)
+        state = next_state
+
+    history = np.array(history)
+
+    return q_values, history
+
 
 # %% slideshow={"slide_type": "slide"}
 # Show final action-state values
-print(Q_values)
+n_iterations_q_learning = 10000
+final_q_values, history_q_learning = q_learning(n_iterations_q_learning)
 
-print_optimal_actions(Q_values)
+print(final_q_values)
+
+print_optimal_actions(final_q_values)
+
 
 # %% slideshow={"slide_type": "slide"}
-final_Q_value = history_q_value[-1, 0, 0]  # final q-value for s0 and a0
+def plot_q_values():
+    """Plot histories for Q-Value iteration and Q-learning algorithms"""
 
-# Plot training history for Q-Value Iteration and Q-Learning methods
-fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
-axes[0].set_ylabel("Q-Value$(s_0, a_0)$", fontsize=14)
-axes[0].set_title("Q-Value Iteration", fontsize=14)
-axes[1].set_title("Q-Learning", fontsize=14)
-for ax, width, history in zip(
-    axes,
-    (n_iterations_q_value, n_iterations_q_learning),
-    (history_q_value, history_q_learning),
-):
-    ax.plot([0, width], [final_Q_value, final_Q_value], "k--")
-    ax.plot(np.arange(width), history[:, 0, 0], "b-", linewidth=2)
-    ax.set_xlabel("Iterations", fontsize=14)
-    ax.axis([0, width, 0, 24])
+    final_q_value = history_q_learning[-1, 0, 0]  # final q-value for s0 and a0
+
+    # Plot training histories for Q-Value Iteration and Q-Learning methods
+    _, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+    axes[0].set_ylabel("Q-Value$(s_0, a_0)$", fontsize=14)
+    axes[0].set_title("Q-Value Iteration", fontsize=14)
+    axes[1].set_title("Q-Learning", fontsize=14)
+    for ax, width, history in zip(
+        axes,
+        (n_iterations_q_value, n_iterations_q_learning),
+        (history_q_vi, history_q_learning),
+    ):
+        ax.plot([0, width], [final_q_value, final_q_value], "k--")
+        ax.plot(np.arange(width), history[:, 0, 0], "b-", linewidth=2)
+        ax.set_xlabel("Iterations", fontsize=14)
+        ax.axis([0, width, 0, 24])
+
+    plt.show()
+
+
+# %%
+plot_q_values()
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Approximate methods
