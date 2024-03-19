@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ainotes"
-version = "0.1.1"
+version = "0.1.2"
 description = "Notes on Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
@@ -12,7 +12,7 @@ torchvision = "^0.15.2"
 # Incompatibility between notebook v7+ and extensions like RISE
 notebook = "^6.0"
 papermill = "^2.4.0"
-matplotlib = "^3.8.2"
+matplotlib = "^3.7.1"
 seaborn = "^0.13.1"
 numpy = "^1.26.3"
 pandas = "^2.1.4"
