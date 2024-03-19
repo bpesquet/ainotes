@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "AI notes"
+name = "ainotes"
 version = "0.1.0"
 description = "Notes on Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
