@@ -6,7 +6,7 @@ authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 torch = "^2.0.1"
 torchvision = "^0.15.2"
 # Incompatibility between notebook v7+ and extensions like RISE
