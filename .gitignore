@@ -9,6 +9,9 @@ docs/**/data
 simple_output.ipynb
 *.pkl
 
+# Python module files synchronized via Jupytext
+__init__.ipynb
+
 # JupyterBook output
 docs/_build/
 
