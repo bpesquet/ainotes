@@ -1,19 +1,16 @@
 [tool.poetry]
 name = "ainotes"
-version = "0.1.8"
+version = "0.1.9"
 description = "Notes on Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]  # Common dependency group
+[tool.poetry.dependencies]  # Code dependency group (for the PyPI package)
 python = "^3.10"
-pylint = "^3.1.0"
-
-[tool.poetry.group.package.dependencies]  # Dependency group for library published on PyPI
 matplotlib = "^3.7.1"
 seaborn = "^0.13.1"
 
-[tool.poetry.group.core.dependencies]  # Dependency group for running chapters
+[tool.poetry.group.run.dependencies]  # Dependency group for running code
 torch = "^2.0.1"
 torchvision = "^0.15.2"
 papermill = "^2.4.0"
@@ -23,13 +20,17 @@ scikit-learn = "^1.3.2"
 # Incompatibility between notebook v7+ and extensions like RISE
 notebook = "^6.0"
 
-[tool.poetry.group.book.dependencies]  # Dependency group for building the book
-jupyter-book = "^0.15.1"
-
-[tool.poetry.group.dev.dependencies]  # Dependency group for editing chapters
+[tool.poetry.group.dev.dependencies]  # Dependency group for editing code
 jupytext = "^1.15.1"
 rise = "^5.7.1"
 jupyter-contrib-nbextensions = "^0.7.0"
+
+[tool.poetry.group.test.dependencies]  # Dependency group for testing
+pylint = "^3.1.0"
+
+[tool.poetry.group.book.dependencies]  # Dependency group for building the book
+jupyter-book = "^0.15.1"
+
 
 [tool.jupytext]
 # Associate every .ipynb notebook with a .py file with explicit cell delimiters (# %%)

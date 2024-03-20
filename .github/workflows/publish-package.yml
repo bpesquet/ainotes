@@ -21,7 +21,7 @@ jobs:
         python-version: "3.x"
         cache: "poetry"
     - name: Install package dependencies
-      run: poetry install --without core,dev,book
+      run: poetry install --without run,dev,book
     - name: Check the code
       run: poetry run pylint ainotes/
     - name: Build package
