@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ainotes"
-version = "0.1.7"
+version = "0.1.8"
 description = "Notes on Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
