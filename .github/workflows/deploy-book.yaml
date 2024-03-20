@@ -1,0 +1,32 @@
+name: Deploy online book
+
+on:
+  # Trigger the jobs on push to main branch
+  push:
+    branches:
+    - main
+
+# This job installs dependencies, build the online book, and pushes it to `gh-pages`
+jobs:
+  deploy-book:
+    runs-on: ubuntu-latest  
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install poetry
+      run: pipx install poetry
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+        cache: "poetry"
+    - name: Install book dependencies only
+      run: poetry install --without package,core,dev
+    - name: Check the code
+      run: poetry run pylint ainotes/
+    - name: Build the online book
+      run: poetry run jupyter-book build ./docs/
+    - name: Push the book to github-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_build/html
