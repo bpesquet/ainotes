@@ -11,6 +11,10 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
+# %% slideshow={"slide_type": "skip"}
+# Install library containing helper functions
+# %pip install pyfit
+
 # %% slideshow={"slide_type": "slide"}
 import platform
 
@@ -28,6 +32,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
+from pyfit.plot import plot_loss_acc
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
@@ -93,31 +98,6 @@ def plot_decision_boundary(model, x, y):
     plt.contourf(xx, yy, zz, cmap=plt.colormaps.get_cmap("Spectral"))
     cm_bright = ListedColormap(["#FF0000", "#0000FF"])
     plt.scatter(x[:, 0], x[:, 1], c=y, cmap=cm_bright)
-    plt.show()
-
-
-def plot_loss_acc(history):
-    """Plot training loss and accuracy. Takes a Keras-like History object as parameter"""
-
-    loss_values = history["loss"]
-    recorded_epochs = range(1, len(loss_values) + 1)
-
-    fig, (ax1, ax2) = plt.subplots(2, 1)
-    ax1.plot(recorded_epochs, loss_values, ".--", label="Training loss")
-    ax1.set_ylabel("Loss")
-    ax1.legend()
-
-    acc_values = history["acc"]
-    ax2.plot(recorded_epochs, acc_values, ".--", label="Training accuracy")
-    ax2.set_xlabel("Epochs")
-    ax2.set_ylabel("Accuracy")
-    plt.legend()
-
-    final_loss = loss_values[-1]
-    final_acc = acc_values[-1]
-    fig.suptitle(
-        f"Training loss: {final_loss:.5f}. Training accuracy: {final_acc*100:.2f}%"
-    )
     plt.show()
 
 

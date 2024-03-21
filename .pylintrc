@@ -1,5 +1,5 @@
 [MASTER]
-# ignore-patterns=docs/**
+ignore=docs
 
 [MESSAGES CONTROL]
 

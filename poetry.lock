@@ -3042,6 +3042,20 @@ doc = ["ablog (>=0.11.0rc2)", "colorama", "ipykernel", "ipyleaflet", "jupyter_sp
 test = ["pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
+name = "pyfit"
+version = "1.0.0"
+description = "Helper functions for training Machine Learning models with PyTorch"
+optional = false
+python-versions = "<4.0,>=3.10"
+files = [
+    {file = "pyfit-1.0.0-py3-none-any.whl", hash = "sha256:4e513737bedc3315df2873d65c2988ef628c3a64a4edef509be3e3520a12ae3b"},
+    {file = "pyfit-1.0.0.tar.gz", hash = "sha256:df78b04d56eff7c3e1adddbab99a772e2bea36df676ebc54775610748c79772a"},
+]
+
+[package.dependencies]
+matplotlib = ">=3.7.1,<4.0.0"
+
+[[package]]
 name = "pygments"
 version = "2.17.2"
 description = "Pygments is a syntax highlighting package written in Python."
@@ -4681,4 +4695,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "0a8fbe51a028517cf766fd57e5f160369a208102c061b0660e799e530eaa8bd1"
+content-hash = "6e2227e5172f8809f6cddc0ab15279f8d673b9012065b0394efabede208d1b97"
