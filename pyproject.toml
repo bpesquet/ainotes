@@ -4,13 +4,14 @@ version = "0.1.10"
 description = "Artificial Intelligence notes"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
+package-mode = false  # Use Poetry only for dependency management, not packaging
 
 [tool.poetry.dependencies]  # Runtime dependencies
 python = "^3.10"
 matplotlib = "^3.7.1"
 seaborn = "^0.13.1"
-torch = "^2.0.1"
-torchvision = "^0.15.2"
+torch = "^2.2.1"
+torchvision = "^0.17.1"
 papermill = "^2.4.0"
 numpy = "^1.26.3"
 pandas = "^2.1.4"
@@ -18,15 +19,13 @@ scikit-learn = "^1.3.2"
 # Incompatibility between notebook v7+ and extensions like RISE
 notebook = "^6.0"
 
-# Development dependencies
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.dev.dependencies]  # Development dependencies
 pylint = "^3.1.0"
 jupytext = "^1.15.1"
 rise = "^5.7.1"
 jupyter-contrib-nbextensions = "^0.7.0"
 
-# Book building dependencies
-[tool.poetry.group.book.dependencies]
+[tool.poetry.group.book.dependencies]  # Book building dependencies
 jupyter-book = "^0.15.1"
 
 
