@@ -549,11 +549,45 @@ document.write(`
 <ul class="simple">
 <li><p>Discover the general architecture of convolutional neural networks.</p></li>
 <li><p>Understand why they perform better than plain neural networks for image-related tasks.</p></li>
-<li><p>Learn how to build convnets with <a class="reference external" href="https://pytorch.org/">PyTorch</a>.</p></li>
+<li><p>Learn how to build convnets with <a class="reference external" href="https://pytorch.org/">PyTorch</a>.2</p></li>
 </ul>
 </section>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install library containing helper functions</span>
+<span class="o">%</span><span class="k">pip</span> install pyfit
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyfit in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (1.0.0)
+Requirement already satisfied: matplotlib&lt;4.0.0,&gt;=3.7.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from pyfit) (3.8.3)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.2.0)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (4.50.0)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.4.5)
+Requirement already satisfied: numpy&lt;2,&gt;=1.21 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.26.4)
+Requirement already satisfied: packaging&gt;=20.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (24.0)
+Requirement already satisfied: pillow&gt;=8 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (10.2.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (3.1.2)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (2.9.0.post0)
+Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.16.0)
+
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">24.0</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -568,6 +602,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">ToTensor</span>
+
+<span class="kn">from</span> <span class="nn">pyfit.plot</span> <span class="kn">import</span> <span class="n">plot_loss_acc</span>
 </pre></div>
 </div>
 </div>
@@ -593,31 +629,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility functions</span>
-
-
-<span class="k">def</span> <span class="nf">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot training loss and accuracy. Takes a Keras-like History object as parameter&quot;&quot;&quot;</span>
-
-    <span class="n">loss_values</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
-    <span class="n">recorded_epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">loss_values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recorded_epochs</span><span class="p">,</span> <span class="n">loss_values</span><span class="p">,</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-    <span class="n">acc_values</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recorded_epochs</span><span class="p">,</span> <span class="n">acc_values</span><span class="p">,</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training accuracy&quot;</span><span class="p">)</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-    <span class="n">final_loss</span> <span class="o">=</span> <span class="n">loss_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">final_acc</span> <span class="o">=</span> <span class="n">acc_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Training loss: </span><span class="si">{</span><span class="n">final_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Training accuracy: </span><span class="si">{</span><span class="n">final_acc</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
-    <span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -682,8 +693,8 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
-NumPy version: 1.26.3
-PyTorch version: 2.0.1
+NumPy version: 1.26.4
+PyTorch version: 2.2.1
 MPS GPU found :)
 </pre></div>
 </div>
@@ -925,7 +936,7 @@ MPS GPU found :)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e265b21d681d718abaca9e9b8fcf5db79a2cf817b9fad42982b80d3a22686333.png" src="../_images/e265b21d681d718abaca9e9b8fcf5db79a2cf817b9fad42982b80d3a22686333.png" />
+<img alt="../_images/923048d0914a46913444e2b9251c90b20dd128a4c1e02348bd8fa183d57d5bbf.png" src="../_images/923048d0914a46913444e2b9251c90b20dd128a4c1e02348bd8fa183d57d5bbf.png" />
 </div>
 </div>
 </section>
@@ -1122,16 +1133,16 @@ Number of trainable parameters: 225034
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
-Epoch [  1/ 10]. Mean loss: 0.53403. Accuracy: 81.28%
-Epoch [  2/ 10]. Mean loss: 0.34656. Accuracy: 88.00%
-Epoch [  3/ 10]. Mean loss: 0.29757. Accuracy: 89.64%
-Epoch [  4/ 10]. Mean loss: 0.26517. Accuracy: 90.77%
-Epoch [  5/ 10]. Mean loss: 0.23982. Accuracy: 91.76%
-Epoch [  6/ 10]. Mean loss: 0.21816. Accuracy: 92.59%
-Epoch [  7/ 10]. Mean loss: 0.19833. Accuracy: 93.35%
-Epoch [  8/ 10]. Mean loss: 0.17987. Accuracy: 94.07%
-Epoch [  9/ 10]. Mean loss: 0.16326. Accuracy: 94.75%
-Epoch [ 10/ 10]. Mean loss: 0.14786. Accuracy: 95.32%
+Epoch [  1/ 10]. Mean loss: 0.51906. Accuracy: 81.86%
+Epoch [  2/ 10]. Mean loss: 0.33954. Accuracy: 88.24%
+Epoch [  3/ 10]. Mean loss: 0.29103. Accuracy: 90.01%
+Epoch [  4/ 10]. Mean loss: 0.25834. Accuracy: 91.14%
+Epoch [  5/ 10]. Mean loss: 0.23274. Accuracy: 92.11%
+Epoch [  6/ 10]. Mean loss: 0.21049. Accuracy: 92.85%
+Epoch [  7/ 10]. Mean loss: 0.18977. Accuracy: 93.66%
+Epoch [  8/ 10]. Mean loss: 0.17140. Accuracy: 94.47%
+Epoch [  9/ 10]. Mean loss: 0.15366. Accuracy: 95.16%
+Epoch [ 10/ 10]. Mean loss: 0.13790. Accuracy: 95.76%
 Training complete! Total gradient descent steps: 9380
 </pre></div>
 </div>
@@ -1148,7 +1159,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0ca2fe30cf576977cfc7a8645b0ec92300b25a9e598c1272b3199aee0725095f.png" src="../_images/0ca2fe30cf576977cfc7a8645b0ec92300b25a9e598c1272b3199aee0725095f.png" />
+<img alt="../_images/ca1d131bec73e7fb4d5ad3d41acd05580ef401c426ddb9c610bf0e0077ef5d5f.png" src="../_images/ca1d131bec73e7fb4d5ad3d41acd05580ef401c426ddb9c610bf0e0077ef5d5f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1158,7 +1169,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/915de74277e9c1a3644e4bd7529acf3d9a8e09ffe0d8d5889f2a5812a94a1992.png" src="../_images/915de74277e9c1a3644e4bd7529acf3d9a8e09ffe0d8d5889f2a5812a94a1992.png" />
+<img alt="../_images/14a4f33e5ebeacb9d477dc89b32e3a1bba56503386678a63baf80df45bef4c79.png" src="../_images/14a4f33e5ebeacb9d477dc89b32e3a1bba56503386678a63baf80df45bef4c79.png" />
 </div>
 </div>
 </section>

@@ -560,6 +560,40 @@ document.write(`
 </section>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install library containing helper functions</span>
+<span class="o">%</span><span class="k">pip</span> install pyfit
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyfit in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (1.0.0)
+Requirement already satisfied: matplotlib&lt;4.0.0,&gt;=3.7.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from pyfit) (3.8.3)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.2.0)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (4.50.0)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.4.5)
+Requirement already satisfied: numpy&lt;2,&gt;=1.21 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.26.4)
+Requirement already satisfied: packaging&gt;=20.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (24.0)
+Requirement already satisfied: pillow&gt;=8 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (10.2.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (3.1.2)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (2.9.0.post0)
+Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.16.0)
+
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">24.0</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -577,6 +611,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">ToTensor</span>
+
+<span class="kn">from</span> <span class="nn">pyfit.plot</span> <span class="kn">import</span> <span class="n">plot_loss_acc</span>
 </pre></div>
 </div>
 </div>
@@ -652,31 +688,6 @@ document.write(`
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot training loss and accuracy. Takes a Keras-like History object as parameter&quot;&quot;&quot;</span>
-
-    <span class="n">loss_values</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
-    <span class="n">recorded_epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">loss_values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recorded_epochs</span><span class="p">,</span> <span class="n">loss_values</span><span class="p">,</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-    <span class="n">acc_values</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recorded_epochs</span><span class="p">,</span> <span class="n">acc_values</span><span class="p">,</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training accuracy&quot;</span><span class="p">)</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
-    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-    <span class="n">final_loss</span> <span class="o">=</span> <span class="n">loss_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">final_acc</span> <span class="o">=</span> <span class="n">acc_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Training loss: </span><span class="si">{</span><span class="n">final_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Training accuracy: </span><span class="si">{</span><span class="n">final_acc</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
-    <span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
 <span class="k">def</span> <span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the total number of (trainable) parameters for a model&quot;&quot;&quot;</span>
 
@@ -741,8 +752,8 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
-NumPy version: 1.26.3
-scikit-learn version: 1.3.2
+NumPy version: 1.26.4
+scikit-learn version: 1.4.1.post1
 PyTorch version: 2.0.1
 No GPU found, using CPU instead
 </pre></div>
@@ -853,7 +864,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2d659848cba6dfdd88d723256d3fc76b5b94a4a1b5c0413b28f0772d013609e5.png" src="../_images/2d659848cba6dfdd88d723256d3fc76b5b94a4a1b5c0413b28f0772d013609e5.png" />
+<img alt="../_images/c4d575c203182ded8d53e52c6ebe04509f88c86d108fe70c7deea337256693c4.png" src="../_images/c4d575c203182ded8d53e52c6ebe04509f88c86d108fe70c7deea337256693c4.png" />
 </div>
 </div>
 </section>
@@ -887,7 +898,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7325af00f2ad3776c1c51ab5171a3f1c3dd5b378425aef1a1518a6d9b2ddb16f.png" src="../_images/7325af00f2ad3776c1c51ab5171a3f1c3dd5b378425aef1a1518a6d9b2ddb16f.png" />
+<img alt="../_images/6fd344f6d5ee2440557293e659cabf535dcb05ddaf6d450819d02a21161fd02b.png" src="../_images/6fd344f6d5ee2440557293e659cabf535dcb05ddaf6d450819d02a21161fd02b.png" />
 </div>
 </div>
 </section>
@@ -926,7 +937,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7a4da6b25a7527b41e08c76d07c232f6898b265e40db8802748843ec9ab8b741.png" src="../_images/7a4da6b25a7527b41e08c76d07c232f6898b265e40db8802748843ec9ab8b741.png" />
+<img alt="../_images/71dd6888d6b8817abee3f7f37ed51fc2504304e8579c1e6ce4580a88e21fa744.png" src="../_images/71dd6888d6b8817abee3f7f37ed51fc2504304e8579c1e6ce4580a88e21fa744.png" />
 </div>
 </div>
 </section>
@@ -985,17 +996,17 @@ No GPU found, using CPU instead
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: (500, 2). targets: (500,)
-[[-0.32467672 -0.29603112]
- [ 0.40003061  0.00660986]
- [ 0.08621761 -0.40238069]
- [-0.00974224  0.18402813]
- [ 0.74864346 -0.79439671]
- [ 0.55674722  0.68585686]
- [ 0.35345507  0.10892971]
- [ 0.16709313 -0.80245418]
- [-0.38029537 -0.27048706]
- [-0.4123724  -0.95964059]]
-[1 1 1 1 0 0 1 0 1 0]
+[[-0.17484517 -0.24930221]
+ [-0.40408387  0.2682799 ]
+ [ 0.94435609  0.15306933]
+ [ 0.93701015 -0.40535873]
+ [ 0.94813686  0.57544557]
+ [ 0.29669816 -0.10540653]
+ [ 0.9945163  -0.14782202]
+ [-0.20949356  0.35725974]
+ [-0.85952503 -0.29925765]
+ [ 0.31498329  0.02076161]]
+[1 1 0 0 0 1 0 1 0 1]
 </pre></div>
 </div>
 </div>
@@ -1007,7 +1018,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/126e161ae875d812d43caced9325fed514d8e7022c23db54c0a2458e0c60fe3c.png" src="../_images/126e161ae875d812d43caced9325fed514d8e7022c23db54c0a2458e0c60fe3c.png" />
+<img alt="../_images/78009f3d3eb4d3f083bb598f2edaa5a04c63ebbd0f5ac25d211dce8ab01b6cdc.png" src="../_images/78009f3d3eb4d3f083bb598f2edaa5a04c63ebbd0f5ac25d211dce8ab01b6cdc.png" />
 </div>
 </div>
 </section>
@@ -1213,56 +1224,56 @@ Number of trainable parameters: 9.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 500 samples. 100 batches per epoch
-Epoch [  1/ 50]. Mean loss: 0.70262. Accuracy: 53.00%
-Epoch [  2/ 50]. Mean loss: 0.69675. Accuracy: 51.60%
-Epoch [  3/ 50]. Mean loss: 0.69314. Accuracy: 61.60%
-Epoch [  4/ 50]. Mean loss: 0.68770. Accuracy: 59.40%
-Epoch [  5/ 50]. Mean loss: 0.68144. Accuracy: 59.80%
-Epoch [  6/ 50]. Mean loss: 0.67122. Accuracy: 59.40%
-Epoch [  7/ 50]. Mean loss: 0.65305. Accuracy: 58.20%
-Epoch [  8/ 50]. Mean loss: 0.63543. Accuracy: 63.00%
-Epoch [  9/ 50]. Mean loss: 0.61463. Accuracy: 67.40%
-Epoch [ 10/ 50]. Mean loss: 0.58134. Accuracy: 75.40%
-Epoch [ 11/ 50]. Mean loss: 0.53992. Accuracy: 82.20%
-Epoch [ 12/ 50]. Mean loss: 0.49717. Accuracy: 83.40%
-Epoch [ 13/ 50]. Mean loss: 0.46294. Accuracy: 85.40%
-Epoch [ 14/ 50]. Mean loss: 0.44274. Accuracy: 84.60%
-Epoch [ 15/ 50]. Mean loss: 0.42935. Accuracy: 85.40%
-Epoch [ 16/ 50]. Mean loss: 0.41580. Accuracy: 85.40%
-Epoch [ 17/ 50]. Mean loss: 0.41020. Accuracy: 85.60%
-Epoch [ 18/ 50]. Mean loss: 0.40576. Accuracy: 84.60%
-Epoch [ 19/ 50]. Mean loss: 0.39901. Accuracy: 85.00%
-Epoch [ 20/ 50]. Mean loss: 0.40043. Accuracy: 84.80%
-Epoch [ 21/ 50]. Mean loss: 0.39271. Accuracy: 85.40%
-Epoch [ 22/ 50]. Mean loss: 0.39377. Accuracy: 85.60%
-Epoch [ 23/ 50]. Mean loss: 0.39023. Accuracy: 85.00%
-Epoch [ 24/ 50]. Mean loss: 0.38722. Accuracy: 85.00%
-Epoch [ 25/ 50]. Mean loss: 0.38693. Accuracy: 86.00%
-Epoch [ 26/ 50]. Mean loss: 0.38385. Accuracy: 85.40%
-Epoch [ 27/ 50]. Mean loss: 0.38378. Accuracy: 85.40%
-Epoch [ 28/ 50]. Mean loss: 0.38171. Accuracy: 84.80%
-Epoch [ 29/ 50]. Mean loss: 0.37918. Accuracy: 85.40%
-Epoch [ 30/ 50]. Mean loss: 0.38222. Accuracy: 84.80%
-Epoch [ 31/ 50]. Mean loss: 0.38052. Accuracy: 85.60%
-Epoch [ 32/ 50]. Mean loss: 0.37954. Accuracy: 85.40%
-Epoch [ 33/ 50]. Mean loss: 0.37514. Accuracy: 85.20%
-Epoch [ 34/ 50]. Mean loss: 0.37813. Accuracy: 85.60%
-Epoch [ 35/ 50]. Mean loss: 0.37574. Accuracy: 84.60%
-Epoch [ 36/ 50]. Mean loss: 0.37466. Accuracy: 85.40%
-Epoch [ 37/ 50]. Mean loss: 0.37679. Accuracy: 85.60%
-Epoch [ 38/ 50]. Mean loss: 0.37439. Accuracy: 85.00%
-Epoch [ 39/ 50]. Mean loss: 0.37387. Accuracy: 85.20%
-Epoch [ 40/ 50]. Mean loss: 0.37079. Accuracy: 84.80%
-Epoch [ 41/ 50]. Mean loss: 0.37035. Accuracy: 85.80%
-Epoch [ 42/ 50]. Mean loss: 0.37122. Accuracy: 85.20%
-Epoch [ 43/ 50]. Mean loss: 0.37228. Accuracy: 85.40%
-Epoch [ 44/ 50]. Mean loss: 0.37338. Accuracy: 85.20%
-Epoch [ 45/ 50]. Mean loss: 0.37170. Accuracy: 85.60%
-Epoch [ 46/ 50]. Mean loss: 0.37078. Accuracy: 84.80%
-Epoch [ 47/ 50]. Mean loss: 0.37189. Accuracy: 85.40%
-Epoch [ 48/ 50]. Mean loss: 0.37002. Accuracy: 84.40%
-Epoch [ 49/ 50]. Mean loss: 0.36965. Accuracy: 85.40%
-Epoch [ 50/ 50]. Mean loss: 0.36996. Accuracy: 85.40%
+Epoch [  1/ 50]. Mean loss: 0.69666. Accuracy: 53.80%
+Epoch [  2/ 50]. Mean loss: 0.69245. Accuracy: 58.00%
+Epoch [  3/ 50]. Mean loss: 0.68901. Accuracy: 62.20%
+Epoch [  4/ 50]. Mean loss: 0.68247. Accuracy: 68.60%
+Epoch [  5/ 50]. Mean loss: 0.67266. Accuracy: 75.00%
+Epoch [  6/ 50]. Mean loss: 0.64818. Accuracy: 80.40%
+Epoch [  7/ 50]. Mean loss: 0.61079. Accuracy: 84.60%
+Epoch [  8/ 50]. Mean loss: 0.56403. Accuracy: 85.00%
+Epoch [  9/ 50]. Mean loss: 0.51661. Accuracy: 85.60%
+Epoch [ 10/ 50]. Mean loss: 0.48368. Accuracy: 85.60%
+Epoch [ 11/ 50]. Mean loss: 0.45784. Accuracy: 85.80%
+Epoch [ 12/ 50]. Mean loss: 0.43980. Accuracy: 85.20%
+Epoch [ 13/ 50]. Mean loss: 0.42826. Accuracy: 86.00%
+Epoch [ 14/ 50]. Mean loss: 0.41968. Accuracy: 85.00%
+Epoch [ 15/ 50]. Mean loss: 0.41230. Accuracy: 85.20%
+Epoch [ 16/ 50]. Mean loss: 0.40578. Accuracy: 86.20%
+Epoch [ 17/ 50]. Mean loss: 0.40196. Accuracy: 85.80%
+Epoch [ 18/ 50]. Mean loss: 0.39845. Accuracy: 85.20%
+Epoch [ 19/ 50]. Mean loss: 0.39568. Accuracy: 85.20%
+Epoch [ 20/ 50]. Mean loss: 0.39305. Accuracy: 85.20%
+Epoch [ 21/ 50]. Mean loss: 0.39136. Accuracy: 85.60%
+Epoch [ 22/ 50]. Mean loss: 0.38705. Accuracy: 85.40%
+Epoch [ 23/ 50]. Mean loss: 0.38583. Accuracy: 85.80%
+Epoch [ 24/ 50]. Mean loss: 0.38560. Accuracy: 85.00%
+Epoch [ 25/ 50]. Mean loss: 0.38318. Accuracy: 85.20%
+Epoch [ 26/ 50]. Mean loss: 0.38040. Accuracy: 85.40%
+Epoch [ 27/ 50]. Mean loss: 0.38177. Accuracy: 84.80%
+Epoch [ 28/ 50]. Mean loss: 0.38157. Accuracy: 85.40%
+Epoch [ 29/ 50]. Mean loss: 0.37967. Accuracy: 85.40%
+Epoch [ 30/ 50]. Mean loss: 0.37797. Accuracy: 84.80%
+Epoch [ 31/ 50]. Mean loss: 0.37793. Accuracy: 85.80%
+Epoch [ 32/ 50]. Mean loss: 0.37736. Accuracy: 85.40%
+Epoch [ 33/ 50]. Mean loss: 0.37557. Accuracy: 86.40%
+Epoch [ 34/ 50]. Mean loss: 0.37652. Accuracy: 84.80%
+Epoch [ 35/ 50]. Mean loss: 0.37403. Accuracy: 85.00%
+Epoch [ 36/ 50]. Mean loss: 0.37649. Accuracy: 86.00%
+Epoch [ 37/ 50]. Mean loss: 0.37472. Accuracy: 85.60%
+Epoch [ 38/ 50]. Mean loss: 0.37593. Accuracy: 84.60%
+Epoch [ 39/ 50]. Mean loss: 0.37220. Accuracy: 85.60%
+Epoch [ 40/ 50]. Mean loss: 0.37487. Accuracy: 85.00%
+Epoch [ 41/ 50]. Mean loss: 0.37069. Accuracy: 85.00%
+Epoch [ 42/ 50]. Mean loss: 0.37320. Accuracy: 85.20%
+Epoch [ 43/ 50]. Mean loss: 0.37325. Accuracy: 84.80%
+Epoch [ 44/ 50]. Mean loss: 0.37189. Accuracy: 85.00%
+Epoch [ 45/ 50]. Mean loss: 0.36939. Accuracy: 85.40%
+Epoch [ 46/ 50]. Mean loss: 0.37261. Accuracy: 85.00%
+Epoch [ 47/ 50]. Mean loss: 0.37228. Accuracy: 84.60%
+Epoch [ 48/ 50]. Mean loss: 0.37373. Accuracy: 85.40%
+Epoch [ 49/ 50]. Mean loss: 0.36809. Accuracy: 85.40%
+Epoch [ 50/ 50]. Mean loss: 0.37200. Accuracy: 85.20%
 Training complete! Total gradient descent steps: 5000
 </pre></div>
 </div>
@@ -1278,7 +1289,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9d8995e577f9a3f335a6e7f4107b86ac6b7d9671018669e96bbbb6bdc746103d.png" src="../_images/9d8995e577f9a3f335a6e7f4107b86ac6b7d9671018669e96bbbb6bdc746103d.png" />
+<img alt="../_images/be446a90b6a7b5417d07b213df0aa6297c946e881a833b9f8cbcaca95441ca45.png" src="../_images/be446a90b6a7b5417d07b213df0aa6297c946e881a833b9f8cbcaca95441ca45.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1288,7 +1299,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/93601e68ba84819cefd91e649362615dece2b09ee13d96c9852601abd5888add.png" src="../_images/93601e68ba84819cefd91e649362615dece2b09ee13d96c9852601abd5888add.png" />
+<img alt="../_images/361bd51ed9707f95a2edd3ecc487e20ed16dbcfe0f780ccd3ae70bf28f8a54a4.png" src="../_images/361bd51ed9707f95a2edd3ecc487e20ed16dbcfe0f780ccd3ae70bf28f8a54a4.png" />
 </div>
 </div>
 </section>
@@ -1482,7 +1493,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/716bd5cc2367835ef3f316653b9dca9120c08be2bc4c2d4d0da2b40d06d86b1b.png" src="../_images/716bd5cc2367835ef3f316653b9dca9120c08be2bc4c2d4d0da2b40d06d86b1b.png" />
+<img alt="../_images/2b516769cafd934811b4f819e30ce3d366fe686301ab9fb3a517de92bce429f1.png" src="../_images/2b516769cafd934811b4f819e30ce3d366fe686301ab9fb3a517de92bce429f1.png" />
 </div>
 </div>
 </section>
@@ -1713,16 +1724,16 @@ Number of trainable parameters: 55050
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
-Epoch [  1/ 10]. Mean loss: 2.27095. Accuracy: 17.39%
-Epoch [  2/ 10]. Mean loss: 2.14185. Accuracy: 39.14%
-Epoch [  3/ 10]. Mean loss: 1.88409. Accuracy: 42.12%
-Epoch [  4/ 10]. Mean loss: 1.57735. Accuracy: 50.45%
-Epoch [  5/ 10]. Mean loss: 1.33551. Accuracy: 60.20%
-Epoch [  6/ 10]. Mean loss: 1.16612. Accuracy: 63.36%
-Epoch [  7/ 10]. Mean loss: 1.04686. Accuracy: 65.08%
-Epoch [  8/ 10]. Mean loss: 0.96125. Accuracy: 66.36%
-Epoch [  9/ 10]. Mean loss: 0.89909. Accuracy: 67.62%
-Epoch [ 10/ 10]. Mean loss: 0.85267. Accuracy: 68.94%
+Epoch [  1/ 10]. Mean loss: 2.28511. Accuracy: 21.39%
+Epoch [  2/ 10]. Mean loss: 2.22016. Accuracy: 32.51%
+Epoch [  3/ 10]. Mean loss: 2.09399. Accuracy: 43.31%
+Epoch [  4/ 10]. Mean loss: 1.86179. Accuracy: 47.05%
+Epoch [  5/ 10]. Mean loss: 1.54342. Accuracy: 51.93%
+Epoch [  6/ 10]. Mean loss: 1.29843. Accuracy: 58.08%
+Epoch [  7/ 10]. Mean loss: 1.14948. Accuracy: 61.77%
+Epoch [  8/ 10]. Mean loss: 1.05058. Accuracy: 64.02%
+Epoch [  9/ 10]. Mean loss: 0.97873. Accuracy: 65.70%
+Epoch [ 10/ 10]. Mean loss: 0.92317. Accuracy: 67.16%
 Training complete! Total gradient descent steps: 9380
 </pre></div>
 </div>
@@ -1738,7 +1749,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/895703911de1518b57e9dc9d0c74b04630c84f6ab98fbc3977e571297f9f86bb.png" src="../_images/895703911de1518b57e9dc9d0c74b04630c84f6ab98fbc3977e571297f9f86bb.png" />
+<img alt="../_images/84908beb55b2a12a8e3ea2d051a593c8b0f8fddade31f861d806d20267fea149.png" src="../_images/84908beb55b2a12a8e3ea2d051a593c8b0f8fddade31f861d806d20267fea149.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1748,7 +1759,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e69a6953bc9a500e45a4f8ccec83ba04566f82f171a86987790bb74785c65d93.png" src="../_images/e69a6953bc9a500e45a4f8ccec83ba04566f82f171a86987790bb74785c65d93.png" />
+<img alt="../_images/eaa61912cc1b00b68807c8cbaf8e27e17ecebefd462fd23b5fd256243bf51610.png" src="../_images/eaa61912cc1b00b68807c8cbaf8e27e17ecebefd462fd23b5fd256243bf51610.png" />
 </div>
 </div>
 </section>
