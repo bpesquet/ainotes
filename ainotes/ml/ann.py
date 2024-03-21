@@ -32,7 +32,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
-from pyfit.plot import plot_loss_acc
+from ainotes.utils.plot import plot_loss_acc
+from ainotes.utils.train import get_device, fit
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
@@ -147,17 +148,9 @@ print(f"PyTorch version: {torch.__version__}")
 
 
 # PyTorch device configuration
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
-# Performance issues exist with MPS backend
-# elif torch.backends.mps.is_available():
-#     device = torch.device("mps")
-#     print("MPS GPU found :)")
-else:
-    device = torch.device("cpu")
-    print("No GPU found, using CPU instead")
-
+# Performance issues exist with MPS backend for MLP-like models
+device, message = get_device(use_mps=False)
+print(message)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Fundamentals
@@ -726,72 +719,13 @@ print(sum(probas))
 
 
 # %%
-def epoch_loop(dataloader, model, loss_fn, optimizer):
-    """Training algorithm for one epoch"""
-
-    total_loss = 0
-    n_correct = 0
-
-    for x_batch, y_batch in dataloader:
-        # Load data and targets on device memory
-        x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-
-        # Reset gradients
-        optimizer.zero_grad()
-
-        # Forward pass
-        output = model(x_batch)
-        loss = loss_fn(output, y_batch)
-
-        # Backward pass: backprop and GD step
-        loss.backward()
-        optimizer.step()
-
-        with torch.no_grad():
-            # Accumulate data for epoch metrics: loss and number of correct predictions
-            total_loss += loss.item()
-            n_correct += (model(x_batch).argmax(dim=1) == y_batch).float().sum().item()
-
-    return total_loss, n_correct
-
-
-# %% slideshow={"slide_type": "slide"}
-def fit(dataloader, model, loss_fn, optimizer, epochs):
-    """Main training code"""
-
-    history = {"loss": [], "acc": []}
-    n_samples = len(dataloader.dataset)
-    n_batches = len(dataloader)
-
-    print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
-
-    for epoch in range(epochs):
-        total_loss, n_correct = epoch_loop(dataloader, model, loss_fn, optimizer)
-
-        # Compute epoch metrics
-        epoch_loss = total_loss / n_batches
-        epoch_acc = n_correct / n_samples
-
-        print(
-            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
-        )
-
-        # Record epoch metrics for later plotting
-        history["loss"].append(epoch_loss)
-        history["acc"].append(epoch_acc)
-
-    print(f"Training complete! Total gradient descent steps: {epochs * n_batches}")
-
-    return history
-
-
-# %% slideshow={"slide_type": "slide"}
 fashion_history = fit(
     dataloader=fashion_train_dataloader,
     model=fashion_model,
     loss_fn=nn.CrossEntropyLoss(),
     optimizer=optim.SGD(fashion_model.parameters(), lr=learning_rate),
     epochs=n_epochs,
+    device=device,
 )
 
 # %% [markdown] slideshow={"slide_type": "slide"}

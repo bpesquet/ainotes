@@ -1,40 +1,37 @@
 [tool.poetry]
 name = "ainotes"
-version = "0.1.10"
+version = "0.1.11"
 description = "Artificial Intelligence notes"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
-package-mode = false  # Use Poetry only for dependency management, not packaging
 
-[tool.poetry.dependencies]  # Runtime dependencies
+# Code dependencies
+[tool.poetry.dependencies]
 python = "^3.10"
-matplotlib = "^3.7.1"
-seaborn = "^0.13.1"
+
+# Runtime dependencies
+[tool.poetry.group.run.dependencies]  
+matplotlib = "^3.8.3"
 torch = "^2.2.1"
 torchvision = "^0.17.1"
-papermill = "^2.4.0"
-numpy = "^1.26.3"
-pandas = "^2.1.4"
-scikit-learn = "^1.3.2"
-# Incompatibility between notebook v7+ and extensions like RISE
-notebook = "^6.0"
-pyfit = "^1.0.0"
+scikit-learn = "^1.4.1.post1"
+papermill = "^2.5.0"
+seaborn = "^0.13.2"
 
-[tool.poetry.group.dev.dependencies]  # Development dependencies
+# Development dependencies
+[tool.poetry.group.dev.dependencies]
 pylint = "^3.1.0"
-jupytext = "^1.15.1"
+jupytext = "^1.16.1"
+notebook = "^6.0"  # Incompatibility between notebook v7+ and RISE
 rise = "^5.7.1"
 jupyter-contrib-nbextensions = "^0.7.0"
-
-[tool.poetry.group.book.dependencies]  # Book building dependencies
-jupyter-book = "^0.15.1"
-
+jupyter-book = "^1.0.0"
 
 [tool.jupytext]
 # Associate every .ipynb notebook with a .py file with explicit cell delimiters (# %%)
-# Notebooks are located in docs/, Python files in src/
+# Notebooks are located in docs/, Python files in ainotes/
 # https://jupytext.readthedocs.io/en/latest/config.html
-formats = "docs///ipynb,src///py:percent"
+formats = "docs///ipynb,ainotes///py:percent"
 
 [build-system]
 requires = ["poetry-core"]

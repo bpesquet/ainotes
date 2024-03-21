@@ -1,13 +1,13 @@
 # Artificial Intelligence notes
 
-This repository contains the source and configuration files for my notes related to AI.
+A collection of interactive notes related to Artificial Intelligence.
 
 ## Dependencies and toolchain
 
 This project is built with the following software:
 
 - the [Python](https://www.python.org/) programming language;
-- [Poetry](https://python-poetry.org/) for dependency management;
+- [Poetry](https://python-poetry.org/) for dependency management and deployment;
 - [Black](https://github.com/psf/black) for code formatting;
 - [Pylint](https://github.com/pylint-dev/pylint) to detect programming mistakes before execution;
 

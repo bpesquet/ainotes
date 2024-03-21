@@ -43,7 +43,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
-from pyfit.plot import plot_loss_acc
+from ainotes.utils.plot import plot_loss_acc
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
