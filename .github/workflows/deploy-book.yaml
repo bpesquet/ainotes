@@ -20,9 +20,9 @@ jobs:
         python-version: "3.11"
         cache: "poetry"
     - name: Install book dependencies only
-      run: poetry install --without run,dev
+      run: poetry install  # --without dev
     - name: Check the code
-      run: poetry run pylint ainotes/
+      run: poetry run pylint src/
     - name: Build the online book
       run: poetry run jupyter-book build ./docs/
     - name: Push the book to github-pages
