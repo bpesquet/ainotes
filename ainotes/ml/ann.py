@@ -400,7 +400,7 @@ planar_model = nn.Sequential(
 print(planar_model)
 
 # Count the total number of trainable model parameters (weights)
-print(f"Number of trainable parameters: {count_parameters(planar_model)}.")
+print(f"Number of trainable parameters: {count_parameters(planar_model)}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Loss function
@@ -426,38 +426,21 @@ planar_loss_fn = nn.BCELoss()
 
 
 # %% slideshow={"slide_type": "slide"}
-def train_planar(dataloader, model, loss_fn, epochs):
+def fit_planar(dataloader, model, loss_fn, epochs):
     """Main training code"""
 
-    # Object storing training history
-    history = {"loss": [], "acc": []}
-
-    # Number of samples
-    n_samples = len(dataloader.dataset)
-
-    # Number of batches in an epoch (= n_samples / batch_size, rounded up)
-    n_batches = len(dataloader)
-
-    print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
-
-    for epoch in range(epochs):
-        # Reset total loss for the current epoch
-        total_loss = 0
-
-        # Reset number of correct predictions for the current epoch
-        n_correct = 0
-
-        # Training loop for one data batch (i.e. one gradient descent step)
+    for _ in range(epochs):
+        # Training algorithm for one data batch (i.e. one gradient descent step)
         for x_batch, y_batch in dataloader:
-            # Zero the gradients before running the backward pass
-            # Avoids accumulating gradients erroneously
-            model.zero_grad()
-
             # Forward pass: compute model output with current weights
             output = model(x_batch)
 
             # Compute loss (comparison between expected and actual results)
             loss = loss_fn(output, y_batch)
+
+            # Reset the gradients to zero before running the backward pass
+            # Avoids accumulating gradients between gradient descent steps
+            model.zero_grad()
 
             # Backward pass (backprop): compute gradient of the loss w.r.t each model weight
             loss.backward()
@@ -468,31 +451,10 @@ def train_planar(dataloader, model, loss_fn, epochs):
                 for param in model.parameters():
                     param -= learning_rate * param.grad
 
-                # Accumulate data for epoch metrics: loss and number of correct predictions
-                total_loss += loss.item()
-                n_correct += (
-                    (torch.round(model(x_batch)) == y_batch).float().sum().item()
-                )
-
-        # Compute epoch metrics
-        epoch_loss = total_loss / n_batches
-        epoch_acc = n_correct / n_samples
-
-        print(
-            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
-        )
-
-        # Record epoch metrics for later plotting
-        history["loss"].append(epoch_loss)
-        history["acc"].append(epoch_acc)
-
-    print(f"Training complete! Total gradient descent steps: {epochs * n_batches}")
-
-    return history
-
 
 # %% slideshow={"slide_type": "slide"}
-planar_history = train_planar(
+# Fit model to planar data
+fit_planar(
     dataloader=planar_dataloader,
     model=planar_model,
     loss_fn=planar_loss_fn,
@@ -503,9 +465,6 @@ planar_history = train_planar(
 # ### Training results
 
 # %% slideshow={"slide_type": "-"}
-plot_loss_acc(planar_history)
-
-# %% slideshow={"slide_type": "slide"}
 plot_decision_boundary(planar_model, planar_data, planar_targets)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -556,7 +515,7 @@ fashion_labels = (
 )
 
 
-# %%
+# %% slideshow={"slide_type": "slide"}
 plot_fashion_images(data=fashion_train_data, labels=fashion_labels, device=device)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -675,9 +634,12 @@ print(sum(probas))
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Model training
+#
+# In order to obtain more details about the training process, we define a [fit]() function that encapsulates the training code and computes metrics.
 
 
-# %%
+# %% slideshow={"slide_type": "slide"}
+# Fit model to fashion images
 fashion_history = fit(
     dataloader=fashion_train_dataloader,
     model=fashion_model,
@@ -694,6 +656,8 @@ fashion_history = fit(
 plot_loss_acc(fashion_history)
 
 # %% slideshow={"slide_type": "slide"}
-plot_fashion_images(fashion_train_data, fashion_labels, fashion_model)
+plot_fashion_images(
+    data=fashion_train_data, labels=fashion_labels, device=device, model=fashion_model
+)
 
 # %%

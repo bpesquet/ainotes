@@ -40,21 +40,23 @@ def count_parameters(model, trainable=True):
 def epoch_loop(dataloader, model, loss_fn, optimizer, device):
     """Training algorithm for one epoch"""
 
+    # Total loss for the current epoch
     total_loss = 0
+
+    # Number of correct predictions for the current epoch
     n_correct = 0
 
+    # Load data as batches of associated inputs and targets
     for x_batch, y_batch in tqdm(dataloader, unit="batches", ncols=100, colour="blue"):
         # Load data and targets on device memory
         x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-
-        # Reset gradients
-        optimizer.zero_grad()
 
         # Forward pass
         output = model(x_batch)
         loss = loss_fn(output, y_batch)
 
         # Backward pass: backprop and GD step
+        optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
@@ -70,13 +72,19 @@ def epoch_loop(dataloader, model, loss_fn, optimizer, device):
 def fit(dataloader, model, loss_fn, optimizer, epochs, device):
     """Main training code"""
 
+    # Object storing training history
     history = {"loss": [], "acc": []}
+
+    # Number of samples
     n_samples = len(dataloader.dataset)
+
+    # Number of batches in an epoch (= n_samples / batch_size, rounded up)
     n_batches = len(dataloader)
 
     print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
 
     for epoch in range(epochs):
+        # Train model for one epoch
         total_loss, n_correct = epoch_loop(
             dataloader, model, loss_fn, optimizer, device
         )
