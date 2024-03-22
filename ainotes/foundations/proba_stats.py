@@ -24,21 +24,14 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
-# %%
+# %% slideshow={"slide_type": "slide"}
 import platform
 
 import torch
 
-from ainotes.utils.train import get_device
-
-# %% slideshow={"slide_type": "slide"}
 # Print environment info
 print(f"Python version: {platform.python_version()}")
 print(f"PyTorch version: {torch.__version__}")
-
-# PyTorch device configuration
-device, message = get_device()
-print(message)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Probability
