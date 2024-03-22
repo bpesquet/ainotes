@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ainotes"
-version = "0.1.16"
+version = "1.0.0"
 description = "A collection of interactive notes related to Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README_PACKAGE.md"  # Project description on PyPI

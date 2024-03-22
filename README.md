@@ -2,7 +2,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/ainotes.svg)](https://pypi.org/project/ainotes)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# Artificial Intelligence notes
+# Artificial Intelligence Notes
 
 A collection of interactive notes related to Artificial Intelligence. Built for educational purposes and updated (somewhat) regularly.
 
