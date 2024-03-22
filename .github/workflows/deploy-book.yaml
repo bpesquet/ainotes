@@ -1,7 +1,7 @@
 name: Deploy online book
 
 on:
-  # Trigger the jobs on push to main branch
+  # Trigger the jobs on each push to main branch
   push:
     branches:
     - main
@@ -19,10 +19,10 @@ jobs:
       with:
         python-version: "3.11"
         cache: "poetry"
-    - name: Install book dependencies only
+    - name: Install dependencies
       run: poetry install  # --without dev
     - name: Check the code
-      run: poetry run pylint src/
+      run: poetry run pylint ainotes/*
     - name: Build the online book
       run: poetry run jupyter-book build ./docs/
     - name: Push the book to github-pages
