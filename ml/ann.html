@@ -568,6 +568,18 @@ document.write(`
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Installing the ainotes package is only necessary in standalone runtime environments like Colab</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;COLAB_RELEASE_TAG&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standalone runtime environment detected, installing ainotes package&quot;</span><span class="p">)</span>
+    <span class="o">%</span><span class="k">pip</span> install ainotes
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -925,17 +937,17 @@ No GPU found, using CPU instead :\
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: (500, 2). targets: (500,)
-[[ 0.36931037  0.30077156]
- [-0.86629352  0.34339987]
- [ 0.06043136  0.42904494]
- [-0.61404679 -0.61020774]
- [ 0.24104621 -0.43622148]
- [ 1.04137164  0.00494889]
- [ 0.17941691  0.87006239]
- [-0.04665329  0.05407338]
- [ 0.23150656 -0.12601949]
- [ 1.02889973  0.05695439]]
-[1 0 1 0 1 0 0 1 1 0]
+[[-0.45943416 -0.07028865]
+ [-0.29296977 -1.04292214]
+ [-0.22404062 -0.28340591]
+ [ 0.01875137  0.31738188]
+ [-0.32728777 -0.17831421]
+ [ 0.18311509 -0.45056598]
+ [ 0.34037651 -0.02481973]
+ [ 0.27745991 -0.02731317]
+ [ 0.25676701  1.12955978]
+ [-0.05200732 -0.1772228 ]]
+[1 0 1 1 1 1 1 1 0 1]
 </pre></div>
 </div>
 </div>
@@ -947,7 +959,7 @@ No GPU found, using CPU instead :\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/98846f97ef5bfe3f5dbf6f8a64bf2ccf3ab3aea81e763ab08a645dd7a177ed7c.png" src="../_images/98846f97ef5bfe3f5dbf6f8a64bf2ccf3ab3aea81e763ab08a645dd7a177ed7c.png" />
+<img alt="../_images/db79a41ad7e1fa62a3459e3f9bdbe8bc9343b2906c97e0a80d0789e2d3d939d3.png" src="../_images/db79a41ad7e1fa62a3459e3f9bdbe8bc9343b2906c97e0a80d0789e2d3d939d3.png" />
 </div>
 </div>
 </section>
@@ -1124,7 +1136,7 @@ Number of trainable parameters: 9
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/276ff51cc7671e6bf2cbdc0d9749dd5497c0ab9143f8cc730ba1c9c47c252bec.png" src="../_images/276ff51cc7671e6bf2cbdc0d9749dd5497c0ab9143f8cc730ba1c9c47c252bec.png" />
+<img alt="../_images/9ce536b357e988ca97719926ace096f62d1e3cc9776a350b2ad81c5c3b115c09.png" src="../_images/9ce536b357e988ca97719926ace096f62d1e3cc9776a350b2ad81c5c3b115c09.png" />
 </div>
 </div>
 </section>
@@ -1318,7 +1330,7 @@ Number of trainable parameters: 9
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/87eeeda8ab4b2fe7cc020a1427b34c4ca336b0ee12ae1cebc3752a0691768c97.png" src="../_images/87eeeda8ab4b2fe7cc020a1427b34c4ca336b0ee12ae1cebc3752a0691768c97.png" />
+<img alt="../_images/18d5cd003a1e89b89ce2fe6ba30d2a7e40237533833a5ac4279c33013e591d91.png" src="../_images/18d5cd003a1e89b89ce2fe6ba30d2a7e40237533833a5ac4279c33013e591d91.png" />
 </div>
 </div>
 </section>
@@ -1488,64 +1500,64 @@ Number of trainable parameters: 55050
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 273.77batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 369.79batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  1/ 10] finished. Mean loss: 2.27083. Accuracy: 20.27%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  1/ 10] finished. Mean loss: 2.27774. Accuracy: 14.34%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 269.61batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 377.81batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  2/ 10] finished. Mean loss: 2.17613. Accuracy: 39.62%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  2/ 10] finished. Mean loss: 2.18621. Accuracy: 22.92%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 315.47batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 333.47batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  3/ 10] finished. Mean loss: 1.97025. Accuracy: 47.30%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  3/ 10] finished. Mean loss: 1.99362. Accuracy: 33.69%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 304.89batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 300.13batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  4/ 10] finished. Mean loss: 1.63073. Accuracy: 48.41%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  4/ 10] finished. Mean loss: 1.67215. Accuracy: 50.09%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 343.20batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 372.57batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  5/ 10] finished. Mean loss: 1.33952. Accuracy: 58.52%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  5/ 10] finished. Mean loss: 1.37534. Accuracy: 58.30%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 333.76batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 307.32batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  6/ 10] finished. Mean loss: 1.15769. Accuracy: 62.89%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  6/ 10] finished. Mean loss: 1.18469. Accuracy: 60.98%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 333.97batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 312.74batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  7/ 10] finished. Mean loss: 1.04012. Accuracy: 64.42%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  7/ 10] finished. Mean loss: 1.06171. Accuracy: 63.26%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 321.72batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 315.81batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  8/ 10] finished. Mean loss: 0.95788. Accuracy: 65.58%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  8/ 10] finished. Mean loss: 0.97653. Accuracy: 65.14%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 315.45batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 325.41batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  9/ 10] finished. Mean loss: 0.89752. Accuracy: 66.88%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  9/ 10] finished. Mean loss: 0.91368. Accuracy: 66.84%
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 314.43batches/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 327.44batches/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [ 10/ 10] finished. Mean loss: 0.85212. Accuracy: 68.11%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [ 10/ 10] finished. Mean loss: 0.86518. Accuracy: 68.34%
 Training complete! Total gradient descent steps: 9380
 </pre></div>
 </div>
@@ -1564,7 +1576,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0beebc14d2f73aa58f5f5b6b0ba08144e8e2b675fa56ceb60975ab37b10cc8d0.png" src="../_images/0beebc14d2f73aa58f5f5b6b0ba08144e8e2b675fa56ceb60975ab37b10cc8d0.png" />
+<img alt="../_images/dc7400d3bc0da5781ea89f14e0c7739e817f0235cb0552ccc3b757ca8d5a8758.png" src="../_images/dc7400d3bc0da5781ea89f14e0c7739e817f0235cb0552ccc3b757ca8d5a8758.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1576,7 +1588,7 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ffb1d0f369302b9349dcf801b0b1cdf287865e692564092aaa2af0adf9c6a96e.png" src="../_images/ffb1d0f369302b9349dcf801b0b1cdf287865e692564092aaa2af0adf9c6a96e.png" />
+<img alt="../_images/f6eefa00b8c549ac8d5d6511a759222b31139ac86c93f0f9445f02b029c06ca4.png" src="../_images/f6eefa00b8c549ac8d5d6511a759222b31139ac86c93f0f9445f02b029c06ca4.png" />
 </div>
 </div>
 </section>
