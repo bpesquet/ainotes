@@ -25,16 +25,11 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
-# %% slideshow={"slide_type": "skip"} tags=["hide-output"]
-# Install library containing helper functions
-# %pip install pyfit
-
 # %%
 import platform
 from IPython.display import YouTubeVideo
 
 import numpy as np
-import matplotlib.pyplot as plt
 import seaborn as sns
 
 import torch
@@ -43,7 +38,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
-from ainotes.utils.plot import plot_loss_acc
+from ainotes.utils.plot import plot_loss_acc, plot_fashion_images
+from ainotes.utils.train import get_device, count_parameters, fit
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
@@ -59,46 +55,6 @@ from ainotes.utils.plot import plot_loss_acc
 # http://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme
 sns.set_theme()
 
-# %% slideshow={"slide_type": "skip"}
-# Utility functions
-
-
-def count_parameters(model, trainable=True):
-    """Return the total number of (trainable) parameters for a model"""
-
-    return (
-        sum(p.numel() for p in model.parameters() if p.requires_grad)
-        if trainable
-        else sum(p.numel() for p in model.parameters())
-    )
-
-
-def plot_fashion_images(data, labels, model=None):
-    """Plot some images with their associated labels"""
-
-    figure = plt.figure(figsize=(10, 6))
-    cols, rows = 7, 4
-    for i in range(1, cols * rows + 1):
-        sample_idx = torch.randint(len(data), size=(1,)).item()
-        img, label = data[sample_idx]
-        figure.add_subplot(rows, cols, i)
-
-        # Title is either true or predicted label
-        if model is None:
-            title = labels[label]
-        else:
-            # Add a dimension (to match expected shape with batch size) and store image on device memory
-            x_img = img[None, :].to(device)
-            # Compute predicted label for image
-            # Even if the model outputs unormalized logits, argmax gives the predicted label
-            pred_label = model(x_img).argmax(dim=1).item()
-            title = f"{labels[pred_label]}?"
-        plt.title(title)
-
-        plt.axis("off")
-        plt.imshow(img.cpu().detach().numpy().squeeze(), cmap="gray")
-    plt.show()
-
 
 # %% slideshow={"slide_type": "slide"}
 # Print environment info
@@ -108,15 +64,8 @@ print(f"PyTorch version: {torch.__version__}")
 
 
 # PyTorch device configuration
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
-elif torch.backends.mps.is_available():
-    device = torch.device("mps")
-    print("MPS GPU found :)")
-else:
-    device = torch.device("cpu")
-    print("No GPU found, using CPU instead")
+device, message = get_device()
+print(message)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Architecture
@@ -355,7 +304,7 @@ fashion_labels = (
 )
 
 # %% slideshow={"slide_type": "-"}
-plot_fashion_images(fashion_train_data, fashion_labels)
+plot_fashion_images(data=fashion_train_data, labels=fashion_labels, device=device)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Hyperparameters
@@ -440,74 +389,13 @@ print(f"Number of trainable parameters: {count_parameters(fashion_convnet)}")
 
 
 # %%
-def epoch_loop(dataloader, model, loss_fn, optimizer):
-    """Training algorithm for one epoch"""
-
-    total_loss = 0
-    n_correct = 0
-
-    for x_batch, y_batch in dataloader:
-        # Load data and targets on device memory
-        x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-
-        # Reset gradients
-        optimizer.zero_grad()
-
-        # Forward pass
-        output = model(x_batch)
-        loss = loss_fn(output, y_batch)
-
-        # Backward pass: backprop and GD step
-        loss.backward()
-        optimizer.step()
-
-        with torch.no_grad():
-            # Accumulate data for epoch metrics: loss and number of correct predictions
-            total_loss += loss.item()
-            n_correct += (model(x_batch).argmax(dim=1) == y_batch).float().sum().item()
-
-    return total_loss, n_correct
-
-
-# %% slideshow={"slide_type": "slide"}
-def fit(dataloader, model, loss_fn, optimizer, epochs):
-    """Main training code"""
-
-    history = {"loss": [], "acc": []}
-    n_samples = len(dataloader.dataset)
-    n_batches = len(dataloader)
-
-    print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
-
-    for epoch in range(epochs):
-        total_loss, n_correct = epoch_loop(dataloader, model, loss_fn, optimizer)
-
-        # Compute epoch metrics
-        epoch_loss = total_loss / n_batches
-        epoch_acc = n_correct / n_samples
-
-        print(
-            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
-        )
-
-        # Record epoch metrics for later plotting
-        history["loss"].append(epoch_loss)
-        history["acc"].append(epoch_acc)
-
-    print(f"Training complete! Total gradient descent steps: {epochs * n_batches}")
-
-    return history
-
-
-# %% slideshow={"slide_type": "slide"}
 fashion_history = fit(
     fashion_train_dataloader,
     fashion_convnet,
-    # Standard loss for multiclass classification
     nn.CrossEntropyLoss(),
-    # Adam optimizer for GD
     optim.Adam(fashion_convnet.parameters(), lr=learning_rate),
     epochs=n_epochs,
+    device=device,
 )
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -518,7 +406,9 @@ fashion_history = fit(
 plot_loss_acc(fashion_history)
 
 # %% slideshow={"slide_type": "slide"}
-plot_fashion_images(fashion_train_data, fashion_labels, fashion_convnet)
+plot_fashion_images(
+    data=fashion_train_data, labels=fashion_labels, device=device, model=fashion_convnet
+)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Using a pretrained convnet

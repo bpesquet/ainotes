@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.15.1
+#       jupytext_version: 1.16.1
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -40,6 +40,8 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, OneHotEncoder
 
 import torch
 
+from ainotes.utils.train import get_device
+
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
 
@@ -59,16 +61,8 @@ print(f"PyTorch version: {torch.__version__}")
 
 
 # PyTorch device configuration
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print(f"CUDA GPU {torch.cuda.get_device_name(0)} found :)")
-# Performance issues exist with MPS backend
-# elif torch.backends.mps.is_available():
-#     device = torch.device("mps")
-#     print("MPS GPU found :)")
-else:
-    device = torch.device("cpu")
-    print("No GPU found, using CPU instead")
+device, message = get_device()
+print(message)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Working with tensors

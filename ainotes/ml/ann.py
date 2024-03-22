@@ -11,10 +11,6 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
-# %% slideshow={"slide_type": "skip"}
-# Install library containing helper functions
-# %pip install pyfit
-
 # %% slideshow={"slide_type": "slide"}
 import platform
 
@@ -32,8 +28,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
-from ainotes.utils.plot import plot_loss_acc
-from ainotes.utils.train import get_device, fit
+from ainotes.utils.plot import plot_loss_acc, plot_fashion_images
+from ainotes.utils.train import get_device, count_parameters, fit
 
 # %% slideshow={"slide_type": "slide"}
 # Setup plots
@@ -99,43 +95,6 @@ def plot_decision_boundary(model, x, y):
     plt.contourf(xx, yy, zz, cmap=plt.colormaps.get_cmap("Spectral"))
     cm_bright = ListedColormap(["#FF0000", "#0000FF"])
     plt.scatter(x[:, 0], x[:, 1], c=y, cmap=cm_bright)
-    plt.show()
-
-
-def count_parameters(model, trainable=True):
-    """Return the total number of (trainable) parameters for a model"""
-
-    return (
-        sum(p.numel() for p in model.parameters() if p.requires_grad)
-        if trainable
-        else sum(p.numel() for p in model.parameters())
-    )
-
-
-def plot_fashion_images(data, labels, model=None):
-    """Plot some images with their associated labels"""
-
-    figure = plt.figure(figsize=(10, 6))
-    cols, rows = 7, 4
-    for i in range(1, cols * rows + 1):
-        sample_idx = torch.randint(len(data), size=(1,)).item()
-        img, label = data[sample_idx]
-        figure.add_subplot(rows, cols, i)
-
-        # Title is either true or predicted label
-        if model is None:
-            title = labels[label]
-        else:
-            # Add a dimension (to match expected shape with batch size) and store image on device memory
-            x_img = img[None, :].to(device)
-            # Compute predicted label for image
-            # Even if the model outputs unormalized logits, argmax gives the predicted label
-            pred_label = model(x_img).argmax(dim=1).item()
-            title = f"{labels[pred_label]}?"
-        plt.title(title)
-
-        plt.axis("off")
-        plt.imshow(img.cpu().detach().numpy().squeeze(), cmap="gray")
     plt.show()
 
 
@@ -598,7 +557,7 @@ fashion_labels = (
 
 
 # %%
-plot_fashion_images(fashion_train_data, fashion_labels)
+plot_fashion_images(data=fashion_train_data, labels=fashion_labels, device=device)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Hyperparameters

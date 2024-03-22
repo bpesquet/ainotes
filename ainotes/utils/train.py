@@ -1,10 +1,14 @@
+# %%
 """
 Training functions
 """
 
+# %%
+from tqdm import tqdm
 import torch
 
 
+# %%
 def get_device(use_mps=True):
     """Return the available GPU/CPU device along with an information message"""
 
@@ -21,13 +25,25 @@ def get_device(use_mps=True):
     return device, message
 
 
+# %%
+def count_parameters(model, trainable=True):
+    """Return the total number of (trainable) parameters for a model"""
+
+    return (
+        sum(p.numel() for p in model.parameters() if p.requires_grad)
+        if trainable
+        else sum(p.numel() for p in model.parameters())
+    )
+
+
+# %%
 def epoch_loop(dataloader, model, loss_fn, optimizer, device):
     """Training algorithm for one epoch"""
 
     total_loss = 0
     n_correct = 0
 
-    for x_batch, y_batch in dataloader:
+    for x_batch, y_batch in tqdm(dataloader, unit="batches", ncols=100, colour="blue"):
         # Load data and targets on device memory
         x_batch, y_batch = x_batch.to(device), y_batch.to(device)
 
@@ -50,6 +66,7 @@ def epoch_loop(dataloader, model, loss_fn, optimizer, device):
     return total_loss, n_correct
 
 
+# %%
 def fit(dataloader, model, loss_fn, optimizer, epochs, device):
     """Main training code"""
 
@@ -69,7 +86,7 @@ def fit(dataloader, model, loss_fn, optimizer, epochs, device):
         epoch_acc = n_correct / n_samples
 
         print(
-            f"Epoch [{(epoch + 1):3}/{epochs:3}]. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+            f"Epoch [{(epoch + 1):3}/{epochs:3}] finished. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
         )
 
         # Record epoch metrics for later plotting

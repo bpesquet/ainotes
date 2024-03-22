@@ -32,7 +32,7 @@ Here are some useful commands for running this project:
 black ainotes/
 
 # Check the code for mistakes
-pylint ainotes/
+pylint ainotes/*
 
 # Force resync of all notebook files (in docs/) with Python files (in ainotes/)
 # Add the --execute flag to rerun all notebooks
@@ -40,8 +40,7 @@ jupytext --sync ainotes/**/*.py
 
 # Build the website locally from notebook files
 # Output is in the docs/_build/ subfolder
-jupyter-book build docs/
-# Alternative command: jb build docs/
+jupyter-book build docs/  # Or simply: jb build docs/
 
 # Generate a PDF version of a chapter
 # GIF files must be replaced by their static counterparts (PNG or JPG) in the notebook before launching this command
