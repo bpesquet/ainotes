@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Introduction to Reinforcement Learning &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/rl';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -546,12 +552,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-reinforcement-learning">
-<h1>Introduction to Reinforcement Learning<a class="headerlink" href="#introduction-to-reinforcement-learning" title="Permalink to this heading">#</a></h1>
+<h1>Introduction to Reinforcement Learning<a class="headerlink" href="#introduction-to-reinforcement-learning" title="Link to this heading">#</a></h1>
 <blockquote>
 <div><p>This chapter is inspired by the book <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> written by Aurélien Géron.</p>
 </div></blockquote>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Understand what Reinforcement Learning (RL) is about.</p></li>
 <li><p>Review Markow Decision Processes.</p></li>
@@ -559,7 +565,7 @@ document.write(`
 </ul>
 </section>
 <section id="environnement-setup">
-<h2>Environnement setup<a class="headerlink" href="#environnement-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environnement setup<a class="headerlink" href="#environnement-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -607,22 +613,22 @@ NumPy version: 1.26.3
 </div>
 </section>
 <section id="what-is-reinforcement-learning">
-<h2>What is Reinforcement Learning?<a class="headerlink" href="#what-is-reinforcement-learning" title="Permalink to this heading">#</a></h2>
+<h2>What is Reinforcement Learning?<a class="headerlink" href="#what-is-reinforcement-learning" title="Link to this heading">#</a></h2>
 <section id="rl-in-a-nutshell">
-<h3>RL in a nutshell<a class="headerlink" href="#rl-in-a-nutshell" title="Permalink to this heading">#</a></h3>
+<h3>RL in a nutshell<a class="headerlink" href="#rl-in-a-nutshell" title="Link to this heading">#</a></h3>
 <p>Reinforcement Learning is about <strong>learning how to evolve in a dynamic system</strong>, often called the <em>environment</em>.</p>
 <p>The learner and decision maker (often called an <em>agent</em>) is not told explicitly which <strong>actions</strong> to take, but instead must discover which actions yield the most <strong>reward</strong> over time by trying them.</p>
 <p>Actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.</p>
 <p><img alt="Learning to ride a bike!" src="../_images/prosper_bike.gif" /></p>
 </section>
 <section id="a-specific-subfield-of-ml">
-<h3>A specific subfield of ML<a class="headerlink" href="#a-specific-subfield-of-ml" title="Permalink to this heading">#</a></h3>
+<h3>A specific subfield of ML<a class="headerlink" href="#a-specific-subfield-of-ml" title="Link to this heading">#</a></h3>
 <p>RL is different from <strong>supervised learning</strong>, where correct answers (desired behaviour) are given to the learner during training. A RL learner must be able to learn from its own experience.</p>
 <p>RL is also different from <strong>unsupervised learning</strong>: finding structure in unlabeled data could help, but does not solve the reward maximisation problem which is at the heart of RL.</p>
 <p>Lastly, RL is different from <strong>evolutionary methods</strong>, which only consider the final outcome and ignore the intermediate steps RL is concerned with.</p>
 </section>
 <section id="reinforcement-learning-examples">
-<h3>Reinforcement Learning examples<a class="headerlink" href="#reinforcement-learning-examples" title="Permalink to this heading">#</a></h3>
+<h3>Reinforcement Learning examples<a class="headerlink" href="#reinforcement-learning-examples" title="Link to this heading">#</a></h3>
 <p>RL can be applied to a wide variety of contexts. To name a few:</p>
 <ul class="simple">
 <li><p>controlling a robot;</p></li>
@@ -632,7 +638,7 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="recent-breakthroughs">
-<h3>Recent breakthroughs<a class="headerlink" href="#recent-breakthroughs" title="Permalink to this heading">#</a></h3>
+<h3>Recent breakthroughs<a class="headerlink" href="#recent-breakthroughs" title="Link to this heading">#</a></h3>
 <p>RL is not a new field but went mainstream in recent years, mostly due to game-related feats:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://deepmind.com/research/case-studies/alphago-the-story-so-far">AlphaGo</a> beat Go champion Lee Sedol in 2016;</p></li>
@@ -641,7 +647,7 @@ NumPy version: 1.26.3
 <li><p><a class="reference external" href="https://deepmind.com/blog/article/alphastar-mastering-real-time-strategy-game-starcraft-ii">AlphaStar</a> reached StarCraft 2 Grandmaster level (top 0.2% of human players) also in 2019.</p></li>
 </ul>
 <section id="alphago">
-<h4>AlphaGo<a class="headerlink" href="#alphago" title="Permalink to this heading">#</a></h4>
+<h4>AlphaGo<a class="headerlink" href="#alphago" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;WXuK6gekU1Y&quot;</span><span class="p">)</span>
@@ -662,7 +668,7 @@ NumPy version: 1.26.3
 </div>
 </section>
 <section id="openai-s-hide-and-seek">
-<h4>OpenAI’s Hide and Seek<a class="headerlink" href="#openai-s-hide-and-seek" title="Permalink to this heading">#</a></h4>
+<h4>OpenAI’s Hide and Seek<a class="headerlink" href="#openai-s-hide-and-seek" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;kopoLzvh5jY&quot;</span><span class="p">)</span>
@@ -685,9 +691,9 @@ NumPy version: 1.26.3
 </section>
 </section>
 <section id="terminology">
-<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h2>
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
 <section id="elements-of-a-rl-system">
-<h3>Elements of a RL system<a class="headerlink" href="#elements-of-a-rl-system" title="Permalink to this heading">#</a></h3>
+<h3>Elements of a RL system<a class="headerlink" href="#elements-of-a-rl-system" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>An <strong>agent</strong> that learns what to do.</p></li>
 <li><p>The <strong>environment</strong> that characterizes the dynamic system in which the agent evolves.</p></li>
@@ -698,7 +704,7 @@ NumPy version: 1.26.3
 <p><img alt="Representation of a RL system" src="../_images/rl_agent_env.png" /></p>
 </section>
 <section id="state">
-<h3>State<a class="headerlink" href="#state" title="Permalink to this heading">#</a></h3>
+<h3>State<a class="headerlink" href="#state" title="Link to this heading">#</a></h3>
 <p><strong>State</strong> represents the information available to the agent about its environment.</p>
 <p>It is used as input to the agent’s policy and value functions, and (optionally) as both input to and output from the agent’s model.</p>
 <blockquote>
@@ -706,38 +712,38 @@ NumPy version: 1.26.3
 </div></blockquote>
 </section>
 <section id="value-functions">
-<h3>Value functions<a class="headerlink" href="#value-functions" title="Permalink to this heading">#</a></h3>
+<h3>Value functions<a class="headerlink" href="#value-functions" title="Link to this heading">#</a></h3>
 <p>Whereas the reward indicates what is good in an immediate sense, a <strong>value function</strong> specifies what is good in the long run.</p>
 <p>The value of a state is the total amount of reward an agent can expect to accumulate over the future, starting from that state.</p>
 <p>Action choices should be made based on value judgments, seeking actions that bring about states of highest value, not highest reward.</p>
 <p>Unfortunately, unlike rewards that are directly given by the environment, values are generally hard to obtain. They must be <strong>estimated</strong> and re-estimated from the sequences of observations an agent makes over its entire lifetime.</p>
 </section>
 <section id="the-exploration-vs-exploitation-dilemna">
-<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Permalink to this heading">#</a></h3>
+<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Link to this heading">#</a></h3>
 <p>The agent has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.</p>
 <p><img alt="Exploration VS exploitation" src="../_images/exploration_exploitation.png" /></p>
 </section>
 <section id="model-free-vs-model-based-rl">
-<h3>Model-free Vs model-based RL<a class="headerlink" href="#model-free-vs-model-based-rl" title="Permalink to this heading">#</a></h3>
+<h3>Model-free Vs model-based RL<a class="headerlink" href="#model-free-vs-model-based-rl" title="Link to this heading">#</a></h3>
 <p><strong>Model-free</strong> algorithms learn solely from experience, through trial-and-error.</p>
 <p>On the contrary, algorithms that, during learning or acting, exploit predictions of the environment’s response are said to be <strong>model-based</strong>. This class of algorithms is able to use <em>planning</em>, i.e. taking into account possible future situations before they are actually experienced (<a class="reference external" href="https://ai.stackexchange.com/a/6733">more details</a>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The term “model” has a different meaning in <a class="reference internal" href="principles.html"><span class="doc std std-doc">supervised Machine Learning</span></a>.</p>
+<p>The term “model” has a different meaning in <a class="reference internal" href="principles.html"><span class="std std-doc">supervised Machine Learning</span></a>.</p>
 </div>
 </section>
 </section>
 <section id="markov-decision-processes">
-<h2>Markov Decision Processes<a class="headerlink" href="#markov-decision-processes" title="Permalink to this heading">#</a></h2>
+<h2>Markov Decision Processes<a class="headerlink" href="#markov-decision-processes" title="Link to this heading">#</a></h2>
 <section id="definition">
-<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h3>
+<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
 <p><strong>Markov Decision Processes</strong> <span id="id1">[<a class="reference internal" href="../reference/bibliography.html#id23" title="RICHARD BELLMAN. A markovian decision process. Journal of Mathematics and Mechanics, 6(5):679–684, 1957. URL: http://www.jstor.org/stable/24900506 (visited on 2024-02-28).">BELLMAN, 1957</a>]</span> provide a mathematical framework for modeling decision making in discrete-time situations where, through its actions, outcomes are partly under the control of a decision maker.</p>
 <p>They are an extension of <strong>Markov chains</strong> in which what happens next depends only on the current state.</p>
 <p>MDPs are a classical formalization of sequential decision making.</p>
 <p>Many RL problems with discrete actions can be modeled as MDPs.</p>
 </section>
 <section id="general-formulation">
-<h3>General formulation<a class="headerlink" href="#general-formulation" title="Permalink to this heading">#</a></h3>
+<h3>General formulation<a class="headerlink" href="#general-formulation" title="Link to this heading">#</a></h3>
 <p><img alt="Agent-environment interface" src="../_images/rl_mdp.png" /></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{S}\)</span>: set of all valid states.</p></li>
@@ -749,7 +755,7 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="finite-markov-decision-processes">
-<h3>Finite Markov Decision Processes<a class="headerlink" href="#finite-markov-decision-processes" title="Permalink to this heading">#</a></h3>
+<h3>Finite Markov Decision Processes<a class="headerlink" href="#finite-markov-decision-processes" title="Link to this heading">#</a></h3>
 <p>In a finite MDP, the states, actions, and rewards spaces (<span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>, and <span class="math notranslate nohighlight">\(\mathcal{R}\)</span>) all have a finite number of elements.</p>
 <p><span class="math notranslate nohighlight">\(\forall t \in \mathbb{N}, R_t\)</span> and <span class="math notranslate nohighlight">\(S_t\)</span> are random variables with discrete probability distributions dependent only on <span class="math notranslate nohighlight">\(S_{t-1}\)</span> and <span class="math notranslate nohighlight">\(A_{t-1}\)</span>. The dynamics of a finite MDP are entirely defined by these distributions.</p>
 <div class="math notranslate nohighlight">
@@ -764,13 +770,13 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="markov-property">
-<h3>Markov property<a class="headerlink" href="#markov-property" title="Permalink to this heading">#</a></h3>
+<h3>Markov property<a class="headerlink" href="#markov-property" title="Link to this heading">#</a></h3>
 <p>This <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_property">property</a> refers to processes in which the probability of each possible value for <span class="math notranslate nohighlight">\(S_t\)</span> and <span class="math notranslate nohighlight">\(R_t\)</span> depends only on the immediately preceding state and action, <span class="math notranslate nohighlight">\(S_{t−1}\)</span> and <span class="math notranslate nohighlight">\(A_{t−1}\)</span>, and not at all on earlier states and actions. Said differently: transitions only depend on the most recent state and action, not on prior history.</p>
 <p>The state must include information about all aspects of the past agent–environment interactions.</p>
 <p>A process with this property is said to be <em>markovian</em>.</p>
 </section>
 <section id="additional-formulations">
-<h3>Additional formulations<a class="headerlink" href="#additional-formulations" title="Permalink to this heading">#</a></h3>
+<h3>Additional formulations<a class="headerlink" href="#additional-formulations" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[p(s'|s,a) \equiv P(S_t=s′ | S_{t−1}=s, A_{t−1}=a) = \sum_{r \in \mathcal{R}} p(s',r|s,a)\]</div>
 <div class="math notranslate nohighlight">
@@ -784,12 +790,12 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>The following MDP (<a class="reference external" href="https://github.com/ageron/handson-ml2/blob/master/18_reinforcement_learning.ipynb">source</a>) has three states <span class="math notranslate nohighlight">\(s_0, s_1, s_2\)</span> and up to three possible discrete actions <span class="math notranslate nohighlight">\(a_0,a_1,a_2\)</span> for each state, some of them yielding positive of negative rewards.</p>
 <p><img alt="Example of a Markov decision process" src="../_images/mdp_example.png" /></p>
 <p>Here, if action <span class="math notranslate nohighlight">\(a_0\)</span> is chosen in state <span class="math notranslate nohighlight">\(s_0\)</span>, then with probability 0.7 we will go to state <span class="math notranslate nohighlight">\(s_0\)</span> with reward +10, with probability 0.3 we will go to state <span class="math notranslate nohighlight">\(s_1\)</span> with no reward, and we cannot go to state <span class="math notranslate nohighlight">\(s_2\)</span>.</p>
 <section id="dynamics-table">
-<h4>Dynamics table<a class="headerlink" href="#dynamics-table" title="Permalink to this heading">#</a></h4>
+<h4>Dynamics table<a class="headerlink" href="#dynamics-table" title="Link to this heading">#</a></h4>
 <p>|<span class="math notranslate nohighlight">\(s\)</span>|<span class="math notranslate nohighlight">\(a\)</span>|<span class="math notranslate nohighlight">\(s'\)</span>|<span class="math notranslate nohighlight">\(p(s'|s,a)\)</span>|<span class="math notranslate nohighlight">\(r(s,a,s')\)</span>|
 |-|-|-|-|-|
 |<span class="math notranslate nohighlight">\(s_0\)</span>|<span class="math notranslate nohighlight">\(a_0\)</span>|<span class="math notranslate nohighlight">\(s_0\)</span>|<span class="math notranslate nohighlight">\(0.7\)</span>|<span class="math notranslate nohighlight">\(+10\)</span>|
@@ -804,7 +810,7 @@ NumPy version: 1.26.3
 |<span class="math notranslate nohighlight">\(s_2\)</span>|<span class="math notranslate nohighlight">\(a_1\)</span>|<span class="math notranslate nohighlight">\(s_2\)</span>|<span class="math notranslate nohighlight">\(0.1\)</span>||</p>
 </section>
 <section id="modelisation">
-<h4>Modelisation<a class="headerlink" href="#modelisation" title="Permalink to this heading">#</a></h4>
+<h4>Modelisation<a class="headerlink" href="#modelisation" title="Link to this heading">#</a></h4>
 <p>The previous MDP can be computationally modelised as a set of arrays. States and actions are represented by their 0-based index.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -831,7 +837,7 @@ NumPy version: 1.26.3
 </section>
 </section>
 <section id="return">
-<h3>Return<a class="headerlink" href="#return" title="Permalink to this heading">#</a></h3>
+<h3>Return<a class="headerlink" href="#return" title="Link to this heading">#</a></h3>
 <p>It is common to evaluate actions based on the sum of all the rewards that came after them, usually applying a <em>discount factor</em> to account for the present value of future rewards.</p>
 <div class="math notranslate nohighlight">
 \[G_t = R_{t+1} + \gamma R_{t+2} +\gamma^2 R_{t+3} + · · · = \sum\limits_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}\]</div>
@@ -841,7 +847,7 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="policy">
-<h3>Policy<a class="headerlink" href="#policy" title="Permalink to this heading">#</a></h3>
+<h3>Policy<a class="headerlink" href="#policy" title="Link to this heading">#</a></h3>
 <p>The algorithm used by the agent to determine its actions is called its <strong>policy</strong>. Policies may be <em>deterministic</em> or <em>stochastic</em> (involving some randomness).</p>
 <p>Formally, a policy <span class="math notranslate nohighlight">\(\pi\)</span> is a potentially probabilistic mapping from state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> to action space <span class="math notranslate nohighlight">\(\mathcal{A}(s), \forall s \in \mathcal{S}\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -851,7 +857,7 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="state-value-function">
-<h3>State-value function<a class="headerlink" href="#state-value-function" title="Permalink to this heading">#</a></h3>
+<h3>State-value function<a class="headerlink" href="#state-value-function" title="Link to this heading">#</a></h3>
 <p>The relationship. between the value function of a state <span class="math notranslate nohighlight">\(v_\pi(s)\)</span> and the value functions of its successor states is called the <em>Bellman equation</em>.</p>
 <div class="math notranslate nohighlight">
 \[v_\pi(s) = \mathbb{E}_\pi \left[ G_t | S_t=s \right] = \mathbb{E}_\pi\left[ \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1} \bigg| S_t = s \right] \forall s \in \mathcal{S}\]</div>
@@ -862,7 +868,7 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="action-value-function">
-<h3>Action-value function<a class="headerlink" href="#action-value-function" title="Permalink to this heading">#</a></h3>
+<h3>Action-value function<a class="headerlink" href="#action-value-function" title="Link to this heading">#</a></h3>
 <p>The function <span class="math notranslate nohighlight">\(q_\pi(s,a)\)</span> expressing the value of taking a specific action is also called the <em>q-value</em> function.</p>
 <div class="math notranslate nohighlight">
 \[q_\pi(s,a) = \mathbb{E}_\pi \left[ G_t | S_t=s, A_t=a \right] = \mathbb{E}_\pi\left[ \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1} \bigg| S_t = s, A_t=a \right]\]</div>
@@ -873,7 +879,7 @@ NumPy version: 1.26.3
 </ul>
 </section>
 <section id="optimality">
-<h3>Optimality<a class="headerlink" href="#optimality" title="Permalink to this heading">#</a></h3>
+<h3>Optimality<a class="headerlink" href="#optimality" title="Link to this heading">#</a></h3>
 <p>The optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> is the one that achieves the biggest return over the long run. The <em>Bellman optimality equations</em> defines the values of state and action under an optimal policy.</p>
 <div class="math notranslate nohighlight">
 \[v_{\pi^*}(s) = v_*(s) = \underset{a \in \mathcal{A}(s)}{max}\;q_*(s,a) = \underset{a}{max} \sum_{s', r}p(s',r | s,a)\left[r + \gamma v_*(s')\right]\]</div>
@@ -882,15 +888,15 @@ NumPy version: 1.26.3
 </section>
 </section>
 <section id="tabular-methods">
-<h2>Tabular methods<a class="headerlink" href="#tabular-methods" title="Permalink to this heading">#</a></h2>
+<h2>Tabular methods<a class="headerlink" href="#tabular-methods" title="Link to this heading">#</a></h2>
 <section id="context">
-<h3>Context<a class="headerlink" href="#context" title="Permalink to this heading">#</a></h3>
+<h3>Context<a class="headerlink" href="#context" title="Link to this heading">#</a></h3>
 <p>When the number of states and actions is limited, approximate value functions can be represented as arrays (<em>tables</em>) and stored in memory.</p>
 <p>In this case, basic algorithms can often find exact solutions, i.e. the optimal value function and the optimal policy.</p>
 <p>These <strong>tabular methods</strong> implement the core ideas of RL and form the building blocks of more powerful ones, used when the state and action spaces become too large.</p>
 </section>
 <section id="value-iteration">
-<h3>Value Iteration<a class="headerlink" href="#value-iteration" title="Permalink to this heading">#</a></h3>
+<h3>Value Iteration<a class="headerlink" href="#value-iteration" title="Link to this heading">#</a></h3>
 <p>Method for finding the optimal state value for each state.</p>
 <ul class="simple">
 <li><p>init all state value estimates to zero;</p></li>
@@ -901,7 +907,7 @@ NumPy version: 1.26.3
 <p>Given enough iterations, these estimates will converge to the optimal state values.</p>
 </section>
 <section id="q-value-iteration">
-<h3>Q-Value Iteration<a class="headerlink" href="#q-value-iteration" title="Permalink to this heading">#</a></h3>
+<h3>Q-Value Iteration<a class="headerlink" href="#q-value-iteration" title="Link to this heading">#</a></h3>
 <p>Like the Value iteration algorithm, iteratively compute <span class="math notranslate nohighlight">\(Q_{k+1}(s,a)\)</span> for all <span class="math notranslate nohighlight">\((s,a)\)</span> until convergence.</p>
 <div class="math notranslate nohighlight">
 \[Q_{k+1}(s,a) \leftarrow \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma \cdot \underset{a'}{max} \;Q_k(s',a')\right]\]</div>
@@ -1005,7 +1011,7 @@ Optimal action for state 2 is a1
 </div>
 </section>
 <section id="td-learning">
-<h3>TD Learning<a class="headerlink" href="#td-learning" title="Permalink to this heading">#</a></h3>
+<h3>TD Learning<a class="headerlink" href="#td-learning" title="Link to this heading">#</a></h3>
 <p>When the transition probabilities and rewards are not known in advance, the agent has to experience each state and each transition: once to know the rewards, several times to estimate the probabilities. It must use an <strong>exploration policy</strong> (for example, a purely random one) to traverse the MDP.</p>
 <p>As it progresses, the <strong>Temporal Difference (TD) Learning</strong> algorithm updates the estimates of the state values based on the transition and rewards that are actually observed.</p>
 <div class="math notranslate nohighlight">
@@ -1020,7 +1026,7 @@ Optimal action for state 2 is a1
 </ul>
 </section>
 <section id="q-learning">
-<h3>Q-Learning<a class="headerlink" href="#q-learning" title="Permalink to this heading">#</a></h3>
+<h3>Q-Learning<a class="headerlink" href="#q-learning" title="Link to this heading">#</a></h3>
 <p>Adapted from the Q-Value Iteration algorithm for situations in which transitions and rewards are initially unknown, <strong>Q-Learning</strong> watches the agent play and gradually improves its estimations of the Q-values. Once it has accurate Q-Value estimates (or close enough), then the optimal policy is choosing the action that has the highest Q-Value (i.e. the <em>greedy</em> policy).</p>
 <div class="math notranslate nohighlight">
 \[Q(s) \underset{\alpha}\leftarrow r + \gamma \cdot \underset{a}{max} \;Q(s',a')\]</div>
@@ -1139,26 +1145,26 @@ Optimal action for state 2 is a1
 </section>
 </section>
 <section id="approximate-methods">
-<h2>Approximate methods<a class="headerlink" href="#approximate-methods" title="Permalink to this heading">#</a></h2>
+<h2>Approximate methods<a class="headerlink" href="#approximate-methods" title="Link to this heading">#</a></h2>
 <section id="id2">
-<h3>Context<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Context<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>The previous methods become intractable for problems with arbitrarily large state spaces. In such cases, it is hopeless to find an optimal policy or the optimal value function, even in the limit of infinite time and data. The goal instead is to discover a good approximate solution, using functions with a manageable number of parameters.</p>
 <p>When dealing with large state spaces, <strong>generalization</strong> (the ability to make sensible decisions based on previous similar encounters) becomes a key issue. Generalization from examples is what <strong>supervised learning</strong> is all about, and many supervized methods have been applied to supplement RL algorithms.</p>
 <p>For years, linear combinations of handcrafted features were necessary to estimate value functions through supervised models. Recently, reseachers have started to harness the power of <strong>Deep Learning</strong> for this task, eliminating the need for manual feature engineering.</p>
 </section>
 <section id="policy-gradients">
-<h3>Policy gradients<a class="headerlink" href="#policy-gradients" title="Permalink to this heading">#</a></h3>
+<h3>Policy gradients<a class="headerlink" href="#policy-gradients" title="Link to this heading">#</a></h3>
 <p>Instead of trying to evaluate actions, <strong>Policy Gradients (PG)</strong> methods learn a parameterized policy that can select actions without consulting a value function. Policy parameters are optimized by following the <em>gradients</em> towards higher rewards.</p>
 <p>One popular class of PG algorithms, called REINFORCE algorithms, was <a class="reference external" href="https://homl.info/132">introduced</a> back in 1992.</p>
 </section>
 <section id="dqn">
-<h3>DQN<a class="headerlink" href="#dqn" title="Permalink to this heading">#</a></h3>
+<h3>DQN<a class="headerlink" href="#dqn" title="Link to this heading">#</a></h3>
 <p><strong>Deep Q-Network (DQN)</strong> was the first RL algorithm to feature a DL model. Introduced in 2014, it was used to learn to play old-school Atari games like Breakout.</p>
 <p>DQN runs a deep neural network for approximating Q-Values. The network takes a state s (i.e. the last 4 screenshots of the game) as input, and outputs an estimation of the Q-Values of all actions in that state.</p>
 <p><img alt="" src="../_images/dqn.png" /></p>
 </section>
 <section id="actor-critic-methods">
-<h3>Actor-Critic methods<a class="headerlink" href="#actor-critic-methods" title="Permalink to this heading">#</a></h3>
+<h3>Actor-Critic methods<a class="headerlink" href="#actor-critic-methods" title="Link to this heading">#</a></h3>
 <p>This family of algorithms combines Policy Gradients with Deep Q-Networks. An Actor-Critic agent contains two neural networks: a policy net and a DQN.</p>
 <ul class="simple">
 <li><p>the DQN (critic) is trained normally, learning from the agent’s experiences;</p></li>
@@ -1166,12 +1172,12 @@ Optimal action for state 2 is a1
 </ul>
 </section>
 <section id="a3c">
-<h3>A3C<a class="headerlink" href="#a3c" title="Permalink to this heading">#</a></h3>
+<h3>A3C<a class="headerlink" href="#a3c" title="Link to this heading">#</a></h3>
 <p>Introduced by DeepMind researchers in 2016, <strong>Asynchronous Advantage Actor-Critic (A3C)</strong> is an Actor-Critic variant where multiple agents learn in parallel, exploring different copies of the environment. At regular intervals, but asynchronously (hence the name), each agent pushes some weight updates to a master network, then it pulls the latest weights from that network. Each agent thus contributes to improving the master network and benefits from what the other agents have learned.</p>
 <p><img alt="" src="../_images/A3C.png" /></p>
 </section>
 <section id="ppo">
-<h3>PPO<a class="headerlink" href="#ppo" title="Permalink to this heading">#</a></h3>
+<h3>PPO<a class="headerlink" href="#ppo" title="Link to this heading">#</a></h3>
 <p><strong>Proximal Policy Optimization (PPO)</strong> is an algorithm based on Advantage Actor-Critic (A2C). In a nutshell, it makes RL less sensitive to step size without the tradeoffs incurred by other approaches.</p>
 <p>In 2019, OpenAI Five, based on the PPO algorithm, defeated the world champions at the multiplayer game Dota 2.</p>
 </section>

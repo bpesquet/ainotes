@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Regression example: predict housing prices &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/regression';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -537,12 +543,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="regression-example-predict-housing-prices">
-<h1>Regression example: predict housing prices<a class="headerlink" href="#regression-example-predict-housing-prices" title="Permalink to this heading">#</a></h1>
+<h1>Regression example: predict housing prices<a class="headerlink" href="#regression-example-predict-housing-prices" title="Link to this heading">#</a></h1>
 <blockquote>
 <div><p>This chapter is inspired by the book <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> written by Aurélien Géron.</p>
 </div></blockquote>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Discover how to train a Machine Learning model on tabular data.</p></li>
 <li><p>Get familiar with the general workflow of a supervised ML project.</p></li>
@@ -553,7 +559,7 @@ document.write(`
 </div></blockquote>
 </section>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -617,9 +623,9 @@ scikit-learn version: 1.3.2
 </div>
 </section>
 <section id="the-machine-learning-project-workflow">
-<h2>The Machine Learning project workflow<a class="headerlink" href="#the-machine-learning-project-workflow" title="Permalink to this heading">#</a></h2>
+<h2>The Machine Learning project workflow<a class="headerlink" href="#the-machine-learning-project-workflow" title="Link to this heading">#</a></h2>
 <section id="main-steps-of-a-supervised-learning-project">
-<h3>Main steps of a supervised learning project<a class="headerlink" href="#main-steps-of-a-supervised-learning-project" title="Permalink to this heading">#</a></h3>
+<h3>Main steps of a supervised learning project<a class="headerlink" href="#main-steps-of-a-supervised-learning-project" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Frame</strong> the problem.</p></li>
 <li><p>Collect, analyze and prepare <strong>data</strong>.</p></li>
@@ -631,9 +637,9 @@ scikit-learn version: 1.3.2
 </section>
 </section>
 <section id="step-1-frame-the-problem">
-<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this heading">#</a></h2>
+<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Link to this heading">#</a></h2>
 <section id="key-questions">
-<h3>Key questions<a class="headerlink" href="#key-questions" title="Permalink to this heading">#</a></h3>
+<h3>Key questions<a class="headerlink" href="#key-questions" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>What is the business objective?</p></li>
 <li><p>How good are the current solutions?</p></li>
@@ -644,7 +650,7 @@ scikit-learn version: 1.3.2
 </ul>
 </section>
 <section id="properties-of-ml-friendly-problems">
-<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this heading">#</a></h3>
+<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Difficulty to express the actions as rules.</p></li>
 <li><p>Data too complex for traditional analytical methods.</p>
@@ -658,7 +664,7 @@ scikit-learn version: 1.3.2
 </ul>
 </section>
 <section id="business-objective-predict-housing-prices">
-<h3>Business objective: predict housing prices<a class="headerlink" href="#business-objective-predict-housing-prices" title="Permalink to this heading">#</a></h3>
+<h3>Business objective: predict housing prices<a class="headerlink" href="#business-objective-predict-housing-prices" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Inputs: housing properties in an area.</p></li>
 <li><p>Output: median housing price in the area.</p></li>
@@ -667,9 +673,9 @@ scikit-learn version: 1.3.2
 </section>
 </section>
 <section id="step-2-collect-analyze-and-prepare-data">
-<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this heading">#</a></h2>
+<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Link to this heading">#</a></h2>
 <section id="a-crucial-step">
-<h3>A crucial step<a class="headerlink" href="#a-crucial-step" title="Permalink to this heading">#</a></h3>
+<h3>A crucial step<a class="headerlink" href="#a-crucial-step" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Real data is messy, incomplete and often scattered across many sources.</p></li>
 <li><p>Data labeling is a manual and tedious process.</p></li>
@@ -677,7 +683,7 @@ scikit-learn version: 1.3.2
 </ul>
 </section>
 <section id="the-california-housing-dataset">
-<h3>The California housing dataset<a class="headerlink" href="#the-california-housing-dataset" title="Permalink to this heading">#</a></h3>
+<h3>The California housing dataset<a class="headerlink" href="#the-california-housing-dataset" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Based on data from the 1990 California census.</p></li>
 <li><p>Slightly modified for teaching purposes by Aurélien Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
@@ -685,7 +691,7 @@ scikit-learn version: 1.3.2
 </ul>
 </section>
 <section id="step-2-1-discover-data">
-<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Permalink to this heading">#</a></h3>
+<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Link to this heading">#</a></h3>
 <p>Our first objective is to familiarize ourselves with the dataset.</p>
 <p>Once data is loaded, the <a class="reference external" href="https://pandas.pydata.org/">pandas</a> library  provides many useful functions for making sense of it.</p>
 <div class="cell docutils container">
@@ -1051,7 +1057,7 @@ memory usage: 1.6+ MB
 </div>
 </section>
 <section id="step-2-2-analyze-data">
-<h3>Step 2.2: analyze data<a class="headerlink" href="#step-2-2-analyze-data" title="Permalink to this heading">#</a></h3>
+<h3>Step 2.2: analyze data<a class="headerlink" href="#step-2-2-analyze-data" title="Link to this heading">#</a></h3>
 <p>The objective here is to gain insights about the data, in order to prepare it optimally for training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1167,7 +1173,7 @@ Name: median_house_value, dtype: float64
 </div>
 </section>
 <section id="step-2-3-split-the-dataset">
-<h3>Step 2.3: split the dataset<a class="headerlink" href="#step-2-3-split-the-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Step 2.3: split the dataset<a class="headerlink" href="#step-2-3-split-the-dataset" title="Link to this heading">#</a></h3>
 <p>A simple solution for splitting datasets is to use the <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>function from scikit-learn.</p>
 <p>Just before or after that, inputs (features given to the model) have to be separated from targets (values it must predict).</p>
 <p><a class="reference external" href="https://mgalarnyk.github.io/"><img alt="Using train_test_split" src="../_images/train-test-split.jpg" /></a></p>
@@ -1213,7 +1219,7 @@ df_x_test: (4128, 9). df_y_test: (4128,)
 </div>
 </section>
 <section id="step-2-4-data-preprocessing">
-<h3>Step 2.4: data preprocessing<a class="headerlink" href="#step-2-4-data-preprocessing" title="Permalink to this heading">#</a></h3>
+<h3>Step 2.4: data preprocessing<a class="headerlink" href="#step-2-4-data-preprocessing" title="Link to this heading">#</a></h3>
 <p>For this dataset, this task involves:</p>
 <ul class="simple">
 <li><p>Handling missing values.</p></li>
@@ -1379,7 +1385,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="preprocessing-pipelines">
-<h3>Preprocessing pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Permalink to this heading">#</a></h3>
+<h3>Preprocessing pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Link to this heading">#</a></h3>
 <p>Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding…).</p>
 <p>scikit-learn support the definition of <strong>pipelines</strong> for streamlining these operations. This is useful to prevent mistakes and oversights when preprocessing new data.</p>
 <div class="cell docutils container">
@@ -1434,19 +1440,19 @@ Name: count, dtype: int64
 </section>
 </section>
 <section id="step-3-select-and-train-models">
-<h2>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Permalink to this heading">#</a></h2>
+<h2>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Link to this heading">#</a></h2>
 <section id="an-iterative-and-empirical-step">
-<h3>An iterative and empirical step<a class="headerlink" href="#an-iterative-and-empirical-step" title="Permalink to this heading">#</a></h3>
+<h3>An iterative and empirical step<a class="headerlink" href="#an-iterative-and-empirical-step" title="Link to this heading">#</a></h3>
 <p>At long last, our data is ready and we can start training models.</p>
 <p>This step is often iterative and can be quite empirical. Depending on data and model complexity, it can also be resource-intensive.</p>
 <p><img alt="Busy training" src="../_images/busy_training.jpg" /></p>
 </section>
 <section id="the-optimization-generalization-dilemna">
-<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this heading">#</a></h3>
+<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Link to this heading">#</a></h3>
 <p><img alt="Underfitting and overfitting" src="../_images/underfitting_overfitting.png" /></p>
 </section>
 <section id="underfitting-and-overfitting">
-<h3>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Permalink to this heading">#</a></h3>
+<h3>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Underfitting</strong> (sometimes called <em>bias</em>): insufficient performance on training set.</p></li>
 <li><p><strong>Overfitting</strong> (sometimes called <em>variance</em>): performance gap between training and validation sets.</p></li>
@@ -1455,7 +1461,7 @@ Name: count, dtype: int64
 <p>The goal of the training step is to find a model powerful enough to <strong>overfit the training set</strong>.</p>
 </section>
 <section id="step-3-1-choose-an-evaluation-metric">
-<h3>Step 3.1: choose an evaluation metric<a class="headerlink" href="#step-3-1-choose-an-evaluation-metric" title="Permalink to this heading">#</a></h3>
+<h3>Step 3.1: choose an evaluation metric<a class="headerlink" href="#step-3-1-choose-an-evaluation-metric" title="Link to this heading">#</a></h3>
 <p>Model performance is assessed through an <strong>evaluation metric</strong>. Like the loss function, it depends on the problem type.</p>
 <p>A classic choice for regression tasks is the <strong>Root Mean Square Error (RMSE)</strong>. It gives an idea of how much error the trained model typically makes in its predictions. Of course, the smaller the better in that case.</p>
 <div class="math notranslate nohighlight">
@@ -1463,7 +1469,7 @@ Name: count, dtype: int64
 <p><strong>Mean Absolute Error</strong> (less sensitive to outliers) and <strong>MSE</strong> may also be used.</p>
 </section>
 <section id="step-3-2-start-with-a-baseline-model">
-<h3>Step 3.2: start with a baseline model<a class="headerlink" href="#step-3-2-start-with-a-baseline-model" title="Permalink to this heading">#</a></h3>
+<h3>Step 3.2: start with a baseline model<a class="headerlink" href="#step-3-2-start-with-a-baseline-model" title="Link to this heading">#</a></h3>
 <p>For each learning type (supervised, unsupervised…), several models of various complexity exist.</p>
 <p>It is often useful to begin the training step by using a basic model. Its results will serve as a <strong>baseline</strong> when training more complicated models. In some cases, its performance might even be surprisingly good.</p>
 <div class="cell docutils container">
@@ -1497,7 +1503,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="step-3-3-try-other-models">
-<h3>Step 3.3: try other models<a class="headerlink" href="#step-3-3-try-other-models" title="Permalink to this heading">#</a></h3>
+<h3>Step 3.3: try other models<a class="headerlink" href="#step-3-3-try-other-models" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a decision tree model to the training set</span>
@@ -1517,11 +1523,11 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="step-3-4-use-a-validation-set-to-evaluate-model-performance">
-<h3>Step 3.4: Use a validation set to evaluate model performance<a class="headerlink" href="#step-3-4-use-a-validation-set-to-evaluate-model-performance" title="Permalink to this heading">#</a></h3>
+<h3>Step 3.4: Use a validation set to evaluate model performance<a class="headerlink" href="#step-3-4-use-a-validation-set-to-evaluate-model-performance" title="Link to this heading">#</a></h3>
 <p>The previous result (<em>error = 0</em>) looks too good to be true. It might very well be a case of severe overfitting to the training set, which means the model won’t perform well with unseen data.</p>
 <p>One way to assert overfitting is to split training data between a smaller training set and a <strong>validation set</strong>, used only to evaluate model performance.</p>
 <section id="cross-validation">
-<h4>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this heading">#</a></h4>
+<h4>Cross-validation<a class="headerlink" href="#cross-validation" title="Link to this heading">#</a></h4>
 <p>A more sophisticated strategy is to apply <strong>K-fold cross validation</strong>. Training data is randomly split into <span class="math notranslate nohighlight">\(K\)</span> subsets called <em>folds</em>. The model is trained and evaluated <span class="math notranslate nohighlight">\(K\)</span> times, using a different fold for validation.</p>
 <p><img alt="K-fold Cross Validation" src="../_images/k-fold-cross-validation.png" /></p>
 <div class="cell docutils container">
@@ -1575,9 +1581,9 @@ Mean cross-validation error for random forest: 49808.02
 </section>
 </section>
 <section id="step-4-tune-the-most-promising-model">
-<h2>Step 4: tune the most promising model<a class="headerlink" href="#step-4-tune-the-most-promising-model" title="Permalink to this heading">#</a></h2>
+<h2>Step 4: tune the most promising model<a class="headerlink" href="#step-4-tune-the-most-promising-model" title="Link to this heading">#</a></h2>
 <section id="step-4-1-search-for-the-best-hyperparameters">
-<h3>Step 4.1: search for the best hyperparameters<a class="headerlink" href="#step-4-1-search-for-the-best-hyperparameters" title="Permalink to this heading">#</a></h3>
+<h3>Step 4.1: search for the best hyperparameters<a class="headerlink" href="#step-4-1-search-for-the-best-hyperparameters" title="Link to this heading">#</a></h3>
 <p>Once a model looks promising, it must be <strong>tuned</strong> in order to offer the best compromise between optimization and generalization.</p>
 <p>The goal is to find the set of model properties that gives the best performance. Model properties are often called <strong>hyperparameters</strong> (example: maximum depth for a decision tree).</p>
 <p>This step can be either:</p>
@@ -1619,7 +1625,7 @@ Mean cross-validation error for random forest: 49808.02
 </div>
 </section>
 <section id="step-4-2-check-final-model-performance-on-test-dataset">
-<h3>Step 4.2: check final model performance on test dataset<a class="headerlink" href="#step-4-2-check-final-model-performance-on-test-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Step 4.2: check final model performance on test dataset<a class="headerlink" href="#step-4-2-check-final-model-performance-on-test-dataset" title="Link to this heading">#</a></h3>
 <p>Now is the time to evaluate the final model on the test set that we put apart before.</p>
 <p>An important point is that preprocessing operations should be applied to test data using preprocessing values (mean, categories…) previously computed on training data. This prevents <strong>information leakage</strong> from test data (<a class="reference external" href="https://machinelearningmastery.com/data-leakage-machine-learning/">explanation</a>)</p>
 <div class="cell docutils container">
@@ -1644,7 +1650,7 @@ Mean cross-validation error for random forest: 49808.02
 </div>
 </section>
 <section id="using-the-model-to-make-predictions-on-new-data">
-<h3>Using the model to make predictions on new data<a class="headerlink" href="#using-the-model-to-make-predictions-on-new-data" title="Permalink to this heading">#</a></h3>
+<h3>Using the model to make predictions on new data<a class="headerlink" href="#using-the-model-to-make-predictions-on-new-data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new data sample</span>
@@ -1725,9 +1731,9 @@ Mean cross-validation error for random forest: 49808.02
 </section>
 </section>
 <section id="step-5-deploy-to-production-and-maintain-the-system">
-<h2>Step 5: deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Permalink to this heading">#</a></h2>
+<h2>Step 5: deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Link to this heading">#</a></h2>
 <section id="step-5-1-save-the-final-model-and-data-pipeline">
-<h3>Step 5.1: save the final model and data pipeline<a class="headerlink" href="#step-5-1-save-the-final-model-and-data-pipeline" title="Permalink to this heading">#</a></h3>
+<h3>Step 5.1: save the final model and data pipeline<a class="headerlink" href="#step-5-1-save-the-final-model-and-data-pipeline" title="Link to this heading">#</a></h3>
 <p>A trained model can be saved to several formats. A standard common is to use Python’s built-in persistence model, <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, through the <a class="reference external" href="https://pypi.org/project/joblib/">joblib</a> library for efficiency reasons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1750,7 +1756,7 @@ Mean cross-validation error for random forest: 49808.02
 </div>
 </section>
 <section id="step-5-2-deploy-the-model">
-<h3>Step 5.2: deploy the model<a class="headerlink" href="#step-5-2-deploy-the-model" title="Permalink to this heading">#</a></h3>
+<h3>Step 5.2: deploy the model<a class="headerlink" href="#step-5-2-deploy-the-model" title="Link to this heading">#</a></h3>
 <p>This step is highly context-dependent. A deployed model is often a part of a more important system. Some common solutions:</p>
 <ul class="simple">
 <li><p>deploying the model as a web service accessible through an API.</p></li>
@@ -1760,7 +1766,7 @@ Mean cross-validation error for random forest: 49808.02
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Model deployement on the web" src="../_images/model_deployment_web.png" /></a></p>
 </section>
 <section id="step-5-3-monitor-and-maintain-the-system">
-<h3>Step 5.3: monitor and maintain the system<a class="headerlink" href="#step-5-3-monitor-and-maintain-the-system" title="Permalink to this heading">#</a></h3>
+<h3>Step 5.3: monitor and maintain the system<a class="headerlink" href="#step-5-3-monitor-and-maintain-the-system" title="Link to this heading">#</a></h3>
 <p>In order to guarantee an optimal quality of service, the deployed system must be carefully monitored. This may involve:</p>
 <ul class="simple">
 <li><p>Checking the system’s live availability and performance at regular intervals.</p></li>

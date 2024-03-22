@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Classification example: recognize handwritten digits &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/classification';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -528,12 +534,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classification-example-recognize-handwritten-digits">
-<h1>Classification example: recognize handwritten digits<a class="headerlink" href="#classification-example-recognize-handwritten-digits" title="Permalink to this heading">#</a></h1>
+<h1>Classification example: recognize handwritten digits<a class="headerlink" href="#classification-example-recognize-handwritten-digits" title="Link to this heading">#</a></h1>
 <blockquote>
 <div><p>This chapter is inspired by the book <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> written by Aurélien Géron.</p>
 </div></blockquote>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Discover how to train a Machine Learning model on bitmap images.</p></li>
 <li><p>Understand how loss and model performance are evaluated in classification tasks.</p></li>
@@ -541,7 +547,7 @@ document.write(`
 </ul>
 </section>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -601,9 +607,9 @@ scikit-learn version: 1.3.2
 </div>
 </section>
 <section id="context-and-data-preparation">
-<h2>Context and data preparation<a class="headerlink" href="#context-and-data-preparation" title="Permalink to this heading">#</a></h2>
+<h2>Context and data preparation<a class="headerlink" href="#context-and-data-preparation" title="Link to this heading">#</a></h2>
 <section id="the-mnist-handwritten-digits-dataset">
-<h3>The MNIST handwritten digits dataset<a class="headerlink" href="#the-mnist-handwritten-digits-dataset" title="Permalink to this heading">#</a></h3>
+<h3>The MNIST handwritten digits dataset<a class="headerlink" href="#the-mnist-handwritten-digits-dataset" title="Link to this heading">#</a></h3>
 <p>This <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">dataset</a>, a staple of Machine Learning and the “Hello, world!” of computer vision, contains 70,000 bitmap images of digits.</p>
 <p>The associated target (expected result) for any image is the digit its represents.</p>
 <div class="cell docutils container">
@@ -701,7 +707,7 @@ First 10 labels: [&#39;5&#39; &#39;0&#39; &#39;4&#39; &#39;1&#39; &#39;9&#39; &#
 </div>
 </section>
 <section id="training-and-test-sets">
-<h3>Training and test sets<a class="headerlink" href="#training-and-test-sets" title="Permalink to this heading">#</a></h3>
+<h3>Training and test sets<a class="headerlink" href="#training-and-test-sets" title="Link to this heading">#</a></h3>
 <p>Data preparation begins with splitting the dataset between training and test sets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -724,7 +730,7 @@ Test images: (10000, 784). Test targets: (10000,)
 </div>
 </section>
 <section id="images-rescaling">
-<h3>Images rescaling<a class="headerlink" href="#images-rescaling" title="Permalink to this heading">#</a></h3>
+<h3>Images rescaling<a class="headerlink" href="#images-rescaling" title="Link to this heading">#</a></h3>
 <p>For grayscale bitmap images, each pixel value is an integer between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(255\)</span>.</p>
 <p>Next, we need to rescale pixel values into the <span class="math notranslate nohighlight">\([0,1]\)</span> range. The easiest way is to divide each value by <span class="math notranslate nohighlight">\(255.0\)</span>.</p>
 <div class="cell docutils container">
@@ -747,9 +753,9 @@ x_test: (60000, 784)
 </section>
 </section>
 <section id="binary-classification">
-<h2>Binary classification<a class="headerlink" href="#binary-classification" title="Permalink to this heading">#</a></h2>
+<h2>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h2>
 <section id="creating-binary-targets">
-<h3>Creating binary targets<a class="headerlink" href="#creating-binary-targets" title="Permalink to this heading">#</a></h3>
+<h3>Creating binary targets<a class="headerlink" href="#creating-binary-targets" title="Link to this heading">#</a></h3>
 <p>To simplify things, let’s start by trying to identify one digit: the number 5. The problem is now a <strong>binary classification</strong> task.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -772,7 +778,7 @@ x_test: (60000, 784)
 </div>
 </section>
 <section id="choosing-a-loss-function">
-<h3>Choosing a loss function<a class="headerlink" href="#choosing-a-loss-function" title="Permalink to this heading">#</a></h3>
+<h3>Choosing a loss function<a class="headerlink" href="#choosing-a-loss-function" title="Link to this heading">#</a></h3>
 <p>This choice depends on the problem type. For binary classification tasks where expected results are either 1 (<em>True</em>) or 0 (<em>False</em>), a popular choice is the <strong>Binary Cross Entropy loss</strong>, a.k.a. <strong>log(istic regression) loss</strong>. It is implemented in the scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html">log_loss</a> function.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{\mathrm{BCE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
@@ -842,7 +848,7 @@ BCE loss (awful prediction): 2.24185
 </div>
 </section>
 <section id="training-a-binary-classifier">
-<h3>Training a binary classifier<a class="headerlink" href="#training-a-binary-classifier" title="Permalink to this heading">#</a></h3>
+<h3>Training a binary classifier<a class="headerlink" href="#training-a-binary-classifier" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a classifier using stochastic gradient descent and logistic loss</span>
@@ -858,9 +864,9 @@ BCE loss (awful prediction): 2.24185
 </div>
 </section>
 <section id="assesing-performance">
-<h3>Assesing  performance<a class="headerlink" href="#assesing-performance" title="Permalink to this heading">#</a></h3>
+<h3>Assesing  performance<a class="headerlink" href="#assesing-performance" title="Link to this heading">#</a></h3>
 <section id="thresholding-model-output">
-<h4>Thresholding model output<a class="headerlink" href="#thresholding-model-output" title="Permalink to this heading">#</a></h4>
+<h4>Thresholding model output<a class="headerlink" href="#thresholding-model-output" title="Link to this heading">#</a></h4>
 <p>A ML model computes probabilities (or scores that are transformed into probabilities). These decimal values are <em>thresholded</em> into discrete values to form the model’s prediction.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -896,7 +902,7 @@ BCE loss (awful prediction): 2.24185
 </div>
 </section>
 <section id="accuracy">
-<h4>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h4>
+<h4>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h4>
 <p>The default performance metric for classification taks is <strong>accuracy</strong>.</p>
 <div class="math notranslate nohighlight">
 \[Accuracy = \frac{\text{Number of exact predictions}}{\text{Total number of predictions}} \]</div>
@@ -919,7 +925,7 @@ BCE loss (awful prediction): 2.24185
 </div>
 </div>
 <section id="computing-training-accuracy">
-<h5>Computing training accuracy<a class="headerlink" href="#computing-training-accuracy" title="Permalink to this heading">#</a></h5>
+<h5>Computing training accuracy<a class="headerlink" href="#computing-training-accuracy" title="Link to this heading">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The score function computes accuracy of the SGDClassifier</span>
@@ -941,7 +947,7 @@ Cross-validation accuracy: [0.97245 0.97255 0.97095]
 </div>
 </section>
 <section id="accuracy-shortcomings">
-<h5>Accuracy shortcomings<a class="headerlink" href="#accuracy-shortcomings" title="Permalink to this heading">#</a></h5>
+<h5>Accuracy shortcomings<a class="headerlink" href="#accuracy-shortcomings" title="Link to this heading">#</a></h5>
 <p>When the dataset is <em>skewed</em> (some classes are more frequent than others), computing accuracy is not enough to assert the model’s performance.</p>
 <p>To find out why, let’s imagine a dumb binary classifier that always predicts that the digit is not 5.</p>
 <div class="cell docutils container">
@@ -965,7 +971,7 @@ Dumb classifier accuracy: 0.90960
 </section>
 </section>
 <section id="true-false-positives-and-negatives">
-<h4>True/False positives and negatives<a class="headerlink" href="#true-false-positives-and-negatives" title="Permalink to this heading">#</a></h4>
+<h4>True/False positives and negatives<a class="headerlink" href="#true-false-positives-and-negatives" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong>True Positive (TP)</strong>: the model <em>correctly</em> predicts the positive class.</p></li>
 <li><p><strong>False Positive (FP)</strong>: the model <em>incorrectly</em> predicts the positive class.</p></li>
@@ -976,7 +982,7 @@ Dumb classifier accuracy: 0.90960
 \[Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\]</div>
 </section>
 <section id="confusion-matrix">
-<h4>Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h4>
+<h4>Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h4>
 <p>Useful representation of classification results. Row are actual classes, columns are predicted classes.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Confusion matrix for 5s" src="../_images/confusion_matrix.png" /></a></p>
 <div class="cell docutils container">
@@ -1001,7 +1007,7 @@ Dumb classifier accuracy: 0.90960
 </div>
 </section>
 <section id="precision-and-recall">
-<h4>Precision and recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this heading">#</a></h4>
+<h4>Precision and recall<a class="headerlink" href="#precision-and-recall" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong>Precision</strong>: proportion of positive identifications that were actually correct.</p></li>
 <li><p><strong>Recall</strong> (or <em>sensitivity</em>): proportion of actual positives that were identified correctly.</p></li>
@@ -1033,7 +1039,7 @@ Class 1: Precision 0.67, Recall 0.50
 </div>
 </div>
 <section id="example-a-flawed-tumor-classifier">
-<h5>Example: a (flawed) tumor classifier<a class="headerlink" href="#example-a-flawed-tumor-classifier" title="Permalink to this heading">#</a></h5>
+<h5>Example: a (flawed) tumor classifier<a class="headerlink" href="#example-a-flawed-tumor-classifier" title="Link to this heading">#</a></h5>
 <p>Context: binary classification of tumors (positive means malignant). Dataset of 100 tumors, of which 9 are malignant.</p>
 <table class="table">
 <thead>
@@ -1057,7 +1063,7 @@ Class 1: Precision 0.67, Recall 0.50
 Recall = \frac{1}{1 + 8} = 11\%\]</div>
 </section>
 <section id="the-precision-recall-trade-off">
-<h5>The precision/recall trade-off<a class="headerlink" href="#the-precision-recall-trade-off" title="Permalink to this heading">#</a></h5>
+<h5>The precision/recall trade-off<a class="headerlink" href="#the-precision-recall-trade-off" title="Link to this heading">#</a></h5>
 <ul class="simple">
 <li><p>Improving precision typically reduces recall and vice versa (<a class="reference external" href="https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#precision-and-recall:-a-tug-of-war">example</a>).</p></li>
 <li><p>Precision matters most when the cost of false positives is high (example: spam detection).</p></li>
@@ -1066,7 +1072,7 @@ Recall = \frac{1}{1 + 8} = 11\%\]</div>
 </section>
 </section>
 <section id="f1-score">
-<h4>F1 score<a class="headerlink" href="#f1-score" title="Permalink to this heading">#</a></h4>
+<h4>F1 score<a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Weighted average (<em>harmonic mean</em>) of precision and recall.</p></li>
 <li><p>Also known as <em>balanced F-score</em> or <em>F-measure</em>.</p></li>
@@ -1096,7 +1102,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </section>
 <section id="roc-curve-and-auroc">
-<h4>ROC curve and AUROC<a class="headerlink" href="#roc-curve-and-auroc" title="Permalink to this heading">#</a></h4>
+<h4>ROC curve and AUROC<a class="headerlink" href="#roc-curve-and-auroc" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[\text{TP Rate} = \frac{TP}{TP + FN} = Recall\;\;\;\;
 \text{FP Rate} = \frac{FP}{FP + TN}\]</div>
@@ -1123,9 +1129,9 @@ weighted avg       0.97      0.97      0.97     60000
 </section>
 </section>
 <section id="multiclass-classification">
-<h2>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this heading">#</a></h2>
+<h2>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Link to this heading">#</a></h2>
 <section id="id1">
-<h3>Choosing a loss function<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Choosing a loss function<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>The log loss extends naturally to the multiclass case. It is also called <strong>Negative Log-Likelihood</strong> or <strong>Cross Entropy</strong>, and is also implemented in the scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html">log_loss</a> function.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{\mathrm{CE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k))\]</div>
@@ -1162,7 +1168,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </section>
 <section id="training-a-multiclass-classifier">
-<h3>Training a multiclass classifier<a class="headerlink" href="#training-a-multiclass-classifier" title="Permalink to this heading">#</a></h3>
+<h3>Training a multiclass classifier<a class="headerlink" href="#training-a-multiclass-classifier" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using all digits as training results</span>
@@ -1180,7 +1186,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </section>
 <section id="assessing-performance">
-<h3>Assessing performance<a class="headerlink" href="#assessing-performance" title="Permalink to this heading">#</a></h3>
+<h3>Assessing performance<a class="headerlink" href="#assessing-performance" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since dataset is not class imbalanced anymore, accuracy is now a reliable metric</span>

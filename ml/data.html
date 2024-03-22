@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Data manipulation &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/data';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -536,9 +542,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-manipulation">
-<h1>Data manipulation<a class="headerlink" href="#data-manipulation" title="Permalink to this heading">#</a></h1>
+<h1>Data manipulation<a class="headerlink" href="#data-manipulation" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Discover what tensors are and how to manipulate them with <a class="reference external" href="https://numpy.org/">NumPy</a> and <a class="reference external" href="https://pytorch.org/">PyTorch</a>.</p></li>
 <li><p>Be able to load and prepare datasets of different types (tabular data, images or videos) for training a Machine Learning model.</p></li>
@@ -546,7 +552,7 @@ document.write(`
 </ul>
 </section>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -562,6 +568,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">ainotes.utils.train</span> <span class="kn">import</span> <span class="n">get_device</span>
 </pre></div>
 </div>
 </div>
@@ -590,39 +598,31 @@ document.write(`
 
 
 <span class="c1"># PyTorch device configuration</span>
-<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA GPU </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> found :)&quot;</span><span class="p">)</span>
-<span class="c1"># Performance issues exist with MPS backend</span>
-<span class="c1"># elif torch.backends.mps.is_available():</span>
-<span class="c1">#     device = torch.device(&quot;mps&quot;)</span>
-<span class="c1">#     print(&quot;MPS GPU found :)&quot;)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No GPU found, using CPU instead&quot;</span><span class="p">)</span>
+<span class="n">device</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">get_device</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
-NumPy version: 1.26.3
-scikit-learn version: 1.3.2
-PyTorch version: 2.0.1
-No GPU found, using CPU instead
+NumPy version: 1.26.4
+scikit-learn version: 1.4.1.post1
+PyTorch version: 2.2.1
+Using MPS GPU :)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="working-with-tensors">
-<h2>Working with tensors<a class="headerlink" href="#working-with-tensors" title="Permalink to this heading">#</a></h2>
+<h2>Working with tensors<a class="headerlink" href="#working-with-tensors" title="Link to this heading">#</a></h2>
 <section id="definition">
-<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h3>
+<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
 <p>In the context of AI, a <strong>tensor</strong> is a set of primitive values sharing the same type (most often numerical), shaped into an array of any number of dimensions. It is a fancy name for a multidimensional array.</p>
 <p>Tensors are heavily used by AI algorithms to represent and manipulate information. They are, in particular, the core data structures of Machine Learning.</p>
 </section>
 <section id="tensor-properties">
-<h3>Tensor properties<a class="headerlink" href="#tensor-properties" title="Permalink to this heading">#</a></h3>
+<h3>Tensor properties<a class="headerlink" href="#tensor-properties" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A tensor’s dimension is also called an <strong>axis</strong>.</p></li>
 <li><p>A tensor’s <strong>rank</strong> is its number of axes.</p></li>
@@ -634,7 +634,7 @@ No GPU found, using CPU instead
 </div></blockquote>
 </section>
 <section id="tensors-in-python">
-<h3>Tensors in Python<a class="headerlink" href="#tensors-in-python" title="Permalink to this heading">#</a></h3>
+<h3>Tensors in Python<a class="headerlink" href="#tensors-in-python" title="Link to this heading">#</a></h3>
 <p>Python offers limited native support for manipulating tensors. Lists can be used to store information, but their mathematical capacities are insufficient for any serious work.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -657,14 +657,14 @@ No GPU found, using CPU instead
 </div>
 </section>
 <section id="dedicated-libraries">
-<h3>Dedicated libraries<a class="headerlink" href="#dedicated-libraries" title="Permalink to this heading">#</a></h3>
+<h3>Dedicated libraries<a class="headerlink" href="#dedicated-libraries" title="Link to this heading">#</a></h3>
 <p>Over the years, several tools have been developed to overcome Python’s native limitations.</p>
 <p>The most widely used is <a class="reference external" href="https://numpy.org/">NumPy</a>, which supports tensors in the form of <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects. It offers a comprehensive set of operations on them, including creating, sorting, selecting, linear algebra and statistical operations.</p>
 </section>
 <section id="tensor-management-with-numpy">
-<h3>Tensor management with NumPy<a class="headerlink" href="#tensor-management-with-numpy" title="Permalink to this heading">#</a></h3>
+<h3>Tensor management with NumPy<a class="headerlink" href="#tensor-management-with-numpy" title="Link to this heading">#</a></h3>
 <section id="creating-tensors">
-<h4>Creating tensors<a class="headerlink" href="#creating-tensors" title="Permalink to this heading">#</a></h4>
+<h4>Creating tensors<a class="headerlink" href="#creating-tensors" title="Link to this heading">#</a></h4>
 <p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html">np.array</a> function creates and returns a new tensor.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#how-to-create-a-basic-array"><img alt="NumPy array creation" src="../_images/numpy_array.png" /></a></p>
 <p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/routines.array-creation.html">NumPy API</a> contains many functions for creating tensors using predefined values.</p>
@@ -716,7 +716,7 @@ Shape: (3,)
 </div>
 </section>
 <section id="generating-random-tensors">
-<h4>Generating random tensors<a class="headerlink" href="#generating-random-tensors" title="Permalink to this heading">#</a></h4>
+<h4>Generating random tensors<a class="headerlink" href="#generating-random-tensors" title="Link to this heading">#</a></h4>
 <p>The <a class="reference external" href="https://numpy.org/doc/stable/reference/random/index.html">NumPy API</a> also permits the creation of (pseudo-)randomly valued tensors, using various statistical laws and data types.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -731,9 +731,9 @@ Shape: (3,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.1875555  0.62188322 0.37111724 0.27371191]
- [0.69765446 0.1594089  0.59248199 0.46596804]
- [0.7432791  0.0282667  0.13099192 0.2987171 ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.87327715 0.69783603 0.91380947 0.95877851]
+ [0.3600699  0.87642275 0.40869857 0.43925051]
+ [0.54297924 0.77137579 0.81503553 0.34392423]]
 Dimensions: 2
 Shape: (3, 4)
 </pre></div>
@@ -750,14 +750,14 @@ Shape: (3, 4)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[65 19 45 38 68]
-  [ 4 46 99 57 89]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[97 16 21 94  2]
+  [66 48 96  7 51]]
 
- [[55 43 63 17 86]
-  [92 44 35 76 11]]
+ [[10 32 50 31 30]
+  [98 72 28  2 29]]
 
- [[35 53 23 70 74]
-  [77 59 75 26 70]]]
+ [[11  7 20 85 10]
+  [80 97 64 92 11]]]
 Dimensions: 3
 Shape: (3, 2, 5)
 </pre></div>
@@ -766,7 +766,7 @@ Shape: (3, 2, 5)
 </div>
 </section>
 <section id="shape-management">
-<h4>Shape management<a class="headerlink" href="#shape-management" title="Permalink to this heading">#</a></h4>
+<h4>Shape management<a class="headerlink" href="#shape-management" title="Link to this heading">#</a></h4>
 <p>A common operation on tensors is <strong>reshaping</strong>: giving it a new shape without changing its data.</p>
 <p>The new shape must be compatible with the current one: the new tensor needs to have the same number of elements as the original one.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#transposing-and-reshaping-a-matrix"><img alt="NumPy reshaping" src="../_images/numpy_reshaping.png" /></a></p>
@@ -818,7 +818,7 @@ Shape: (6,)
 </div>
 </section>
 <section id="indexing-and-slicing">
-<h4>Indexing and slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this heading">#</a></h4>
+<h4>Indexing and slicing<a class="headerlink" href="#indexing-and-slicing" title="Link to this heading">#</a></h4>
 <p>Tensors can be indexed and sliced just like regular Python lists.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#indexing-and-slicing"><img alt="NumPy indexing" src="../_images/numpy_indexing.png" /></a></p>
 <div class="cell docutils container">
@@ -851,7 +851,7 @@ Shape: (6,)
 </div>
 </section>
 <section id="tensor-axes">
-<h4>Tensor axes<a class="headerlink" href="#tensor-axes" title="Permalink to this heading">#</a></h4>
+<h4>Tensor axes<a class="headerlink" href="#tensor-axes" title="Link to this heading">#</a></h4>
 <p>Many tensor operations can be applied along one or several <strong>axes</strong>. They are indexed starting at 0.</p>
 <p><a class="reference external" href="https://www.sharpsightlabs.com/blog/numpy-axes-explained/"><img alt="NumPy axes" src="../_images/numpy_axes.png" /></a></p>
 <div class="cell docutils container">
@@ -879,7 +879,7 @@ Shape: (6,)
 </div>
 </section>
 <section id="element-wise-operations">
-<h4>Element-wise operations<a class="headerlink" href="#element-wise-operations" title="Permalink to this heading">#</a></h4>
+<h4>Element-wise operations<a class="headerlink" href="#element-wise-operations" title="Link to this heading">#</a></h4>
 <p>These operations are applied independently to each entry in the tensors being considered.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -909,7 +909,7 @@ Shape: (2, 3)
 </div>
 </section>
 <section id="dot-product">
-<h4>Dot product<a class="headerlink" href="#dot-product" title="Permalink to this heading">#</a></h4>
+<h4>Dot product<a class="headerlink" href="#dot-product" title="Link to this heading">#</a></h4>
 <p>On the contrary, operations like dot product combine entries in the input tensors to produce a differently shaped result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -941,7 +941,7 @@ Shape: (2, 2)
 </div>
 </section>
 <section id="broadcasting">
-<h4>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this heading">#</a></h4>
+<h4>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h4>
 <p><strong>Broadcasting</strong> is a mechanism that allows operations to be performed on tensors of different shapes. Subject to <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html#general-broadcasting-rules">certain constraints</a>, the smaller tensor may be “broadcast” across the larger one so that they have compatible shapes.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#broadcasting"><img alt="NumPy broadcasting" src="../_images/numpy_broadcasting.png" /></a></p>
 <p>Broadcasting provides a efficient means of <em>vectorizing</em> tensor operations.</p>
@@ -982,7 +982,7 @@ Shape: (2, 3)
 </section>
 </section>
 <section id="gpu-based-tensors">
-<h3>GPU-based tensors<a class="headerlink" href="#gpu-based-tensors" title="Permalink to this heading">#</a></h3>
+<h3>GPU-based tensors<a class="headerlink" href="#gpu-based-tensors" title="Link to this heading">#</a></h3>
 <p>For all its qualities, NumPy has a limitation which can be critical in some contexts: it only runs on the machine’s <a class="reference external" href="https://en.wikipedia.org/wiki/Processor_(computing)">CPU</a>.</p>
 <p>Among other advantages, newer tools offer support for dedicated high-performance processors like <a class="reference external" href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPUs</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit">TPUs</a>, while providing a NumPy-like API to make onboarding easier. The most prominent ones are currently <a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a>, <a class="reference external" href="https://pytorch.org">PyTorch</a> and <a class="reference external" href="https://jax.readthedocs.io">JAX</a>.</p>
 <div class="cell docutils container">
@@ -994,8 +994,12 @@ Shape: (2, 3)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8458, 0.0136],
-        [0.3408, 0.2046]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.5224, 0.7456],
+        [0.5272, 0.0403]], device=&#39;mps:0&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages/torch/_tensor_str.py:137: UserWarning: MPS: nonzero op is supported natively starting from macOS 13.0. Falling back on CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/aten/src/ATen/native/mps/operations/Indexing.mm:283.)
+  nonzero_finite_vals = torch.masked_select(
 </pre></div>
 </div>
 </div>
@@ -1003,9 +1007,9 @@ Shape: (2, 3)
 </section>
 </section>
 <section id="loading-and-exploring-data">
-<h2>Loading and exploring data<a class="headerlink" href="#loading-and-exploring-data" title="Permalink to this heading">#</a></h2>
+<h2>Loading and exploring data<a class="headerlink" href="#loading-and-exploring-data" title="Link to this heading">#</a></h2>
 <section id="introduction-to-pandas">
-<h3>Introduction to pandas<a class="headerlink" href="#introduction-to-pandas" title="Permalink to this heading">#</a></h3>
+<h3>Introduction to pandas<a class="headerlink" href="#introduction-to-pandas" title="Link to this heading">#</a></h3>
 <p>The <a class="reference external" href="https://pandas.pydata.org/">pandas</a> library is dedicated to data analysis in Python. It greatly facilitates loading, exploring and processing tabular data files.</p>
 <p>The primary data structures in pandas are implemented as two classes:</p>
 <ul class="simple">
@@ -1038,7 +1042,7 @@ NY     19651127  141297
 </div>
 </section>
 <section id="loading-a-tabular-dataset">
-<h3>Loading a tabular dataset<a class="headerlink" href="#loading-a-tabular-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Loading a tabular dataset<a class="headerlink" href="#loading-a-tabular-dataset" title="Link to this heading">#</a></h3>
 <p>When describing tabular information, most datasets are stored as a CSV (Comma-Separated Values) text file.</p>
 <p>The <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pd.read_csv</a> function can load a CSV file into a DataFrame from either a local path or a URL.</p>
 <p>The following code loads a dataset which was extracted from a <a class="reference external" href="https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results">Kaggle competition</a>.</p>
@@ -1055,7 +1059,7 @@ NY     19651127  141297
 </div>
 </section>
 <section id="exploring-tabular-data">
-<h3>Exploring tabular data<a class="headerlink" href="#exploring-tabular-data" title="Permalink to this heading">#</a></h3>
+<h3>Exploring tabular data<a class="headerlink" href="#exploring-tabular-data" title="Link to this heading">#</a></h3>
 <p>Once a dataset is loaded into a DataFrame, many operations can be applied to it for visualization or transformation purposes. For more details, see the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html">10 minutes to pandas</a> tutorial.</p>
 <p>Let’s use pandas to perform the very first steps of what is often called <em>Exploratory Data Analysis</em>.</p>
 <div class="cell docutils container">
@@ -1378,93 +1382,93 @@ memory usage: 31.0+ MB
   </thead>
   <tbody>
     <tr>
-      <th>36009</th>
-      <td>18500</td>
-      <td>Cecilia Carranza Saroli</td>
+      <th>234619</th>
+      <td>117659</td>
+      <td>Andrzej Szymczak</td>
+      <td>M</td>
+      <td>27.0</td>
+      <td>193.0</td>
+      <td>96.0</td>
+      <td>Poland</td>
+      <td>POL</td>
+      <td>1976 Summer</td>
+      <td>1976</td>
+      <td>Summer</td>
+      <td>Montreal</td>
+      <td>Handball</td>
+      <td>Handball Men's Handball</td>
+      <td>Bronze</td>
+    </tr>
+    <tr>
+      <th>165291</th>
+      <td>83006</td>
+      <td>John William Mulhall</td>
+      <td>M</td>
+      <td>26.0</td>
+      <td>165.0</td>
+      <td>62.0</td>
+      <td>Great Britain</td>
+      <td>GBR</td>
+      <td>1964 Summer</td>
+      <td>1964</td>
+      <td>Summer</td>
+      <td>Tokyo</td>
+      <td>Gymnastics</td>
+      <td>Gymnastics Men's Horse Vault</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>226761</th>
+      <td>113946</td>
+      <td>Barbora potkov</td>
       <td>F</td>
-      <td>21.0</td>
-      <td>164.0</td>
-      <td>63.0</td>
-      <td>Argentina</td>
-      <td>ARG</td>
-      <td>2008 Summer</td>
-      <td>2008</td>
-      <td>Summer</td>
-      <td>Beijing</td>
-      <td>Sailing</td>
-      <td>Sailing Women's One Person Dinghy</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>209419</th>
-      <td>105154</td>
-      <td>Heraclio Eder Snchez Tern</td>
-      <td>M</td>
-      <td>22.0</td>
-      <td>176.0</td>
-      <td>67.0</td>
-      <td>Mexico</td>
-      <td>MEX</td>
-      <td>2008 Summer</td>
-      <td>2008</td>
-      <td>Summer</td>
-      <td>Beijing</td>
-      <td>Athletics</td>
-      <td>Athletics Men's 20 kilometres Walk</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>90811</th>
-      <td>46010</td>
-      <td>Amanda Jane Hardy</td>
-      <td>F</td>
-      <td>28.0</td>
-      <td>163.0</td>
-      <td>58.0</td>
-      <td>Australia-1</td>
-      <td>AUS</td>
-      <td>2000 Summer</td>
-      <td>2000</td>
-      <td>Summer</td>
-      <td>Sydney</td>
-      <td>Badminton</td>
-      <td>Badminton Mixed Doubles</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>82539</th>
-      <td>41929</td>
-      <td>Ale Gorza</td>
-      <td>M</td>
-      <td>29.0</td>
-      <td>180.0</td>
-      <td>83.0</td>
-      <td>Slovenia</td>
-      <td>SLO</td>
-      <td>2010 Winter</td>
-      <td>2010</td>
-      <td>Winter</td>
-      <td>Vancouver</td>
-      <td>Alpine Skiing</td>
-      <td>Alpine Skiing Men's Super G</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>85857</th>
-      <td>43536</td>
-      <td>Maurice Gueissaz</td>
-      <td>M</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Switzerland</td>
-      <td>SUI</td>
-      <td>1948 Summer</td>
-      <td>1948</td>
+      <td>31.0</td>
+      <td>182.0</td>
+      <td>80.0</td>
+      <td>Czech Republic</td>
+      <td>CZE</td>
+      <td>2012 Summer</td>
+      <td>2012</td>
       <td>Summer</td>
       <td>London</td>
-      <td>Rowing</td>
-      <td>Rowing Men's Double Sculls</td>
+      <td>Athletics</td>
+      <td>Athletics Women's Javelin Throw</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>223951</th>
+      <td>112493</td>
+      <td>Clement Eyer Smoot</td>
+      <td>M</td>
+      <td>20.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Western Golf Association-1</td>
+      <td>USA</td>
+      <td>1904 Summer</td>
+      <td>1904</td>
+      <td>Summer</td>
+      <td>St. Louis</td>
+      <td>Golf</td>
+      <td>Golf Men's Team</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>196758</th>
+      <td>98783</td>
+      <td>Shankar Ramu</td>
+      <td>M</td>
+      <td>22.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Malaysia</td>
+      <td>MAS</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Hockey</td>
+      <td>Hockey Men's Hockey</td>
       <td>NaN</td>
     </tr>
   </tbody>
@@ -1730,7 +1734,7 @@ Athletes from GER: 3.63%
 </div>
 </section>
 <section id="loading-images">
-<h3>Loading images<a class="headerlink" href="#loading-images" title="Permalink to this heading">#</a></h3>
+<h3>Loading images<a class="headerlink" href="#loading-images" title="Link to this heading">#</a></h3>
 <p>Digital images are stored using either the <strong>bitmap</strong> format (an array of color values for all individual pixels in the image) or the <strong>vector format</strong> (a description of the elementary shapes in the image).</p>
 <p>Bitmap images can be easily manipulated as tensors. Each pixel color is typically expressed using a combination of the three primary colors: red, green and blue.</p>
 <p><a class="reference external" href="https://medium.com/&#64;brugmanj/coding-and-colors-a-practical-approach-to-hex-and-rgb-values-9a6e98720b25"><img alt="RGB wheel" src="../_images/rgb_wheel.jpg" /></a></p>
@@ -1757,15 +1761,15 @@ Sample image: (427, 640, 3)
 Sample pixel: [219  78  60]
 </pre></div>
 </div>
-<img alt="../_images/9ae94a94651b7683c17e4b0714723267913794ea18dfce6d28ecc457e857f291.png" src="../_images/9ae94a94651b7683c17e4b0714723267913794ea18dfce6d28ecc457e857f291.png" />
+<img alt="../_images/e8688a303beb0251862a850075c1f0473dce8f1483c0fb2899b8cbb87f2302e9.png" src="../_images/e8688a303beb0251862a850075c1f0473dce8f1483c0fb2899b8cbb87f2302e9.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="preparing-data-for-training">
-<h2>Preparing data for training<a class="headerlink" href="#preparing-data-for-training" title="Permalink to this heading">#</a></h2>
+<h2>Preparing data for training<a class="headerlink" href="#preparing-data-for-training" title="Link to this heading">#</a></h2>
 <section id="a-mandatory-step">
-<h3>A mandatory step<a class="headerlink" href="#a-mandatory-step" title="Permalink to this heading">#</a></h3>
+<h3>A mandatory step<a class="headerlink" href="#a-mandatory-step" title="Link to this heading">#</a></h3>
 <p>In Machine Learning, the chosen dataset has to be carefully prepared before using it to train a model. This can have a major impact on the outcome of the training process.</p>
 <p>This important task, sometimes called <em>data preprocessing</em>, might involve:</p>
 <ul class="simple">
@@ -1780,7 +1784,7 @@ Sample pixel: [219  78  60]
 </ul>
 </section>
 <section id="data-splitting">
-<h3>Data splitting<a class="headerlink" href="#data-splitting" title="Permalink to this heading">#</a></h3>
+<h3>Data splitting<a class="headerlink" href="#data-splitting" title="Link to this heading">#</a></h3>
 <p>Once trained, a ML model must be able to <strong>generalize</strong> (perform well with new data). In order to assert this ability, data is always split into two or three sets before training:</p>
 <ul class="simple">
 <li><p><strong>Training set</strong> (typically 80% or more): fed to the model during training.</p></li>
@@ -1817,7 +1821,7 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </section>
 <section id="image-and-video-reshaping">
-<h3>Image and video reshaping<a class="headerlink" href="#image-and-video-reshaping" title="Permalink to this heading">#</a></h3>
+<h3>Image and video reshaping<a class="headerlink" href="#image-and-video-reshaping" title="Link to this heading">#</a></h3>
 <p>A bitmap image can be represented as a 3D multidimensional array of dimensions <span class="math notranslate nohighlight">\(height \times width \times color\_channels\)</span>.</p>
 <p>A video can be represented as a 4D multidimensional array of dimensions <span class="math notranslate nohighlight">\(frames \times height \times width \times color\_channels\)</span>.</p>
 <p>They have to be <strong>reshaped</strong>, or more precisely <em>flattened</em> in that case, into a vector (1D tensor) before being fed to most ML algorithms.</p>
@@ -1847,7 +1851,7 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </section>
 <section id="handling-of-missing-values">
-<h3>Handling of missing values<a class="headerlink" href="#handling-of-missing-values" title="Permalink to this heading">#</a></h3>
+<h3>Handling of missing values<a class="headerlink" href="#handling-of-missing-values" title="Link to this heading">#</a></h3>
 <p>Most ML algorithms cannot work with missing values in features.</p>
 <p>Depending on the percentage of missing data, three options exist:</p>
 <ul class="simple">
@@ -1891,7 +1895,7 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </section>
 <section id="feature-scaling">
-<h3>Feature scaling<a class="headerlink" href="#feature-scaling" title="Permalink to this heading">#</a></h3>
+<h3>Feature scaling<a class="headerlink" href="#feature-scaling" title="Link to this heading">#</a></h3>
 <p>Most ML algorithms work best when all features have a <strong>similar scale</strong>. Several solutions exist:</p>
 <ul class="simple">
 <li><p><strong>Min-Max scaling</strong>: features are shifted and rescaled to the <span class="math notranslate nohighlight">\([0,1]\)</span> range by substracting the <code class="docutils literal notranslate"><span class="pre">min</span></code> value and dividing by <code class="docutils literal notranslate"><span class="pre">(max-min)</span></code> on the first axis.</p></li>
@@ -1914,12 +1918,12 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[6 5 8 3]
- [1 4 6 2]
- [3 8 5 6]]
-[[1.         0.25       1.         0.25      ]
- [0.         0.         0.33333333 0.        ]
- [0.4        1.         0.         1.        ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4 2 1 1]
+ [4 9 7 4]
+ [3 1 9 3]]
+[[1.         0.125      0.         0.        ]
+ [1.         1.         0.75       1.        ]
+ [0.         0.         1.         0.66666667]]
 Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
 </pre></div>
 </div>
@@ -1946,20 +1950,20 @@ Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2 1 3 2]
- [2 7 7 8]
- [3 2 6 2]]
-[2.33333333 3.33333333 5.33333333 4.        ]
-[[-0.70710678 -0.88900089 -1.37281295 -0.70710678]
- [-0.70710678  1.3970014   0.98058068  1.41421356]
- [ 1.41421356 -0.50800051  0.39223227 -0.70710678]]
-Mean: 0.0. Std: 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[8 3 6 7]
+ [2 7 7 6]
+ [7 9 8 5]]
+[5.66666667 6.33333333 7.         6.        ]
+[[ 0.88900089 -1.33630621 -1.22474487  1.22474487]
+ [-1.3970014   0.26726124  0.          0.        ]
+ [ 0.50800051  1.06904497  1.22474487 -1.22474487]]
+Mean: 1.850371707708594e-17. Std: 1.0
 </pre></div>
 </div>
 </div>
 </div>
 <section id="feature-scaling-and-training-test-sets">
-<h4>Feature scaling and training/test sets<a class="headerlink" href="#feature-scaling-and-training-test-sets" title="Permalink to this heading">#</a></h4>
+<h4>Feature scaling and training/test sets<a class="headerlink" href="#feature-scaling-and-training-test-sets" title="Link to this heading">#</a></h4>
 <p>In order to avoid <a class="reference external" href="https://stats.stackexchange.com/a/174865">information leakage</a>, the test set must be scaled with values calculated on the training set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1978,17 +1982,17 @@ Mean: 0.0. Std: 1.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train mean: [ 4.03717464e-17  8.07434927e-17  1.51394049e-17 -2.29614307e-16]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train mean: [ 1.71579922e-16 -1.36885452e-16 -6.92627773e-16 -2.52323415e-17]
 Train std: [1. 1. 1. 1.]
-Test mean: [-0.44110575 -0.65141874 -0.34561108 -0.12502486]
-Test std: [0.85591862 0.81516664 1.0212625  1.31886361]
+Test mean: [ 0.38510838  0.74722209  0.15848908 -0.06560817]
+Test std: [0.95896239 1.37968827 1.12558319 1.33617739]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="image-and-video-scaling">
-<h4>Image and video scaling<a class="headerlink" href="#image-and-video-scaling" title="Permalink to this heading">#</a></h4>
+<h4>Image and video scaling<a class="headerlink" href="#image-and-video-scaling" title="Link to this heading">#</a></h4>
 <p>Individual pixel values for images and videos are typically integers in the <span class="math notranslate nohighlight">\([0,255]\)</span> range. This is not ideal for most ML algorithms.</p>
 <p>Dividing them by <span class="math notranslate nohighlight">\(255.0\)</span> to obtain floats into the <span class="math notranslate nohighlight">\([0,1]\)</span> range is a common practice.</p>
 <div class="cell docutils container">
@@ -2006,7 +2010,7 @@ Test std: [0.85591862 0.81516664 1.0212625  1.31886361]
 </section>
 </section>
 <section id="encoding-of-categorical-features">
-<h3>Encoding of categorical features<a class="headerlink" href="#encoding-of-categorical-features" title="Permalink to this heading">#</a></h3>
+<h3>Encoding of categorical features<a class="headerlink" href="#encoding-of-categorical-features" title="Link to this heading">#</a></h3>
 <p>Some features or targets may come as discrete rather than continuous values. Moreover, these discrete values might be strings. ML models are only able to manage numerical-only data.</p>
 <p>A solution is to apply one-of-K encoding, also named <strong>dummy encoding</strong> or <strong>one-hot encoding</strong>. Each categorical feature with <code class="docutils literal notranslate"><span class="pre">K</span></code> possible values is transformed into a vector of <code class="docutils literal notranslate"><span class="pre">K</span></code> binary features, with one of them 1 and all others 0.</p>
 <p>Note: using arbitrary integer values rather than binary vectors would create a proximity relationship between the new features, which could confuse the model during training.</p>
@@ -2055,22 +2059,22 @@ Test std: [0.85591862 0.81516664 1.0212625  1.31886361]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0]
  [2]
- [3]
- [2]
+ [6]
+ [6]
  [0]]
-[[0. 0. 0. 1.]
- [0. 1. 0. 0.]
- [0. 0. 1. 0.]
- [0. 1. 0. 0.]
- [1. 0. 0. 0.]]
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]
+ [0. 0. 1.]
+ [1. 0. 0.]]
 </pre></div>
 </div>
 </div>
 </div>
 <section id="one-hot-encoding-and-training-test-sets">
-<h4>One-hot encoding and training/test sets<a class="headerlink" href="#one-hot-encoding-and-training-test-sets" title="Permalink to this heading">#</a></h4>
+<h4>One-hot encoding and training/test sets<a class="headerlink" href="#one-hot-encoding-and-training-test-sets" title="Link to this heading">#</a></h4>
 <p>Depending on value distribution between training and test sets, some categories might appear only in one set.</p>
 <p>The best solution is to one-hot encode based on the training set categories, ignoring test-only categories.</p>
 <div class="cell docutils container">
@@ -2133,12 +2137,12 @@ Test std: [0.85591862 0.81516664 1.0212625  1.31886361]
 </section>
 </section>
 <section id="data-augmentation">
-<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this heading">#</a></h3>
+<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Link to this heading">#</a></h3>
 <p><strong>Data augmentation</strong> is the process of enriching a dataset by adding new samples, slightly modified copies of existing data or newly created synthetic data.</p>
 <p><a class="reference external" href="https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22"><img alt="Image augmentation example" src="../_images/image_augmentation.png" /></a></p>
 </section>
 <section id="feature-engineering">
-<h3>Feature engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this heading">#</a></h3>
+<h3>Feature engineering<a class="headerlink" href="#feature-engineering" title="Link to this heading">#</a></h3>
 <p><strong>Feature engineering</strong> is the process of preparing the proper input features, in order to facilitate the learning task. The problem is made easier by expressing it in a simpler way. This usually requires a good domain knowledge.</p>
 <p>The ability of deep neural networks to discover useful features by themselves has somewhat reduced the criticality of feature engineering. Nevertheless, it remains important in order to solve problems more elegantly and with fewer data.</p>
 <p>Example (taken from the book <a class="reference external" href="https://github.com/fchollet/deep-learning-with-python-notebooks">Deep Learning with Python</a>): the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.</p>

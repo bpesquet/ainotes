@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Artificial neural networks &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/ann';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -549,9 +555,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="artificial-neural-networks">
-<h1>Artificial neural networks<a class="headerlink" href="#artificial-neural-networks" title="Permalink to this heading">#</a></h1>
+<h1>Artificial neural networks<a class="headerlink" href="#artificial-neural-networks" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Know the possibilities, architecture and key components of an artificial neural network.</p></li>
 <li><p>Understand how neural networks are trained.</p></li>
@@ -559,42 +565,8 @@ document.write(`
 </ul>
 </section>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install library containing helper functions</span>
-<span class="o">%</span><span class="k">pip</span> install pyfit
-</pre></div>
-</div>
-</div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyfit in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (1.0.0)
-Requirement already satisfied: matplotlib&lt;4.0.0,&gt;=3.7.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from pyfit) (3.8.3)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.2.0)
-Requirement already satisfied: cycler&gt;=0.10 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (4.50.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.4.5)
-Requirement already satisfied: numpy&lt;2,&gt;=1.21 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.26.4)
-Requirement already satisfied: packaging&gt;=20.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (24.0)
-Requirement already satisfied: pillow&gt;=8 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (10.2.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (3.1.2)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (2.9.0.post0)
-Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/ainotes/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&lt;4.0.0,&gt;=3.7.1-&gt;pyfit) (1.16.0)
-
-<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">24.0</span>
-<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
-Note: you may need to restart the kernel to use updated packages.
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
@@ -612,7 +584,8 @@ Note: you may need to restart the kernel to use updated packages.
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">ToTensor</span>
 
-<span class="kn">from</span> <span class="nn">pyfit.plot</span> <span class="kn">import</span> <span class="n">plot_loss_acc</span>
+<span class="kn">from</span> <span class="nn">ainotes.utils.plot</span> <span class="kn">import</span> <span class="n">plot_loss_acc</span><span class="p">,</span> <span class="n">plot_fashion_images</span>
+<span class="kn">from</span> <span class="nn">ainotes.utils.train</span> <span class="kn">import</span> <span class="n">get_device</span><span class="p">,</span> <span class="n">count_parameters</span><span class="p">,</span> <span class="n">fit</span>
 </pre></div>
 </div>
 </div>
@@ -686,43 +659,6 @@ Note: you may need to restart the kernel to use updated packages.
     <span class="n">cm_bright</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">,</span> <span class="s2">&quot;#0000FF&quot;</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm_bright</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the total number of (trainable) parameters for a model&quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">trainable</span>
-        <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
-    <span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot some images with their associated labels&quot;&quot;&quot;</span>
-
-    <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-    <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">rows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">sample_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span>
-        <span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-
-        <span class="c1"># Title is either true or predicted label</span>
-        <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Add a dimension (to match expected shape with batch size) and store image on device memory</span>
-            <span class="n">x_img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-            <span class="c1"># Compute predicted label for image</span>
-            <span class="c1"># Even if the model outputs unormalized logits, argmax gives the predicted label</span>
-            <span class="n">pred_label</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_img</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="n">pred_label</span><span class="p">]</span><span class="si">}</span><span class="s2">?&quot;</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-
-        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -737,16 +673,9 @@ Note: you may need to restart the kernel to use updated packages.
 
 
 <span class="c1"># PyTorch device configuration</span>
-<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA GPU </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> found :)&quot;</span><span class="p">)</span>
-<span class="c1"># Performance issues exist with MPS backend</span>
-<span class="c1"># elif torch.backends.mps.is_available():</span>
-<span class="c1">#     device = torch.device(&quot;mps&quot;)</span>
-<span class="c1">#     print(&quot;MPS GPU found :)&quot;)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No GPU found, using CPU instead&quot;</span><span class="p">)</span>
+<span class="c1"># Performance issues exist with MPS backend for MLP-like models</span>
+<span class="n">device</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">get_device</span><span class="p">(</span><span class="n">use_mps</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -754,42 +683,42 @@ Note: you may need to restart the kernel to use updated packages.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
 NumPy version: 1.26.4
 scikit-learn version: 1.4.1.post1
-PyTorch version: 2.0.1
-No GPU found, using CPU instead
+PyTorch version: 2.2.1
+No GPU found, using CPU instead :\
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="fundamentals">
-<h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this heading">#</a></h2>
+<h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading">#</a></h2>
 <section id="online-playground">
-<h3>Online playground<a class="headerlink" href="#online-playground" title="Permalink to this heading">#</a></h3>
-<p><a class="reference external" href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.1&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.59857&amp;showTestData=false&amp;discretize=false&amp;percTrainData=30&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;problem_hide=true&amp;regularization_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=false"><img alt="TensorFlow playground" src="../_images/tf_playground.png" /></a></p>
+<h3>Online playground<a class="headerlink" href="#online-playground" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="http://playground.tensorflow.org/#activation=tanh&amp;amp;batchSize=10&amp;amp;dataset=circle&amp;amp;regDataset=reg-plane&amp;amp;learningRate=0.1&amp;amp;regularizationRate=0&amp;amp;noise=0&amp;amp;networkShape=2&amp;amp;seed=0.59857&amp;amp;showTestData=false&amp;amp;discretize=false&amp;amp;percTrainData=30&amp;amp;x=true&amp;amp;y=true&amp;amp;xTimesY=false&amp;amp;xSquared=false&amp;amp;ySquared=false&amp;amp;cosX=false&amp;amp;sinX=false&amp;amp;cosY=false&amp;amp;sinY=false&amp;amp;collectStats=false&amp;amp;problem=classification&amp;amp;initZero=false&amp;amp;hideText=false&amp;amp;showTestData_hide=false&amp;amp;problem_hide=true&amp;amp;regularization_hide=true&amp;amp;regularizationRate_hide=true&amp;amp;percTrainData_hide=false"><img alt="TensorFlow playground" src="../_images/tf_playground.png" /></a></p>
 </section>
 <section id="history">
-<h3>History<a class="headerlink" href="#history" title="Permalink to this heading">#</a></h3>
+<h3>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h3>
 <section id="a-biological-inspiration">
-<h4>A biological inspiration<a class="headerlink" href="#a-biological-inspiration" title="Permalink to this heading">#</a></h4>
+<h4>A biological inspiration<a class="headerlink" href="#a-biological-inspiration" title="Link to this heading">#</a></h4>
 <p><img alt="Neuron" src="../_images/neuron.png" /></p>
 </section>
 <section id="mcculloch-pitts-formal-neuron-1943">
-<h4>McCulloch &amp; Pitts’ formal neuron (1943)<a class="headerlink" href="#mcculloch-pitts-formal-neuron-1943" title="Permalink to this heading">#</a></h4>
+<h4>McCulloch &amp; Pitts’ formal neuron (1943)<a class="headerlink" href="#mcculloch-pitts-formal-neuron-1943" title="Link to this heading">#</a></h4>
 <p><img alt="Formal neuron model" src="../_images/neuron_model.jpeg" /></p>
 </section>
 <section id="hebb-s-rule-1949">
-<h4>Hebb’s rule (1949)<a class="headerlink" href="#hebb-s-rule-1949" title="Permalink to this heading">#</a></h4>
+<h4>Hebb’s rule (1949)<a class="headerlink" href="#hebb-s-rule-1949" title="Link to this heading">#</a></h4>
 <p>Attempt to explain synaptic plasticity, the adaptation of brain neurons during the learning process.</p>
 <blockquote>
 <div><p>“The general idea is an old one, that any two cells or systems of cells that are repeatedly active at the same time will tend to become ‘associated’ so that activity in one facilitates activity in the other.”</p>
 </div></blockquote>
 </section>
 <section id="franck-rosenblatt-s-perceptron-1958">
-<h4>Franck Rosenblatt’s perceptron (1958)<a class="headerlink" href="#franck-rosenblatt-s-perceptron-1958" title="Permalink to this heading">#</a></h4>
+<h4>Franck Rosenblatt’s perceptron (1958)<a class="headerlink" href="#franck-rosenblatt-s-perceptron-1958" title="Link to this heading">#</a></h4>
 <p><img alt="The Perceptron" src="../_images/Perceptron.jpg" /></p>
 </section>
 <section id="the-perceptron-learning-algorithm">
-<h4>The perceptron learning algorithm<a class="headerlink" href="#the-perceptron-learning-algorithm" title="Permalink to this heading">#</a></h4>
+<h4>The perceptron learning algorithm<a class="headerlink" href="#the-perceptron-learning-algorithm" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Init randomly the connection weights <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>.</p></li>
 <li><p>For each training sample <span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>:</p>
@@ -801,13 +730,13 @@ No GPU found, using CPU instead
 </ol>
 </section>
 <section id="minsky-s-critic-1969">
-<h4>Minsky’s critic (1969)<a class="headerlink" href="#minsky-s-critic-1969" title="Permalink to this heading">#</a></h4>
+<h4>Minsky’s critic (1969)<a class="headerlink" href="#minsky-s-critic-1969" title="Link to this heading">#</a></h4>
 <p>One perceptron cannot learn non-linearly separable functions.</p>
 <p><img alt="XOR problem" src="../_images/xor.png" /></p>
 <p>At the time, no learning algorithm existed for training the hidden layers of a MLP.</p>
 </section>
 <section id="decisive-breakthroughs-1970s-1990s">
-<h4>Decisive breakthroughs (1970s-1990s)<a class="headerlink" href="#decisive-breakthroughs-1970s-1990s" title="Permalink to this heading">#</a></h4>
+<h4>Decisive breakthroughs (1970s-1990s)<a class="headerlink" href="#decisive-breakthroughs-1970s-1990s" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>1974: backpropagation theory (P. Werbos).</p></li>
 <li><p>1986: learning through backpropagation (Rumelhart, Hinton, Williams).</p></li>
@@ -817,17 +746,17 @@ No GPU found, using CPU instead
 </section>
 </section>
 <section id="key-components">
-<h3>Key components<a class="headerlink" href="#key-components" title="Permalink to this heading">#</a></h3>
+<h3>Key components<a class="headerlink" href="#key-components" title="Link to this heading">#</a></h3>
 <section id="anatomy-of-a-fully-connected-network">
-<h4>Anatomy of a fully connected network<a class="headerlink" href="#anatomy-of-a-fully-connected-network" title="Permalink to this heading">#</a></h4>
+<h4>Anatomy of a fully connected network<a class="headerlink" href="#anatomy-of-a-fully-connected-network" title="Link to this heading">#</a></h4>
 <p><img alt="A neural network" src="../_images/nn_weights.png" /></p>
 </section>
 <section id="neuron-output">
-<h4>Neuron output<a class="headerlink" href="#neuron-output" title="Permalink to this heading">#</a></h4>
+<h4>Neuron output<a class="headerlink" href="#neuron-output" title="Link to this heading">#</a></h4>
 <p><img alt="Neuron output" src="../_images/neuron_output.png" /></p>
 </section>
 <section id="activation-functions">
-<h4>Activation functions<a class="headerlink" href="#activation-functions" title="Permalink to this heading">#</a></h4>
+<h4>Activation functions<a class="headerlink" href="#activation-functions" title="Link to this heading">#</a></h4>
 <p>They are applied to the weighted sum of neuron inputs to produce its output.</p>
 <p>They must be:</p>
 <ul class="simple">
@@ -835,7 +764,7 @@ No GPU found, using CPU instead
 <li><p><strong>differentiable</strong>, so that gradients can be computed during learning.</p></li>
 </ul>
 <section id="sigmoid">
-<h5>Sigmoid<a class="headerlink" href="#sigmoid" title="Permalink to this heading">#</a></h5>
+<h5>Sigmoid<a class="headerlink" href="#sigmoid" title="Link to this heading">#</a></h5>
 <p>This function “squashes” its input between between 0 and 1, outputting something that can be interpreted as the probability of the positive class. It is often used in the final layer of the network for binary classification tasks.</p>
 <div class="math notranslate nohighlight">
 \[\sigma(x) = \frac{1}{1 + e^{-x}}\]</div>
@@ -869,7 +798,7 @@ No GPU found, using CPU instead
 </div>
 </section>
 <section id="tanh">
-<h5>tanh<a class="headerlink" href="#tanh" title="Permalink to this heading">#</a></h5>
+<h5>tanh<a class="headerlink" href="#tanh" title="Link to this heading">#</a></h5>
 <p>The hyperbolic tangent function has a similar shape as sigmoid, but outputs values in the <span class="math notranslate nohighlight">\([-1,1]\)</span> interval.</p>
 <div class="math notranslate nohighlight">
 \[tanh(x) = \frac{sinh(x)}{cosh(x)} = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{2}{1+e^{-2x}} -1 = 2\sigma(2x) - 1\]</div>
@@ -903,7 +832,7 @@ No GPU found, using CPU instead
 </div>
 </section>
 <section id="relu">
-<h5>ReLU<a class="headerlink" href="#relu" title="Permalink to this heading">#</a></h5>
+<h5>ReLU<a class="headerlink" href="#relu" title="Link to this heading">#</a></h5>
 <p>The Rectified Linear Unit function has replaced sigmoid and tanh as the default activation function in most contexts.</p>
 <div class="math notranslate nohighlight">
 \[ReLU(x) = max(0,x)\]</div>
@@ -944,13 +873,13 @@ No GPU found, using CPU instead
 </section>
 </section>
 <section id="training-process">
-<h3>Training process<a class="headerlink" href="#training-process" title="Permalink to this heading">#</a></h3>
+<h3>Training process<a class="headerlink" href="#training-process" title="Link to this heading">#</a></h3>
 <section id="learning-algorithm">
-<h4>Learning algorithm<a class="headerlink" href="#learning-algorithm" title="Permalink to this heading">#</a></h4>
+<h4>Learning algorithm<a class="headerlink" href="#learning-algorithm" title="Link to this heading">#</a></h4>
 <p><a class="reference external" href="https://www.manning.com/books/deep-learning-with-python"><img alt="Extract from the book Deep Learning with Python" src="../_images/nn_learning.jpg" /></a></p>
 </section>
 <section id="weights-initialization">
-<h4>Weights initialization<a class="headerlink" href="#weights-initialization" title="Permalink to this heading">#</a></h4>
+<h4>Weights initialization<a class="headerlink" href="#weights-initialization" title="Link to this heading">#</a></h4>
 <p>To facilitate training, initial weights must be:</p>
 <ul class="simple">
 <li><p>non-zero</p></li>
@@ -960,28 +889,28 @@ No GPU found, using CPU instead
 <p><a class="reference external" href="https://towardsdatascience.com/weight-initialization-in-neural-networks-a-journey-from-the-basics-to-kaiming-954fb9b47c79">Several techniques exist</a>. A commonly used one is <a class="reference external" href="https://proceedings.mlr.press/v9/glorot10a.html">Xavier initialization</a>.</p>
 </section>
 <section id="weights-update">
-<h4>Weights update<a class="headerlink" href="#weights-update" title="Permalink to this heading">#</a></h4>
-<p>Objective: minimize the loss function. Method: <a class="reference internal" href="principles.html"><span class="doc std std-doc">gradient descent</span></a>.</p>
+<h4>Weights update<a class="headerlink" href="#weights-update" title="Link to this heading">#</a></h4>
+<p>Objective: minimize the loss function. Method: <a class="reference internal" href="principles.html"><span class="std std-doc">gradient descent</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\]</div>
 </section>
 <section id="backpropagation">
-<h4>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this heading">#</a></h4>
+<h4>Backpropagation<a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h4>
 <p>Objective: compute <span class="math notranslate nohighlight">\(\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\)</span>, the loss function gradient w.r.t. all the network weights.</p>
 <p>Method: apply the <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a> to compute partial derivatives backwards, starting from the current output.</p>
 <div class="math notranslate nohighlight">
 \[y = f(g(x)) \;\;\;\; \frac{\partial y}{\partial x} = \frac{\partial f}{\partial g} \frac{\partial g}{\partial x}\;\;\;\; \frac{\partial y}{\partial x} = \sum_{i=1}^n \frac{\partial f}{\partial g^{(i)}} \frac{\partial g^{(i)}}{\partial x}\]</div>
 </section>
 <section id="visual-demo-of-backpropagation">
-<h4>Visual demo of backpropagation<a class="headerlink" href="#visual-demo-of-backpropagation" title="Permalink to this heading">#</a></h4>
+<h4>Visual demo of backpropagation<a class="headerlink" href="#visual-demo-of-backpropagation" title="Link to this heading">#</a></h4>
 <p><a class="reference external" href="https://developers-dot-devsite-v2-prod.appspot.com/machine-learning/crash-course/backprop-scroll"><img alt="Backprop explained visually" src="../_images/visual_backprop_demo.png" /></a></p>
 </section>
 </section>
 </section>
 <section id="binary-classification-example">
-<h2>BInary classification example<a class="headerlink" href="#binary-classification-example" title="Permalink to this heading">#</a></h2>
+<h2>BInary classification example<a class="headerlink" href="#binary-classification-example" title="Link to this heading">#</a></h2>
 <section id="data-generation-and-visualization">
-<h3>Data generation and visualization<a class="headerlink" href="#data-generation-and-visualization" title="Permalink to this heading">#</a></h3>
+<h3>Data generation and visualization<a class="headerlink" href="#data-generation-and-visualization" title="Link to this heading">#</a></h3>
 <p>A scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">function</a> is used to easily generate two-dimensional data with two classes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -996,17 +925,17 @@ No GPU found, using CPU instead
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: (500, 2). targets: (500,)
-[[-0.17484517 -0.24930221]
- [-0.40408387  0.2682799 ]
- [ 0.94435609  0.15306933]
- [ 0.93701015 -0.40535873]
- [ 0.94813686  0.57544557]
- [ 0.29669816 -0.10540653]
- [ 0.9945163  -0.14782202]
- [-0.20949356  0.35725974]
- [-0.85952503 -0.29925765]
- [ 0.31498329  0.02076161]]
-[1 1 0 0 0 1 0 1 0 1]
+[[ 0.36931037  0.30077156]
+ [-0.86629352  0.34339987]
+ [ 0.06043136  0.42904494]
+ [-0.61404679 -0.61020774]
+ [ 0.24104621 -0.43622148]
+ [ 1.04137164  0.00494889]
+ [ 0.17941691  0.87006239]
+ [-0.04665329  0.05407338]
+ [ 0.23150656 -0.12601949]
+ [ 1.02889973  0.05695439]]
+[1 0 1 0 1 0 0 1 1 0]
 </pre></div>
 </div>
 </div>
@@ -1018,12 +947,12 @@ No GPU found, using CPU instead
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/78009f3d3eb4d3f083bb598f2edaa5a04c63ebbd0f5ac25d211dce8ab01b6cdc.png" src="../_images/78009f3d3eb4d3f083bb598f2edaa5a04c63ebbd0f5ac25d211dce8ab01b6cdc.png" />
+<img alt="../_images/98846f97ef5bfe3f5dbf6f8a64bf2ccf3ab3aea81e763ab08a645dd7a177ed7c.png" src="../_images/98846f97ef5bfe3f5dbf6f8a64bf2ccf3ab3aea81e763ab08a645dd7a177ed7c.png" />
 </div>
 </div>
 </section>
 <section id="hyperparameters">
-<h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h3>
+<h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">#</a></h3>
 <p>Hyperparameters (<span class="math notranslate nohighlight">\(\neq\)</span> model parameters) are adjustable configuration values that let you control the model training process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1044,7 +973,7 @@ No GPU found, using CPU instead
 </div>
 </section>
 <section id="data-preparation">
-<h3>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this heading">#</a></h3>
+<h3>Data preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h3>
 <p>Generated data (NumPy tensors) needs to be converted to PyTorch tensors before training a PyTorch-based model. These new tensors are stored in the memory of the available device (GPU ou CPU).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1066,7 +995,7 @@ No GPU found, using CPU instead
 </div>
 </div>
 </div>
-<p>In order to use <a class="reference internal" href="principles.html"><span class="doc std std-doc">mini-batch SGD</span></a>, data needs to be passed to the model as small, randomized batches during training. The Pytorch <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">DataLoader</a> class abstracts this complexity for us.</p>
+<p>In order to use <a class="reference internal" href="principles.html"><span class="std std-doc">mini-batch SGD</span></a>, data needs to be passed to the model as small, randomized batches during training. The Pytorch <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">DataLoader</a> class abstracts this complexity for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data as randomized batches for training</span>
@@ -1079,7 +1008,7 @@ No GPU found, using CPU instead
 </div>
 </section>
 <section id="model-definition">
-<h3>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this heading">#</a></h3>
+<h3>Model definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h3>
 <p>A PyTorch model is defined by combining elementary blocks, known as <em>modules</em>.</p>
 <p>Our neural network uses the following ones:</p>
 <ul class="simple">
@@ -1103,7 +1032,7 @@ No GPU found, using CPU instead
 <span class="nb">print</span><span class="p">(</span><span class="n">planar_model</span><span class="p">)</span>
 
 <span class="c1"># Count the total number of trainable model parameters (weights)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of trainable parameters: </span><span class="si">{</span><span class="n">count_parameters</span><span class="p">(</span><span class="n">planar_model</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of trainable parameters: </span><span class="si">{</span><span class="n">count_parameters</span><span class="p">(</span><span class="n">planar_model</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1114,15 +1043,15 @@ No GPU found, using CPU instead
   (2): Linear(in_features=2, out_features=1, bias=True)
   (3): Sigmoid()
 )
-Number of trainable parameters: 9.
+Number of trainable parameters: 9
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="loss-function">
-<h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
-<p>For binary classification tasks, the standard choice is the <a class="reference internal" href="classification.html"><span class="doc std std-doc">binary cross entropy loss</span></a>, conveniently provided by a <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">PyTorch class</a>.</p>
+<h3>Loss function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
+<p>For binary classification tasks, the standard choice is the <a class="reference internal" href="classification.html"><span class="std std-doc">binary cross entropy loss</span></a>, conveniently provided by a <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html">PyTorch class</a>.</p>
 <p>For each sample of the batch, it will compare the output of the model (a value <span class="math notranslate nohighlight">\(\in [0,1]\)</span> provided by the sigmoid function) with the expected binary value <span class="math notranslate nohighlight">\(\in \{0,1\}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1134,7 +1063,7 @@ Number of trainable parameters: 9.
 </div>
 </section>
 <section id="model-training">
-<h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this heading">#</a></h3>
+<h3>Model training<a class="headerlink" href="#model-training" title="Link to this heading">#</a></h3>
 <p>The training algorithm is as follows:</p>
 <ul class="simple">
 <li><p>On each iteration on the whole dataset (known as an <em>epoch</em>) and for each data batch inside an epoch, the model output is computed on the current batch.</p></li>
@@ -1144,38 +1073,21 @@ Number of trainable parameters: 9.
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_planar</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_planar</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training code&quot;&quot;&quot;</span>
 
-    <span class="c1"># Object storing training history</span>
-    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
-
-    <span class="c1"># Number of samples</span>
-    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-
-    <span class="c1"># Number of batches in an epoch (= n_samples / batch_size, rounded up)</span>
-    <span class="n">n_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-        <span class="c1"># Reset total loss for the current epoch</span>
-        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="c1"># Reset number of correct predictions for the current epoch</span>
-        <span class="n">n_correct</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="c1"># Training loop for one data batch (i.e. one gradient descent step)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="c1"># Training algorithm for one data batch (i.e. one gradient descent step)</span>
         <span class="k">for</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
-            <span class="c1"># Zero the gradients before running the backward pass</span>
-            <span class="c1"># Avoids accumulating gradients erroneously</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-
             <span class="c1"># Forward pass: compute model output with current weights</span>
             <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
 
             <span class="c1"># Compute loss (comparison between expected and actual results)</span>
             <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+
+            <span class="c1"># Reset the gradients to zero before running the backward pass</span>
+            <span class="c1"># Avoids accumulating gradients between gradient descent steps</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
 
             <span class="c1"># Backward pass (backprop): compute gradient of the loss w.r.t each model weight</span>
             <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
@@ -1185,35 +1097,14 @@ Number of trainable parameters: 9.
             <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
                 <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
                     <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
-
-                <span class="c1"># Accumulate data for epoch metrics: loss and number of correct predictions</span>
-                <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-                <span class="n">n_correct</span> <span class="o">+=</span> <span class="p">(</span>
-                    <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">))</span> <span class="o">==</span> <span class="n">y_batch</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-                <span class="p">)</span>
-
-        <span class="c1"># Compute epoch metrics</span>
-        <span class="n">epoch_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="n">n_batches</span>
-        <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
-
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
-        <span class="p">)</span>
-
-        <span class="c1"># Record epoch metrics for later plotting</span>
-        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
-        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">history</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planar_history</span> <span class="o">=</span> <span class="n">train_planar</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit model to planar data</span>
+<span class="n">fit_planar</span><span class="p">(</span>
     <span class="n">dataloader</span><span class="o">=</span><span class="n">planar_dataloader</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="n">planar_model</span><span class="p">,</span>
     <span class="n">loss_fn</span><span class="o">=</span><span class="n">planar_loss_fn</span><span class="p">,</span>
@@ -1222,76 +1113,10 @@ Number of trainable parameters: 9.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 500 samples. 100 batches per epoch
-Epoch [  1/ 50]. Mean loss: 0.69666. Accuracy: 53.80%
-Epoch [  2/ 50]. Mean loss: 0.69245. Accuracy: 58.00%
-Epoch [  3/ 50]. Mean loss: 0.68901. Accuracy: 62.20%
-Epoch [  4/ 50]. Mean loss: 0.68247. Accuracy: 68.60%
-Epoch [  5/ 50]. Mean loss: 0.67266. Accuracy: 75.00%
-Epoch [  6/ 50]. Mean loss: 0.64818. Accuracy: 80.40%
-Epoch [  7/ 50]. Mean loss: 0.61079. Accuracy: 84.60%
-Epoch [  8/ 50]. Mean loss: 0.56403. Accuracy: 85.00%
-Epoch [  9/ 50]. Mean loss: 0.51661. Accuracy: 85.60%
-Epoch [ 10/ 50]. Mean loss: 0.48368. Accuracy: 85.60%
-Epoch [ 11/ 50]. Mean loss: 0.45784. Accuracy: 85.80%
-Epoch [ 12/ 50]. Mean loss: 0.43980. Accuracy: 85.20%
-Epoch [ 13/ 50]. Mean loss: 0.42826. Accuracy: 86.00%
-Epoch [ 14/ 50]. Mean loss: 0.41968. Accuracy: 85.00%
-Epoch [ 15/ 50]. Mean loss: 0.41230. Accuracy: 85.20%
-Epoch [ 16/ 50]. Mean loss: 0.40578. Accuracy: 86.20%
-Epoch [ 17/ 50]. Mean loss: 0.40196. Accuracy: 85.80%
-Epoch [ 18/ 50]. Mean loss: 0.39845. Accuracy: 85.20%
-Epoch [ 19/ 50]. Mean loss: 0.39568. Accuracy: 85.20%
-Epoch [ 20/ 50]. Mean loss: 0.39305. Accuracy: 85.20%
-Epoch [ 21/ 50]. Mean loss: 0.39136. Accuracy: 85.60%
-Epoch [ 22/ 50]. Mean loss: 0.38705. Accuracy: 85.40%
-Epoch [ 23/ 50]. Mean loss: 0.38583. Accuracy: 85.80%
-Epoch [ 24/ 50]. Mean loss: 0.38560. Accuracy: 85.00%
-Epoch [ 25/ 50]. Mean loss: 0.38318. Accuracy: 85.20%
-Epoch [ 26/ 50]. Mean loss: 0.38040. Accuracy: 85.40%
-Epoch [ 27/ 50]. Mean loss: 0.38177. Accuracy: 84.80%
-Epoch [ 28/ 50]. Mean loss: 0.38157. Accuracy: 85.40%
-Epoch [ 29/ 50]. Mean loss: 0.37967. Accuracy: 85.40%
-Epoch [ 30/ 50]. Mean loss: 0.37797. Accuracy: 84.80%
-Epoch [ 31/ 50]. Mean loss: 0.37793. Accuracy: 85.80%
-Epoch [ 32/ 50]. Mean loss: 0.37736. Accuracy: 85.40%
-Epoch [ 33/ 50]. Mean loss: 0.37557. Accuracy: 86.40%
-Epoch [ 34/ 50]. Mean loss: 0.37652. Accuracy: 84.80%
-Epoch [ 35/ 50]. Mean loss: 0.37403. Accuracy: 85.00%
-Epoch [ 36/ 50]. Mean loss: 0.37649. Accuracy: 86.00%
-Epoch [ 37/ 50]. Mean loss: 0.37472. Accuracy: 85.60%
-Epoch [ 38/ 50]. Mean loss: 0.37593. Accuracy: 84.60%
-Epoch [ 39/ 50]. Mean loss: 0.37220. Accuracy: 85.60%
-Epoch [ 40/ 50]. Mean loss: 0.37487. Accuracy: 85.00%
-Epoch [ 41/ 50]. Mean loss: 0.37069. Accuracy: 85.00%
-Epoch [ 42/ 50]. Mean loss: 0.37320. Accuracy: 85.20%
-Epoch [ 43/ 50]. Mean loss: 0.37325. Accuracy: 84.80%
-Epoch [ 44/ 50]. Mean loss: 0.37189. Accuracy: 85.00%
-Epoch [ 45/ 50]. Mean loss: 0.36939. Accuracy: 85.40%
-Epoch [ 46/ 50]. Mean loss: 0.37261. Accuracy: 85.00%
-Epoch [ 47/ 50]. Mean loss: 0.37228. Accuracy: 84.60%
-Epoch [ 48/ 50]. Mean loss: 0.37373. Accuracy: 85.40%
-Epoch [ 49/ 50]. Mean loss: 0.36809. Accuracy: 85.40%
-Epoch [ 50/ 50]. Mean loss: 0.37200. Accuracy: 85.20%
-Training complete! Total gradient descent steps: 5000
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="training-results">
-<h3>Training results<a class="headerlink" href="#training-results" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">planar_history</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/be446a90b6a7b5417d07b213df0aa6297c946e881a833b9f8cbcaca95441ca45.png" src="../_images/be446a90b6a7b5417d07b213df0aa6297c946e881a833b9f8cbcaca95441ca45.png" />
-</div>
-</div>
+<h3>Training results<a class="headerlink" href="#training-results" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_decision_boundary</span><span class="p">(</span><span class="n">planar_model</span><span class="p">,</span> <span class="n">planar_data</span><span class="p">,</span> <span class="n">planar_targets</span><span class="p">)</span>
@@ -1299,15 +1124,15 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/361bd51ed9707f95a2edd3ecc487e20ed16dbcfe0f780ccd3ae70bf28f8a54a4.png" src="../_images/361bd51ed9707f95a2edd3ecc487e20ed16dbcfe0f780ccd3ae70bf28f8a54a4.png" />
+<img alt="../_images/276ff51cc7671e6bf2cbdc0d9749dd5497c0ab9143f8cc730ba1c9c47c252bec.png" src="../_images/276ff51cc7671e6bf2cbdc0d9749dd5497c0ab9143f8cc730ba1c9c47c252bec.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="multiclass-classification-example">
-<h2>Multiclass classification example<a class="headerlink" href="#multiclass-classification-example" title="Permalink to this heading">#</a></h2>
+<h2>Multiclass classification example<a class="headerlink" href="#multiclass-classification-example" title="Link to this heading">#</a></h2>
 <section id="data-loading-and-visualization">
-<h3>Data loading and visualization<a class="headerlink" href="#data-loading-and-visualization" title="Permalink to this heading">#</a></h3>
+<h3>Data loading and visualization<a class="headerlink" href="#data-loading-and-visualization" title="Link to this heading">#</a></h3>
 <p>We use the <a class="reference external" href="https://github.com/zalandoresearch/fashion-mnist">Fashion-MNIST</a> dataset, analogous to the famous MNIST handwritten digits dataset. It consists of:</p>
 <ul class="simple">
 <li><p>a training set containing 60,000 28x28 grayscale images, each of them associated with a label (fashion category) from 10 classes;</p></li>
@@ -1488,17 +1313,17 @@ Training complete! Total gradient descent steps: 5000
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fashion_images</span><span class="p">(</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">fashion_labels</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fashion_images</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">fashion_labels</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2b516769cafd934811b4f819e30ce3d366fe686301ab9fb3a517de92bce429f1.png" src="../_images/2b516769cafd934811b4f819e30ce3d366fe686301ab9fb3a517de92bce429f1.png" />
+<img alt="../_images/87eeeda8ab4b2fe7cc020a1427b34c4ca336b0ee12ae1cebc3752a0691768c97.png" src="../_images/87eeeda8ab4b2fe7cc020a1427b34c4ca336b0ee12ae1cebc3752a0691768c97.png" />
 </div>
 </div>
 </section>
 <section id="id1">
-<h3>Hyperparameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Hyperparameters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to change the learning rate to 1e-2 ans check training results</span>
@@ -1511,7 +1336,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </section>
 <section id="id2">
-<h3>Data preparation<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Data preparation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>As always, data will be passed to the model as small, randomized batches during training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1523,7 +1348,7 @@ Training complete! Total gradient descent steps: 5000
 </div>
 </section>
 <section id="id3">
-<h3>Model definition<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3>Model definition<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>Most PyTorch models are defined as subclasses of the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html">Module</a> class. Their constructor creates the layer architecture and their <code class="docutils literal notranslate"><span class="pre">forward</span></code> method defines the forward pass of the model.</p>
 <p>In this model, we use the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html">Flatten</a> module that transforms an input tensor of any shape into a vector (hence its name).</p>
 <div class="cell docutils container">
@@ -1593,13 +1418,13 @@ Number of trainable parameters: 55050
 </div>
 </section>
 <section id="id4">
-<h3>Loss function<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>The standard choice for multiclass classification tasks is the <a class="reference internal" href="classification.html"><span class="doc std std-doc">cross entropy loss</span></a> a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">CrossEntropyLoss</a>.</p>
+<h3>Loss function<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>The standard choice for multiclass classification tasks is the <a class="reference internal" href="classification.html"><span class="std std-doc">cross entropy loss</span></a> a.k.a. negative log-likelihood loss, provided by a PyTorch class aptly named <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">CrossEntropyLoss</a>.</p>
 <blockquote>
 <div><p>PyTorch also offers the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss">NLLLoss</a> class implementing the negative log-likelihood loss. A key difference is that <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> expects <em>logits</em>  (raw, unnormalized predictions) as inputs, and uses <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html#torch.nn.LogSoftmax">LogSoftmax</a> to transform them into probabilities before computing its output. Using <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> is equivalent to applying <code class="docutils literal notranslate"><span class="pre">LogSoftmax</span></code> followed by <code class="docutils literal notranslate"><span class="pre">NLLLoss</span></code> (<a class="reference external" href="https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81">more details</a>).</p>
 </div></blockquote>
 <section id="softmax">
-<h4>Softmax<a class="headerlink" href="#softmax" title="Permalink to this heading">#</a></h4>
+<h4>Softmax<a class="headerlink" href="#softmax" title="Link to this heading">#</a></h4>
 <p>The softmax function turns a vector <span class="math notranslate nohighlight">\(\pmb{v} = \{v_1, v_2, \dots, v_K \} \in \mathbb{R}^K\)</span> of raws values (called a <em>logits vector</em> when it’s the output of a ML model) into a probability distribution. It is a multiclass generalization of the sigmoid function.</p>
 <div class="math notranslate nohighlight">
 \[\sigma(\pmb{v})_k = \frac{e^{v_k}}{\sum_{k=1}^K {e^{v_k}}}\;\;\;\;
@@ -1638,110 +1463,100 @@ Number of trainable parameters: 55050
 </section>
 </section>
 <section id="optimization-algorithm">
-<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this heading">#</a></h3>
+<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Link to this heading">#</a></h3>
 <p>PyTorch provides out-of-the-box implementations for many gradient descent optimization algorithms (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.Adam.html">Adam</a>, <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.RMSprop.html">RMSProp</a>, etc).</p>
 <p>We’ll stick with vanilla mini-batch SGD for now.</p>
 </section>
 <section id="id5">
-<h3>Model training<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3>Model training<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>In order to obtain more details about the training process, we define a <a class="reference internal" href="#"><span class="xref myst">fit</span></a> function that encapsulates the training code and computes metrics.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">epoch_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Training algorithm for one epoch&quot;&quot;&quot;</span>
-
-    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">n_correct</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
-        <span class="c1"># Load data and targets on device memory</span>
-        <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="o">=</span> <span class="n">x_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-
-        <span class="c1"># Reset gradients</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-
-        <span class="c1"># Forward pass</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
-
-        <span class="c1"># Backward pass: backprop and GD step</span>
-        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-
-        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-            <span class="c1"># Accumulate data for epoch metrics: loss and number of correct predictions</span>
-            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-            <span class="n">n_correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_batch</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-
-    <span class="k">return</span> <span class="n">total_loss</span><span class="p">,</span> <span class="n">n_correct</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main training code&quot;&quot;&quot;</span>
-
-    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="p">[]}</span>
-    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-    <span class="n">n_batches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training started! </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> samples. </span><span class="si">{</span><span class="n">n_batches</span><span class="si">}</span><span class="s2"> batches per epoch&quot;</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-        <span class="n">total_loss</span><span class="p">,</span> <span class="n">n_correct</span> <span class="o">=</span> <span class="n">epoch_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
-
-        <span class="c1"># Compute epoch metrics</span>
-        <span class="n">epoch_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="n">n_batches</span>
-        <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="n">n_samples</span>
-
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2">]. Mean loss: </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">. Accuracy: </span><span class="si">{</span><span class="n">epoch_acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
-        <span class="p">)</span>
-
-        <span class="c1"># Record epoch metrics for later plotting</span>
-        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_loss</span><span class="p">)</span>
-        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_acc</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training complete! Total gradient descent steps: </span><span class="si">{</span><span class="n">epochs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_batches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">history</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fashion_history</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit model to fashion images</span>
+<span class="n">fashion_history</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span>
     <span class="n">dataloader</span><span class="o">=</span><span class="n">fashion_train_dataloader</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="n">fashion_model</span><span class="p">,</span>
     <span class="n">loss_fn</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
     <span class="n">optimizer</span><span class="o">=</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">fashion_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span>
     <span class="n">epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started! 60000 samples. 938 batches per epoch
-Epoch [  1/ 10]. Mean loss: 2.28511. Accuracy: 21.39%
-Epoch [  2/ 10]. Mean loss: 2.22016. Accuracy: 32.51%
-Epoch [  3/ 10]. Mean loss: 2.09399. Accuracy: 43.31%
-Epoch [  4/ 10]. Mean loss: 1.86179. Accuracy: 47.05%
-Epoch [  5/ 10]. Mean loss: 1.54342. Accuracy: 51.93%
-Epoch [  6/ 10]. Mean loss: 1.29843. Accuracy: 58.08%
-Epoch [  7/ 10]. Mean loss: 1.14948. Accuracy: 61.77%
-Epoch [  8/ 10]. Mean loss: 1.05058. Accuracy: 64.02%
-Epoch [  9/ 10]. Mean loss: 0.97873. Accuracy: 65.70%
-Epoch [ 10/ 10]. Mean loss: 0.92317. Accuracy: 67.16%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 273.77batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  1/ 10] finished. Mean loss: 2.27083. Accuracy: 20.27%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 269.61batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  2/ 10] finished. Mean loss: 2.17613. Accuracy: 39.62%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 315.47batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  3/ 10] finished. Mean loss: 1.97025. Accuracy: 47.30%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:03&lt;00:00, 304.89batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  4/ 10] finished. Mean loss: 1.63073. Accuracy: 48.41%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 343.20batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  5/ 10] finished. Mean loss: 1.33952. Accuracy: 58.52%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 333.76batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  6/ 10] finished. Mean loss: 1.15769. Accuracy: 62.89%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 333.97batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  7/ 10] finished. Mean loss: 1.04012. Accuracy: 64.42%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 321.72batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  8/ 10] finished. Mean loss: 0.95788. Accuracy: 65.58%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 315.45batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [  9/ 10] finished. Mean loss: 0.89752. Accuracy: 66.88%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|<span class=" -Color -Color-Blue">███████████████████████████████████████████████████████</span>| 938/938 [00:02&lt;00:00, 314.43batches/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [ 10/ 10] finished. Mean loss: 0.85212. Accuracy: 68.11%
 Training complete! Total gradient descent steps: 9380
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id6">
-<h3>Training results<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3>Training results<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">fashion_history</span><span class="p">)</span>
@@ -1749,17 +1564,19 @@ Training complete! Total gradient descent steps: 9380
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/84908beb55b2a12a8e3ea2d051a593c8b0f8fddade31f861d806d20267fea149.png" src="../_images/84908beb55b2a12a8e3ea2d051a593c8b0f8fddade31f861d806d20267fea149.png" />
+<img alt="../_images/0beebc14d2f73aa58f5f5b6b0ba08144e8e2b675fa56ceb60975ab37b10cc8d0.png" src="../_images/0beebc14d2f73aa58f5f5b6b0ba08144e8e2b675fa56ceb60975ab37b10cc8d0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fashion_images</span><span class="p">(</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">fashion_labels</span><span class="p">,</span> <span class="n">fashion_model</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_fashion_images</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fashion_train_data</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">fashion_labels</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">fashion_model</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/eaa61912cc1b00b68807c8cbaf8e27e17ecebefd462fd23b5fd256243bf51610.png" src="../_images/eaa61912cc1b00b68807c8cbaf8e27e17ecebefd462fd23b5fd256243bf51610.png" />
+<img alt="../_images/ffb1d0f369302b9349dcf801b0b1cdf287865e692564092aaa2af0adf9c6a96e.png" src="../_images/ffb1d0f369302b9349dcf801b0b1cdf287865e692564092aaa2af0adf9c6a96e.png" />
 </div>
 </div>
 </section>

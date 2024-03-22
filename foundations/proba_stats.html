@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Probability &amp; statistics &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/proba_stats';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -517,7 +523,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-statistics">
-<h1>Probability &amp; statistics<a class="headerlink" href="#probability-statistics" title="Permalink to this heading">#</a></h1>
+<h1>Probability &amp; statistics<a class="headerlink" href="#probability-statistics" title="Link to this heading">#</a></h1>
 <blockquote>
 <div><p>“Probability deals with knowing the model of our world and use it for deductions. Statistics deal with trying to identify this model based on observation of reality.”</p>
 </div></blockquote>
@@ -526,14 +532,14 @@ document.write(`
 <p>This chapter is under construction.</p>
 </div>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">ainotes.utils.train</span> <span class="kn">import</span> <span class="n">get_device</span>
 </pre></div>
 </div>
 </div>
@@ -546,16 +552,13 @@ PyTorch version: 2.0.1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device configuration</span>
-<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA GPU </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> found :)&quot;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;mps&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MPS GPU found :)&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No GPU found, using CPU instead&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print environment info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PyTorch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># PyTorch device configuration</span>
+<span class="n">device</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">get_device</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -567,27 +570,27 @@ PyTorch version: 2.0.1
 </div>
 </section>
 <section id="probability">
-<h2>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h2>
+<h2>Probability<a class="headerlink" href="#probability" title="Link to this heading">#</a></h2>
 <section id="fundamentals">
-<h3>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this heading">#</a></h3>
+<h3>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading">#</a></h3>
 <section id="random-experiment">
-<h4>Random experiment<a class="headerlink" href="#random-experiment" title="Permalink to this heading">#</a></h4>
+<h4>Random experiment<a class="headerlink" href="#random-experiment" title="Link to this heading">#</a></h4>
 <p>Experiment implying some randomness. Knowing the experimental conditions is not enough to predict its outcome. Opposite of <em>deterministic experiment</em>.</p>
 <p>Example: throwing a six-sided dice.</p>
 </section>
 <section id="sample-space">
-<h4>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h4>
+<h4>Sample space<a class="headerlink" href="#sample-space" title="Link to this heading">#</a></h4>
 <p>Set of all possible outcomes for the random experiment, denoted by <span class="math notranslate nohighlight">\(\Omega\)</span> or <span class="math notranslate nohighlight">\(S\)</span>. Can either be finite or infinitely large.</p>
 <p>Example: <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span></p>
 </section>
 <section id="event">
-<h4>Event<a class="headerlink" href="#event" title="Permalink to this heading">#</a></h4>
+<h4>Event<a class="headerlink" href="#event" title="Link to this heading">#</a></h4>
 <p>Subset of the sample space, denoted by <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span>.</p>
 <p>An event is a set of elementary events (observed outcomes). An elementary event is denoted <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>. If <span class="math notranslate nohighlight">\(\omega \in E\)</span>, then event <span class="math notranslate nohighlight">\(E\)</span> has occurred.</p>
 <p>Example: <span class="math notranslate nohighlight">\(E \equiv \text{&quot;obtaining an odd number&quot;}\)</span>. <span class="math notranslate nohighlight">\(E= \{1,3,5\}\)</span></p>
 </section>
 <section id="relationships-between-events">
-<h4>Relationships between events<a class="headerlink" href="#relationships-between-events" title="Permalink to this heading">#</a></h4>
+<h4>Relationships between events<a class="headerlink" href="#relationships-between-events" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Inclusion <span class="math notranslate nohighlight">\(A \subset B\)</span>. If <span class="math notranslate nohighlight">\(A\)</span> occurs, <span class="math notranslate nohighlight">\(B\)</span> occurs too.</p></li>
 <li><p>Equality <span class="math notranslate nohighlight">\(A = B\)</span>. All elements are identical for both events.</p></li>
@@ -596,7 +599,7 @@ PyTorch version: 2.0.1
 <p>Example: <span class="math notranslate nohighlight">\(A \equiv \text{&quot;obtaining an odd number&quot;}\)</span> and <span class="math notranslate nohighlight">\(B \equiv \text{&quot;obtaining an even number&quot;}\)</span> are incompatible.</p>
 </section>
 <section id="composition-of-events">
-<h4>Composition of events<a class="headerlink" href="#composition-of-events" title="Permalink to this heading">#</a></h4>
+<h4>Composition of events<a class="headerlink" href="#composition-of-events" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Negation <span class="math notranslate nohighlight">\(E^\star = \Omega \backslash E\)</span>. Occurs if and only if <span class="math notranslate nohighlight">\(E\)</span> does not occur.</p></li>
 <li><p>Conjunction <span class="math notranslate nohighlight">\(A \cap B\)</span>. Occurs if and only if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> occur simultaneously.</p></li>
@@ -611,7 +614,7 @@ PyTorch version: 2.0.1
 </ul>
 </section>
 <section id="event-algebra">
-<h4>Event algebra<a class="headerlink" href="#event-algebra" title="Permalink to this heading">#</a></h4>
+<h4>Event algebra<a class="headerlink" href="#event-algebra" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Idempotency: <span class="math notranslate nohighlight">\(A \cup A = A\)</span> and <span class="math notranslate nohighlight">\(A \cap A = A\)</span></p></li>
 <li><p>Commutativity: <span class="math notranslate nohighlight">\(A \cup B = B \cup A\)</span> and <span class="math notranslate nohighlight">\(A \cap B = B \cap A\)</span></p></li>
@@ -623,7 +626,7 @@ PyTorch version: 2.0.1
 </ul>
 </section>
 <section id="event-partition">
-<h4>Event partition<a class="headerlink" href="#event-partition" title="Permalink to this heading">#</a></h4>
+<h4>Event partition<a class="headerlink" href="#event-partition" title="Link to this heading">#</a></h4>
 <p>An event set <span class="math notranslate nohighlight">\(\{ A_1, \dots, A_n \}\)</span> is a partition of the sample space if and only if:</p>
 <ul class="simple">
 <li><p>No event is impossible: <span class="math notranslate nohighlight">\(\forall i, A_i \ne \emptyset\)</span></p></li>
@@ -632,29 +635,29 @@ PyTorch version: 2.0.1
 </ul>
 </section>
 <section id="combination-of-random-experiments">
-<h4>Combination of random experiments<a class="headerlink" href="#combination-of-random-experiments" title="Permalink to this heading">#</a></h4>
+<h4>Combination of random experiments<a class="headerlink" href="#combination-of-random-experiments" title="Link to this heading">#</a></h4>
 <p>For two joint experiments characterized by sample spaces <span class="math notranslate nohighlight">\(\Omega_1\)</span> and <span class="math notranslate nohighlight">\(\Omega_2\)</span>, we can define a new sample space <span class="math notranslate nohighlight">\(\Omega\)</span> as their cartesian product: <span class="math notranslate nohighlight">\(\Omega = \Omega_1 \times \Omega_2\)</span></p>
 <p>Example for rolling two dices: <span class="math notranslate nohighlight">\(\Omega_1 = \Omega_2 = \{1,2,3,4,5,6\}\)</span> and <span class="math notranslate nohighlight">\(\Omega = \{(1,1), (1,2), \dots, (6,5), (6,6) \}\)</span> (36 couples).</p>
 </section>
 </section>
 <section id="probability-basics">
-<h3>Probability basics<a class="headerlink" href="#probability-basics" title="Permalink to this heading">#</a></h3>
+<h3>Probability basics<a class="headerlink" href="#probability-basics" title="Link to this heading">#</a></h3>
 <section id="classical-definition">
-<h4>Classical definition<a class="headerlink" href="#classical-definition" title="Permalink to this heading">#</a></h4>
+<h4>Classical definition<a class="headerlink" href="#classical-definition" title="Link to this heading">#</a></h4>
 <p>The probability of an event is the ratio of the number of cases favorable to it, to the number of all cases possible when nothing leads us to expect that any one of these cases should occur more than any other, which renders them, for us, equally possible. (Laplace, 1819)</p>
 <div class="math notranslate nohighlight">
 \[P(A) = \frac{\# A}{\# \Omega}\]</div>
 <p>Assumes equiprobability and a finite number of cases.</p>
 </section>
 <section id="frequentist-definition">
-<h4>Frequentist definition<a class="headerlink" href="#frequentist-definition" title="Permalink to this heading">#</a></h4>
+<h4>Frequentist definition<a class="headerlink" href="#frequentist-definition" title="Link to this heading">#</a></h4>
 <p>For <span class="math notranslate nohighlight">\(n\)</span> repetitions under the same conditions of a random experiment, <span class="math notranslate nohighlight">\(P(A)\)</span> is the theorical frequency of event <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[P(A) = \lim_{n\to \infty} \frac{\# A}{n}\]</div>
 <p>Assumes the possibility of indefinitely repeating an experiment without changing its conditions.</p>
 </section>
 <section id="axiomatic-definition">
-<h4>Axiomatic definition<a class="headerlink" href="#axiomatic-definition" title="Permalink to this heading">#</a></h4>
+<h4>Axiomatic definition<a class="headerlink" href="#axiomatic-definition" title="Link to this heading">#</a></h4>
 <p>A probability is a number that satisfies the following axioms (Kolmogorov, 1933):</p>
 <ul class="simple">
 <li><p>For any event <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(P(A) \ge 0\)</span></p></li>
@@ -663,7 +666,7 @@ PyTorch version: 2.0.1
 </ul>
 </section>
 <section id="properties-of-probabilities">
-<h4>Properties of probabilities<a class="headerlink" href="#properties-of-probabilities" title="Permalink to this heading">#</a></h4>
+<h4>Properties of probabilities<a class="headerlink" href="#properties-of-probabilities" title="Link to this heading">#</a></h4>
 <p>The previous definition has the following consequences:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(\emptyset) = 0\)</span></p></li>
@@ -675,14 +678,14 @@ PyTorch version: 2.0.1
 </ul>
 </section>
 <section id="conditional-probability">
-<h4>Conditional probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h4>
+<h4>Conditional probability<a class="headerlink" href="#conditional-probability" title="Link to this heading">#</a></h4>
 <p>The probability <span class="math notranslate nohighlight">\(P(A|B)\)</span> of event <span class="math notranslate nohighlight">\(A\)</span> knowing that event <span class="math notranslate nohighlight">\(B\)</span> has occurred is given by:</p>
 <div class="math notranslate nohighlight">
 \[P(A|B) = \frac{P(A \cap B)}{P(B)} \qquad \text{with} \space P(B) \ne 0\]</div>
 <p>There is no fundamental difference between conditional and non-conditional probabilities: <span class="math notranslate nohighlight">\(P(A) = P(A|\Omega)\)</span></p>
 </section>
 <section id="properties-of-conditional-probabilities">
-<h4>Properties of conditional probabilities<a class="headerlink" href="#properties-of-conditional-probabilities" title="Permalink to this heading">#</a></h4>
+<h4>Properties of conditional probabilities<a class="headerlink" href="#properties-of-conditional-probabilities" title="Link to this heading">#</a></h4>
 <p>The previous definition has the following consequences:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(\Omega|B) = 1\)</span></p></li>
@@ -695,7 +698,7 @@ PyTorch version: 2.0.1
 </ul>
 </section>
 <section id="chain-rule">
-<h4>Chain rule<a class="headerlink" href="#chain-rule" title="Permalink to this heading">#</a></h4>
+<h4>Chain rule<a class="headerlink" href="#chain-rule" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(A \cap B) = P(A|B)P(B)\)</span></p></li>
 <li><p>More generally, for any events <span class="math notranslate nohighlight">\(A_1, A_2,\dots,A_n\)</span>,</p></li>
@@ -704,13 +707,13 @@ PyTorch version: 2.0.1
 \[P(A_1 \cap \cdots \cap A_n ) = P(A_1)P(A_2|A_1)P(A_3|(A_1 \cap A_2)) \dots P(A_n|(A_1 \cap \cdots \cap A_{n-1}))\]</div>
 </section>
 <section id="law-of-total-probability">
-<h4>Law of total probability<a class="headerlink" href="#law-of-total-probability" title="Permalink to this heading">#</a></h4>
+<h4>Law of total probability<a class="headerlink" href="#law-of-total-probability" title="Link to this heading">#</a></h4>
 <p>If the set of events <span class="math notranslate nohighlight">\(\{B_1, B_2, \dots, B_n\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>, then:</p>
 <div class="math notranslate nohighlight">
 \[P(A) = \sum_{i=1}^{n} P(A|B_i)P(B_i)\]</div>
 </section>
 <section id="bayes-theorem">
-<h4>Bayes’ theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h4>
+<h4>Bayes’ theorem<a class="headerlink" href="#bayes-theorem" title="Link to this heading">#</a></h4>
 <p>If the set of events <span class="math notranslate nohighlight">\(\{B_1, B_2, \dots, B_n\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>, then:</p>
 <div class="math notranslate nohighlight">
 \[P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{i=1}^{n} P(A|B_i)P(B_i)}\]</div>

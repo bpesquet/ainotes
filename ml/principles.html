@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Principles of supervised learning &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ml/principles';</script>
@@ -162,7 +157,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -555,16 +561,16 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="principles-of-supervised-learning">
-<h1>Principles of supervised learning<a class="headerlink" href="#principles-of-supervised-learning" title="Permalink to this heading">#</a></h1>
+<h1>Principles of supervised learning<a class="headerlink" href="#principles-of-supervised-learning" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Define how a supervised ML system can be formalized.</p></li>
 <li><p>Develop an intuition of learning via gradient descent.</p></li>
 </ul>
 </section>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -582,9 +588,9 @@ document.write(`
 </div>
 </section>
 <section id="terminology">
-<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h2>
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
 <section id="components-of-a-supervised-ml-system">
-<h3>Components of a supervised ML system<a class="headerlink" href="#components-of-a-supervised-ml-system" title="Permalink to this heading">#</a></h3>
+<h3>Components of a supervised ML system<a class="headerlink" href="#components-of-a-supervised-ml-system" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Some <strong>data</strong> to learn from.</p></li>
 <li><p>A <strong>model</strong> to transform data into results.</p></li>
@@ -593,25 +599,25 @@ document.write(`
 </ul>
 </section>
 <section id="data">
-<h3>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h3>
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
 <section id="features">
-<h4>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h4>
+<h4>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h4>
 <p>A <strong>feature</strong> is an attribute (property) of the data given to the model: the number of rooms in a house, the color of a pixel in an image, the presence of a specific word in a text, etc. Most of the time, they come under numerical form.</p>
 <p>A simple ML project might use a single feature, while more sophisticated ones could use millions of them.</p>
 <p>They are denoted using the <span class="math notranslate nohighlight">\(x\)</span> variable.</p>
 </section>
 <section id="label">
-<h4>Label<a class="headerlink" href="#label" title="Permalink to this heading">#</a></h4>
+<h4>Label<a class="headerlink" href="#label" title="Link to this heading">#</a></h4>
 <p>A <strong>label</strong> (or <strong>class</strong> in the context of classification), is a result the model is trying to predict: the future price of an asset, the nature of the animal shown in a picture, the presence or absence of a face, etc.</p>
 <p>They are denoted using the <span class="math notranslate nohighlight">\(y\)</span> variable.</p>
 </section>
 <section id="samples">
-<h4>Samples<a class="headerlink" href="#samples" title="Permalink to this heading">#</a></h4>
+<h4>Samples<a class="headerlink" href="#samples" title="Link to this heading">#</a></h4>
 <p>An <strong>sample</strong>, also called <strong>example</strong>, is a particular instance of data: an individual email, an image, etc.</p>
 <p>A <strong>labeled sample</strong> includes both its feature(s) and the associated label(s) to predict. An <strong>unlabeled sample</strong> includes only feature(s).</p>
 </section>
 <section id="inputs">
-<h4>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">#</a></h4>
+<h4>Inputs<a class="headerlink" href="#inputs" title="Link to this heading">#</a></h4>
 <p><strong>Inputs</strong> correspond to all features for one sample of the dataset.</p>
 <p>They are denoted using the <span class="math notranslate nohighlight">\(\pmb{x}\)</span> variable (notice the boldface to indicate that it is a vector).</p>
 <div class="math notranslate nohighlight">
@@ -629,7 +635,7 @@ document.write(`
 </ul>
 </section>
 <section id="targets">
-<h4>Targets<a class="headerlink" href="#targets" title="Permalink to this heading">#</a></h4>
+<h4>Targets<a class="headerlink" href="#targets" title="Link to this heading">#</a></h4>
 <p><strong>Targets</strong> are the expected results (labels) associated to a data sample, often called the <em>ground truth</em>. They are denoted using the <span class="math notranslate nohighlight">\(\pmb{y}\)</span> variable.</p>
 <p>Some ML models have to predict more than one value for each sample (for example, in multiclass classification). In that case, <span class="math notranslate nohighlight">\(K&gt;1\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -646,7 +652,7 @@ document.write(`
 </ul>
 </section>
 <section id="inputs-matrix">
-<h4>Inputs matrix<a class="headerlink" href="#inputs-matrix" title="Permalink to this heading">#</a></h4>
+<h4>Inputs matrix<a class="headerlink" href="#inputs-matrix" title="Link to this heading">#</a></h4>
 <p>Many ML models expect their inputs to come under the form of a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix, often called <strong>design matrix</strong> and denoted <span class="math notranslate nohighlight">\(\pmb{X}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\pmb{X} = \begin{bmatrix}
@@ -663,7 +669,7 @@ document.write(`
      \end{bmatrix}\end{split}\]</div>
 </section>
 <section id="targets-matrix">
-<h4>Targets matrix<a class="headerlink" href="#targets-matrix" title="Permalink to this heading">#</a></h4>
+<h4>Targets matrix<a class="headerlink" href="#targets-matrix" title="Link to this heading">#</a></h4>
 <p>Accordingly, expected results are often stored in a <span class="math notranslate nohighlight">\(m \times K\)</span> matrix denoted <span class="math notranslate nohighlight">\(\pmb{Y}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\pmb{Y} = \begin{bmatrix}
@@ -681,24 +687,24 @@ document.write(`
 </section>
 </section>
 <section id="model">
-<h3>Model<a class="headerlink" href="#model" title="Permalink to this heading">#</a></h3>
+<h3>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
 <p>The representation learnt from data during training is called a <strong>model</strong>. It defines the relationship between features and labels.</p>
 <p>Most (but not all) ML systems are model-based.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Extract from the book Hands-on Machine Learning with Scikit-Learn &amp; TensorFlow by A. Géron" src="../_images/instance_model_learning.png" /></a></p>
 <section id="the-two-phases-of-a-model-s-life">
-<h4>The two phases of a model’s life<a class="headerlink" href="#the-two-phases-of-a-model-s-life" title="Permalink to this heading">#</a></h4>
+<h4>The two phases of a model’s life<a class="headerlink" href="#the-two-phases-of-a-model-s-life" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><strong>Training</strong>: using labeled samples, the model learns to find a relationship between features and labels.</p></li>
 <li><p><strong>Inference</strong>: the trained model is used to make predictions on unlabeled samples (new data unseen during training).</p></li>
 </ul>
 </section>
 <section id="model-parameters-vs-hyperparameters">
-<h4>Model parameters Vs hyperparameters<a class="headerlink" href="#model-parameters-vs-hyperparameters" title="Permalink to this heading">#</a></h4>
+<h4>Model parameters Vs hyperparameters<a class="headerlink" href="#model-parameters-vs-hyperparameters" title="Link to this heading">#</a></h4>
 <p><strong>Parameters</strong>, sometimes called <strong>weights</strong>, are the internal values that affect the computed output of a model. During the training phase, they are algorithmically adjusted for optimal performance w.r.t the loss function. The set of parameters for a model is often denoted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span> or <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>.</p>
 <p>They are not to be confused with <strong>hyperparameters</strong>, which are configuration properties that constrain the model: the maximum depth of a decision tree, the number of layers in a neural networks, etc. Hyperparameters are statically defined before training by the user or by a dedicated tool.</p>
 </section>
 <section id="hypothesis-function">
-<h4>Hypothesis function<a class="headerlink" href="#hypothesis-function" title="Permalink to this heading">#</a></h4>
+<h4>Hypothesis function<a class="headerlink" href="#hypothesis-function" title="Link to this heading">#</a></h4>
 <p>Mathematically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).</p>
 <p>This function, called the <strong>hypothesis function</strong>, is denoted <span class="math notranslate nohighlight">\(h_{\pmb{\omega}}\)</span> to show that it is parametrized by <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>. Its output (predicted result) is denoted  <span class="math notranslate nohighlight">\(\pmb{y'}\)</span> or <span class="math notranslate nohighlight">\(\hat{\pmb{y}}\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -714,7 +720,7 @@ document.write(`
 </ul>
 </section>
 <section id="predictions-matrix">
-<h4>Predictions matrix<a class="headerlink" href="#predictions-matrix" title="Permalink to this heading">#</a></h4>
+<h4>Predictions matrix<a class="headerlink" href="#predictions-matrix" title="Link to this heading">#</a></h4>
 <p>Model predictions for the whole dataset can be stored in a <span class="math notranslate nohighlight">\(m \times K\)</span> matrix denoted <span class="math notranslate nohighlight">\(\pmb{Y'}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\pmb{Y'} =
@@ -734,7 +740,7 @@ document.write(`
 </section>
 </section>
 <section id="loss-function">
-<h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
+<h3>Loss function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
 <p>The <strong>loss function</strong>, also called <strong>cost function</strong> or <strong>objective function</strong>, quantifies the difference, often called <strong>error</strong>, between targets (expected results) and actual results computed by the model. Its value at any given time is a scalar called the <strong>loss value</strong>, or simply <strong>loss</strong>.</p>
 <p>By convention, loss functions are usually defined so that lower is better, hence their name. If the model’s prediction is perfect, the loss value is zero.</p>
 <p>The loss function is generally denoted <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> or <span class="math notranslate nohighlight">\(\mathcal{J}\)</span>.</p>
@@ -742,7 +748,7 @@ document.write(`
 <div><p>Mathematically, it depends on the inputs <span class="math notranslate nohighlight">\(\pmb{X}\)</span>, the expected results <span class="math notranslate nohighlight">\(\pmb{Y}\)</span> and the model parameters <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>. However, during model training, <span class="math notranslate nohighlight">\(\pmb{X}\)</span> and <span class="math notranslate nohighlight">\(\pmb{Y}\)</span> can be treated as constants. Thus, the loss function depends solely on <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span> and will be denoted <span class="math notranslate nohighlight">\(\mathcal{L(\pmb{\omega})}\)</span>.</p>
 </div></blockquote>
 <section id="loss-function-example">
-<h4>Loss function example<a class="headerlink" href="#loss-function-example" title="Permalink to this heading">#</a></h4>
+<h4>Loss function example<a class="headerlink" href="#loss-function-example" title="Link to this heading">#</a></h4>
 <p>The choice of the loss function depends on the problem type.</p>
 <p>For regression tasks, a popular choice is the <strong>Mean Squared Error</strong> a.k.a. <em>squared L2 norm</em>.</p>
 <div class="math notranslate nohighlight">
@@ -750,18 +756,18 @@ document.write(`
 </section>
 </section>
 <section id="optimization-algorithm">
-<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this heading">#</a></h3>
+<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Link to this heading">#</a></h3>
 <p>Used only during the training phase, it aims at finding the set of model parameters (denoted <span class="math notranslate nohighlight">\(\pmb{\omega^*}\)</span> or <span class="math notranslate nohighlight">\(\pmb{\theta^*}\)</span>) that minimizes the loss value.</p>
 <p>Depending on the task and the model type, several algorithms of various complexity exist.</p>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss"><img alt="Untrained Vs trained model" src="../_images/LossSideBySide.png" /></a></p>
 </section>
 </section>
 <section id="reducing-loss-via-gradient-descent">
-<h2>Reducing loss via gradient descent<a class="headerlink" href="#reducing-loss-via-gradient-descent" title="Permalink to this heading">#</a></h2>
+<h2>Reducing loss via gradient descent<a class="headerlink" href="#reducing-loss-via-gradient-descent" title="Link to this heading">#</a></h2>
 <section id="the-gradient-descent-algorithm">
-<h3>The gradient descent algorithm<a class="headerlink" href="#the-gradient-descent-algorithm" title="Permalink to this heading">#</a></h3>
+<h3>The gradient descent algorithm<a class="headerlink" href="#the-gradient-descent-algorithm" title="Link to this heading">#</a></h3>
 <section id="an-iterative-approach">
-<h4>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Permalink to this heading">#</a></h4>
+<h4>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The model’s parameters are iteratively updated until an optimum is reached.</p></li>
 <li><p>Each GD iteration combines two steps: computing the gradient of the loss function, then use it to update model parameters.</p></li>
@@ -769,7 +775,7 @@ document.write(`
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss"><img alt="Iterative approach" src="../_images/GradientDescentDiagram.png" /></a></p>
 </section>
 <section id="step-1-compute-gradient-of-loss-function">
-<h4>Step 1: compute gradient of loss function<a class="headerlink" href="#step-1-compute-gradient-of-loss-function" title="Permalink to this heading">#</a></h4>
+<h4>Step 1: compute gradient of loss function<a class="headerlink" href="#step-1-compute-gradient-of-loss-function" title="Link to this heading">#</a></h4>
 <p>A <strong>gradient</strong> expresses the variation of a function relative to the variation of its parameters.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega}) = \begin{pmatrix}
@@ -783,7 +789,7 @@ document.write(`
 </ul>
 </section>
 <section id="step-2-update-model-parameters">
-<h4>Step 2: update model parameters<a class="headerlink" href="#step-2-update-model-parameters" title="Permalink to this heading">#</a></h4>
+<h4>Step 2: update model parameters<a class="headerlink" href="#step-2-update-model-parameters" title="Link to this heading">#</a></h4>
 <p>In order to reduce loss for the next iteration, parameters are updated in the <strong>opposite direction</strong> of the gradient.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\]</div>
@@ -795,24 +801,24 @@ document.write(`
 </section>
 </section>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
 <section id="d-gradient-descent-one-parameter">
-<h4>1D gradient descent (one parameter)<a class="headerlink" href="#d-gradient-descent-one-parameter" title="Permalink to this heading">#</a></h4>
+<h4>1D gradient descent (one parameter)<a class="headerlink" href="#d-gradient-descent-one-parameter" title="Link to this heading">#</a></h4>
 <p><img alt="Gradient Descent" src="../_images/gradient_descent_1parameter.png" /></p>
 </section>
 <section id="d-gradient-descent-two-parameters">
-<h4>2D gradient descent (two parameters)<a class="headerlink" href="#d-gradient-descent-two-parameters" title="Permalink to this heading">#</a></h4>
+<h4>2D gradient descent (two parameters)<a class="headerlink" href="#d-gradient-descent-two-parameters" title="Link to this heading">#</a></h4>
 <p><img alt="Tangent Space" src="../_images/tangent_space.png" /></p>
 </section>
 <section id="dynamics-of-a-2d-gradient-descent">
-<h4>Dynamics of a 2D gradient descent<a class="headerlink" href="#dynamics-of-a-2d-gradient-descent" title="Permalink to this heading">#</a></h4>
+<h4>Dynamics of a 2D gradient descent<a class="headerlink" href="#dynamics-of-a-2d-gradient-descent" title="Link to this heading">#</a></h4>
 <p><a class="reference external" href="https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/"><img alt="Gradient descent line graph" src="../_images/gradient_descent_line_graph.gif" /></a></p>
 </section>
 </section>
 <section id="gradient-descent-types">
-<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this heading">#</a></h3>
+<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Link to this heading">#</a></h3>
 <section id="batch-gradient-descent">
-<h4>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Permalink to this heading">#</a></h4>
+<h4>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Link to this heading">#</a></h4>
 <p>The gradient is computed on the whole dataset before model parameters are updated.</p>
 <ul class="simple">
 <li><p>Advantages: simple and safe (always converges in the right direction).</p></li>
@@ -820,7 +826,7 @@ document.write(`
 </ul>
 </section>
 <section id="stochastic-gradient-descent-sgd">
-<h4>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this heading">#</a></h4>
+<h4>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Link to this heading">#</a></h4>
 <p>The gradient is computed on only one randomly chosen sample whole dataset before parameters are updated.</p>
 <ul class="simple">
 <li><p>Advantages:</p>
@@ -838,7 +844,7 @@ document.write(`
 </ul>
 </section>
 <section id="mini-batch-sgd">
-<h4>Mini-Batch SGD<a class="headerlink" href="#mini-batch-sgd" title="Permalink to this heading">#</a></h4>
+<h4>Mini-Batch SGD<a class="headerlink" href="#mini-batch-sgd" title="Link to this heading">#</a></h4>
 <p>The gradient is computed on a small set of samples, called a <em>batch</em>, before parameters are updated.</p>
 <ul class="simple">
 <li><p>Combines the advantages of batch and stochastic GD.</p></li>
@@ -848,13 +854,13 @@ document.write(`
 </section>
 </section>
 <section id="parameters-update">
-<h3>Parameters update<a class="headerlink" href="#parameters-update" title="Permalink to this heading">#</a></h3>
+<h3>Parameters update<a class="headerlink" href="#parameters-update" title="Link to this heading">#</a></h3>
 <section id="impact-of-learning-rate">
-<h4>Impact of learning rate<a class="headerlink" href="#impact-of-learning-rate" title="Permalink to this heading">#</a></h4>
+<h4>Impact of learning rate<a class="headerlink" href="#impact-of-learning-rate" title="Link to this heading">#</a></h4>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/fitter/graph"><img alt="Learning rate" src="../_images/learning_rate.png" /></a></p>
 </section>
 <section id="the-local-minima-problem">
-<h4>The local minima problem<a class="headerlink" href="#the-local-minima-problem" title="Permalink to this heading">#</a></h4>
+<h4>The local minima problem<a class="headerlink" href="#the-local-minima-problem" title="Link to this heading">#</a></h4>
 <p><img alt="Local minima" src="../_images/local_minima.jpg" /></p>
 <p><img alt="Gradient Descent" src="../_images/gd_ng.jpg" /></p>
 <div class="cell docutils container">
@@ -878,17 +884,17 @@ document.write(`
 </section>
 </section>
 <section id="gradient-descent-optimization-algorithms">
-<h3>Gradient descent optimization algorithms<a class="headerlink" href="#gradient-descent-optimization-algorithms" title="Permalink to this heading">#</a></h3>
+<h3>Gradient descent optimization algorithms<a class="headerlink" href="#gradient-descent-optimization-algorithms" title="Link to this heading">#</a></h3>
 <section id="gradient-descent-evolution-map">
-<h4>Gradient descent evolution map<a class="headerlink" href="#gradient-descent-evolution-map" title="Permalink to this heading">#</a></h4>
+<h4>Gradient descent evolution map<a class="headerlink" href="#gradient-descent-evolution-map" title="Link to this heading">#</a></h4>
 <p><a class="reference external" href="https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9"><img alt="Gradient Descent evolution map" src="../_images/gradient_descent_evolution_map.png" /></a></p>
 </section>
 <section id="momentum">
-<h4>Momentum<a class="headerlink" href="#momentum" title="Permalink to this heading">#</a></h4>
+<h4>Momentum<a class="headerlink" href="#momentum" title="Link to this heading">#</a></h4>
 <p>Momentum optimization accelerates the descent speed in the direction of the minimum by accumulating previous gradients. It can also escape plateaux faster then plain GD.</p>
 <p><a class="reference external" href="https://youtu.be/qPKKtvkVAjY"><img alt="Momemtum demo" src="../_images/gd_momentum_demo.gif" /></a></p>
 <section id="momentum-equations">
-<h5>Momentum equations<a class="headerlink" href="#momentum-equations" title="Permalink to this heading">#</a></h5>
+<h5>Momentum equations<a class="headerlink" href="#momentum-equations" title="Link to this heading">#</a></h5>
 <div class="math notranslate nohighlight">
 \[\pmb{m_{t+1}} = \beta_t \pmb{m_t} - \nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\]</div>
 <div class="math notranslate nohighlight">
@@ -899,12 +905,12 @@ document.write(`
 </ul>
 </section>
 <section id="momentum-vs-plain-gd">
-<h5>Momentum Vs plain GD<a class="headerlink" href="#momentum-vs-plain-gd" title="Permalink to this heading">#</a></h5>
+<h5>Momentum Vs plain GD<a class="headerlink" href="#momentum-vs-plain-gd" title="Link to this heading">#</a></h5>
 <p><a class="reference external" href="https://youtu.be/kVU8zTI-Od0"><img alt="Momentum Vs plain GD" src="../_images/gd_momentum.png" /></a></p>
 </section>
 </section>
 <section id="rmsprop">
-<h4>RMSprop<a class="headerlink" href="#rmsprop" title="Permalink to this heading">#</a></h4>
+<h4>RMSprop<a class="headerlink" href="#rmsprop" title="Link to this heading">#</a></h4>
 <p><em>RMSprop</em> decays the learning rate differently for each parameter, scaling down the gradient vector along the steepest dimensions. The underlying idea is to adjust the descent direction a bit more towards the global minimum.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{v_{t+1}} = \beta_t \pmb{v_t} + (1-\beta_t) \left(\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\right)^2\]</div>
@@ -916,7 +922,7 @@ document.write(`
 </ul>
 </section>
 <section id="adam-and-other-techniques">
-<h4>Adam and other techniques<a class="headerlink" href="#adam-and-other-techniques" title="Permalink to this heading">#</a></h4>
+<h4>Adam and other techniques<a class="headerlink" href="#adam-and-other-techniques" title="Link to this heading">#</a></h4>
 <p><em>Adam</em> (<em>Adaptive Moment Estimation</em>) combines the ideas of momentum and RMSprop. It is the <em>de facto</em> choice nowadays.</p>
 <p>Gradient descent optimization is a rich subfield of Machine Learning. Read more in <a class="reference external" href="http://ruder.io/optimizing-gradient-descent/">this article</a>.</p>
 </section>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Programming &#8212; ainotes</title>
   
@@ -29,39 +28,35 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'foundations/programming';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -160,7 +155,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
@@ -597,9 +603,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="programming">
-<h1>Programming<a class="headerlink" href="#programming" title="Permalink to this heading">#</a></h1>
+<h1>Programming<a class="headerlink" href="#programming" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Review the essential concepts of programming: variables, flow control, data structures, etc.</p></li>
 <li><p>Demonstrate their implementation in the <a class="reference external" href="https://www.python.org/">Python</a> programming language.</p></li>
@@ -608,7 +614,7 @@ document.write(`
 </ul>
 </section>
 <section id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>papermill
@@ -679,9 +685,9 @@ Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/
 </div>
 </section>
 <section id="the-python-language">
-<h2>The Python language<a class="headerlink" href="#the-python-language" title="Permalink to this heading">#</a></h2>
+<h2>The Python language<a class="headerlink" href="#the-python-language" title="Link to this heading">#</a></h2>
 <section id="python-in-a-nutshell">
-<h3>Python in a nutshell<a class="headerlink" href="#python-in-a-nutshell" title="Permalink to this heading">#</a></h3>
+<h3>Python in a nutshell<a class="headerlink" href="#python-in-a-nutshell" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="https://www.python.org">Python</a> is a multi-purpose programming language created in 1989 by <a class="reference external" href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido van Rossum</a> and developed under a open source license.</p>
 <p>It has the following characteristics:</p>
 <ul class="simple">
@@ -692,7 +698,7 @@ Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/
 </ul>
 </section>
 <section id="the-python-syntax">
-<h3>The Python syntax<a class="headerlink" href="#the-python-syntax" title="Permalink to this heading">#</a></h3>
+<h3>The Python syntax<a class="headerlink" href="#the-python-syntax" title="Link to this heading">#</a></h3>
 <blockquote>
 <div><p>For many more examples, see the cheatsheet below.</p>
 </div></blockquote>
@@ -721,7 +727,7 @@ Hello, Iggy
 </div>
 </section>
 <section id="a-prominent-language">
-<h3>A prominent language<a class="headerlink" href="#a-prominent-language" title="Permalink to this heading">#</a></h3>
+<h3>A prominent language<a class="headerlink" href="#a-prominent-language" title="Link to this heading">#</a></h3>
 <p>Python has become the language of choice for artificial intelligence and <a class="reference external" href="https://en.wikipedia.org/wiki/Data_science">Data Science</a>, for the following reasons:</p>
 <ul class="simple">
 <li><p>language qualities (ease of use, simplicity, versatility);</p></li>
@@ -730,13 +736,13 @@ Hello, Iggy
 </ul>
 </section>
 <section id="the-jupyter-notebook-format">
-<h3>The Jupyter Notebook format<a class="headerlink" href="#the-jupyter-notebook-format" title="Permalink to this heading">#</a></h3>
+<h3>The Jupyter Notebook format<a class="headerlink" href="#the-jupyter-notebook-format" title="Link to this heading">#</a></h3>
 <p>The <a class="reference external" href="https://jupyter.org/">Jupyter Notebook</a> is an open-source web application for creating and managing documents (called <em>notebooks</em>) that may contain executable code, equations, visualizations and text.</p>
 <p>A notebook file has an <em>.ipynb</em> extension. It contains blocks of text called <em>cells</em>, written in either code or <a class="reference external" href="https://www.markdownguide.org/">Markdown</a>. Notebooks have become a standard for experimenting and sharing results in many scientific fields.</p>
 <p><a class="reference external" href="https://jupyter.org/"><img alt="IPython" src="../_images/jupyterpreview.jpg" /></a></p>
 </section>
 <section id="running-python-code">
-<h3>Running Python code<a class="headerlink" href="#running-python-code" title="Permalink to this heading">#</a></h3>
+<h3>Running Python code<a class="headerlink" href="#running-python-code" title="Link to this heading">#</a></h3>
 <p>Python code can be run either:</p>
 <ul class="simple">
 <li><p><strong>locally</strong>, after installing a Python environment. <a class="reference external" href="https://www.anaconda.com/download">Anaconda</a>, a scientific distribution including many (1500+) specialized packages, is the easiest way to setup a work environment for AI with Python.</p></li>
@@ -745,10 +751,10 @@ Hello, Iggy
 </section>
 </section>
 <section id="yet-another-python-cheatsheet">
-<h2>(Yet another) Python cheatsheet<a class="headerlink" href="#yet-another-python-cheatsheet" title="Permalink to this heading">#</a></h2>
+<h2>(Yet another) Python cheatsheet<a class="headerlink" href="#yet-another-python-cheatsheet" title="Link to this heading">#</a></h2>
 <p>Inspired by <a class="reference external" href="https://jakevdp.github.io/WhirlwindTourOfPython/">A Whirlwind Tour of Python</a> and <a class="reference external" href="https://www.pythoncheatsheet.org/">another Python Cheatsheet</a>.</p>
 <section id="basics">
-<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this heading">#</a></h3>
+<h3>Basics<a class="headerlink" href="#basics" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print statement</span>
@@ -776,7 +782,7 @@ I&#39;m happy
 </div>
 </section>
 <section id="string-formatting">
-<h3>String formatting<a class="headerlink" href="#string-formatting" title="Permalink to this heading">#</a></h3>
+<h3>String formatting<a class="headerlink" href="#string-formatting" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Garance&quot;</span>
@@ -811,7 +817,7 @@ My name is Garance and I&#39;m 16 years old.
 </div>
 </section>
 <section id="numbers-and-arithmetic">
-<h3>Numbers and arithmetic<a class="headerlink" href="#numbers-and-arithmetic" title="Permalink to this heading">#</a></h3>
+<h3>Numbers and arithmetic<a class="headerlink" href="#numbers-and-arithmetic" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Type: int</span>
@@ -846,9 +852,9 @@ My name is Garance and I&#39;m 16 years old.
 </div>
 </section>
 <section id="flow-control">
-<h3>Flow control<a class="headerlink" href="#flow-control" title="Permalink to this heading">#</a></h3>
+<h3>Flow control<a class="headerlink" href="#flow-control" title="Link to this heading">#</a></h3>
 <section id="the-if-elif-else-statement">
-<h4>The if/elif/else statement<a class="headerlink" href="#the-if-elif-else-statement" title="Permalink to this heading">#</a></h4>
+<h4>The if/elif/else statement<a class="headerlink" href="#the-if-elif-else-statement" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Bob&quot;</span>
@@ -870,7 +876,7 @@ My name is Garance and I&#39;m 16 years old.
 </div>
 </section>
 <section id="the-while-loop">
-<h4>The while loop<a class="headerlink" href="#the-while-loop" title="Permalink to this heading">#</a></h4>
+<h4>The while loop<a class="headerlink" href="#the-while-loop" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
@@ -898,7 +904,7 @@ My name is Garance and I&#39;m 16 years old.
 </div>
 </section>
 <section id="the-for-else-loop">
-<h4>The for/else loop<a class="headerlink" href="#the-for-else-loop" title="Permalink to this heading">#</a></h4>
+<h4>The for/else loop<a class="headerlink" href="#the-for-else-loop" title="Link to this heading">#</a></h4>
 <p>The optional <code class="docutils literal notranslate"><span class="pre">else</span></code>statement is only useful when a <code class="docutils literal notranslate"><span class="pre">break</span></code> condition can occur in the loop.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -920,9 +926,9 @@ My name is Garance and I&#39;m 16 years old.
 </section>
 </section>
 <section id="data-structures">
-<h3>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this heading">#</a></h3>
+<h3>Data structures<a class="headerlink" href="#data-structures" title="Link to this heading">#</a></h3>
 <section id="lists">
-<h4>Lists<a class="headerlink" href="#lists" title="Permalink to this heading">#</a></h4>
+<h4>Lists<a class="headerlink" href="#lists" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="s2">&quot;Belgium&quot;</span><span class="p">,</span> <span class="s2">&quot;India&quot;</span><span class="p">]</span>
@@ -949,7 +955,7 @@ India
 </div>
 </section>
 <section id="list-indexing-and-slicing">
-<h4>List indexing and slicing<a class="headerlink" href="#list-indexing-and-slicing" title="Permalink to this heading">#</a></h4>
+<h4>List indexing and slicing<a class="headerlink" href="#list-indexing-and-slicing" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">countries</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
@@ -974,7 +980,7 @@ India
 </div>
 </section>
 <section id="tuples">
-<h4>Tuples<a class="headerlink" href="#tuples" title="Permalink to this heading">#</a></h4>
+<h4>Tuples<a class="headerlink" href="#tuples" title="Link to this heading">#</a></h4>
 <p>Contrary to lists, tuples are <em>immutable</em> (read-only).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -997,7 +1003,7 @@ India
 </div>
 </section>
 <section id="dictionaries">
-<h4>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this heading">#</a></h4>
+<h4>Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;one&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
@@ -1022,7 +1028,7 @@ ninety =&gt; 90
 </div>
 </section>
 <section id="sets">
-<h4>Sets<a class="headerlink" href="#sets" title="Permalink to this heading">#</a></h4>
+<h4>Sets<a class="headerlink" href="#sets" title="Link to this heading">#</a></h4>
 <p>A set is an unordered collection of unique items.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1040,7 +1046,7 @@ ninety =&gt; 90
 </div>
 </section>
 <section id="union-intersection-and-difference-of-sets">
-<h4>Union, intersection and difference of sets<a class="headerlink" href="#union-intersection-and-difference-of-sets" title="Permalink to this heading">#</a></h4>
+<h4>Union, intersection and difference of sets<a class="headerlink" href="#union-intersection-and-difference-of-sets" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">primes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
@@ -1063,9 +1069,9 @@ ninety =&gt; 90
 </section>
 </section>
 <section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
 <section id="function-definition">
-<h4>Function definition<a class="headerlink" href="#function-definition" title="Permalink to this heading">#</a></h4>
+<h4>Function definition<a class="headerlink" href="#function-definition" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -1078,7 +1084,7 @@ ninety =&gt; 90
 </div>
 </section>
 <section id="function-call">
-<h4>Function call<a class="headerlink" href="#function-call" title="Permalink to this heading">#</a></h4>
+<h4>Function call<a class="headerlink" href="#function-call" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print function docstring</span>
@@ -1103,7 +1109,7 @@ square(x)
 </div>
 </section>
 <section id="default-parameter-values">
-<h4>Default parameter values<a class="headerlink" href="#default-parameter-values" title="Permalink to this heading">#</a></h4>
+<h4>Default parameter values<a class="headerlink" href="#default-parameter-values" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -1128,7 +1134,7 @@ square(x)
 </div>
 </section>
 <section id="flexible-function-arguments">
-<h4>Flexible function arguments<a class="headerlink" href="#flexible-function-arguments" title="Permalink to this heading">#</a></h4>
+<h4>Flexible function arguments<a class="headerlink" href="#flexible-function-arguments" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">catch_all_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1151,7 +1157,7 @@ kwargs = {&#39;a&#39;: 10, &#39;b&#39;: &#39;hello&#39;}
 </div>
 </section>
 <section id="lambda-anonymous-functions">
-<h4>Lambda (anonymous) functions<a class="headerlink" href="#lambda-anonymous-functions" title="Permalink to this heading">#</a></h4>
+<h4>Lambda (anonymous) functions<a class="headerlink" href="#lambda-anonymous-functions" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
@@ -1169,9 +1175,9 @@ kwargs = {&#39;a&#39;: 10, &#39;b&#39;: &#39;hello&#39;}
 </section>
 </section>
 <section id="iterators">
-<h3>Iterators<a class="headerlink" href="#iterators" title="Permalink to this heading">#</a></h3>
+<h3>Iterators<a class="headerlink" href="#iterators" title="Link to this heading">#</a></h3>
 <section id="a-unified-interface-for-iterating">
-<h4>A unified interface for iterating<a class="headerlink" href="#a-unified-interface-for-iterating" title="Permalink to this heading">#</a></h4>
+<h4>A unified interface for iterating<a class="headerlink" href="#a-unified-interface-for-iterating" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
@@ -1203,7 +1209,7 @@ C
 </div>
 </section>
 <section id="under-the-hood">
-<h4>Under the hood<a class="headerlink" href="#under-the-hood" title="Permalink to this heading">#</a></h4>
+<h4>Under the hood<a class="headerlink" href="#under-the-hood" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>An <strong>iterable</strong> is a object that has an <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> method which returns an <strong>iterator</strong> to provide iteration support.</p></li>
 <li><p>An <strong>iterator</strong> is an object with a <code class="docutils literal notranslate"><span class="pre">__next__</span></code> method which returns the next iteration element.</p></li>
@@ -1213,7 +1219,7 @@ C
 </ul>
 </section>
 <section id="the-range-function">
-<h4>The range() function<a class="headerlink" href="#the-range-function" title="Permalink to this heading">#</a></h4>
+<h4>The range() function<a class="headerlink" href="#the-range-function" title="Link to this heading">#</a></h4>
 <p>It doesn’t return a list, but a <code class="docutils literal notranslate"><span class="pre">range</span></code> object (which exposes an iterator).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1277,7 +1283,7 @@ C
 </div>
 </section>
 <section id="the-enumerate-function">
-<h4>The enumerate() function<a class="headerlink" href="#the-enumerate-function" title="Permalink to this heading">#</a></h4>
+<h4>The enumerate() function<a class="headerlink" href="#the-enumerate-function" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">supplies</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pens&quot;</span><span class="p">,</span> <span class="s2">&quot;staplers&quot;</span><span class="p">,</span> <span class="s2">&quot;flame-throwers&quot;</span><span class="p">,</span> <span class="s2">&quot;binders&quot;</span><span class="p">]</span>
@@ -1299,16 +1305,16 @@ Index 3 in supplies is: binders
 </section>
 </section>
 <section id="comprehensions">
-<h3>Comprehensions<a class="headerlink" href="#comprehensions" title="Permalink to this heading">#</a></h3>
+<h3>Comprehensions<a class="headerlink" href="#comprehensions" title="Link to this heading">#</a></h3>
 <section id="principle">
-<h4>Principle<a class="headerlink" href="#principle" title="Permalink to this heading">#</a></h4>
+<h4>Principle<a class="headerlink" href="#principle" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Provide a concise way to create sequences.</p></li>
 <li><p>General syntax: <code class="docutils literal notranslate"><span class="pre">[expr</span> <span class="pre">for</span> <span class="pre">var</span> <span class="pre">in</span> <span class="pre">iterable]</span></code>.</p></li>
 </ul>
 </section>
 <section id="list-comprehensions">
-<h4>List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this heading">#</a></h4>
+<h4>List comprehensions<a class="headerlink" href="#list-comprehensions" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions</span>
@@ -1336,7 +1342,7 @@ Index 3 in supplies is: binders
 </div>
 </section>
 <section id="set-and-dictionary-comprehensions">
-<h4>Set and dictionary comprehensions<a class="headerlink" href="#set-and-dictionary-comprehensions" title="Permalink to this heading">#</a></h4>
+<h4>Set and dictionary comprehensions<a class="headerlink" href="#set-and-dictionary-comprehensions" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an uppercase set</span>
@@ -1363,9 +1369,9 @@ Index 3 in supplies is: binders
 </section>
 </section>
 <section id="generators">
-<h3>Generators<a class="headerlink" href="#generators" title="Permalink to this heading">#</a></h3>
+<h3>Generators<a class="headerlink" href="#generators" title="Link to this heading">#</a></h3>
 <section id="id1">
-<h4>Principle<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<h4>Principle<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>A <strong>generator</strong> defines a recipe for producing values.</p></li>
 <li><p>A generator does not actually compute the values until they are needed.</p></li>
@@ -1374,7 +1380,7 @@ Index 3 in supplies is: binders
 </ul>
 </section>
 <section id="generators-expressions">
-<h4>Generators expressions<a class="headerlink" href="#generators-expressions" title="Permalink to this heading">#</a></h4>
+<h4>Generators expressions<a class="headerlink" href="#generators-expressions" title="Link to this heading">#</a></h4>
 <p>They use parentheses, not square brackets like list comprehensions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1394,7 +1400,7 @@ Index 3 in supplies is: binders
 </div>
 </section>
 <section id="generator-functions">
-<h4>Generator functions<a class="headerlink" href="#generator-functions" title="Permalink to this heading">#</a></h4>
+<h4>Generator functions<a class="headerlink" href="#generator-functions" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>A function that, rather than using <code class="docutils literal notranslate"><span class="pre">return</span></code> to return a value once, uses <code class="docutils literal notranslate"><span class="pre">yield</span></code> to yield a (potentially infinite) sequence of values.</p></li>
 <li><p>Useful when the generator algorithm gets complicated.</p></li>
@@ -1424,9 +1430,9 @@ Index 3 in supplies is: binders
 </section>
 </section>
 <section id="object-oriented-programming">
-<h3>Object-oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this heading">#</a></h3>
+<h3>Object-oriented programming<a class="headerlink" href="#object-oriented-programming" title="Link to this heading">#</a></h3>
 <section id="class-definition">
-<h4>Class definition<a class="headerlink" href="#class-definition" title="Permalink to this heading">#</a></h4>
+<h4>Class definition<a class="headerlink" href="#class-definition" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://docs.python.org/3/tutorial/classes.html</span>
@@ -1451,7 +1457,7 @@ Index 3 in supplies is: binders
 </div>
 </section>
 <section id="class-instanciation">
-<h4>Class instanciation<a class="headerlink" href="#class-instanciation" title="Permalink to this heading">#</a></h4>
+<h4>Class instanciation<a class="headerlink" href="#class-instanciation" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_account</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -1471,7 +1477,7 @@ Index 3 in supplies is: binders
 </div>
 </section>
 <section id="instance-properties">
-<h4>Instance properties<a class="headerlink" href="#instance-properties" title="Permalink to this heading">#</a></h4>
+<h4>Instance properties<a class="headerlink" href="#instance-properties" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://docs.python.org/3/library/functions.html#property</span>
@@ -1500,7 +1506,7 @@ Index 3 in supplies is: binders
 </div>
 </section>
 <section id="using-instance-properties">
-<h4>Using instance properties<a class="headerlink" href="#using-instance-properties" title="Permalink to this heading">#</a></h4>
+<h4>Using instance properties<a class="headerlink" href="#using-instance-properties" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_strange_vehicle</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;electric&quot;</span><span class="p">)</span>
@@ -1522,7 +1528,7 @@ electric
 </div>
 </section>
 <section id="class-attributes">
-<h4>Class attributes<a class="headerlink" href="#class-attributes" title="Permalink to this heading">#</a></h4>
+<h4>Class attributes<a class="headerlink" href="#class-attributes" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
@@ -1555,7 +1561,7 @@ electric
 </div>
 </section>
 <section id="inheritance">
-<h4>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h4>
+<h4>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
@@ -1588,7 +1594,7 @@ Mammal
 </div>
 </section>
 <section id="dataclasses">
-<h4>Dataclasses<a class="headerlink" href="#dataclasses" title="Permalink to this heading">#</a></h4>
+<h4>Dataclasses<a class="headerlink" href="#dataclasses" title="Link to this heading">#</a></h4>
 <p>Simplified syntax for attribute-centric classes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1619,7 +1625,7 @@ Mammal
 </section>
 </section>
 <section id="modules-and-packages">
-<h3>Modules and packages<a class="headerlink" href="#modules-and-packages" title="Permalink to this heading">#</a></h3>
+<h3>Modules and packages<a class="headerlink" href="#modules-and-packages" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing all module content into a namespace</span>
@@ -1650,9 +1656,9 @@ Mammal
 </section>
 </section>
 <section id="python-good-practices">
-<h2>Python good practices<a class="headerlink" href="#python-good-practices" title="Permalink to this heading">#</a></h2>
+<h2>Python good practices<a class="headerlink" href="#python-good-practices" title="Link to this heading">#</a></h2>
 <section id="writing-pythonic-code">
-<h3>Writing pythonic code<a class="headerlink" href="#writing-pythonic-code" title="Permalink to this heading">#</a></h3>
+<h3>Writing pythonic code<a class="headerlink" href="#writing-pythonic-code" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
@@ -1686,7 +1692,7 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div>
 </div>
 <section id="what-does-pythonic-mean">
-<h4>What does “Pythonic” mean?<a class="headerlink" href="#what-does-pythonic-mean" title="Permalink to this heading">#</a></h4>
+<h4>What does “Pythonic” mean?<a class="headerlink" href="#what-does-pythonic-mean" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Python code is considered <em>pythonic</em> if it:</p>
 <ul>
@@ -1701,7 +1707,7 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div></blockquote>
 </section>
 <section id="example-swapping-two-variables">
-<h4>Example: swapping two variables<a class="headerlink" href="#example-swapping-two-variables" title="Permalink to this heading">#</a></h4>
+<h4>Example: swapping two variables<a class="headerlink" href="#example-swapping-two-variables" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
@@ -1728,7 +1734,7 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </div>
 </section>
 <section id="example-iterating-on-a-list">
-<h4>Example: iterating on a list<a class="headerlink" href="#example-iterating-on-a-list" title="Permalink to this heading">#</a></h4>
+<h4>Example: iterating on a list<a class="headerlink" href="#example-iterating-on-a-list" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
@@ -1766,7 +1772,7 @@ c
 </div>
 </section>
 <section id="example-indexed-traversal">
-<h4>Example: indexed traversal<a class="headerlink" href="#example-indexed-traversal" title="Permalink to this heading">#</a></h4>
+<h4>Example: indexed traversal<a class="headerlink" href="#example-indexed-traversal" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
@@ -1794,7 +1800,7 @@ c
 </div>
 </section>
 <section id="example-searching-in-a-list">
-<h4>Example: searching in a list<a class="headerlink" href="#example-searching-in-a-list" title="Permalink to this heading">#</a></h4>
+<h4>Example: searching in a list<a class="headerlink" href="#example-searching-in-a-list" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apples&quot;</span><span class="p">,</span> <span class="s2">&quot;oranges&quot;</span><span class="p">,</span> <span class="s2">&quot;bananas&quot;</span><span class="p">,</span> <span class="s2">&quot;grapes&quot;</span><span class="p">]</span>
@@ -1823,7 +1829,7 @@ False
 </div>
 </section>
 <section id="example-generating-a-list">
-<h4>Example: generating a list<a class="headerlink" href="#example-generating-a-list" title="Permalink to this heading">#</a></h4>
+<h4>Example: generating a list<a class="headerlink" href="#example-generating-a-list" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
@@ -1852,7 +1858,7 @@ False
 </div>
 </section>
 <section id="code-style">
-<h4>Code style<a class="headerlink" href="#code-style" title="Permalink to this heading">#</a></h4>
+<h4>Code style<a class="headerlink" href="#code-style" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> is the official style guide for Python:</p>
 <ul>
@@ -1867,7 +1873,7 @@ False
 </ul>
 </section>
 <section id="beyond-pep8">
-<h4>Beyond PEP8<a class="headerlink" href="#beyond-pep8" title="Permalink to this heading">#</a></h4>
+<h4>Beyond PEP8<a class="headerlink" href="#beyond-pep8" title="Link to this heading">#</a></h4>
 <p>Focusing on style and PEP8-compliance might make you miss more fundamental code flaws.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1891,7 +1897,7 @@ False
 </div>
 </section>
 <section id="docstrings">
-<h4>Docstrings<a class="headerlink" href="#docstrings" title="Permalink to this heading">#</a></h4>
+<h4>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h4>
 <p>A <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">docstring</a> is a string literal that occurs as the first statement in a module, function, class, or method definition to document it.</p>
 <p>All modules, classes, public methods and exported functions should include a docstring.</p>
 <div class="cell docutils container">
@@ -1912,7 +1918,7 @@ False
 </div>
 </section>
 <section id="code-linting">
-<h4>Code linting<a class="headerlink" href="#code-linting" title="Permalink to this heading">#</a></h4>
+<h4>Code linting<a class="headerlink" href="#code-linting" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><em>Linting</em> is the process of checking code for syntactical and stylistic problems before execution.</p></li>
 <li><p>It is useful to catch errors and improve code quality in dynamically typed, interpreted languages, where there is no compiler.</p></li>
@@ -1920,7 +1926,7 @@ False
 </ul>
 </section>
 <section id="type-annotations">
-<h4>Type annotations<a class="headerlink" href="#type-annotations" title="Permalink to this heading">#</a></h4>
+<h4>Type annotations<a class="headerlink" href="#type-annotations" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Added in Python 3.5, <a class="reference external" href="https://www.python.org/dev/peps/pep-0484/">type annotations</a> allow to add type hints to code entities like variables or functions, bringing a statically typed flavour to the language.</p></li>
 <li><p><a class="reference external" href="http://mypy-lang.org/">mypy</a> can automatically check the code for annotation correctness.</p></li>
@@ -1947,7 +1953,7 @@ False
 </div>
 </section>
 <section id="unit-tests">
-<h4>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this heading">#</a></h4>
+<h4>Unit tests<a class="headerlink" href="#unit-tests" title="Link to this heading">#</a></h4>
 <p>Unit tests automate the testing of individual code elements like functions or methods, thus decreasing the risk of bugs and regressions.</p>
 <p>They can be implemented in Python using tools like <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest</a> or <a class="reference external" href="https://docs.pytest.org">pytest</a>.</p>
 <div class="cell docutils container">
@@ -1968,9 +1974,9 @@ False
 </section>
 </section>
 <section id="packaging-and-dependency-management">
-<h3>Packaging and dependency management<a class="headerlink" href="#packaging-and-dependency-management" title="Permalink to this heading">#</a></h3>
+<h3>Packaging and dependency management<a class="headerlink" href="#packaging-and-dependency-management" title="Link to this heading">#</a></h3>
 <section id="managing-dependencies-in-python">
-<h4>Managing dependencies in Python<a class="headerlink" href="#managing-dependencies-in-python" title="Permalink to this heading">#</a></h4>
+<h4>Managing dependencies in Python<a class="headerlink" href="#managing-dependencies-in-python" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Most Python apps depend on third-party libraries and frameworks (NumPy, Flask, Requests…).</p></li>
 <li><p>These tools may also have external dependencies, and so on.</p></li>
@@ -1983,7 +1989,7 @@ False
 </ul>
 </section>
 <section id="semantic-versioning">
-<h4>Semantic versioning<a class="headerlink" href="#semantic-versioning" title="Permalink to this heading">#</a></h4>
+<h4>Semantic versioning<a class="headerlink" href="#semantic-versioning" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Software versioning convention used in many ecosystems.</p></li>
 <li><p>A version number comes as a suite of three digits <code class="docutils literal notranslate"><span class="pre">X.Y.Z</span></code>.</p>
@@ -1997,7 +2003,7 @@ False
 </ul>
 </section>
 <section id="pip-and-requirements-txt">
-<h4>pip and requirements.txt<a class="headerlink" href="#pip-and-requirements-txt" title="Permalink to this heading">#</a></h4>
+<h4>pip and requirements.txt<a class="headerlink" href="#pip-and-requirements-txt" title="Link to this heading">#</a></h4>
 <p>A <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is the most basic way of declaring dependencies in Python.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>certifi&gt;=2020.11.0
 chardet==4.0.0
@@ -2012,7 +2018,7 @@ Flask&gt;=1.1.0
 </div>
 </section>
 <section id="virtual-environments">
-<h4>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this heading">#</a></h4>
+<h4>Virtual environments<a class="headerlink" href="#virtual-environments" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>A <strong>virtual environment</strong> is an isolated Python environment where a project’s dependencies are installed.</p></li>
 <li><p>Using them prevents the risk of mixing dependencies required by different projects on the same machine.</p></li>
@@ -2020,7 +2026,7 @@ Flask&gt;=1.1.0
 </ul>
 </section>
 <section id="conda-and-environment-yml">
-<h4>conda and environment.yml<a class="headerlink" href="#conda-and-environment-yml" title="Permalink to this heading">#</a></h4>
+<h4>conda and environment.yml<a class="headerlink" href="#conda-and-environment-yml" title="Link to this heading">#</a></h4>
 <p>Installed as part of the <a class="reference external" href="https://www.anaconda.com/">Anaconda</a> distribution, the <a class="reference external" href="https://docs.conda.io">conda</a> package manager reads an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file to install the dependencies associated to a specific virtual environment.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-env</span>
 
@@ -2036,7 +2042,7 @@ Flask&gt;=1.1.0
 </div>
 </section>
 <section id="poetry">
-<h4>Poetry<a class="headerlink" href="#poetry" title="Permalink to this heading">#</a></h4>
+<h4>Poetry<a class="headerlink" href="#poetry" title="Link to this heading">#</a></h4>
 <p><a class="reference external" href="https://python-poetry.org">Poetry</a> is a recent packaging and dependency management tool for Python. It downloads packages from <a class="reference external" href="https://pypi.org/">PyPI</a> by default.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new poetry-compliant project in the my-project folder</span>
 poetry<span class="w"> </span>new<span class="w"> </span>my-project
@@ -2056,7 +2062,7 @@ poetry<span class="w"> </span>update
 </div>
 </section>
 <section id="poetry-and-virtual-environments">
-<h4>Poetry and virtual environments<a class="headerlink" href="#poetry-and-virtual-environments" title="Permalink to this heading">#</a></h4>
+<h4>Poetry and virtual environments<a class="headerlink" href="#poetry-and-virtual-environments" title="Link to this heading">#</a></h4>
 <p>By default, Poetry creates a virtual environment for the configured project in a user-specific folder. A standard practice is to store it in the project’s folder.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tell Poetry to store the environment in the local project folder</span>
 poetry<span class="w"> </span>config<span class="w"> </span>virtualenvs.in-project<span class="w"> </span><span class="nb">true</span>
@@ -2067,7 +2073,7 @@ poetry<span class="w"> </span>shell
 </div>
 </section>
 <section id="the-pyproject-toml-file">
-<h4>The pyproject.toml file<a class="headerlink" href="#the-pyproject-toml-file" title="Permalink to this heading">#</a></h4>
+<h4>The pyproject.toml file<a class="headerlink" href="#the-pyproject-toml-file" title="Link to this heading">#</a></h4>
 <p>Poetry configuration file, soon-to-be standard for Python projects.</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry]</span>
 <span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;poetry example&quot;</span>
@@ -2088,7 +2094,7 @@ poetry<span class="w"> </span>shell
 </div>
 </section>
 <section id="caret-requirements">
-<h4>Caret requirements<a class="headerlink" href="#caret-requirements" title="Permalink to this heading">#</a></h4>
+<h4>Caret requirements<a class="headerlink" href="#caret-requirements" title="Link to this heading">#</a></h4>
 <p>Offers a way to precisely define dependency versions.</p>
 <table class="table">
 <thead>
@@ -2116,7 +2122,7 @@ poetry<span class="w"> </span>shell
 </table>
 </section>
 <section id="the-poetry-lock-file">
-<h4>The poetry.lock file<a class="headerlink" href="#the-poetry-lock-file" title="Permalink to this heading">#</a></h4>
+<h4>The poetry.lock file<a class="headerlink" href="#the-poetry-lock-file" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The first time Poetry install dependencies, it creates a <code class="docutils literal notranslate"><span class="pre">poetry.lock</span></code> file that contains the exact versions of all installed packages.</p></li>
 <li><p>Subsequent installs will use these exact versions to ensure consistency.</p></li>
@@ -2125,9 +2131,9 @@ poetry<span class="w"> </span>shell
 </section>
 </section>
 <section id="working-with-notebooks">
-<h3>Working with notebooks<a class="headerlink" href="#working-with-notebooks" title="Permalink to this heading">#</a></h3>
+<h3>Working with notebooks<a class="headerlink" href="#working-with-notebooks" title="Link to this heading">#</a></h3>
 <section id="advantages-of-jupyter-notebooks">
-<h4>Advantages of Jupyter notebooks<a class="headerlink" href="#advantages-of-jupyter-notebooks" title="Permalink to this heading">#</a></h4>
+<h4>Advantages of Jupyter notebooks<a class="headerlink" href="#advantages-of-jupyter-notebooks" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Standard format for mixing text, images and (executable) code.</p></li>
 <li><p>Open source and platform-independant.</p></li>
@@ -2137,7 +2143,7 @@ poetry<span class="w"> </span>shell
 </ul>
 </section>
 <section id="drawbacks-of-jupyter-notebooks">
-<h4>Drawbacks of Jupyter notebooks<a class="headerlink" href="#drawbacks-of-jupyter-notebooks" title="Permalink to this heading">#</a></h4>
+<h4>Drawbacks of Jupyter notebooks<a class="headerlink" href="#drawbacks-of-jupyter-notebooks" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Arbitrary execution order of cells can cause confusing errors.</p></li>
 <li><p>Notebooks don’t encourage good programming habits like modularization, linting and tests.</p></li>
@@ -2146,17 +2152,17 @@ poetry<span class="w"> </span>shell
 </ul>
 </section>
 <section id="collaborating-with-notebooks">
-<h4>Collaborating with notebooks<a class="headerlink" href="#collaborating-with-notebooks" title="Permalink to this heading">#</a></h4>
+<h4>Collaborating with notebooks<a class="headerlink" href="#collaborating-with-notebooks" title="Link to this heading">#</a></h4>
 <p>A common solution for sharing notebooks between a team is to use <a class="reference external" href="https://jupytext.readthedocs.io">Jupytext</a>. This tool can associate an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file with a Python file to facilitate collaboration and version control.</p>
 </section>
 <section id="code-organization">
-<h4>Code organization<a class="headerlink" href="#code-organization" title="Permalink to this heading">#</a></h4>
+<h4>Code organization<a class="headerlink" href="#code-organization" title="Link to this heading">#</a></h4>
 <p>Monolithic notebooks can grow over time and become hard to understand and maintain.</p>
 <p>Just like in a traditional software project, it is possible to split them into separate parts, thus following the <a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> design principle.</p>
 <p>Code can be splitted into several sub-notebooks and/or external Python files. The latter facilitates unit testing and version control.</p>
 </section>
 <section id="notebook-workflow">
-<h4>Notebook workflow<a class="headerlink" href="#notebook-workflow" title="Permalink to this heading">#</a></h4>
+<h4>Notebook workflow<a class="headerlink" href="#notebook-workflow" title="Link to this heading">#</a></h4>
 <p>Tools like <a class="reference external" href="https://papermill.readthedocs.io">papermill</a> can orchestrate the execution of several notebooks in a row. External parameters can be passed to notebooks, and the runtime flow can depend on the execution results of each notebook.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -2195,7 +2201,7 @@ Executing: 100%|█████████████████████�
 </section>
 </section>
 <section id="additional-resources">
-<h3>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this heading">#</a></h3>
+<h3>Additional resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="https://docs.quantifiedcode.com/python-anti-patterns/index.html">The Little Book of Python Anti-Patterns</a></p>
 </section>
 </section>
