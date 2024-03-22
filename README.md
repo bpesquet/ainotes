@@ -4,9 +4,9 @@
 
 # Artificial Intelligence notes
 
-A collection of interactive notes related to Artificial Intelligence built for educational purposes.
+A collection of interactive notes related to Artificial Intelligence. Built for educational purposes and updated (somewhat) regularly.
 
-## Project structure
+## Structure
 
 This project has the following structure:
 
@@ -57,3 +57,9 @@ jupyter-book build docs/  # Or simply: jb build docs/
 # GIF files must be replaced by their static counterparts (PNG or JPG) in the notebook before launching this command
 jupyter nbconvert --to PDF {notebook_file_name}
 ```
+
+## License
+
+Licenses are [Creative Commons](LICENSE) for the textual content and [MIT](CODE_LICENSE) for the code. See also [Acknowledgments](docs/reference/acknowledgments.md).
+
+Copyright © 2023-present [Baptiste Pesquet](https://bpesquet.fr).
