@@ -27,7 +27,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: "3.x"
+        python-version: "3.11"
         cache: "poetry"
     - name: Install package dependencies
       run: poetry install
@@ -61,7 +61,6 @@ jobs:
     - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
 
-  # Should work but TestPyPI indicates that the project already exists: commenting job for now
   publish-to-testpypi:
     name: Publish to TestPyPI
     needs:
