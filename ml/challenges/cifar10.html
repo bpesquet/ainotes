@@ -512,11 +512,27 @@ document.write(`
 <ul class="simple">
 <li><p>Follow the main steps of a supervised ML project: data loading and exploring, data preparation, model training and evaluation.</p></li>
 <li><p>Use the <a class="reference external" href="https://pytorch.org">PyTorch</a> library for data loading and model training. If you are new to it, consider following its <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/intro.html">official tutorial</a>.</p></li>
-<li><p>Don’t forget to setup your environment by importing the necessary Python packages. Several helper functions (see below) have already been defined for you.</p></li>
+<li><p>Don’t forget to setup your environment by importing the necessary Python packages. In particular, the <a class="reference external" href="https://github.com/bpesquet/ainotes">ainotes</a> project contains several useful functions for <a class="reference external" href="https://github.com/bpesquet/ainotes/blob/main/ainotes/utils/plot.py">plotting</a> and <a class="reference external" href="https://github.com/bpesquet/ainotes/blob/main/ainotes/utils/train.py">training</a>.</p></li>
 <li><p>Regarding data loading and preparation, bitmap images should be normalized. You can find an example using the CIFAR10 dataset <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#load-and-normalize-cifar10">here</a>.</p></li>
 <li><p>You may train and evaluate a standard MultiLayer Perceptron, using <a class="reference internal" href="../ann.html"><span class="std std-doc">this chapter</span></a> as a blueprint. Warning: you will have to adapt the inputs of your network to the color images of the CIFAR10 dataset.</p></li>
 <li><p><strong>Bonus</strong>: train a convolutional neural network using <a class="reference internal" href="../cnn.html"><span class="std std-doc">this chapter</span></a> as a blueprint. After training, compare its performance with the MLP results.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pylint: disable=wrong-import-position</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Installing the ainotes package is only necessary in standalone runtime environments like Colab</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;COLAB_RELEASE_TAG&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standalone runtime environment detected, installing ainotes package&quot;</span><span class="p">)</span>
+    <span class="o">%</span><span class="k">pip</span> install ainotes
+
+<span class="c1"># pylint: enable=wrong-import-position</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
