@@ -1,8 +1,26 @@
+[![Python Versions](https://img.shields.io/pypi/pyversions/ainotes.svg)](https://pypi.org/project/ainotes)
+[![PyPI Version](https://img.shields.io/pypi/v/ainotes.svg)](https://pypi.org/project/ainotes)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 # Artificial Intelligence notes
 
-A collection of interactive notes related to Artificial Intelligence.
+A collection of interactive notes related to Artificial Intelligence built for educational purposes.
 
-## Dependencies and toolchain
+## Project structure
+
+This project has the following structure:
+
+- [ainotes/](ainotes) contains the Python source files;
+- [data/](data) contains the datasets used by some of the notes;
+- [docs/](docs) contains the [Jupyter](https://jupyter.org/) notebooks synchronized with Python files and used to create the [online version](https://www.bpesquet.fr/ainotes) of the notes.
+
+Once a new notebook (`.ipynb` file) is created in the `docs/` folder, it is automagically paired with a Python (`.py`) file by the same name in the `ainotes/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file.
+
+The notebooks are versioned in order to display their output online and open them in cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
+
+The project is also published as a [package](https://pypi.org/project/ainotes/) on [PyPI](https://pypi.org). This is necessary to import shared code in cloud execution platforms.
+
+## Toolchain
 
 This project is built with the following software:
 
@@ -10,20 +28,13 @@ This project is built with the following software:
 - [Poetry](https://python-poetry.org/) for dependency management and deployment;
 - [Black](https://github.com/psf/black) for code formatting;
 - [Pylint](https://github.com/pylint-dev/pylint) to detect programming mistakes before execution;
-
-Additionally, it uses the following tools to create the [online version](https://www.bpesquet.fr/ainotes) of these notes:
-
-- [Jupytext](https://jupytext.readthedocs.io) to synchronize Python source files with [Jupyter](https://jupyter.org/) notebooks;
+- [Jupytext](https://jupytext.readthedocs.io) to synchronize Python source files with Jupyter notebooks;
 - [Jupyter Book](https://jupyterbook.org) to generate a static website from the notebooks;
-- A [GitHub Action](.github/workflows/deploy.yaml) to implement [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) and publish the website to [GitHub Pages](https://pages.github.com/) after each code push.
-
-When teaching, I run the notebooks in a local Jupyter server and use [RISE](https://rise.readthedocs.io) to showcase them as live [reveal.js](https://revealjs.com)-based presentations.
+- [RISE](https://rise.readthedocs.io) to showcase notebooks as live [reveal.js](https://revealjs.com)-based presentations;
+- A [GitHub Action](.github/workflows/deploy-book.yaml) to publish the website to [GitHub Pages](https://pages.github.com/);
+- Another [GitHub Action](.github/workflows/publish-package.yaml) to publish the source code as a PyPI/TestPyPI package.
 
 ## Development notes
-
-Once a new `.ipynb` is created in the `docs/` folder, it is automagically paired with a `.py` file by the same name in the `ainotes/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file.
-
-The `.ipynb` files are still versioned in order to show their output online, and access them from cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
 
 Here are some useful commands for running this project:
 

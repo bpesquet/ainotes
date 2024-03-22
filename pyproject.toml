@@ -1,11 +1,15 @@
 [tool.poetry]
 name = "ainotes"
-version = "0.1.14"
-description = "Artificial Intelligence notes"
+version = "0.1.15"
+description = "A collection of interactive notes related to Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
-readme = "README.md"
+readme = "README-package.md"  # Project description on PyPI
+license = "LICENSE"
 
-# Code dependencies
+[project.urls]
+Repository = "https://github.com/bpesquet/ainotes.git"
+
+# Core dependencies
 [tool.poetry.dependencies]
 python = "^3.10"
 
