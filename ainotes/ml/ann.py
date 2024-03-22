@@ -11,9 +11,20 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
+# %% slideshow={"slide_type": "skip"}
+# pylint: disable=wrong-import-position
+
+import os
+
+# Installing the ainotes package is only necessary in standalone runtime environments like Colab
+if os.getenv("COLAB_RELEASE_TAG"):
+    print("Standalone runtime environment detected, installing ainotes package")
+    # %pip install ainotes
+
+# pylint: enable=wrong-import-position
+
 # %% slideshow={"slide_type": "slide"}
 import platform
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap

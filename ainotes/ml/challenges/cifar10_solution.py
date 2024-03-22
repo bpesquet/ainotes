@@ -38,8 +38,16 @@
 # ## Environment setup
 
 # %% slideshow={"slide_type": "skip"}
-# Install project library for importing helper code
-# %pip install ainotes
+# pylint: disable=wrong-import-position
+
+import os
+
+# Installing the ainotes package is only necessary in standalone runtime environments like Colab
+if os.getenv("COLAB_RELEASE_TAG"):
+    print("Standalone runtime environment detected, installing ainotes package")
+    # %pip install ainotes
+
+# pylint: enable=wrong-import-position
 
 # %%
 import platform
@@ -306,7 +314,7 @@ plot_cifar10_images(
 # %% [markdown]
 # ### Results interpretation
 #
-# The convnet is much better than the MLP at classifying CIFAR10 images, which is not surprising given that its architecture was invented for this kind of tasks.
+# The convnet is much better than the MLP at classifying CIFAR10 images, which is not surprising given that its architecture was invented for this kind of task.
 #
 # Results could probably be even better with a longer training time.
 

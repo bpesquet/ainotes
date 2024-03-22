@@ -25,6 +25,18 @@
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Environment setup
 
+# %% slideshow={"slide_type": "skip"}
+# pylint: disable=wrong-import-position
+
+import os
+
+# Installing the ainotes package is only necessary in standalone runtime environments like Colab
+if os.getenv("COLAB_RELEASE_TAG"):
+    print("Standalone runtime environment detected, installing ainotes package")
+    # %pip install ainotes
+
+# pylint: enable=wrong-import-position
+
 # %%
 import platform
 from IPython.display import YouTubeVideo
