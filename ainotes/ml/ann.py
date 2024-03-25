@@ -646,7 +646,7 @@ print(sum(probas))
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Model training
 #
-# In order to obtain more details about the training process, we define a [fit]() function that encapsulates the training code and computes metrics.
+# In order to obtain more details about the training process, we define a [fit](https://github.com/bpesquet/ainotes/blob/main/ainotes/utils/train.py) function that encapsulates the training code and computes metrics.
 
 
 # %% slideshow={"slide_type": "slide"}
