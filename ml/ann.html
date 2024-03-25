@@ -568,12 +568,16 @@ document.write(`
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pylint: disable=wrong-import-position</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># Installing the ainotes package is only necessary in standalone runtime environments like Colab</span>
 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;COLAB_RELEASE_TAG&quot;</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standalone runtime environment detected, installing ainotes package&quot;</span><span class="p">)</span>
     <span class="o">%</span><span class="k">pip</span> install ainotes
+
+<span class="c1"># pylint: enable=wrong-import-position</span>
 </pre></div>
 </div>
 </div>
@@ -581,7 +585,6 @@ document.write(`
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
-
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
@@ -1481,7 +1484,7 @@ Number of trainable parameters: 55050
 </section>
 <section id="id5">
 <h3>Model training<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
-<p>In order to obtain more details about the training process, we define a <a class="reference internal" href="#"><span class="xref myst">fit</span></a> function that encapsulates the training code and computes metrics.</p>
+<p>In order to obtain more details about the training process, we define a <a class="reference external" href="https://github.com/bpesquet/ainotes/blob/main/ainotes/utils/train.py">fit</a> function that encapsulates the training code and computes metrics.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit model to fashion images</span>
