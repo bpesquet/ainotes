@@ -10,13 +10,13 @@ A collection of interactive notes related to Artificial Intelligence. Built for 
 
 This project has the following structure:
 
-- [ainotes/](ainotes) contains the Python source files;
+- [ainotes/](ainotes) contains the notes' source files, written in [Python](https://www.python.org/);
 - [data/](data) contains the datasets used by some of the notes;
 - [docs/](docs) contains the [Jupyter](https://jupyter.org/) notebooks synchronized with Python files and used to create the [online version](https://www.bpesquet.fr/ainotes) of the notes.
 
 Once a new notebook (`.ipynb` file) is created in the `docs/` folder, it is automagically paired with a Python (`.py`) file by the same name in the `ainotes/` folder. Afterwards, all updates to either file will be reflected into the other. This is configured in the [pyproject.toml](pyproject.toml) file.
 
-The notebooks are versioned in order to display their output online and open them in cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
+Alongside the source files, the notebooks are also versioned in order to display their output online and access them in cloud execution platforms like [Google Colaboratory](https://colab.research.google.com/).
 
 The project is also published as a [package](https://pypi.org/project/ainotes/) on [PyPI](https://pypi.org). This is necessary to import shared code in cloud execution platforms.
 
@@ -24,7 +24,6 @@ The project is also published as a [package](https://pypi.org/project/ainotes/) 
 
 This project is built with the following software:
 
-- the [Python](https://www.python.org/) programming language;
 - [Poetry](https://python-poetry.org/) for dependency management and deployment;
 - [Black](https://github.com/psf/black) for code formatting;
 - [Pylint](https://github.com/pylint-dev/pylint) to detect programming mistakes before execution;

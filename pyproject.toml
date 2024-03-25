@@ -1,13 +1,11 @@
 [tool.poetry]
 name = "ainotes"
-version = "1.0.0"
+version = "1.0.1"
 description = "A collection of interactive notes related to Artificial Intelligence"
 authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README_PACKAGE.md"  # Project description on PyPI
-license = "CODE_LICENSE"
-
-[project.urls]
-Repository = "https://github.com/bpesquet/ainotes.git"
+license = "MIT"  # Code license, textual content is CC-BY-NC-SA 4.0
+repository = "https://github.com/bpesquet/ainotes"
 
 # Core dependencies
 [tool.poetry.dependencies]
