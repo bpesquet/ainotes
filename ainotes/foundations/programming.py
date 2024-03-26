@@ -27,7 +27,7 @@
 # ## Environment setup
 
 # %% slideshow={"slide_type": "skip"} tags=["hide-output"]
-# !pip install papermill
+# %pip install papermill
 
 # %% slideshow={"slide_type": "slide"}
 # Relax some linting rules not needed here
@@ -54,6 +54,8 @@ print(f"Python version: {platform.python_version()}")
 # - dynamic types;
 # - automatic memory management;
 # - and much more!
+#
+# Despite its maturity, Python is still evolving, with many nice features added regularly ([What's in which Python](https://nedbatchelder.com/text/which-py.html))
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### The Python syntax
