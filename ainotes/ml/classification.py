@@ -227,7 +227,7 @@ sgd_model.predict_proba(samples).round(decimals=3)
 #
 # The default performance metric for classification taks is **accuracy**.
 #
-# $$Accuracy = \frac{\text{Number of exact predictions}}{\text{Total number of predictions}} $$
+# $$\text{Accuracy} = \frac{\text{Number of exact predictions}}{\text{Total number of predictions}} $$
 
 # %%
 # Define fictitious ground truth and prediction results
@@ -274,7 +274,7 @@ print(f"Dumb classifier accuracy: {dumb_model_acc:.05f}")
 # - **True Negative (TN)**: the model _correctly_ predicts the negative class.
 # - **False Negative (FN)**: the model _incorrectly_ predicts the negative class.
 #
-# $$Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$$
+# $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Confusion matrix
@@ -300,12 +300,14 @@ plot_conf_mat(sgd_model, x_train, y_train_5)
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Precision and recall
 #
-# - **Precision**: proportion of positive identifications that were actually correct.
-# - **Recall** (or *sensitivity*): proportion of actual positives that were identified correctly.
+# - **Precision**: proportion of all predictions for a class that were actually correct.
+# - **Recall**: proportion of all samples for a class that were correctly predicted.
 #
-# $$Precision = \frac{TP}{TP + FP} = \frac{\text{True Positives}}{\text{Total Predicted Positives}}$$
+# Example: for the positive class,
 #
-# $$Recall = \frac{TP}{TP + FN} = \frac{\text{True Positives}}{\text{Total Actual Positives}}$$
+# $$\text{Precision}_{positive} = \frac{TP}{TP + FP} = \frac{\text{True Positives}}{\text{Total Predicted Positives}}$$
+#
+# $$\text{Recall}_{positive} = \frac{TP}{TP + FN} = \frac{\text{True Positives}}{\text{Total Actual Positives}}$$
 
 # %% slideshow={"slide_type": "slide"}
 # Define fictitious ground truth and prediction results
@@ -330,11 +332,11 @@ for label in [0, 1]:
 # | False Negatives: 8 | True Positives: 1|
 
 # %% [markdown] slideshow={"slide_type": "fragment"}
-# $$Accuracy = \frac{90+1}{100} = 91\%$$
+# $$\text{Accuracy} = \frac{90+1}{100} = 91\%$$
 
 # %% [markdown] slideshow={"slide_type": "fragment"}
-# $$Precision = \frac{1}{1 + 1} = 50\%\;\;\;
-# Recall = \frac{1}{1 + 8} = 11\%$$
+# $$\text{Precision}_{positive} = \frac{1}{1 + 1} = 50\%\;\;\;
+# \text{Recall}_{positive} = \frac{1}{1 + 8} = 11\%$$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ##### The precision/recall trade-off
@@ -350,32 +352,11 @@ for label in [0, 1]:
 # - Also known as _balanced F-score_ or _F-measure_.
 # - Favors classifiers that have similar precision and recall.
 #
-# $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
+# $$\text{F1} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
 
 # %% slideshow={"slide_type": "slide"}
-# Compute several metrics about the SGDClassifier
+# Compute several metrics about our 5/not 5 classifier
 print(classification_report(y_train_5, sgd_model.predict(x_train)))
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# #### ROC curve and AUROC
-#
-# $$\text{TP Rate} = \frac{TP}{TP + FN} = Recall\;\;\;\;
-# \text{FP Rate} = \frac{FP}{FP + TN}$$
-#
-# - ROC stands for "Receiver Operating Characteristic".
-# - A ROC curve plots TPR vs. FPR at different classification thresholds.
-# - AUC or more precisely AUROC ("Area Under the ROC Curve") provides an aggregate measure of performance across all possible classification thresholds.
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# [![AUROC animation](_images/auroc_animation.gif)](https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# [![AUROC shape animation](_images/auroc_shape_animation.gif)](https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation)
-
-# %% slideshow={"slide_type": "slide"}
-# Plot ROC curve for the SGDClassifier
-sgd_disp = RocCurveDisplay.from_estimator(sgd_model, x_train, y_train_5)
-plt.show()
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Multiclass classification
