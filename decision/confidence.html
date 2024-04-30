@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Decision confidence &#8212; ainotes</title>
+    <title>Confidence in decision-making &#8212; ainotes</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'decision/confidence';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -472,7 +474,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Decision confidence</h1>
+    <h1>Confidence in decision-making</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -485,16 +487,27 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence">Confidence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#belief">Belief</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognitive-control">Cognitive control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usefulness-of-confidence-in-decision-making">Usefulness of confidence in decision-making</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-detection-theory">Signal Detection Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-and-specificity">Sensitivity and specificity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curve-and-auroc">ROC curve and AUROC</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-threshold-choice">Impact of threshold choice</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-model-s-separative-power">Impact of model’s separative power</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminability-index">Discriminability index</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a></li>
 </ul>
 </li>
@@ -509,8 +522,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="decision-confidence">
-<h1>Decision confidence<a class="headerlink" href="#decision-confidence" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="confidence-in-decision-making">
+<h1>Confidence in decision-making<a class="headerlink" href="#confidence-in-decision-making" title="Link to this heading">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This chapter is under construction.</p>
@@ -527,27 +540,32 @@ document.write(`
 <p><strong>Trust</strong> is a social construct: the belief that someone or something will behave or perform as expected. It implies a relationship between a <em>trustor</em> and a <em>trustee</em>.</p>
 <p><strong>Self-confidence</strong> is trust in one’s abilities.</p>
 </section>
+<section id="uncertainty">
+<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Link to this heading">#</a></h3>
+<p>Generally speaking, <strong>uncertainty</strong> (or incertitude) characterizes situations involving imperfect or unknown information.</p>
+<p>In decision-making, it refers to <strong>the variability in the representation of information before a decision is taken</strong> <span id="id2">[]</span>.</p>
+</section>
+<section id="belief">
+<h3>Belief<a class="headerlink" href="#belief" title="Link to this heading">#</a></h3>
+</section>
+<section id="bias">
+<h3>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h3>
+</section>
+<section id="sensitivity">
+<h3>Sensitivity<a class="headerlink" href="#sensitivity" title="Link to this heading">#</a></h3>
+</section>
 <section id="error-monitoring">
 <h3>Error monitoring<a class="headerlink" href="#error-monitoring" title="Link to this heading">#</a></h3>
-<p>In decision-making, <strong>error monitoring (EM)</strong> is the process by which one is able to detect his/her errors as soon as a response has been made <span id="id2">[<a class="reference internal" href="../reference/bibliography.html#id22" title="Nick Yeung and Christopher Summerfield. Metacognition in human decision-making: confidence and error monitoring. Philosophical Transactions of the Royal Society B: Biological Sciences, 367(1594):1310–1321, May 2012. doi:10.1098/rstb.2011.0416.">Yeung and Summerfield, 2012</a>]</span>.</p>
+<p>In decision-making, <strong>error monitoring (EM)</strong> is the process by which one is able to detect his/her errors as soon as a response has been made <span id="id3">[<a class="reference internal" href="../reference/bibliography.html#id22" title="Nick Yeung and Christopher Summerfield. Metacognition in human decision-making: confidence and error monitoring. Philosophical Transactions of the Royal Society B: Biological Sciences, 367(1594):1310–1321, May 2012. doi:10.1098/rstb.2011.0416.">Yeung and Summerfield, 2012</a>]</span>.</p>
 <p>EM allows adaptation of behavior both in the short and longer terms through gradual learning of actions’ outcomes.</p>
+</section>
+<section id="cognitive-control">
+<h3>Cognitive control<a class="headerlink" href="#cognitive-control" title="Link to this heading">#</a></h3>
 </section>
 <section id="metacognition">
 <h3>Metacognition<a class="headerlink" href="#metacognition" title="Link to this heading">#</a></h3>
 <p>Confidence judgments and error monitoring are two related aspects of <strong>metacognition</strong>, the self-monitoring and self-control of one’s own cognition (sometimes called <em>high order thinking</em>).</p>
 <p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Metacognition.jpg"><img alt="Metacognition" src="../_images/metacognition.jpg" /></a></p>
-</section>
-<section id="sensitivity">
-<h3>Sensitivity<a class="headerlink" href="#sensitivity" title="Link to this heading">#</a></h3>
-</section>
-<section id="bias">
-<h3>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h3>
-</section>
-<section id="uncertainty">
-<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Link to this heading">#</a></h3>
-</section>
-<section id="belief">
-<h3>Belief<a class="headerlink" href="#belief" title="Link to this heading">#</a></h3>
 </section>
 </section>
 <section id="usefulness-of-confidence-in-decision-making">
@@ -555,6 +573,42 @@ document.write(`
 </section>
 <section id="modeling-decision-confidence">
 <h2>Modeling decision confidence<a class="headerlink" href="#modeling-decision-confidence" title="Link to this heading">#</a></h2>
+<section id="signal-detection-theory">
+<h3>Signal Detection Theory<a class="headerlink" href="#signal-detection-theory" title="Link to this heading">#</a></h3>
+<p>Framework for analyzing decision making in the presence of uncertainty.</p>
+<p>Originally developped by radar researchers in the mid-20th century, it has applications in many fields (psychology, diagnostics, quality control, etc).</p>
+<section id="sensitivity-and-specificity">
+<h4>Sensitivity and specificity<a class="headerlink" href="#sensitivity-and-specificity" title="Link to this heading">#</a></h4>
+<p><strong>Sensitivity</strong> quantifies how well a model can identify true positives. <strong>Specificity</strong> quantifies how well a model can identify true negatives. Equivalent to the recall metric, these definitions are often used in <a class="reference external" href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity">medecine and statistics</a>.</p>
+<div class="math notranslate nohighlight">
+\[\text{Sensitivity} = \frac{TP}{TP + FN} = \text{True Positive Rate} = \text{Recall}_{positive}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Specificity} = \frac{TN}{TN + FP} = \text{True Negative Rate} = \text{Recall}_{negative}\]</div>
+<p>Prediction outcomes can be interpreted as probability density functions, in order to represent results graphically.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity#/media/File:Specificity_vs_Sensitivity_Graph.png"><img alt="Sensitivity and specificity" src="../_images/Specificity_vs_Sensitivity_Graph.png" /></a></p>
+</section>
+<section id="roc-curve-and-auroc">
+<h4>ROC curve and AUROC<a class="headerlink" href="#roc-curve-and-auroc" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\text{False Positive Rate} = \frac{FP}{TN+FP} = 1 - TNR = 1 -\text{Specificity}\]</div>
+<ul class="simple">
+<li><p>ROC stands for “Receiver Operating Characteristic”.</p></li>
+<li><p>A ROC curve plots sensitivity vs. (1 - specificity), or TPR vs. FPR, for each possible classification threshold.</p></li>
+<li><p>AUC, or more precisely AUROC (“Area Under the ROC Curve”), provides an aggregate measure of performance across all possible classification thresholds.</p></li>
+</ul>
+<section id="impact-of-threshold-choice">
+<h5>Impact of threshold choice<a class="headerlink" href="#impact-of-threshold-choice" title="Link to this heading">#</a></h5>
+<p><a class="reference external" href="https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation"><img alt="AUROC animation" src="../_images/auroc_animation.gif" /></a></p>
+</section>
+<section id="impact-of-model-s-separative-power">
+<h5>Impact of model’s separative power<a class="headerlink" href="#impact-of-model-s-separative-power" title="Link to this heading">#</a></h5>
+<p><a class="reference external" href="https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation"><img alt="AUROC shape animation" src="../_images/auroc_shape_animation.gif" /></a></p>
+</section>
+</section>
+<section id="discriminability-index">
+<h4>Discriminability index<a class="headerlink" href="#discriminability-index" title="Link to this heading">#</a></h4>
+</section>
+</section>
 <section id="measuring-confidence">
 <h3>Measuring confidence<a class="headerlink" href="#measuring-confidence" title="Link to this heading">#</a></h3>
 <p>Two dominant methodologies:</p>
@@ -637,16 +691,27 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence">Confidence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#belief">Belief</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognitive-control">Cognitive control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usefulness-of-confidence-in-decision-making">Usefulness of confidence in decision-making</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-detection-theory">Signal Detection Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-and-specificity">Sensitivity and specificity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curve-and-auroc">ROC curve and AUROC</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-threshold-choice">Impact of threshold choice</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-model-s-separative-power">Impact of model’s separative power</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminability-index">Discriminability index</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a></li>
 </ul>
 </li>

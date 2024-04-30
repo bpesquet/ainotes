@@ -491,22 +491,36 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-events">Relationships between events</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-algebra">Event algebra</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-venn-diagrams-for-event-composition">Example: Venn diagrams for event composition</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-algebra">Event algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-venn-diagrams-for-events-algebra">Example: Venn diagrams for events algebra</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-partition">Event partition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-throwing-dices">Examples: throwing dices</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-definition">Frequentist definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice">Example: throwing a 6-sided dice</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule">Chain rule</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-product-rule-a-k-a-chain-rule">General product rule (a.k.a. chain rule)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-total-probability">Law of total probability</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ theorem</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-events">Independance between events</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independance">Conditional independance</a></li>
 </ul>
 </li>
 </ul>
@@ -560,18 +574,19 @@ PyTorch version: 2.2.1
 <section id="random-experiment">
 <h4>Random experiment<a class="headerlink" href="#random-experiment" title="Link to this heading">#</a></h4>
 <p>Experiment implying some randomness. Knowing the experimental conditions is not enough to predict its outcome. Opposite of <em>deterministic experiment</em>.</p>
-<p>Example: throwing a six-sided dice.</p>
+<p>Example: throwing a 6-sided dice.</p>
 </section>
 <section id="sample-space">
 <h4>Sample space<a class="headerlink" href="#sample-space" title="Link to this heading">#</a></h4>
-<p>Set of all possible outcomes for the random experiment, denoted by <span class="math notranslate nohighlight">\(\Omega\)</span> or <span class="math notranslate nohighlight">\(S\)</span>. Can either be finite or infinitely large.</p>
-<p>Example: <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span></p>
+<p>Set of all possible outcomes for the random experiment, also called <em>universe</em> of the random experiment. Denoted by <span class="math notranslate nohighlight">\(\Omega\)</span> or <span class="math notranslate nohighlight">\(S\)</span>. Can either be finite or infinitely large.</p>
+<p>Example: <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span>.</p>
 </section>
 <section id="event">
 <h4>Event<a class="headerlink" href="#event" title="Link to this heading">#</a></h4>
-<p>Subset of the sample space, denoted by <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span>.</p>
-<p>An event is a set of elementary events (observed outcomes). An elementary event is denoted <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>. If <span class="math notranslate nohighlight">\(\omega \in E\)</span>, then event <span class="math notranslate nohighlight">\(E\)</span> has occurred.</p>
-<p>Example: <span class="math notranslate nohighlight">\(E \equiv \text{&quot;obtaining an odd number&quot;}\)</span>. <span class="math notranslate nohighlight">\(E= \{1,3,5\}\)</span></p>
+<p>An <strong>event</strong> <span class="math notranslate nohighlight">\(A\)</span> is a subset of the sample space: <span class="math notranslate nohighlight">\(A \subseteq \Omega\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\Omega\)</span> is the certain event. <span class="math notranslate nohighlight">\(\emptyset\)</span> is the impossible event.</p>
+<p>An event is a set of <strong>elementary events</strong>. An elementary event <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> is an observed outcome of the random experiment. If <span class="math notranslate nohighlight">\(\omega \in A\)</span>, then event <span class="math notranslate nohighlight">\(A\)</span> has occurred.</p>
+<p>Example: <span class="math notranslate nohighlight">\(A \equiv \text{&quot;obtaining an odd number&quot;}\)</span>. <span class="math notranslate nohighlight">\(A= \{1,3,5\}\)</span>.</p>
 </section>
 <section id="relationships-between-events">
 <h4>Relationships between events<a class="headerlink" href="#relationships-between-events" title="Link to this heading">#</a></h4>
@@ -585,17 +600,27 @@ PyTorch version: 2.2.1
 <section id="composition-of-events">
 <h4>Composition of events<a class="headerlink" href="#composition-of-events" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Negation <span class="math notranslate nohighlight">\(E^\star = \Omega \backslash E\)</span>. Occurs if and only if <span class="math notranslate nohighlight">\(E\)</span> does not occur.</p></li>
+<li><p>Negation <span class="math notranslate nohighlight">\(A^\star = \Omega \backslash A\)</span> (<span class="math notranslate nohighlight">\(\Omega\)</span> minus <span class="math notranslate nohighlight">\(A\)</span>). Occurs if and only if <span class="math notranslate nohighlight">\(A\)</span> does not occur.</p></li>
 <li><p>Conjunction <span class="math notranslate nohighlight">\(A \cap B\)</span>. Occurs if and only if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> occur simultaneously.</p></li>
 <li><p>Union <span class="math notranslate nohighlight">\(A \cup B\)</span>. Occurs if either <span class="math notranslate nohighlight">\(A\)</span> or <span class="math notranslate nohighlight">\(B\)</span> occurs.</p></li>
 <li><p>Generalization to <span class="math notranslate nohighlight">\(n\)</span> events:</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(\bigcap_{i=1}^{n} A_i =  A_1 \cap A_2 \cap \cdots \cap A_n\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\bigcup_{i=1}^{n} A_i =  A_1 \cup A_2 \cup \cdots \cup A_n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bigcap_{i=1}^{n} A_i =  A_1 \cap A_2 \cap \cdots \cap A_n\)</span> (All <span class="math notranslate nohighlight">\(A_i\)</span> events occured simutaneously)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bigcup_{i=1}^{n} A_i =  A_1 \cup A_2 \cup \cdots \cup A_n\)</span> (At least one of the <span class="math notranslate nohighlight">\(A_i\)</span> events occurred)</p></li>
+<li><p><span class="math notranslate nohighlight">\((\bigcap_{i=1}^{n} A_i) \subseteq (\bigcup_{i=1}^{n} A_i)\)</span></p></li>
 </ul>
 </li>
-<li><p><span class="math notranslate nohighlight">\((\bigcap_{i=1}^{n} A_i) \subseteq (\bigcup_{i=1}^{n} A_i)\)</span> is always verified.</p></li>
 </ul>
+<p>Example: <span class="math notranslate nohighlight">\(A \equiv \text{&quot;obtaining an odd number&quot;}\)</span>. <span class="math notranslate nohighlight">\(A^\star = \{2,4,6\}\)</span>.</p>
+<section id="example-venn-diagrams-for-event-composition">
+<h5>Example: Venn diagrams for event composition<a class="headerlink" href="#example-venn-diagrams-for-event-composition" title="Link to this heading">#</a></h5>
+<p><img alt="Venn diagrams for events composition" src="../_images/event_composition_venn_diagram.png" /></p>
+<ul class="simple">
+<li><p>(i): <span class="math notranslate nohighlight">\(B \cap C\)</span></p></li>
+<li><p>(ii): <span class="math notranslate nohighlight">\(B \cup C\)</span></p></li>
+<li><p>(iii): <span class="math notranslate nohighlight">\(A^\star \cap B\)</span></p></li>
+</ul>
+</section>
 </section>
 <section id="event-algebra">
 <h4>Event algebra<a class="headerlink" href="#event-algebra" title="Link to this heading">#</a></h4>
@@ -606,32 +631,64 @@ PyTorch version: 2.2.1
 <li><p>Distributivity: <span class="math notranslate nohighlight">\((A \cup B) \cap C = (A \cap C) \cup (B \cap C)\)</span> and <span class="math notranslate nohighlight">\((A \cap B) \cup C = (A \cup B) \cap (B \cup C)\)</span></p></li>
 <li><p>Identities : <span class="math notranslate nohighlight">\(A \cup \emptyset = A\)</span>, <span class="math notranslate nohighlight">\(A \cup \Omega = \Omega\)</span>, <span class="math notranslate nohighlight">\(A \cap \emptyset = \emptyset\)</span> and <span class="math notranslate nohighlight">\(A \cap \Omega = A\)</span></p></li>
 <li><p>Complementarity: <span class="math notranslate nohighlight">\(A \cup A^* = \Omega\)</span>, <span class="math notranslate nohighlight">\(A \cap A^* = \emptyset\)</span>, <span class="math notranslate nohighlight">\((A^*)^* = A\)</span>, <span class="math notranslate nohighlight">\(\emptyset^* = \Omega\)</span> and <span class="math notranslate nohighlight">\(\Omega^* = \emptyset\)</span></p></li>
-<li><p>De Morgan laws: <span class="math notranslate nohighlight">\((A \cup B)^* = A^* \cap B^*\)</span> and <span class="math notranslate nohighlight">\((A \cap B)^* = A^* \cup B^*\)</span></p></li>
+<li><p>De Morgan laws:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\((A \cup B)^* = A^* \cap B^*\)</span> and <span class="math notranslate nohighlight">\((A \cap B)^* = A^* \cup B^*\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\bigcup_{i=1}^{n} A_i)^\star = \bigcap_{i=1}^{n} A_i^\star\)</span> and <span class="math notranslate nohighlight">\((\bigcap_{i=1}^{n} A_i)^\star = \bigcup_{i=1}^{n} A_i^\star\)</span></p></li>
 </ul>
+</li>
+</ul>
+<section id="example-venn-diagrams-for-events-algebra">
+<h5>Example: Venn diagrams for events algebra<a class="headerlink" href="#example-venn-diagrams-for-events-algebra" title="Link to this heading">#</a></h5>
+<p><img alt="Venn diagrams for events albegra" src="../_images/event_algebra_venn_diagram.png" /></p>
+<ul class="simple">
+<li><p>(i): <span class="math notranslate nohighlight">\((B \cap C)^\star = B^\star \cup C^\star\)</span></p></li>
+<li><p>(ii): <span class="math notranslate nohighlight">\(((A \cap B^\star) \cup C^\star)^\star = (A^\star \cap C) \cup (B \cap C)\)</span></p></li>
+</ul>
+</section>
 </section>
 <section id="event-partition">
 <h4>Event partition<a class="headerlink" href="#event-partition" title="Link to this heading">#</a></h4>
-<p>An event set <span class="math notranslate nohighlight">\(\{ A_1, \dots, A_n \}\)</span> is a partition of the sample space if and only if:</p>
+<p>An event set <span class="math notranslate nohighlight">\(\{ A_1, \dots, A_n \}\)</span> is a <strong>partition</strong> of the sample space if and only if:</p>
 <ul class="simple">
 <li><p>No event is impossible: <span class="math notranslate nohighlight">\(\forall i, A_i \ne \emptyset\)</span></p></li>
 <li><p>Events are incompatible two by two: <span class="math notranslate nohighlight">\(\forall i \ne j, A_i \cap A_j = \emptyset\)</span></p></li>
 <li><p>Union of all events is equal to the sample space: <span class="math notranslate nohighlight">\(\bigcup_{i=1}^{n} A_i = \Omega\)</span></p></li>
 </ul>
+<p><img alt="Event partition" src="../_images/event_partitions.png" /></p>
 </section>
 <section id="combination-of-random-experiments">
 <h4>Combination of random experiments<a class="headerlink" href="#combination-of-random-experiments" title="Link to this heading">#</a></h4>
 <p>For two joint experiments characterized by sample spaces <span class="math notranslate nohighlight">\(\Omega_1\)</span> and <span class="math notranslate nohighlight">\(\Omega_2\)</span>, we can define a new sample space <span class="math notranslate nohighlight">\(\Omega\)</span> as their cartesian product: <span class="math notranslate nohighlight">\(\Omega = \Omega_1 \times \Omega_2\)</span></p>
-<p>Example for rolling two dices: <span class="math notranslate nohighlight">\(\Omega_1 = \Omega_2 = \{1,2,3,4,5,6\}\)</span> and <span class="math notranslate nohighlight">\(\Omega = \{(1,1), (1,2), \dots, (6,5), (6,6) \}\)</span> (36 couples).</p>
+<p>Example for rolling two 6-sided dices: <span class="math notranslate nohighlight">\(\Omega_1 = \Omega_2 = \{1,2,3,4,5,6\}\)</span> and <span class="math notranslate nohighlight">\(\Omega = \{(1,1), (1,2), \dots, (6,5), (6,6) \}\)</span> (36 couples).</p>
 </section>
 </section>
 <section id="probability-basics">
 <h3>Probability basics<a class="headerlink" href="#probability-basics" title="Link to this heading">#</a></h3>
 <section id="classical-definition">
 <h4>Classical definition<a class="headerlink" href="#classical-definition" title="Link to this heading">#</a></h4>
-<p>The probability of an event is the ratio of the number of cases favorable to it, to the number of all cases possible when nothing leads us to expect that any one of these cases should occur more than any other, which renders them, for us, equally possible. (Laplace, 1819)</p>
+<blockquote>
+<div><p>“The probability of an event is the ratio of the number of cases favorable to it, to the number of all cases possible when nothing leads us to expect that any one of these cases should occur more than any other, which renders them, for us, equally possible.” (Laplace, 1819)</p>
+</div></blockquote>
 <div class="math notranslate nohighlight">
 \[P(A) = \frac{\# A}{\# \Omega}\]</div>
-<p>Assumes equiprobability and a finite number of cases.</p>
+<p>Assumes a finite number of cases and equiprobability between them.</p>
+<section id="examples-throwing-dices">
+<h5>Examples: throwing dices<a class="headerlink" href="#examples-throwing-dices" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p>Throwing a 6-sided dice. <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span>. <span class="math notranslate nohighlight">\(A \equiv\)</span> “obtaining 5”.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(A) = \frac{\# A}{\# \Omega} = \frac{1}{6}\]</div>
+<ul class="simple">
+<li><p>Throwing two 6-sided dices and summing their values. <span class="math notranslate nohighlight">\(\Omega = \{2,3,\dots,12\}\)</span>. <span class="math notranslate nohighlight">\(A \equiv\)</span> “obtaining 5”.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(A) \neq \frac{\# A}{\# \Omega} = \frac{1}{11} \; \text{(no equiprobability)}\]</div>
+<div class="math notranslate nohighlight">
+\[P(A) = \frac{\# A'}{\# \Omega'} = \frac{4}{36} = \frac{1}{6}\]</div>
+<p>With <span class="math notranslate nohighlight">\(A' = \{(1,4), (2,3), (3,2), (4,1)\}\)</span> and <span class="math notranslate nohighlight">\(\Omega'=\{(1,1), (1,2), \dots, (6,6)\}\)</span></p>
+</section>
 </section>
 <section id="frequentist-definition">
 <h4>Frequentist definition<a class="headerlink" href="#frequentist-definition" title="Link to this heading">#</a></h4>
@@ -642,7 +699,7 @@ PyTorch version: 2.2.1
 </section>
 <section id="axiomatic-definition">
 <h4>Axiomatic definition<a class="headerlink" href="#axiomatic-definition" title="Link to this heading">#</a></h4>
-<p>A probability is a number that satisfies the following axioms (Kolmogorov, 1933):</p>
+<p>A <strong>probability</strong> is a number that satisfies the following axioms (Kolmogorov, 1933):</p>
 <ul class="simple">
 <li><p>For any event <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(P(A) \ge 0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(P(\Omega) = 1\)</span></p></li>
@@ -656,8 +713,8 @@ PyTorch version: 2.2.1
 <li><p><span class="math notranslate nohighlight">\(P(\emptyset) = 0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(P(A) \le 1\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(P(A^*) = 1 - P(A)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span></p></li>
 <li><p>If <span class="math notranslate nohighlight">\(\forall i \ne j, A_i \cap A_j = \emptyset\)</span>, then <span class="math notranslate nohighlight">\(P(\bigcup_{i=1}^{n} A_i) = \sum_{i=1}^{n} P(A_i)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span></p></li>
 <li><p>In the general case, <span class="math notranslate nohighlight">\(P(\bigcup_{i=1}^{n} A_i) \le \sum_{i=1}^{n} P(A_i)\)</span></p></li>
 </ul>
 </section>
@@ -667,6 +724,15 @@ PyTorch version: 2.2.1
 <div class="math notranslate nohighlight">
 \[P(A|B) = \frac{P(A \cap B)}{P(B)} \qquad \text{with} \space P(B) \ne 0\]</div>
 <p>There is no fundamental difference between conditional and non-conditional probabilities: <span class="math notranslate nohighlight">\(P(A) = P(A|\Omega)\)</span></p>
+<section id="example-throwing-a-6-sided-dice">
+<h5>Example: throwing a 6-sided dice<a class="headerlink" href="#example-throwing-a-6-sided-dice" title="Link to this heading">#</a></h5>
+<p><span class="math notranslate nohighlight">\(A \equiv\)</span> “result is <span class="math notranslate nohighlight">\(\leq\)</span> 3”, <span class="math notranslate nohighlight">\(B \equiv\)</span> “result is even”, <span class="math notranslate nohighlight">\(C \equiv\)</span> “result = 6”.</p>
+<p><img alt="Probabilities for A,B and C" src="../_images/probas_d6.png" /></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(A) = P(B) = \frac{1}{2}\)</span> even though <span class="math notranslate nohighlight">\(A \neq B\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{1}{3}\)</span>.</p></li>
+</ul>
+</section>
 </section>
 <section id="properties-of-conditional-probabilities">
 <h4>Properties of conditional probabilities<a class="headerlink" href="#properties-of-conditional-probabilities" title="Link to this heading">#</a></h4>
@@ -681,11 +747,11 @@ PyTorch version: 2.2.1
 <li><p>If <span class="math notranslate nohighlight">\(A \subset B\)</span>, <span class="math notranslate nohighlight">\(P(A|B) = \frac{P(A)}{P(B)} \ge P(A)\)</span></p></li>
 </ul>
 </section>
-<section id="chain-rule">
-<h4>Chain rule<a class="headerlink" href="#chain-rule" title="Link to this heading">#</a></h4>
+<section id="general-product-rule-a-k-a-chain-rule">
+<h4>General product rule (a.k.a. chain rule)<a class="headerlink" href="#general-product-rule-a-k-a-chain-rule" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(A \cap B) = P(A|B)P(B)\)</span></p></li>
-<li><p>More generally, for any events <span class="math notranslate nohighlight">\(A_1, A_2,\dots,A_n\)</span>,</p></li>
+<li><p>More generally, for any events <span class="math notranslate nohighlight">\(A_1, A_2,\dots,A_n\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[P(A_1 \cap \cdots \cap A_n ) = P(A_1)P(A_2|A_1)P(A_3|(A_1 \cap A_2)) \dots P(A_n|(A_1 \cap \cdots \cap A_{n-1}))\]</div>
@@ -695,15 +761,33 @@ PyTorch version: 2.2.1
 <p>If the set of events <span class="math notranslate nohighlight">\(\{B_1, B_2, \dots, B_n\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>, then:</p>
 <div class="math notranslate nohighlight">
 \[P(A) = \sum_{i=1}^{n} P(A|B_i)P(B_i)\]</div>
+<p><img alt="Law of total probability" src="../_images/law_total_probas.png" /></p>
 </section>
 <section id="bayes-theorem">
 <h4>Bayes’ theorem<a class="headerlink" href="#bayes-theorem" title="Link to this heading">#</a></h4>
+<p>For any two events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(B|A) = \frac{P(A|B)P(B)}{P(A)}\]</div>
 <p>If the set of events <span class="math notranslate nohighlight">\(\{B_1, B_2, \dots, B_n\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span>, then:</p>
 <div class="math notranslate nohighlight">
-\[P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{i=1}^{n} P(A|B_i)P(B_i)}\]</div>
-<p><span class="math notranslate nohighlight">\(P(B_i)\)</span> is the prior probability (known before the random experiment). <span class="math notranslate nohighlight">\(P(B_i|A)\)</span> is the posterior probability.</p>
+\[P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{j=1}^{n} P(A|B_j)P(B_j)}\]</div>
+<p><span class="math notranslate nohighlight">\(P(B_i)\)</span> is the <em>prior</em> probability (known before the random experiment). <span class="math notranslate nohighlight">\(P(B_i|A)\)</span> is the <em>posterior</em> probability.</p>
 <p>The <span class="math notranslate nohighlight">\(B_i\)</span> events can be seen as the possible causes responsible for the occurrence of <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>To be continued…</p>
+</section>
+<section id="independance-between-events">
+<h4>Independance between events<a class="headerlink" href="#independance-between-events" title="Link to this heading">#</a></h4>
+<p>For any two events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[A \perp B \Longleftrightarrow P(A \cap B) = P(A)P(B) \Longleftrightarrow P(A|B)=P(A) \; \text{with} \; P(B) \neq 0\]</div>
+<p>For any events <span class="math notranslate nohighlight">\(A_1,\dots,A_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[A_1 \perp \dots \perp A_n \Longleftrightarrow P (\bigcap_{j \in J} A_j) = \prod_{j \in J} P(A_j) \; \text{for every} \; J \subseteq \{1,\dots,n\}\]</div>
+</section>
+<section id="conditional-independance">
+<h4>Conditional independance<a class="headerlink" href="#conditional-independance" title="Link to this heading">#</a></h4>
+<p>For any three events <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[(A \perp B)\C \Longleftrightarrow P((A \cap B)|C) = P(A|C)P(B|C)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://www.tensorflow.org/guide/tensor</span>
@@ -791,22 +875,36 @@ PyTorch version: 2.2.1
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-events">Relationships between events</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-algebra">Event algebra</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-venn-diagrams-for-event-composition">Example: Venn diagrams for event composition</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-algebra">Event algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-venn-diagrams-for-events-algebra">Example: Venn diagrams for events algebra</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-partition">Event partition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-throwing-dices">Examples: throwing dices</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-definition">Frequentist definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice">Example: throwing a 6-sided dice</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule">Chain rule</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-product-rule-a-k-a-chain-rule">General product rule (a.k.a. chain rule)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-total-probability">Law of total probability</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ theorem</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-events">Independance between events</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independance">Conditional independance</a></li>
 </ul>
 </li>
 </ul>
