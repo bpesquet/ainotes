@@ -103,7 +103,7 @@ print(f"PyTorch version: {torch.__version__}")
 # * Distributivity: $(A \cup B) \cap C = (A \cap C) \cup (B \cap C)$ and $(A \cap B) \cup C = (A \cup B) \cap (B \cup C)$
 # * Identities : $A \cup \emptyset = A$, $A \cup \Omega = \Omega$, $A \cap \emptyset = \emptyset$ and $A \cap \Omega = A$
 # * Complementarity: $A \cup A^* = \Omega$, $A \cap A^* = \emptyset$, $(A^*)^* = A$, $\emptyset^* = \Omega$ and $\Omega^* = \emptyset$
-# * De Morgan laws: 
+# * De Morgan laws:
 #   * $(A \cup B)^* = A^* \cap B^*$ and $(A \cap B)^* = A^* \cup B^*$
 #   * $(\bigcup_{i=1}^{n} A_i)^\star = \bigcap_{i=1}^{n} A_i^\star$ and $(\bigcap_{i=1}^{n} A_i)^\star = \bigcup_{i=1}^{n} A_i^\star$
 
@@ -147,7 +147,7 @@ print(f"PyTorch version: {torch.__version__}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ##### Examples: throwing dices
 #
-# - Throwing a 6-sided dice. $\Omega = \{1,2,3,4,5,6\}$. $A \equiv$ "obtaining 5". 
+# - Throwing a 6-sided dice. $\Omega = \{1,2,3,4,5,6\}$. $A \equiv$ "obtaining 5".
 #
 # $$P(A) = \frac{\# A}{\# \Omega} = \frac{1}{6}$$
 #
