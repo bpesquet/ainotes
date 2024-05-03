@@ -34,26 +34,24 @@ print(f"Python version: {platform.python_version()}")
 print(f"PyTorch version: {torch.__version__}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Probability
+# ## Fundamentals
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Fundamentals
-#
-# #### Random experiment
+# ### Random experiment (a.k.a. trial)
 #
 # Experiment implying some randomness. Knowing the experimental conditions is not enough to predict its outcome. Opposite of *deterministic experiment*.
 #
 # Example: throwing a 6-sided dice.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Sample space
+# ### Sample space
 #
 # Set of all possible outcomes for the random experiment, also called *universe* of the random experiment. Denoted by $\Omega$ or $S$. Can either be finite or infinitely large.
 #
 # Example: $\Omega = \{1,2,3,4,5,6\}$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Event
+# ### Event
 #
 # An **event** $A$ is a subset of the sample space: $A \subseteq \Omega$.
 #
@@ -127,14 +125,17 @@ print(f"PyTorch version: {torch.__version__}")
 # ![Event partition](_images/event_partitions.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Combination of random experiments
+# ### Combination of random experiments
 #
 # For two joint experiments characterized by sample spaces $\Omega_1$ and $\Omega_2$, we can define a new sample space $\Omega$ as their cartesian product: $\Omega = \Omega_1 \times \Omega_2$
 #
 # Example for rolling two 6-sided dices: $\Omega_1 = \Omega_2 = \{1,2,3,4,5,6\}$ and $\Omega = \{(1,1), (1,2), \dots, (6,5), (6,6) \}$ (36 couples).
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Probability basics
+# ## Probability basics
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Probability of an event
 #
 # #### Classical definition
 #
@@ -145,7 +146,7 @@ print(f"PyTorch version: {torch.__version__}")
 # Assumes a finite number of cases and equiprobability between them.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ##### Examples: throwing dices
+# ##### Example: throwing dices
 #
 # - Throwing a 6-sided dice. $\Omega = \{1,2,3,4,5,6\}$. $A \equiv$ "obtaining 5".
 #
@@ -190,16 +191,18 @@ print(f"PyTorch version: {torch.__version__}")
 # * In the general case, $P(\bigcup_{i=1}^{n} A_i) \le \sum_{i=1}^{n} P(A_i)$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Conditional probability
+# ### Conditional probability
 #
 # The probability $P(A|B)$ of event $A$ knowing that event $B$ has occurred is given by:
 #
 # $$P(A|B) = \frac{P(A \cap B)}{P(B)} \qquad \text{with} \space P(B) \ne 0$$
 #
+# ![Conditional probability](_images/conditional_proba.png)
+#
 # There is no fundamental difference between conditional and non-conditional probabilities: $P(A) = P(A|\Omega)$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ##### Example: throwing a 6-sided dice
+# #### Example: throwing a 6-sided dice
 #
 # $A \equiv$ "result is $\leq$ 3", $B \equiv$ "result is even", $C \equiv$ "result = 6".
 #
@@ -222,6 +225,8 @@ print(f"PyTorch version: {torch.__version__}")
 # * If $A \subset B$, $P(A|B) = \frac{P(A)}{P(B)} \ge P(A)$
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# ### Fundamental probability laws
+#
 # #### General product rule (a.k.a. chain rule)
 #
 # * $P(A \cap B) = P(A|B)P(B)$
@@ -254,7 +259,7 @@ print(f"PyTorch version: {torch.__version__}")
 # The $B_i$ events can be seen as the possible causes responsible for the occurrence of $A$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Independance between events
+# ### Independance between events
 #
 # For any two events $A$ and $B$:
 #
@@ -269,7 +274,159 @@ print(f"PyTorch version: {torch.__version__}")
 #
 # For any three events $A$, $B$ and $C$:
 #
-# $$(A \perp B)\C \Longleftrightarrow P((A \cap B)|C) = P(A|C)P(B|C)$$
+# $$(A \perp B)|C \Longleftrightarrow P((A \cap B)|C) = P(A|C)P(B|C)$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Independance between trials
+#
+# Two experiments characterized by sample spaces $\Omega_1$ and $\Omega_2$ are independant if and only if:
+#
+# $$P(A \times B) = P(A)P(B) \qquad \forall A \in \Omega_1, B \in \Omega_2$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Example : throwing a 6-sided dice twice
+#
+# $A_i \equiv$ "obtaining number $i$ at first throw", $B_j \equiv$ "obtaining number $j$ at second throw".
+#
+# $$P(A_i \times B_j) = P(A_i)P(B_j) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Random variables
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Definition
+#
+# A random varialbe $X$ is an application from $\Omega$ to $\mathbb{R}$ that associates a value $x=X(\omega) \in \mathbb{R}_X$ to each elementary event $\omega \in \Omega$.
+#
+# $\mathbb{R}_X \subseteq \mathbb{R}$ is called the *variation domain* of $X$.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Example: throwing a 6-sided dice
+#
+# The financial gain can be defined as a random variable $X$.
+#
+# $\mathbb{R}_X = \{-5,0,5\}$
+#
+# ![Random variable example](_images/random_variable_example.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Discrete random variables
+#
+# #### Probability function
+#
+# It associates to each value $x$ the probability $p(x)$ that the random variable $X$ takes this value.
+#
+# $$p(x) =
+#     \begin{cases}
+#       P(X=x) \qquad \text{if} \; x \in \mathbb{R}_X \\
+#       0 \qquad \qquad \;\;\;\; \text{if} \; x \notin \mathbb{R}_X
+#     \end{cases}$$
+#     
+# $$\forall x \in \mathbb{R}, p(x) \ge 0$$
+#
+# $$\sum_{i=1}^n p(x_i) = \sum_{i=1}^n P(X=x_i) = P(\bigcup_{i=1}^n X = x_i) = 1$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ##### Example 1: throwing a 6-sided dice twice (followup)
+#
+# |$x$|$-5$|$0$|$5$|
+# |-|-|-|-|
+# |$p(x)$|$\frac{1}{6}$|$\frac{2}{3}$|$\frac{1}{6}$|
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ##### Example 2: number of major earthquakes in a century
+#
+# ![Probability function example](_images/proba_function_example.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Probability of an event related to a random variable
+#
+# For an event $B \subseteq \mathbb{R}_X$, its probability is given by:
+#
+# $$P(B) = \sum_{x \in B} p(x)$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ##### Example: throwing a 6-sided dice twice (followup)
+#
+# $B \equiv$ "not losing money".
+#
+# $$P(B) = P(X \ge 0) = \frac{5}{6}$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Distribution function
+#
+# $$F(x) = P(X \le x) = \sum_{x_i \le x} p(x_i) \qquad \forall x \in \mathbb{R}, x_i \in \mathbb{R}_X$$
+#
+# $$\forall x_i \lt x_j, F(x_i) \le F(x_j)$$
+#
+# $F(x)$ is a monotonically increasing "staircase" function.
+#
+# ![Distribution function example](_images/distri_function_example.png)
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Bernoulli's law
+#
+# We only consider the occurence (or lack thereof) of an event $A$, given by its probability $p = P(A)$.
+#
+# $$\Omega = \{A, A^*\}$$
+#
+# The random variable $X$ associating $1$ to the occurence of $A$ and $0$ otherwise is called Bernoulli's law.
+#
+# $$X \sim Be(p) \Longleftrightarrow p(x) =
+#     \begin{cases}
+#       p \qquad \text{if} \; x=1 \qquad \text{(}A \text{ occurred)}\\
+#       1-p \;\; \text{if} \; x=0 \qquad \text{(}A^* \text{ occurred)}\\
+#       0 \qquad \text{otherwise}
+#     \end{cases}$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Binomial law
+#
+# A Bernoulli trial is repeated several times.
+#
+# If $Y_i \sim \dots \sim Y_n \sim Be(p)$ with $Y_1 \perp \dots \perp Y_n$, then:
+#
+# $$X = \sum_{i=1}^n Y_i \sim Bi(n,p)$$
+#
+# $$X \sim Bi(n,p) \Longleftrightarrow p(x) =
+#     \begin{cases}
+#       C_n^x p^x(1-p)^{n-x} \qquad \text{if } x \in \{0, \dots, n\}\\
+#       0 \qquad \qquad \qquad \;\;\;\; \text{otherwise}
+#     \end{cases}$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Hypergeometric law
+#
+# The binomial law describes the probability of $x$ successes (random draws for which the object drawn has a specified feature) in $n$ draws with replacement.
+#
+# In contrast, the hypergeometric law describes the probability of $x$ successes in $n$ draws *without replacement*, from a finite population of size $N$ that contains exactly $k$ objects with that feature. As such, there is no independance between the successive results of the $n$ Bernoulli trials.
+#
+# $$X \sim Hy(N,n,k) \Longleftrightarrow p(x) =
+#     \begin{cases}
+#       \frac{C_k^x C_{N-k}^{n-x}}{C_N^n} \qquad \text{with max}(0, n+k-N) \le x \le \text{min}(n,k)\\
+#       0 \qquad \qquad \; \text{otherwise}
+#     \end{cases}$$
+#     
+# When $N \gg n$, it can be approximated by $Bi(n, k / N)$.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Geometric law
+#
+# This law describes the probability of obtaining a first success when repeating independant Bernoulli trials.
+#
+# $$X \sim Ge(p) \Longleftrightarrow p(x) =
+#     \begin{cases}
+#       p(1-p)^{x-1} \qquad \text{if } x \in \mathbb{N}^+\\
+#       0 \qquad \qquad \;\;\;\;\;\; \text{otherwise}
+#     \end{cases}$$
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ## Appendices
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Combinations
+#
+# $$C_n^k = \frac{n!}{k!(n-k)!}$$
 
 # %% slideshow={"slide_type": "slide"}
 
@@ -278,3 +435,5 @@ print(f"PyTorch version: {torch.__version__}")
 # https://en.wikipedia.org/wiki/Event_(probability_theory)
 # https://devmath.fr/tools/latex-symbols-list/#
 #
+
+# %%
