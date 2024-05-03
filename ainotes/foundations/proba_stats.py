@@ -321,7 +321,7 @@ print(f"PyTorch version: {torch.__version__}")
 #       P(X=x) \qquad \text{if} \; x \in \mathbb{R}_X \\
 #       0 \qquad \qquad \;\;\;\; \text{if} \; x \notin \mathbb{R}_X
 #     \end{cases}$$
-#     
+#
 # $$\forall x \in \mathbb{R}, p(x) \ge 0$$
 #
 # $$\sum_{i=1}^n p(x_i) = \sum_{i=1}^n P(X=x_i) = P(\bigcup_{i=1}^n X = x_i) = 1$$
@@ -406,7 +406,7 @@ print(f"PyTorch version: {torch.__version__}")
 #       \frac{C_k^x C_{N-k}^{n-x}}{C_N^n} \qquad \text{with max}(0, n+k-N) \le x \le \text{min}(n,k)\\
 #       0 \qquad \qquad \; \text{otherwise}
 #     \end{cases}$$
-#     
+#
 # When $N \gg n$, it can be approximated by $Bi(n, k / N)$.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
