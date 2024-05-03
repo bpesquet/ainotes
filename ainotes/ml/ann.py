@@ -262,8 +262,8 @@ plot_activation_function(tanh, tanh_prime, "Tanh", axis=(-6, 6, -1.1, 1.1))
 #
 # $$ReLU'(x) =
 #     \begin{cases}
-#       0 \; \forall x \in\; ]-\infty, 0] \\
-#       1 \; \forall x \in\; ]0, +\infty[
+#       0 \qquad \forall x \in\; ]-\infty, 0] \\
+#       1 \qquad \forall x \in\; ]0, +\infty[
 #     \end{cases}$$
 
 
