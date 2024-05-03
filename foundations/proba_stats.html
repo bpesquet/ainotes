@@ -485,11 +485,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiment">Random experiment</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiment-a-k-a-trial">Random experiment (a.k.a. trial)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-events">Relationships between events</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-venn-diagrams-for-event-composition">Example: Venn diagrams for event composition</a></li>
@@ -500,29 +499,67 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-partition">Event partition</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-an-event">Probability of an event</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-throwing-dices">Examples: throwing dices</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-dices">Example: throwing dices</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-definition">Frequentist definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice">Example: throwing a 6-sided dice</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice">Example: throwing a 6-sided dice</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-probability-laws">Fundamental probability laws</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-product-rule-a-k-a-chain-rule">General product rule (a.k.a. chain rule)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-total-probability">Law of total probability</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ theorem</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-events">Independance between events</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independance">Conditional independance</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-events">Independance between events</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independance">Conditional independance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-trials">Independance between trials</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice-twice">Example : throwing a 6-sided dice twice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example: throwing a 6-sided dice</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-random-variables">Discrete random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-function">Probability function</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-throwing-a-6-sided-dice-twice-followup">Example 1: throwing a 6-sided dice twice (followup)</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-number-of-major-earthquakes-in-a-century">Example 2: number of major earthquakes in a century</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-an-event-related-to-a-random-variable">Probability of an event related to a random variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice-twice-followup">Example: throwing a 6-sided dice twice (followup)</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-function">Distribution function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-s-law">Bernoulli’s law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-law">Binomial law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergeometric-law">Hypergeometric law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-law">Geometric law</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendices">Appendices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinations">Combinations</a></li>
 </ul>
 </li>
 </ul>
@@ -567,27 +604,24 @@ PyTorch version: 2.2.1
 </div>
 </div>
 </section>
-<section id="probability">
-<h2>Probability<a class="headerlink" href="#probability" title="Link to this heading">#</a></h2>
 <section id="fundamentals">
-<h3>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading">#</a></h3>
-<section id="random-experiment">
-<h4>Random experiment<a class="headerlink" href="#random-experiment" title="Link to this heading">#</a></h4>
+<h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading">#</a></h2>
+<section id="random-experiment-a-k-a-trial">
+<h3>Random experiment (a.k.a. trial)<a class="headerlink" href="#random-experiment-a-k-a-trial" title="Link to this heading">#</a></h3>
 <p>Experiment implying some randomness. Knowing the experimental conditions is not enough to predict its outcome. Opposite of <em>deterministic experiment</em>.</p>
 <p>Example: throwing a 6-sided dice.</p>
 </section>
 <section id="sample-space">
-<h4>Sample space<a class="headerlink" href="#sample-space" title="Link to this heading">#</a></h4>
+<h3>Sample space<a class="headerlink" href="#sample-space" title="Link to this heading">#</a></h3>
 <p>Set of all possible outcomes for the random experiment, also called <em>universe</em> of the random experiment. Denoted by <span class="math notranslate nohighlight">\(\Omega\)</span> or <span class="math notranslate nohighlight">\(S\)</span>. Can either be finite or infinitely large.</p>
 <p>Example: <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span>.</p>
 </section>
 <section id="event">
-<h4>Event<a class="headerlink" href="#event" title="Link to this heading">#</a></h4>
+<h3>Event<a class="headerlink" href="#event" title="Link to this heading">#</a></h3>
 <p>An <strong>event</strong> <span class="math notranslate nohighlight">\(A\)</span> is a subset of the sample space: <span class="math notranslate nohighlight">\(A \subseteq \Omega\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(\Omega\)</span> is the certain event. <span class="math notranslate nohighlight">\(\emptyset\)</span> is the impossible event.</p>
 <p>An event is a set of <strong>elementary events</strong>. An elementary event <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> is an observed outcome of the random experiment. If <span class="math notranslate nohighlight">\(\omega \in A\)</span>, then event <span class="math notranslate nohighlight">\(A\)</span> has occurred.</p>
 <p>Example: <span class="math notranslate nohighlight">\(A \equiv \text{&quot;obtaining an odd number&quot;}\)</span>. <span class="math notranslate nohighlight">\(A= \{1,3,5\}\)</span>.</p>
-</section>
 <section id="relationships-between-events">
 <h4>Relationships between events<a class="headerlink" href="#relationships-between-events" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -657,14 +691,17 @@ PyTorch version: 2.2.1
 </ul>
 <p><img alt="Event partition" src="../_images/event_partitions.png" /></p>
 </section>
+</section>
 <section id="combination-of-random-experiments">
-<h4>Combination of random experiments<a class="headerlink" href="#combination-of-random-experiments" title="Link to this heading">#</a></h4>
+<h3>Combination of random experiments<a class="headerlink" href="#combination-of-random-experiments" title="Link to this heading">#</a></h3>
 <p>For two joint experiments characterized by sample spaces <span class="math notranslate nohighlight">\(\Omega_1\)</span> and <span class="math notranslate nohighlight">\(\Omega_2\)</span>, we can define a new sample space <span class="math notranslate nohighlight">\(\Omega\)</span> as their cartesian product: <span class="math notranslate nohighlight">\(\Omega = \Omega_1 \times \Omega_2\)</span></p>
 <p>Example for rolling two 6-sided dices: <span class="math notranslate nohighlight">\(\Omega_1 = \Omega_2 = \{1,2,3,4,5,6\}\)</span> and <span class="math notranslate nohighlight">\(\Omega = \{(1,1), (1,2), \dots, (6,5), (6,6) \}\)</span> (36 couples).</p>
 </section>
 </section>
 <section id="probability-basics">
-<h3>Probability basics<a class="headerlink" href="#probability-basics" title="Link to this heading">#</a></h3>
+<h2>Probability basics<a class="headerlink" href="#probability-basics" title="Link to this heading">#</a></h2>
+<section id="probability-of-an-event">
+<h3>Probability of an event<a class="headerlink" href="#probability-of-an-event" title="Link to this heading">#</a></h3>
 <section id="classical-definition">
 <h4>Classical definition<a class="headerlink" href="#classical-definition" title="Link to this heading">#</a></h4>
 <blockquote>
@@ -673,8 +710,8 @@ PyTorch version: 2.2.1
 <div class="math notranslate nohighlight">
 \[P(A) = \frac{\# A}{\# \Omega}\]</div>
 <p>Assumes a finite number of cases and equiprobability between them.</p>
-<section id="examples-throwing-dices">
-<h5>Examples: throwing dices<a class="headerlink" href="#examples-throwing-dices" title="Link to this heading">#</a></h5>
+<section id="example-throwing-dices">
+<h5>Example: throwing dices<a class="headerlink" href="#example-throwing-dices" title="Link to this heading">#</a></h5>
 <ul class="simple">
 <li><p>Throwing a 6-sided dice. <span class="math notranslate nohighlight">\(\Omega = \{1,2,3,4,5,6\}\)</span>. <span class="math notranslate nohighlight">\(A \equiv\)</span> “obtaining 5”.</p></li>
 </ul>
@@ -718,21 +755,22 @@ PyTorch version: 2.2.1
 <li><p>In the general case, <span class="math notranslate nohighlight">\(P(\bigcup_{i=1}^{n} A_i) \le \sum_{i=1}^{n} P(A_i)\)</span></p></li>
 </ul>
 </section>
+</section>
 <section id="conditional-probability">
-<h4>Conditional probability<a class="headerlink" href="#conditional-probability" title="Link to this heading">#</a></h4>
+<h3>Conditional probability<a class="headerlink" href="#conditional-probability" title="Link to this heading">#</a></h3>
 <p>The probability <span class="math notranslate nohighlight">\(P(A|B)\)</span> of event <span class="math notranslate nohighlight">\(A\)</span> knowing that event <span class="math notranslate nohighlight">\(B\)</span> has occurred is given by:</p>
 <div class="math notranslate nohighlight">
 \[P(A|B) = \frac{P(A \cap B)}{P(B)} \qquad \text{with} \space P(B) \ne 0\]</div>
+<p><img alt="Conditional probability" src="../_images/conditional_proba.png" /></p>
 <p>There is no fundamental difference between conditional and non-conditional probabilities: <span class="math notranslate nohighlight">\(P(A) = P(A|\Omega)\)</span></p>
 <section id="example-throwing-a-6-sided-dice">
-<h5>Example: throwing a 6-sided dice<a class="headerlink" href="#example-throwing-a-6-sided-dice" title="Link to this heading">#</a></h5>
+<h4>Example: throwing a 6-sided dice<a class="headerlink" href="#example-throwing-a-6-sided-dice" title="Link to this heading">#</a></h4>
 <p><span class="math notranslate nohighlight">\(A \equiv\)</span> “result is <span class="math notranslate nohighlight">\(\leq\)</span> 3”, <span class="math notranslate nohighlight">\(B \equiv\)</span> “result is even”, <span class="math notranslate nohighlight">\(C \equiv\)</span> “result = 6”.</p>
 <p><img alt="Probabilities for A,B and C" src="../_images/probas_d6.png" /></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(A) = P(B) = \frac{1}{2}\)</span> even though <span class="math notranslate nohighlight">\(A \neq B\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{1}{3}\)</span>.</p></li>
 </ul>
-</section>
 </section>
 <section id="properties-of-conditional-probabilities">
 <h4>Properties of conditional probabilities<a class="headerlink" href="#properties-of-conditional-probabilities" title="Link to this heading">#</a></h4>
@@ -747,6 +785,9 @@ PyTorch version: 2.2.1
 <li><p>If <span class="math notranslate nohighlight">\(A \subset B\)</span>, <span class="math notranslate nohighlight">\(P(A|B) = \frac{P(A)}{P(B)} \ge P(A)\)</span></p></li>
 </ul>
 </section>
+</section>
+<section id="fundamental-probability-laws">
+<h3>Fundamental probability laws<a class="headerlink" href="#fundamental-probability-laws" title="Link to this heading">#</a></h3>
 <section id="general-product-rule-a-k-a-chain-rule">
 <h4>General product rule (a.k.a. chain rule)<a class="headerlink" href="#general-product-rule-a-k-a-chain-rule" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -774,20 +815,165 @@ PyTorch version: 2.2.1
 <p><span class="math notranslate nohighlight">\(P(B_i)\)</span> is the <em>prior</em> probability (known before the random experiment). <span class="math notranslate nohighlight">\(P(B_i|A)\)</span> is the <em>posterior</em> probability.</p>
 <p>The <span class="math notranslate nohighlight">\(B_i\)</span> events can be seen as the possible causes responsible for the occurrence of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </section>
+</section>
 <section id="independance-between-events">
-<h4>Independance between events<a class="headerlink" href="#independance-between-events" title="Link to this heading">#</a></h4>
+<h3>Independance between events<a class="headerlink" href="#independance-between-events" title="Link to this heading">#</a></h3>
 <p>For any two events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[A \perp B \Longleftrightarrow P(A \cap B) = P(A)P(B) \Longleftrightarrow P(A|B)=P(A) \; \text{with} \; P(B) \neq 0\]</div>
 <p>For any events <span class="math notranslate nohighlight">\(A_1,\dots,A_n\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[A_1 \perp \dots \perp A_n \Longleftrightarrow P (\bigcap_{j \in J} A_j) = \prod_{j \in J} P(A_j) \; \text{for every} \; J \subseteq \{1,\dots,n\}\]</div>
-</section>
 <section id="conditional-independance">
 <h4>Conditional independance<a class="headerlink" href="#conditional-independance" title="Link to this heading">#</a></h4>
 <p>For any three events <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[(A \perp B)\C \Longleftrightarrow P((A \cap B)|C) = P(A|C)P(B|C)\]</div>
+\[(A \perp B)|C \Longleftrightarrow P((A \cap B)|C) = P(A|C)P(B|C)\]</div>
+</section>
+<section id="independance-between-trials">
+<h4>Independance between trials<a class="headerlink" href="#independance-between-trials" title="Link to this heading">#</a></h4>
+<p>Two experiments characterized by sample spaces <span class="math notranslate nohighlight">\(\Omega_1\)</span> and <span class="math notranslate nohighlight">\(\Omega_2\)</span> are independant if and only if:</p>
+<div class="math notranslate nohighlight">
+\[P(A \times B) = P(A)P(B) \qquad \forall A \in \Omega_1, B \in \Omega_2\]</div>
+</section>
+<section id="example-throwing-a-6-sided-dice-twice">
+<h4>Example : throwing a 6-sided dice twice<a class="headerlink" href="#example-throwing-a-6-sided-dice-twice" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(A_i \equiv\)</span> “obtaining number <span class="math notranslate nohighlight">\(i\)</span> at first throw”, <span class="math notranslate nohighlight">\(B_j \equiv\)</span> “obtaining number <span class="math notranslate nohighlight">\(j\)</span> at second throw”.</p>
+<div class="math notranslate nohighlight">
+\[P(A_i \times B_j) = P(A_i)P(B_j) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}\]</div>
+</section>
+</section>
+</section>
+<section id="random-variables">
+<h2>Random variables<a class="headerlink" href="#random-variables" title="Link to this heading">#</a></h2>
+<section id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
+<p>A random varialbe <span class="math notranslate nohighlight">\(X\)</span> is an application from <span class="math notranslate nohighlight">\(\Omega\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that associates a value <span class="math notranslate nohighlight">\(x=X(\omega) \in \mathbb{R}_X\)</span> to each elementary event <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\mathbb{R}_X \subseteq \mathbb{R}\)</span> is called the <em>variation domain</em> of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<section id="id1">
+<h4>Example: throwing a 6-sided dice<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>The financial gain can be defined as a random variable <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\mathbb{R}_X = \{-5,0,5\}\)</span></p>
+<p><img alt="Random variable example" src="../_images/random_variable_example.png" /></p>
+</section>
+</section>
+<section id="discrete-random-variables">
+<h3>Discrete random variables<a class="headerlink" href="#discrete-random-variables" title="Link to this heading">#</a></h3>
+<section id="probability-function">
+<h4>Probability function<a class="headerlink" href="#probability-function" title="Link to this heading">#</a></h4>
+<p>It associates to each value <span class="math notranslate nohighlight">\(x\)</span> the probability <span class="math notranslate nohighlight">\(p(x)\)</span> that the random variable <span class="math notranslate nohighlight">\(X\)</span> takes this value.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(x) =
+    \begin{cases}
+      P(X=x) \qquad \text{if} \; x \in \mathbb{R}_X \\
+      0 \qquad \qquad \;\;\;\; \text{if} \; x \notin \mathbb{R}_X
+    \end{cases}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\forall x \in \mathbb{R}, p(x) \ge 0\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n p(x_i) = \sum_{i=1}^n P(X=x_i) = P(\bigcup_{i=1}^n X = x_i) = 1\]</div>
+<section id="example-1-throwing-a-6-sided-dice-twice-followup">
+<h5>Example 1: throwing a 6-sided dice twice (followup)<a class="headerlink" href="#example-1-throwing-a-6-sided-dice-twice-followup" title="Link to this heading">#</a></h5>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(-5\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(5\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(p(x)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{6}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{2}{3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{6}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-2-number-of-major-earthquakes-in-a-century">
+<h5>Example 2: number of major earthquakes in a century<a class="headerlink" href="#example-2-number-of-major-earthquakes-in-a-century" title="Link to this heading">#</a></h5>
+<p><img alt="Probability function example" src="../_images/proba_function_example.png" /></p>
+</section>
+</section>
+<section id="probability-of-an-event-related-to-a-random-variable">
+<h4>Probability of an event related to a random variable<a class="headerlink" href="#probability-of-an-event-related-to-a-random-variable" title="Link to this heading">#</a></h4>
+<p>For an event <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}_X\)</span>, its probability is given by:</p>
+<div class="math notranslate nohighlight">
+\[P(B) = \sum_{x \in B} p(x)\]</div>
+<section id="example-throwing-a-6-sided-dice-twice-followup">
+<h5>Example: throwing a 6-sided dice twice (followup)<a class="headerlink" href="#example-throwing-a-6-sided-dice-twice-followup" title="Link to this heading">#</a></h5>
+<p><span class="math notranslate nohighlight">\(B \equiv\)</span> “not losing money”.</p>
+<div class="math notranslate nohighlight">
+\[P(B) = P(X \ge 0) = \frac{5}{6}\]</div>
+</section>
+</section>
+<section id="distribution-function">
+<h4>Distribution function<a class="headerlink" href="#distribution-function" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[F(x) = P(X \le x) = \sum_{x_i \le x} p(x_i) \qquad \forall x \in \mathbb{R}, x_i \in \mathbb{R}_X\]</div>
+<div class="math notranslate nohighlight">
+\[\forall x_i \lt x_j, F(x_i) \le F(x_j)\]</div>
+<p><span class="math notranslate nohighlight">\(F(x)\)</span> is a monotonically increasing “staircase” function.</p>
+<p><img alt="Distribution function example" src="../_images/distri_function_example.png" /></p>
+</section>
+<section id="bernoulli-s-law">
+<h4>Bernoulli’s law<a class="headerlink" href="#bernoulli-s-law" title="Link to this heading">#</a></h4>
+<p>We only consider the occurence (or lack thereof) of an event <span class="math notranslate nohighlight">\(A\)</span>, given by its probability <span class="math notranslate nohighlight">\(p = P(A)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\Omega = \{A, A^*\}\]</div>
+<p>The random variable <span class="math notranslate nohighlight">\(X\)</span> associating <span class="math notranslate nohighlight">\(1\)</span> to the occurence of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(0\)</span> otherwise is called Bernoulli’s law.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}X \sim Be(p) \Longleftrightarrow p(x) =
+    \begin{cases}
+      p \qquad \text{if} \; x=1 \qquad \text{(}A \text{ occurred)}\\
+      1-p \;\; \text{if} \; x=0 \qquad \text{(}A^* \text{ occurred)}\\
+      0 \qquad \text{otherwise}
+    \end{cases}\end{split}\]</div>
+</section>
+<section id="binomial-law">
+<h4>Binomial law<a class="headerlink" href="#binomial-law" title="Link to this heading">#</a></h4>
+<p>A Bernoulli trial is repeated several times.</p>
+<p>If <span class="math notranslate nohighlight">\(Y_i \sim \dots \sim Y_n \sim Be(p)\)</span> with <span class="math notranslate nohighlight">\(Y_1 \perp \dots \perp Y_n\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[X = \sum_{i=1}^n Y_i \sim Bi(n,p)\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}X \sim Bi(n,p) \Longleftrightarrow p(x) =
+    \begin{cases}
+      C_n^x p^x(1-p)^{n-x} \qquad \text{if } x \in \{0, \dots, n\}\\
+      0 \qquad \qquad \qquad \;\;\;\; \text{otherwise}
+    \end{cases}\end{split}\]</div>
+</section>
+<section id="hypergeometric-law">
+<h4>Hypergeometric law<a class="headerlink" href="#hypergeometric-law" title="Link to this heading">#</a></h4>
+<p>The binomial law describes the probability of <span class="math notranslate nohighlight">\(x\)</span> successes (random draws for which the object drawn has a specified feature) in <span class="math notranslate nohighlight">\(n\)</span> draws with replacement.</p>
+<p>In contrast, the hypergeometric law describes the probability of <span class="math notranslate nohighlight">\(x\)</span> successes in <span class="math notranslate nohighlight">\(n\)</span> draws <em>without replacement</em>, from a finite population of size <span class="math notranslate nohighlight">\(N\)</span> that contains exactly <span class="math notranslate nohighlight">\(k\)</span> objects with that feature. As such, there is no independance between the successive results of the <span class="math notranslate nohighlight">\(n\)</span> Bernoulli trials.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}X \sim Hy(N,n,k) \Longleftrightarrow p(x) =
+    \begin{cases}
+      \frac{C_k^x C_{N-k}^{n-x}}{C_N^n} \qquad \text{with max}(0, n+k-N) \le x \le \text{min}(n,k)\\
+      0 \qquad \qquad \; \text{otherwise}
+    \end{cases}\end{split}\]</div>
+<p>When <span class="math notranslate nohighlight">\(N \gg n\)</span>, it can be approximated by <span class="math notranslate nohighlight">\(Bi(n, k / N)\)</span>.</p>
+</section>
+<section id="geometric-law">
+<h4>Geometric law<a class="headerlink" href="#geometric-law" title="Link to this heading">#</a></h4>
+<p>This law describes the probability of obtaining a first success when repeating independant Bernoulli trials.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}X \sim Ge(p) \Longleftrightarrow p(x) =
+    \begin{cases}
+      p(1-p)^{x-1} \qquad \text{if } x \in \mathbb{N}^+\\
+      0 \qquad \qquad \;\;\;\;\;\; \text{otherwise}
+    \end{cases}\end{split}\]</div>
+</section>
+</section>
+</section>
+<section id="appendices">
+<h2>Appendices<a class="headerlink" href="#appendices" title="Link to this heading">#</a></h2>
+<section id="combinations">
+<h3>Combinations<a class="headerlink" href="#combinations" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[C_n^k = \frac{n!}{k!(n-k)!}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://www.tensorflow.org/guide/tensor</span>
@@ -799,7 +985,6 @@ PyTorch version: 2.2.1
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 </section>
@@ -869,11 +1054,10 @@ PyTorch version: 2.2.1
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiment">Random experiment</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiment-a-k-a-trial">Random experiment (a.k.a. trial)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#event">Event</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships-between-events">Relationships between events</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-events">Composition of events</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-venn-diagrams-for-event-composition">Example: Venn diagrams for event composition</a></li>
@@ -884,29 +1068,67 @@ PyTorch version: 2.2.1
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#event-partition">Event partition</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-random-experiments">Combination of random experiments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-basics">Probability basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-an-event">Probability of an event</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-definition">Classical definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-throwing-dices">Examples: throwing dices</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-dices">Example: throwing dices</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-definition">Frequentist definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-probabilities">Properties of probabilities</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice">Example: throwing a 6-sided dice</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice">Example: throwing a 6-sided dice</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-conditional-probabilities">Properties of conditional probabilities</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-probability-laws">Fundamental probability laws</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-product-rule-a-k-a-chain-rule">General product rule (a.k.a. chain rule)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-total-probability">Law of total probability</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ theorem</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-events">Independance between events</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independance">Conditional independance</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-events">Independance between events</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independance">Conditional independance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-between-trials">Independance between trials</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice-twice">Example : throwing a 6-sided dice twice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example: throwing a 6-sided dice</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-random-variables">Discrete random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-function">Probability function</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-throwing-a-6-sided-dice-twice-followup">Example 1: throwing a 6-sided dice twice (followup)</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-number-of-major-earthquakes-in-a-century">Example 2: number of major earthquakes in a century</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-an-event-related-to-a-random-variable">Probability of an event related to a random variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-throwing-a-6-sided-dice-twice-followup">Example: throwing a 6-sided dice twice (followup)</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-function">Distribution function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-s-law">Bernoulli’s law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-law">Binomial law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergeometric-law">Hypergeometric law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-law">Geometric law</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendices">Appendices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinations">Combinations</a></li>
 </ul>
 </li>
 </ul>
