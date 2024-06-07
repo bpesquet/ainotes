@@ -484,33 +484,57 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence">Confidence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-general-definition">Confidence: general definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#belief">Belief</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-updated-definition">Confidence: updated definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognitive-control">Cognitive control</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metaperception">Metaperception</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usefulness-of-confidence-in-decision-making">Usefulness of confidence in decision-making</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognitive-control">Cognitive control</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-of-interest">Measures of interest</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-tasks">Experimental tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-of-information-for-a-perceptual-task">Flow of information for a perceptual task</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurement-methods">Measurement methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-ratings">Confidence ratings</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#post-decision-wagering">Post-decision wagering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-out-paradigm">Opt-out paradigm</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-forced-choice">Confidence forced choice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence">Computing confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phi-pearson-correlation">Phi/Pearson correlation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-detection-theory">Signal Detection Theory</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-and-specificity">Sensitivity and specificity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curve-and-auroc">ROC curve and AUROC</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-threshold-choice">Impact of threshold choice</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-model-s-separative-power">Impact of model’s separative power</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-criterion-choice">Impact of criterion choice</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-task-difficulty">Impact of task difficulty</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminability-index">Discriminability index</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploiting-confidence">Exploiting confidence</a></li>
 </ul>
             </nav>
         </div>
@@ -528,55 +552,203 @@ document.write(`
 <p class="admonition-title">Warning</p>
 <p>This chapter is under construction.</p>
 </div>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="kn">import</span> <span class="nn">scipy</span>
+
+<span class="c1"># Print environment info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SciPy version: </span><span class="si">{</span><span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+SciPy version: 1.12.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="terminology">
 <h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
-<section id="confidence">
-<h3>Confidence<a class="headerlink" href="#confidence" title="Link to this heading">#</a></h3>
-<p>In general terms, <strong>confidence</strong> is the belief or conviction that a hypothesis or prediction is correct, that an outcome will be favorable, or that a chosen course of action is the best or most effective.</p>
-<p>In decision-making, confidence can be more precisely defined as <strong>the subjective estimate of decision quality</strong> <span id="id1">[<a class="reference internal" href="../reference/bibliography.html#id21" title="Jeroen Brus, Helena Aebersold, Marcus Grueschow, and Rafael Polania. Sources of confidence in value-based choice. Nature Communications, 12(1):7337, December 2021. doi:10.1038/s41467-021-27618-5.">Brus <em>et al.</em>, 2021</a>]</span>.</p>
-</section>
-<section id="trust">
-<h3>Trust<a class="headerlink" href="#trust" title="Link to this heading">#</a></h3>
-<p><strong>Trust</strong> is a social construct: the belief that someone or something will behave or perform as expected. It implies a relationship between a <em>trustor</em> and a <em>trustee</em>.</p>
-<p><strong>Self-confidence</strong> is trust in one’s abilities.</p>
-</section>
-<section id="uncertainty">
-<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Link to this heading">#</a></h3>
-<p>Generally speaking, <strong>uncertainty</strong> (or incertitude) characterizes situations involving imperfect or unknown information.</p>
-<p>In decision-making, it refers to <strong>the variability in the representation of information before a decision is taken</strong> <span id="id2">[]</span>.</p>
+<section id="confidence-general-definition">
+<h3>Confidence: general definition<a class="headerlink" href="#confidence-general-definition" title="Link to this heading">#</a></h3>
+<p>Everyone knows intuitively what confidence is about, yet it is seldom defined explicitely.</p>
+<p>In the broadest sense, <strong>confidence quantifies a degree of belief in something or someone</strong> <span id="id1">[<a class="reference internal" href="../reference/bibliography.html#id24" title="Florent Meyniel, Mariano Sigman, and Zachary F. Mainen. Confidence as Bayesian Probability: From Neural Origins to Behavior. Neuron, 88(1):78–92, October 2015. doi:10.1016/j.neuron.2015.09.039.">Meyniel <em>et al.</em>, 2015</a>]</span>.</p>
+<p>It is fundamentally linked to its object: a thought, a choice, an external actor, etc.</p>
 </section>
 <section id="belief">
 <h3>Belief<a class="headerlink" href="#belief" title="Link to this heading">#</a></h3>
+<p>A belief is <strong>a feeling of certainty about a proposition</strong>. It is a subjective, conscious experience.</p>
+<p>Regarding perceptions, our belief usually matches our perceptual experience, but not always <span id="id2">[<a class="reference internal" href="../reference/bibliography.html#id28" title="Pascal Mamassian. Confidence Forced-Choice and Other Metaperceptual Tasks*. Perception, 49(6):616–635, June 2020. doi:10.1177/0301006620928010.">Mamassian, 2020</a>]</span>.</p>
+<p><img alt="Belief-perception gap" src="../_images/belief_perception_gap.png" /></p>
 </section>
-<section id="bias">
-<h3>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h3>
+<section id="uncertainty">
+<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Link to this heading">#</a></h3>
+<p>Generally speaking, uncertainty (or incertitude) characterizes situations involving <strong>imperfect or unknown information</strong>.</p>
+<p>In decision-making, uncertainty refers to <strong>the variability in the representation of information before a decision is taken</strong> <span id="id3">[<a class="reference internal" href="../reference/bibliography.html#id28" title="Pascal Mamassian. Confidence Forced-Choice and Other Metaperceptual Tasks*. Perception, 49(6):616–635, June 2020. doi:10.1177/0301006620928010.">Mamassian, 2020</a>]</span>.</p>
+<p>To perform well, the brain needs to be effective at dealing with many uncertainties, some of them external (changes in world state or sensorimotor variability), others internal (cognitive variables, timing or abstract states). Uncertainty is inherent to all stages of neural computation.</p>
 </section>
-<section id="sensitivity">
-<h3>Sensitivity<a class="headerlink" href="#sensitivity" title="Link to this heading">#</a></h3>
+<section id="confidence-updated-definition">
+<h3>Confidence: updated definition<a class="headerlink" href="#confidence-updated-definition" title="Link to this heading">#</a></h3>
+<p>In decision-making, confidence can be seen as <strong>the subjective estimate of decision quality</strong> <span id="id4">[<a class="reference internal" href="../reference/bibliography.html#id21" title="Jeroen Brus, Helena Aebersold, Marcus Grueschow, and Rafael Polania. Sources of confidence in value-based choice. Nature Communications, 12(1):7337, December 2021. doi:10.1038/s41467-021-27618-5.">Brus <em>et al.</em>, 2021</a>]</span>.</p>
+<p>More formally, it can be defined as <strong>the probability that a choice is correct given the evidence</strong> <span id="id5">[<a class="reference internal" href="../reference/bibliography.html#id25" title="Alexandre Pouget, Jan Drugowitsch, and Adam Kepecs. Confidence and certainty: distinct probabilistic quantities for different goals. Nature Neuroscience, 19(3):366–374, March 2016. doi:10.1038/nn.4240.">Pouget <em>et al.</em>, 2016</a>]</span>.</p>
+<p>Confidence is a form of certainty. A key difference is that contrary to confidence, (un)certainties are <em>decision independant</em>. <strong>Confidence quantifies the degree of certainty associated to a decision</strong>.</p>
+</section>
+<section id="trust">
+<h3>Trust<a class="headerlink" href="#trust" title="Link to this heading">#</a></h3>
+<p>Trust is a social construct: <strong>the belief that someone or something will behave or perform as expected</strong>. It implies a relationship between a <em>trustor</em> and a <em>trustee</em>.</p>
+<p><strong>Self-confidence</strong> is trust in one’s abilities.</p>
 </section>
 <section id="error-monitoring">
 <h3>Error monitoring<a class="headerlink" href="#error-monitoring" title="Link to this heading">#</a></h3>
-<p>In decision-making, <strong>error monitoring (EM)</strong> is the process by which one is able to detect his/her errors as soon as a response has been made <span id="id3">[<a class="reference internal" href="../reference/bibliography.html#id22" title="Nick Yeung and Christopher Summerfield. Metacognition in human decision-making: confidence and error monitoring. Philosophical Transactions of the Royal Society B: Biological Sciences, 367(1594):1310–1321, May 2012. doi:10.1098/rstb.2011.0416.">Yeung and Summerfield, 2012</a>]</span>.</p>
+<p>In decision-making, error monitoring (EM) is <strong>the process by which one is able to detect his/her errors as soon as a response has been made</strong> <span id="id6">[<a class="reference internal" href="../reference/bibliography.html#id22" title="Nick Yeung and Christopher Summerfield. Metacognition in human decision-making: confidence and error monitoring. Philosophical Transactions of the Royal Society B: Biological Sciences, 367(1594):1310–1321, May 2012. doi:10.1098/rstb.2011.0416.">Yeung and Summerfield, 2012</a>]</span>.</p>
 <p>EM allows adaptation of behavior both in the short and longer terms through gradual learning of actions’ outcomes.</p>
-</section>
-<section id="cognitive-control">
-<h3>Cognitive control<a class="headerlink" href="#cognitive-control" title="Link to this heading">#</a></h3>
 </section>
 <section id="metacognition">
 <h3>Metacognition<a class="headerlink" href="#metacognition" title="Link to this heading">#</a></h3>
-<p>Confidence judgments and error monitoring are two related aspects of <strong>metacognition</strong>, the self-monitoring and self-control of one’s own cognition (sometimes called <em>high order thinking</em>).</p>
-<p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Metacognition.jpg"><img alt="Metacognition" src="../_images/metacognition.jpg" /></a></p>
+<p>Confidence judgments and error monitoring are two related aspects of metacognition (sometimes called <em>higher order thinking</em>).</p>
+<p>First described in <span id="id7">[<a class="reference internal" href="../reference/bibliography.html#id26" title="John Flavell. Metacognition and Cognitive Monitoring. October 1979.">Flavell, 1979</a>]</span>, metacognition can be defined as <strong>the ability to consider, understand and regulate one’s cognitive processes</strong>. It is a key skill to adapt to complex problems and changing environments.</p>
+<p>Metacognition is classicaly divided into two subprocesses: <strong>monitoring</strong> and <strong>control</strong>.</p>
+<p><img alt="Metacognition diagram" src="../_images/metacognition_diagram.png" /></p>
+<section id="metaperception">
+<h4>Metaperception<a class="headerlink" href="#metaperception" title="Link to this heading">#</a></h4>
+<p><img alt="Metaperception" src="../_images/metaperception.png" /></p>
+<p><span id="id8">[<a class="reference internal" href="../reference/bibliography.html#id28" title="Pascal Mamassian. Confidence Forced-Choice and Other Metaperceptual Tasks*. Perception, 49(6):616–635, June 2020. doi:10.1177/0301006620928010.">Mamassian, 2020</a>]</span></p>
 </section>
 </section>
-<section id="usefulness-of-confidence-in-decision-making">
-<h2>Usefulness of confidence in decision-making<a class="headerlink" href="#usefulness-of-confidence-in-decision-making" title="Link to this heading">#</a></h2>
+<section id="cognitive-control">
+<h3>Cognitive control<a class="headerlink" href="#cognitive-control" title="Link to this heading">#</a></h3>
+<p>Cognitive control refers to <strong>the intentional selection of thoughts, emotions, and behaviors based on current task demands and social context, and the concomitant suppression of inappropriate habitual actions</strong> <span id="id9">[<a class="reference internal" href="../reference/bibliography.html#id27" title="Earl K. Miller and Jonathan D. Cohen. An Integrative Theory of Prefrontal Cortex Function. Annual Review of Neuroscience, 24(1):167–202, March 2001. doi:10.1146/annurev.neuro.24.1.167.">Miller and Cohen, 2001</a>]</span>.</p>
+<p>In simpler terms, cognitive control allows adapting our behaviour on-the-fly to improve performance.</p>
 </section>
-<section id="modeling-decision-confidence">
-<h2>Modeling decision confidence<a class="headerlink" href="#modeling-decision-confidence" title="Link to this heading">#</a></h2>
+</section>
+<section id="measuring-confidence">
+<h2>Measuring confidence<a class="headerlink" href="#measuring-confidence" title="Link to this heading">#</a></h2>
+<section id="measures-of-interest">
+<h3>Measures of interest<a class="headerlink" href="#measures-of-interest" title="Link to this heading">#</a></h3>
+<section id="sensitivity">
+<h4>Sensitivity<a class="headerlink" href="#sensitivity" title="Link to this heading">#</a></h4>
+<p>Confidence/metacognitive/type 2 sensitivity is <strong>the capacity to distinguish correct from incorrect decisions</strong>.</p>
+<p>Being confident when taking correct decisions and less confident otherwise demonstrates a high degree of sensitivity.</p>
+<p>Sensitivity is often affected by task performance itself: an individual will appear to have greater sensitivity on an easy task compared to a hard task <span id="id10">[<a class="reference internal" href="../reference/bibliography.html#id29" title="Stephen M. Fleming and Hakwan C. Lau. How to measure metacognition. Frontiers in Human Neuroscience, July 2014. doi:10.3389/fnhum.2014.00443.">Fleming and Lau, 2014</a>]</span>.</p>
+</section>
+<section id="bias">
+<h4>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h4>
+<p>Confidence/metacognitive/type 2 bias is <strong>a difference in subjective confidence despite constant task performance</strong>.</p>
+<p>Under- and over-confidence are examples of biases.</p>
+<p><img alt="Sensitivity Vs bias" src="../_images/sensitivity_vs_bias.png" /></p>
+<blockquote>
+<div><p>Real confidence distributions are unlikely to be Gaussian.</p>
+</div></blockquote>
+<p><span id="id11">[<a class="reference internal" href="../reference/bibliography.html#id29" title="Stephen M. Fleming and Hakwan C. Lau. How to measure metacognition. Frontiers in Human Neuroscience, July 2014. doi:10.3389/fnhum.2014.00443.">Fleming and Lau, 2014</a>]</span></p>
+</section>
+<section id="efficiency">
+<h4>Efficiency<a class="headerlink" href="#efficiency" title="Link to this heading">#</a></h4>
+<p>Confidence/metacognitive efficiency is <strong>the level of sensitivity given a certain level of task performance</strong>.</p>
+</section>
+</section>
+<section id="experimental-tasks">
+<h3>Experimental tasks<a class="headerlink" href="#experimental-tasks" title="Link to this heading">#</a></h3>
+<p>Their setup is similar to those used to study <a class="reference internal" href="introduction.html"><span class="std std-doc">decision-making</span></a>. The major difference is that after taking a decision (a <em>type 1</em> task), subjects express their confidence (a <em>type 2</em> task).</p>
+<p>Type 1 task example: is the <a class="reference external" href="http://neuroanatody.com/2016/05/whats-in-a-gabor-patch/">Gabor patch</a> tilted to the left or to the right?</p>
+<p><img alt="Gabor patch" src="../_images/gabor_patch.png" /></p>
+<section id="flow-of-information-for-a-perceptual-task">
+<h4>Flow of information for a perceptual task<a class="headerlink" href="#flow-of-information-for-a-perceptual-task" title="Link to this heading">#</a></h4>
+<p><img alt="Flow of information for a perceptual task" src="../_images/confidence_information_flow.png" /></p>
+<p><span id="id12">[<a class="reference internal" href="../reference/bibliography.html#id28" title="Pascal Mamassian. Confidence Forced-Choice and Other Metaperceptual Tasks*. Perception, 49(6):616–635, June 2020. doi:10.1177/0301006620928010.">Mamassian, 2020</a>]</span></p>
+</section>
+</section>
+<section id="measurement-methods">
+<h3>Measurement methods<a class="headerlink" href="#measurement-methods" title="Link to this heading">#</a></h3>
+<section id="confidence-ratings">
+<h4>Confidence ratings<a class="headerlink" href="#confidence-ratings" title="Link to this heading">#</a></h4>
+<p><img alt="Confidence ratings" src="../_images/confidence_ratings.png" /></p>
+<p>After a decision, the subject is asked to evaluate its correctness, using a dedicated scale.</p>
+<p>Simple and frequently used, this method has several drawbacks: intersubject variability regarding bias and scale usage, and possible confusions between type 1 and type 2 judgments <span id="id13">[<a class="reference internal" href="../reference/bibliography.html#id28" title="Pascal Mamassian. Confidence Forced-Choice and Other Metaperceptual Tasks*. Perception, 49(6):616–635, June 2020. doi:10.1177/0301006620928010.">Mamassian, 2020</a>]</span>.</p>
+</section>
+<section id="post-decision-wagering">
+<h4>Post-decision wagering<a class="headerlink" href="#post-decision-wagering" title="Link to this heading">#</a></h4>
+<p>After a decision, subjects are asked to gamble on whether their response was correct. If the decision is correct, the wager amount is kept <span id="id14">[<a class="reference internal" href="../reference/bibliography.html#id30" title="Stephen M. Fleming and Raymond J. Dolan. The neural basis of metacognitive ability. Philosophical Transactions of the Royal Society B: Biological Sciences, 367(1594):1338–1349, May 2012. doi:10.1098/rstb.2011.0417.">Fleming and Dolan, 2012</a>]</span>.</p>
+<p>The amount of the bet is assumed to reflect a subject’s confidence in his or her decision.</p>
+</section>
+<section id="opt-out-paradigm">
+<h4>Opt-out paradigm<a class="headerlink" href="#opt-out-paradigm" title="Link to this heading">#</a></h4>
+<p><img alt="Confidence opt-out" src="../_images/confidence_opt_out.png" /></p>
+<p>In most but not all the trials, the subject has the option to decline the decision task and receive a smaller reward.</p>
+<p>This paradigm is well suited to experiments with animals, which cannot explicitely report their confidence.</p>
+<p>One challenge is to avoid confounding it with a three-alternative forced choice <span id="id15">[<a class="reference internal" href="../reference/bibliography.html#id31" title="Adam Kepecs and Zachary F. Mainen. A computational framework for the study of confidence in humans and animals. Philosophical Transactions of the Royal Society B: Biological Sciences, 367(1594):1322–1337, May 2012. doi:10.1098/rstb.2012.0037.">Kepecs and Mainen, 2012</a>]</span>.</p>
+</section>
+<section id="confidence-forced-choice">
+<h4>Confidence forced choice<a class="headerlink" href="#confidence-forced-choice" title="Link to this heading">#</a></h4>
+<p><img alt="Confidence forced choice" src="../_images/confidence_forced_choice.png" /></p>
+<p>After two decisions, the subject has to choose which one is more likely to be correct.</p>
+<p>One benefit of this paradigm is that it disregards confidence biases to focus on sensitivity <span id="id16">[<a class="reference internal" href="../reference/bibliography.html#id28" title="Pascal Mamassian. Confidence Forced-Choice and Other Metaperceptual Tasks*. Perception, 49(6):616–635, June 2020. doi:10.1177/0301006620928010.">Mamassian, 2020</a>]</span>.</p>
+</section>
+</section>
+</section>
+<section id="computing-confidence">
+<h2>Computing confidence<a class="headerlink" href="#computing-confidence" title="Link to this heading">#</a></h2>
+<section id="context">
+<h3>Context<a class="headerlink" href="#context" title="Link to this heading">#</a></h3>
+<p>Let’s consider a simple two-alternative forced choice decision task.</p>
+<p>Assuming that post-decisional confidence was measured on a binary scale (high/low), we can count the number of confidence ratings assigned to each judgment in the following type 2 table.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type 1 decision</p></th>
+<th class="head"><p>Low confidence</p></th>
+<th class="head"><p>High confidence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Incorrect</p></td>
+<td><p>True Negatives (<span class="math notranslate nohighlight">\(TN_2\)</span>)</p></td>
+<td><p>False Positives (<span class="math notranslate nohighlight">\(FP_2\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Correct</p></td>
+<td><p>False Negatives (<span class="math notranslate nohighlight">\(FN_2\)</span>)</p></td>
+<td><p>True Positives (<span class="math notranslate nohighlight">\(TP_2\)</span>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phi-pearson-correlation">
+<h3>Phi/Pearson correlation<a class="headerlink" href="#phi-pearson-correlation" title="Link to this heading">#</a></h3>
+<p>The simplest measure of confidence sensitivity is the <span class="math notranslate nohighlight">\(\phi\)</span> correlation (a.k.a. Pearson <span class="math notranslate nohighlight">\(r\)</span> correlation for binary variables) between accuracy and confidence measurements.</p>
+<blockquote>
+<div><p>This metric is equivalent to the Matthews Correlation Coefficient (MCC) in the context of Machine Learning.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Binary results for each decision (type 1 task)</span>
+<span class="c1"># 1 = correct answer, 0 = wrong answer</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Binary confidence for each decision (type 2 task)</span>
+<span class="c1"># 1 = high confidence, 0 = low confidence</span>
+<span class="n">confidence</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">confidence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation: PearsonRResult(statistic=0.3333333333333334, pvalue=0.5185185185185184)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="signal-detection-theory">
 <h3>Signal Detection Theory<a class="headerlink" href="#signal-detection-theory" title="Link to this heading">#</a></h3>
 <p>Framework for analyzing decision making in the presence of uncertainty.</p>
-<p>Originally developped by radar researchers in the mid-20th century, it has applications in many fields (psychology, diagnostics, quality control, etc).</p>
+<p>Originally developped in the mid-20th century by radar researchers to assess how faithfully an operator is able to separate signal from noise, it has applications in many fields (psychology, diagnostics, quality control, etc).</p>
 <section id="sensitivity-and-specificity">
 <h4>Sensitivity and specificity<a class="headerlink" href="#sensitivity-and-specificity" title="Link to this heading">#</a></h4>
 <p><strong>Sensitivity</strong> quantifies how well a model can identify true positives. <strong>Specificity</strong> quantifies how well a model can identify true negatives. Equivalent to the recall metric, these definitions are often used in <a class="reference external" href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity">medecine and statistics</a>.</p>
@@ -596,12 +768,12 @@ document.write(`
 <li><p>A ROC curve plots sensitivity vs. (1 - specificity), or TPR vs. FPR, for each possible classification threshold.</p></li>
 <li><p>AUC, or more precisely AUROC (“Area Under the ROC Curve”), provides an aggregate measure of performance across all possible classification thresholds.</p></li>
 </ul>
-<section id="impact-of-threshold-choice">
-<h5>Impact of threshold choice<a class="headerlink" href="#impact-of-threshold-choice" title="Link to this heading">#</a></h5>
+<section id="impact-of-criterion-choice">
+<h5>Impact of criterion choice<a class="headerlink" href="#impact-of-criterion-choice" title="Link to this heading">#</a></h5>
 <p><a class="reference external" href="https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation"><img alt="AUROC animation" src="../_images/auroc_animation.gif" /></a></p>
 </section>
-<section id="impact-of-model-s-separative-power">
-<h5>Impact of model’s separative power<a class="headerlink" href="#impact-of-model-s-separative-power" title="Link to this heading">#</a></h5>
+<section id="impact-of-task-difficulty">
+<h5>Impact of task difficulty<a class="headerlink" href="#impact-of-task-difficulty" title="Link to this heading">#</a></h5>
 <p><a class="reference external" href="https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation"><img alt="AUROC shape animation" src="../_images/auroc_shape_animation.gif" /></a></p>
 </section>
 </section>
@@ -609,18 +781,9 @@ document.write(`
 <h4>Discriminability index<a class="headerlink" href="#discriminability-index" title="Link to this heading">#</a></h4>
 </section>
 </section>
-<section id="measuring-confidence">
-<h3>Measuring confidence<a class="headerlink" href="#measuring-confidence" title="Link to this heading">#</a></h3>
-<p>Two dominant methodologies:</p>
-<ul class="simple">
-<li><p>Confidence ratings: after a decision, evaluate its correctness.</p></li>
-<li><p>Confidence forced choice: after two decisions, choose which one is more likely to be correct.</p>
-<ul>
-<li><p>Disregards confidence biases to focus on confidence sensitivity.</p></li>
-</ul>
-</li>
-</ul>
 </section>
+<section id="exploiting-confidence">
+<h2>Exploiting confidence<a class="headerlink" href="#exploiting-confidence" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -688,33 +851,57 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence">Confidence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-general-definition">Confidence: general definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#belief">Belief</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-updated-definition">Confidence: updated definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trust">Trust</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-monitoring">Error monitoring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognitive-control">Cognitive control</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metacognition">Metacognition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metaperception">Metaperception</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usefulness-of-confidence-in-decision-making">Usefulness of confidence in decision-making</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-decision-confidence">Modeling decision confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cognitive-control">Cognitive control</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-of-interest">Measures of interest</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity">Sensitivity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-tasks">Experimental tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-of-information-for-a-perceptual-task">Flow of information for a perceptual task</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurement-methods">Measurement methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-ratings">Confidence ratings</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#post-decision-wagering">Post-decision wagering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-out-paradigm">Opt-out paradigm</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-forced-choice">Confidence forced choice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence">Computing confidence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phi-pearson-correlation">Phi/Pearson correlation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-detection-theory">Signal Detection Theory</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-and-specificity">Sensitivity and specificity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curve-and-auroc">ROC curve and AUROC</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-threshold-choice">Impact of threshold choice</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-model-s-separative-power">Impact of model’s separative power</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-criterion-choice">Impact of criterion choice</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-of-task-difficulty">Impact of task difficulty</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminability-index">Discriminability index</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-confidence">Measuring confidence</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploiting-confidence">Exploiting confidence</a></li>
 </ul>
   </nav></div>
 
