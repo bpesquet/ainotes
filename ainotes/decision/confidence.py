@@ -24,12 +24,11 @@
 
 # %% slideshow={"slide_type": "slide"}
 import platform
-
-import scipy
+import math
+from statistics import NormalDist
 
 # Print environment info
 print(f"Python version: {platform.python_version()}")
-print(f"SciPy version: {scipy.__version__}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Terminology
@@ -216,14 +215,18 @@ print(f"SciPy version: {scipy.__version__}")
 # |Correct|False Negatives ($FN_2$)|True Positives ($TP_2$)|
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Phi/Pearson correlation
+# ### Statistical correlation
 #
-# The simplest measure of confidence sensitivity is the $\phi$ correlation (a.k.a. Pearson $r$ correlation for binary variables) between accuracy and confidence measurements.
+# The simplest measure of confidence sensitivity is the [$\phi$ coefficient](https://en.wikipedia.org/wiki/Phi_coefficient) (a.k.a. Pearson $r$ correlation for binary variables) between results and confidence measurements.
 #
-# > This metric is equivalent to the Matthews Correlation Coefficient (MCC) in the context of Machine Learning.
+# $$\phi = \frac{(TN_2 *TP_2 - FN_2*FP_2)}{\sqrt{(TP_2+FP_2)(TP_2+FN_2)(TN_2+FP_2)(TN_2+FN_2)}}$$
+#
+# > This metric is equivalent to the *Matthews Correlation Coefficient* (MCC) used in Machine Learning {cite}`chiccoMatthewsCorrelationCoefficient2023`.
+#
+# Another possible way of computing correlation is the *Goodman-Kruskal gamma coefficient* $G$.
 
 # %% slideshow={"slide_type": "slide"}
-# Binary results for each decision (type 1 task)
+# Binary results for a series of decisions (type 1 task)
 # 1 = correct answer, 0 = wrong answer
 results = [1, 0, 0, 1, 1, 0]
 
@@ -231,38 +234,96 @@ results = [1, 0, 0, 1, 1, 0]
 # 1 = high confidence, 0 = low confidence
 confidence = [1, 1, 0, 0, 1, 0]
 
-r = scipy.stats.pearsonr(results, confidence)
-print(f"Correlation: {r}")
+# Compute true/false positives/negatives
+TN_2 = len([r for r, c in zip(results, confidence) if r == 0 and c == 0])
+FN_2 = len([r for r, c in zip(results, confidence) if r == 1 and c == 0])
+FP_2 = len([r for r, c in zip(results, confidence) if r == 0 and c == 1])
+TP_2 = len([r for r, c in zip(results, confidence) if r == 1 and c == 1])
+
+# Compute phi correlation manually
+phi = (TN_2 * TP_2 - FN_2 * FP_2) / math.sqrt(
+    (TP_2 + FP_2) * (TP_2 + FN_2) * (TN_2 + FP_2) * (TN_2 + FN_2)
+)
+print(f"Correlation: {phi:.02}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Signal Detection Theory
 #
 # Framework for analyzing decision making in the presence of uncertainty.
 #
-# Originally developped in the mid-20th century by radar researchers to assess how faithfully an operator is able to separate signal from noise, it has applications in many fields (psychology, diagnostics, quality control, etc).
+# Originally developped in the mid-20th century to assess how faithfully a radar operator is able to separate signal from noise, it has applications in many fields (psychology, diagnostics, quality control, etc).
+#
+# SDT's main virtue is its ability to disentangle sensitivity from bias in a decision process.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Sensitivity and specificity
+# #### Context
 #
-# **Sensitivity** quantifies how well a model can identify true positives. **Specificity** quantifies how well a model can identify true negatives. Equivalent to the recall metric, these definitions are often used in [medecine and statistics](https://en.wikipedia.org/wiki/Sensitivity_and_specificity).
+# In an experiment where stimuli or signals were either present or absent, and the subject categorized each trial as having the stimulus/signal present or absent, the trials are sorted into one of four categories in the following type 1 table.
 #
-# $$\text{Sensitivity} = \frac{TP}{TP + FN} = \text{True Positive Rate} = \text{Recall}_{positive}$$
-#
-# $$\text{Specificity} = \frac{TN}{TN + FP} = \text{True Negative Rate} = \text{Recall}_{negative}$$
+# |Stimulus or signal|Response: "absent"|Response: "present"|
+# |-|-|-|
+# |Absent|Correct Rejections ($TN_1$)|False Alarms ($FP_1$)|
+# |Present|Misses ($FN_1$)|Hits ($TP_1$)|
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# Prediction outcomes can be interpreted as probability density functions, in order to represent results graphically.
+# #### Discrimination metrics
 #
-# [![Sensitivity and specificity](_images/Specificity_vs_Sensitivity_Graph.png)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity#/media/File:Specificity_vs_Sensitivity_Graph.png)
+# *True Positive Rate (TPR)* a.k.a. *hit rate* is the proportion of hits in the presence of stimulus/signal. It quantifies how well a decision maker can identify true positives.
+#
+# *False Positive Rate (FPR)* a.k.a. *false alarm rate* is the proportion of false alarms in the absence of stimulus/signal.
+#
+# $$\text{TPR}_1 = \frac{TP_1}{TP_1 + FN_1}$$
+#
+# $$\text{FPR}_1 = \frac{FP_1}{TN_1+FP_1}$$
+#
+# > $\text{TPR}_1$ is equivalent to the *recall* metric used in Machine Learning.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Conceptual overview
+#
+# SDT represents a decision as a comparison between a *decision variable* (DV), derived from a single piece of sensory evidence, and a *criterion* (the threshold between "absent" and "present" responses).
+#
+# Since evidence is affected by perturbations such as neural noise and fluctuation in attention, the DV can be modelized as a random variable described by a probability distribution.
+#
+# More precisely, SDT assumes that the distributions of DV values in the presence or absence of stimulus/signal are Gaussian with equal variance.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ![Standard model of SDT](_images/sdt_standard.png)
+#
+# {cite}`michelConfidenceConsciousnessResearch2023`
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Example
+#
+# ![Example of criterion choice](_images/sdt_example.png)
+#
+# With this criterion choice, the TPR (shaded region of the signal distribution) is 0.9332 and the FPR (shaded region of the noise distribution) is 0.3085 {cite}`stanislawCalculationSignalDetection1999`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Sensitivity index
+#
+# Type 1 sensitivity/discriminability index $d'$ is a measure of discrimination performance in the task. It quantifies the sensibility of the decision maker to the presence of the stimulus/signal.
+#
+# $d'$ quantifies the distance between the means of the signal and noise distributions in standard deviation units. It can be obtained using the inverse cumulative distribution function, which computes the *standard score* a.k.a. *z-score* associated to a probability {cite}`stanislawCalculationSignalDetection1999`.
+#
+# $$d' = z(\text{TPR}) - z(\text{FPR})$$
+
+# %% slideshow={"slide_type": "slide"}
+# Discrimination metrics values for the previous example
+TPR_1 = 0.9332
+FPR_1 = 0.3085
+
+# Computing d'
+# https://stackoverflow.com/a/55250607
+d_prime = NormalDist().inv_cdf(TPR_1) - NormalDist().inv_cdf(FPR_1)
+print(f"d': {d_prime:.05}")
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### ROC curve and AUROC
 #
-# $$\text{False Positive Rate} = \frac{FP}{TN+FP} = 1 - TNR = 1 -\text{Specificity}$$
+# The ROC ("Receiver Operating Characteristic") curve plots TPR vs. FPR for each possible value of the decision threshold.
 #
-# - ROC stands for "Receiver Operating Characteristic".
-# - A ROC curve plots sensitivity vs. (1 - specificity), or TPR vs. FPR, for each possible classification threshold.
-# - AUC, or more precisely AUROC ("Area Under the ROC Curve"), provides an aggregate measure of performance across all possible classification thresholds.
+# AUC, or more precisely AUROC ("Area Under the ROC Curve"), provides an aggregate measure of performance across all possible decision thresholds.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ##### Impact of criterion choice
@@ -270,12 +331,9 @@ print(f"Correlation: {r}")
 # [![AUROC animation](_images/auroc_animation.gif)](https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ##### Impact of task difficulty
+# ##### Impact of task discriminability
 #
 # [![AUROC shape animation](_images/auroc_shape_animation.gif)](https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation)
-
-# %% [markdown]
-# #### Discriminability index
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## Exploiting confidence
