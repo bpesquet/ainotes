@@ -224,6 +224,8 @@ print(f"Python version: {platform.python_version()}")
 # > This metric is equivalent to the *Matthews Correlation Coefficient* (MCC) used in Machine Learning {cite}`chiccoMatthewsCorrelationCoefficient2023`.
 #
 # Another possible way of computing correlation is the *Goodman-Kruskal gamma coefficient* $G$.
+#
+# Unfortunately, both $\phi$ and $G$ can be affected by bias.
 
 # %% slideshow={"slide_type": "slide"}
 # Binary results for a series of decisions (type 1 task)
@@ -249,14 +251,16 @@ print(f"Correlation: {phi:.02}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Signal Detection Theory
 #
-# Framework for analyzing decision making in the presence of uncertainty.
+# SDT is a framework for analyzing decision making in the presence of uncertainty.
 #
 # Originally developped in the mid-20th century to assess how faithfully a radar operator is able to separate signal from noise, it has applications in many fields (psychology, diagnostics, quality control, etc).
 #
 # SDT's main virtue is its ability to disentangle sensitivity from bias in a decision process.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Context
+# #### Conceptual overview
+#
+# ##### Context
 #
 # In an experiment where stimuli or signals were either present or absent, and the subject categorized each trial as having the stimulus/signal present or absent, the trials are sorted into one of four categories in the following type 1 table.
 #
@@ -266,7 +270,7 @@ print(f"Correlation: {phi:.02}")
 # |Present|Misses ($FN_1$)|Hits ($TP_1$)|
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Discrimination metrics
+# ##### Discrimination metrics
 #
 # *True Positive Rate (TPR)* a.k.a. *hit rate* is the proportion of hits in the presence of stimulus/signal. It quantifies how well a decision maker can identify true positives.
 #
@@ -279,7 +283,7 @@ print(f"Correlation: {phi:.02}")
 # > $\text{TPR}_1$ is equivalent to the *recall* metric used in Machine Learning.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Conceptual overview
+# ##### Probability distributions
 #
 # SDT represents a decision as a comparison between a *decision variable* (DV), derived from a single piece of sensory evidence, and a *criterion* (the threshold between "absent" and "present" responses).
 #
@@ -293,20 +297,20 @@ print(f"Correlation: {phi:.02}")
 # {cite}`michelConfidenceConsciousnessResearch2023`
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Example
+# ##### Example
 #
 # ![Example of criterion choice](_images/sdt_example.png)
 #
 # With this criterion choice, the TPR (shaded region of the signal distribution) is 0.9332 and the FPR (shaded region of the noise distribution) is 0.3085 {cite}`stanislawCalculationSignalDetection1999`.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Sensitivity index
+# #### Type 1 sensitivity index
 #
-# Type 1 sensitivity/discriminability index $d'$ is a measure of discrimination performance in the task. It quantifies the sensibility of the decision maker to the presence of the stimulus/signal.
+# Type 1 sensitivity/discriminability index $d'_1$ is a measure of discrimination performance in the task. It quantifies the sensibility of the decision maker to the presence of the stimulus/signal.
 #
-# $d'$ quantifies the distance between the means of the signal and noise distributions in standard deviation units. It can be obtained using the inverse cumulative distribution function, which computes the *standard score* a.k.a. *z-score* associated to a probability {cite}`stanislawCalculationSignalDetection1999`.
+# $d'_1$ quantifies the distance between the means of the signal and noise distributions in standard deviation units. It can be obtained using the inverse cumulative distribution function, which computes the *standard score* a.k.a. *z-score* associated to a probability {cite}`stanislawCalculationSignalDetection1999`.
 #
-# $$d' = z(\text{TPR}) - z(\text{FPR})$$
+# $$d'_1 = z(\text{TPR}_1) - z(\text{FPR}_1)$$
 
 # %% slideshow={"slide_type": "slide"}
 # Discrimination metrics values for the previous example
@@ -321,9 +325,18 @@ print(f"d': {d_prime:.05}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### ROC curve and AUROC
 #
-# The ROC ("Receiver Operating Characteristic") curve plots TPR vs. FPR for each possible value of the decision threshold.
+# The ROC curve ("Receiver Operating Characteristic") plots TPR vs. FPR for each possible value of the decision criterion.
 #
-# AUC, or more precisely AUROC ("Area Under the ROC Curve"), provides an aggregate measure of performance across all possible decision thresholds.
+# AUC, or more precisely AUROC ("Area Under the ROC Curve"), provides an aggregate measure of performance across all possible decision criterions. It is a way to assess sensitivity independently of bias.
+#
+# This non-parametric approach is free from the equal-variance Gaussian assumption needed for $d'$ to be bias-free {cite}`flemingHowMeasureMetacognition2014`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ##### Examples
+#
+# ![Examples of ROC curves](_images/sdt_roc_examples.png)
+#
+# {cite}`michelConfidenceConsciousnessResearch2023`
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ##### Impact of criterion choice
@@ -331,11 +344,72 @@ print(f"d': {d_prime:.05}")
 # [![AUROC animation](_images/auroc_animation.gif)](https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ##### Impact of task discriminability
+# ##### Impact of signal discriminability
 #
 # [![AUROC shape animation](_images/auroc_shape_animation.gif)](https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
+# #### Type 2 sensitivity index
+#
+# Applying SDT to the type 2 confidence table defined above, we can compute type 2 sensitivity $d'_2$ by applying the same formula, using True and False Positive Rates that link accuracy and confidence.
+#
+# $$d'_2 = z(\text{TPR}_2) - z(\text{FPR}_2)$$
+#
+# However, the equal-variance Gaussian assumption for distributions is problematic in this case {cite}`galvinTypeTasksTheory2003`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### AUROC2
+#
+# With multiple confidence ratings, it is possible to construct a type 2 ROC curve by treating each confidence level as a criterion that separates high from low confidence. AUROC2 is then a (theorically) bias-free measure of confidence sensitivity.
+#
+# ![Example of ROC curve for confidence](_images/auroc2.png)
+#
+# {cite}`flemingHowMeasureMetacognition2014`
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Meta-d'
+#
+# This measure exploits the fact that given Gaussian variance assumptions at the type 1 level, the shapes of the type 2 distributions are known even if they are not themselves Gaussian. More precisely, the type 2 ROC curve is entirely determined by type 1 sensitivity if the subject is metacognitively ideal (perfect in placing their confidence ratings).
+#
+# Using this assumption and given the subject’s type 2 performance data, we can thus obtain the underlying type 1 sensitivity. This measure is called meta-$d'$. It estimates the level of type 1 performance ($d′_1$) that would have given rise to the observed type 2 data {cite}`flemingHowMeasureMetacognition2014`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### M-ratio
+#
+# Because meta-$d′$ is in the same units as (type 1) $d′$, the two can be directly compared.
+#
+# We can define confidence efficiency as the value of meta-$d′$ relative to $d′$, or meta-$d'/d'$. This measure is called the M-ratio.
+#
+# An alternative measure is meta-$d'-d'$, favored when $d'$ takes small values {cite}`flemingHowMeasureMetacognition2014`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Evidence Accumulation Models
+#
+# In contrast to models inspired by SDT (which is silent on decision time), accumulation of evidence models assume that new sensory evidence becomes available over time until a decision is reached.
+#
+# The number of accumulators may vary from only one (à la Drift Diffusion Model) to several ones, more or less partially correlated (for example, using mutual inhibition).
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Balance of Evidence
+#
+# In a multi-accumulator model, confidence can be seen as the distance between them at the time of decision (i.e. threshold reached). This measure is called the *Balance of Evidence* (BoE) {cite}`mamassianVisualConfidence2016`.
+#
+# ![Balance of Evidence example](_images/BoE.png)
+#
+# In a DDM-like model, confidence is taken to be the current position of the accumulated evidence.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Two-stage Dynamic Signal Detection
+#
+# Other approaches like the *Two-stage Dynamic Signal Detection* (2DSD) model postulate that the accumulation process continues after a decision has been made. The ultimate location of accumulated evidence serves as a proxy for confidence.
+#
+# ![2DSD model](_images/2DSD.png)
+#
+# {cite}`pleskacTwostageDynamicSignal2010`
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # ## Exploiting confidence
+#
+# > Soon!
 
 # %%
