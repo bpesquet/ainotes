@@ -16,7 +16,7 @@
 # # Confidence in decision-making
 #
 # ```{warning}
-# This chapter is under construction.
+# This chapter is a work in progress.
 # ```
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -45,16 +45,16 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Belief
 #
-# A belief is **a feeling of certainty about a proposition**. It is a subjective, conscious experience.
+# A belief is **a feeling of certainty about a proposition** (i.e. a statement or a decision). It is a subjective, conscious experience.
 #
-# Regarding perceptions, our belief usually matches our perceptual experience, but not always {cite}`mamassianConfidenceForcedChoiceOther2020`.
+# Note: regarding perceptions, our belief usually matches our perceptual experience, but not always {cite}`mamassianConfidenceForcedChoiceOther2020`.
 #
 # ![Belief-perception gap](_images/belief_perception_gap.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Uncertainty
 #
-# Generally speaking, uncertainty (or incertitude) characterizes situations involving **imperfect or unknown information**.
+# Generally speaking, uncertainty (or incertitude) characterizes situations involving **imperfect, noisy or unknown information**.
 #
 # In decision-making, uncertainty refers to **the variability in the representation of information before a decision is taken** {cite}`mamassianConfidenceForcedChoiceOther2020`.
 #
@@ -96,7 +96,7 @@ print(f"Python version: {platform.python_version()}")
 # ![Metacognition diagram](_images/metacognition_diagram.png)
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# #### Metaperception
+# #### Example of metacognition: metaperception
 #
 # ![Metaperception](_images/metaperception.png)
 #
@@ -113,14 +113,32 @@ print(f"Python version: {platform.python_version()}")
 # ## Measuring confidence
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ### Measures of interest
+# ### Experimental tasks
+#
+# Their setup is similar to those used to study [decision-making](introduction.ipynb). The major difference is that before or (more frequently) after taking a decision (a *type 1* task), subjects express their confidence about it (a *type 2* task).
+#
+# Example of type 1 task: is the [Gabor patch](http://neuroanatody.com/2016/05/whats-in-a-gabor-patch/) tilted to the left or to the right?
+#
+# ![Gabor patch](_images/gabor_patch.png)
 
-# %% [markdown] slideshow={"slide_type": "-"}
+# %% [markdown] slideshow={"slide_type": "slide"}
+# #### Flow of information for a perceptual task
+#
+# ![Flow of information for a perceptual task](_images/confidence_information_flow.png)
+#
+# {cite}`mamassianConfidenceForcedChoiceOther2020`
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Measures of interest
+#
+# Measures of metacognition in experimental tasks seek to estimate the statistical relationship between confidence judgments and objective performance {cite}`flemingMetacognitionConfidenceReview`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
 # #### Sensitivity
 #
-# Confidence/metacognitive/type 2 sensitivity is **the capacity to distinguish correct from incorrect decisions**.
+# Confidence/metacognitive/type 2 sensitivity is **the capacity to correlate confidence judgments and objective task performance**.
 #
-# Being confident when taking correct decisions and less confident otherwise demonstrates a high degree of sensitivity.
+# For example, being confident when taking correct decisions and less confident otherwise demonstrates a high degree of sensitivity.
 #
 # Sensitivity is often affected by task performance itself: an individual will appear to have greater sensitivity on an easy task compared to a hard task {cite}`flemingHowMeasureMetacognition2014`.
 
@@ -140,23 +158,9 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # #### Efficiency
 #
-# Confidence/metacognitive efficiency is **the level of sensitivity given a certain level of task performance**.
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# ### Experimental tasks
+# Confidence/metacognitive efficiency (or capacity) is **the level of sensitivity given a certain level of task performance**.
 #
-# Their setup is similar to those used to study [decision-making](introduction.ipynb). The major difference is that after taking a decision (a *type 1* task), subjects express their confidence (a *type 2* task).
-#
-# Type 1 task example: is the [Gabor patch](http://neuroanatody.com/2016/05/whats-in-a-gabor-patch/) tilted to the left or to the right?
-#
-# ![Gabor patch](_images/gabor_patch.png)
-
-# %% [markdown] slideshow={"slide_type": "slide"}
-# #### Flow of information for a perceptual task
-#
-# ![Flow of information for a perceptual task](_images/confidence_information_flow.png)
-#
-# {cite}`mamassianConfidenceForcedChoiceOther2020`
+# It is measured relative to a particular task performance level.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Measurement methods
@@ -217,7 +221,7 @@ print(f"Python version: {platform.python_version()}")
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Statistical correlation
 #
-# The simplest measure of confidence sensitivity is the [$\phi$ coefficient](https://en.wikipedia.org/wiki/Phi_coefficient) (a.k.a. Pearson $r$ correlation for binary variables) between results and confidence measurements.
+# The simplest measure of confidence sensitivity is the [$\phi$ coefficient](https://en.wikipedia.org/wiki/Phi_coefficient) (a.k.a. Pearson $r$ correlation for binary variables) between task performance and confidence measurements.
 #
 # $$\phi = \frac{(TN_2 *TP_2 - FN_2*FP_2)}{\sqrt{(TP_2+FP_2)(TP_2+FN_2)(TN_2+FP_2)(TN_2+FN_2)}}$$
 #
@@ -403,13 +407,35 @@ print(f"d': {d_prime:.05}")
 #
 # Other approaches like the *Two-stage Dynamic Signal Detection* (2DSD) model postulate that the accumulation process continues after a decision has been made. The ultimate location of accumulated evidence serves as a proxy for confidence.
 #
+# These approaches of confidence formation may help explain some experimentaly reported phenomena like post-decisional changes of mind.
+#
 # ![2DSD model](_images/2DSD.png)
 #
 # {cite}`pleskacTwostageDynamicSignal2010`
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## Exploiting confidence
+# ## What's next?
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Neural basis of confidence
 #
-# > Soon!
+# Numerous studies demonstrate that the brain tracks uncertainty about a wide range of quantities and that such uncertainty informs metacognitive processes, such as confidence judgments {cite}`flemingMetacognitionConfidenceReview`.
+#
+# Activity in the parietal cortex seems related to evidence accumulation during decision-making.
+#
+# Convergent findings emphasize the importance of the prefrontal cortex, more precisely the ventromedial prefrontal cortex (vmPFC), in the formation of confidence.
+#
+# Many results suggest that there are separate and perhaps multiple brain areas involved in confidence monitoring and reporting {cite}`grimaldiThereAreThings2015`.
+
+# %% [markdown] slideshow={"slide_type": "slide"}
+# ### Usages of confidence
+#
+# As part of metacognitive monitoring, confidence judgments may inform the processes of cognitive control.
+#
+# Having an explicit representation of the confidence of a perceptual decision may help us compute the risk of being wrong ($1 - \text{confidence}$).
+#
+# Having a good confidence sensitivity will also give us the possibility to allocate appropriate resources to a task.
+#
+# Good confidence can also help us appreciate whether and how we can control the environment {cite}`mamassianConfidenceForcedChoiceOther2020`.
 
 # %%
