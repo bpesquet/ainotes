@@ -1,4 +1,4 @@
-# Challenges
+# 📝 Exercises
 
 ```{tableofcontents}
 ```
