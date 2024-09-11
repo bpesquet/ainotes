@@ -38,10 +38,10 @@ parts:
       sections:
       - file: ml/rl
         title: Introduction
-    - file: ml/challenges
+    - file: ml/exercises
       sections:
-      - file: ml/challenges/heart_disease
-      - file: ml/challenges/cifar10
+      - file: ml/exercises/heart_disease
+      - file: ml/exercises/cifar10
   - caption: Decision-making
     chapters:
     - file: decision/introduction
