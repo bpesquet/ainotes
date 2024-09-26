@@ -4,6 +4,8 @@
 
 # Artificial Intelligence Notes
 
+> This project is being phased out and replaced by [mlcourse](https://github.com/bpesquet/mlcourse).
+
 A collection of interactive notes related to Artificial Intelligence. Built for educational purposes and updated (somewhat) regularly.
 
 ## Structure
