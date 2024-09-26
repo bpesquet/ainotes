@@ -75,7 +75,7 @@ print(f"scikit-learn version: {sklearn.__version__}")
 
 
 # %% [markdown] slideshow={"slide_type": "slide"}
-# ## The Machine Learning project workflow
+# ## Workflow of a Machine Learning project
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ### Main steps of a supervised learning project
@@ -544,12 +544,12 @@ print(f"Predicted median price: {y_new[0]:.02f}")
 
 # %%
 # Serialize final model and input pipeline to disk
-joblib.dump(final_model, "final_model.pkl")
-joblib.dump(full_pipeline, "full_pipeline.pkl")
+joblib.dump(final_model, "_output/final_model.pkl")
+joblib.dump(full_pipeline, "_output/full_pipeline.pkl")
 
 # (Later in the process)
-# model = joblib.load("final_model.pkl")
-# pipeline = joblib.load("full_pipeline.pkl")
+# model = joblib.load("_output/final_model.pkl")
+# pipeline = joblib.load("_output/full_pipeline.pkl")
 # ...
 
 # %% [markdown] slideshow={"slide_type": "slide"}
